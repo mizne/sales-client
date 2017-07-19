@@ -23,25 +23,23 @@ const actions = {
     })
   },
   FETCH_DELIVERY_FEE: ({ commit }) => {
-    const userAddress = new qq.maps.LatLng(32.03886, 118.79828)
     const merchantAddress = new qq.maps.LatLng(32.03886, 118.79828)
-
-    const distance = qq.maps.geometry.spherical.computeDistanceBetween(
-      userAddress,
-      merchantAddress
-    )
-
-    // window.alert(distance)
 
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(function(position) {
         var lat = position.coords.latitude
         var lng = position.coords.longitude
         //调用地图命名空间中的转换接口   type的可选值为 1:GPS经纬度，2:搜狗经纬度，3:百度经纬度，4:mapbar经纬度，5:google经纬度，6:搜狗墨卡托
-        qq.maps.convertor.translate(new qq.maps.LatLng(lat, lng), 1, function(res) {
-          //取出经纬度并且赋值
+        qq.maps.convertor.translate(new qq.maps.LatLng(lat, lng), 1, function(
+          res
+        ) {
+          const userAddress = new qq.maps.LatLng(res[0].lat, res[0].lng)
+          const distance = qq.maps.geometry.spherical.computeDistanceBetween(
+            userAddress,
+            merchantAddress
+          )
 
-          window.alert(JSON.stringify(res[0], null, 2))
+          window.alert(`distance: ${distance}`)
         })
       })
     } else {
