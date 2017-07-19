@@ -86,7 +86,7 @@ export default {
               .then(coupons => {
                 if (coupons.length > 0) {
                   vToast({
-                    content: `恭喜您, 您有 ${coupons.length} 张可用优惠券, 在订单页面可查看 ^_^`,
+                    content: `恭喜您, 您有 ${coupons.length} 张优惠券, 在订单页面可查看 ^_^`,
                     position: 'top'
                   })
                 }
