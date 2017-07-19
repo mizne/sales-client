@@ -37,13 +37,11 @@ const actions = {
       navigator.geolocation.getCurrentPosition(function(position) {
         var lat = position.coords.latitude
         var lng = position.coords.longitude
-        console.log(lat, lng)
         //调用地图命名空间中的转换接口   type的可选值为 1:GPS经纬度，2:搜狗经纬度，3:百度经纬度，4:mapbar经纬度，5:google经纬度，6:搜狗墨卡托
         qq.maps.convertor.translate(new qq.maps.LatLng(lat, lng), 1, function(res) {
           //取出经纬度并且赋值
-          // latlng = res[0]
 
-          console.log(res)
+          window.alert(JSON.stringify(res[0], null, 2))
         })
       })
     } else {
