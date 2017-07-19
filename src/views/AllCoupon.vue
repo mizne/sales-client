@@ -6,7 +6,7 @@
     <deal-content>
       <template v-if="allCoupons.length > 0">
         <coupon-item v-for="coupon in allCoupons" :key="coupon.couponKey" 
-        :coupon="coupon"></coupon-item>
+        :coupon="coupon" :merchant="tenantName"></coupon-item>
       </template>
       <template v-else>
         <div class="no-coupon">还没有优惠券呢 ^_^</div>
