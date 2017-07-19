@@ -75,6 +75,10 @@
         </div>
       </div>
     </deal-content>
+  
+    <deal-footer>
+      <bill-bar @to-shopcomment="toShopComment"></bill-bar>
+    </deal-footer>
   </div>
 </template>
 <script>
@@ -84,6 +88,7 @@ import fecha from 'fecha'
 import DealHeader from '@/components/DealHeader'
 import DealContent from '@/components/DealContent'
 import DealFooter from '@/components/DealFooter'
+import BillBar from '@/components/BillBar'
 
 import { objFrom } from '@/util/index'
 import { vAlert } from '@/util/vux-wrapper'
@@ -95,6 +100,7 @@ export default {
     DealHeader,
     DealContent,
     DealFooter,
+    BillBar
   },
   computed: {
     ...mapGetters(['orderDetail', 'tenantName', 'isVip'])
@@ -146,6 +152,9 @@ export default {
           }
         }
       )
+    },
+    toShopComment() {
+      this.$router.push({ name: 'ShopComment' })
     }
   },
   created() {
