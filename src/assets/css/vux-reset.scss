@@ -1,0 +1,22 @@
+@import './main.scss';
+
+.weui-toast_text {
+  background-color: grayscale($primaryColor);
+  .weui-toast__content {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+.weui-btn.weui-btn_primary {
+	background-color: $primaryColor;
+}
+
+.vux-x-textarea.weui-cell {
+  padding: 0 !important;
+
+  .weui-textarea {
+    padding: 0 10px;
+    box-sizing: border-box;
+  }
+}

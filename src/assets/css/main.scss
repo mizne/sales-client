@@ -1,0 +1,11 @@
+$text: #222;
+$greyText: #999;
+$primaryColor: #1AAD19;
+$warnColor: #E64340;
+$greyBackground: #EEE;
+
+@mixin flexboxCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
