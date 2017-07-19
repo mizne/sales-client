@@ -75,7 +75,7 @@ export default {
       }, {})
       const params = {
         phoneNumber: storage.get('phoneNumber'),
-        text: this.commentText,
+        comment: this.commentText,
         ...score
       }
 

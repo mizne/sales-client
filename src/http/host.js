@@ -4,5 +4,5 @@ export default {
   eshop: 'https://deal.xiaovbao.cn/api/test/customer/eshop',
   
   //development: 'http://192.168.1.118:8092/api/v4',
-  logger: 'http://logger.xiaovbao.cn/api/v1'
+  logger: 'https://logger.xiaovbao.cn/api/v1'
 }
