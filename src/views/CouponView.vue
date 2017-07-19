@@ -1,6 +1,6 @@
 <template>
   <div class="coupon-view-container">
-    <deal-header title="优惠券">
+    <deal-header title="选择优惠券">
     </deal-header>
   
     <deal-content>
@@ -10,30 +10,8 @@
       </tab>
 
       <template v-if="couponsToShow.length > 0">
-        <div class="coupon-item" v-for="coupon in couponsToShow" :key="coupon.couponKey" @click="selectItem(coupon)">
-          <div :class="['abstract', filter]">
-            <div class="money">
-              <i v-if="coupon.couponType === 'discount'" class="icon-discount"></i>
-              <i v-else class="icon-money"></i>
-              <span style="margin-left: 10px;">{{coupon.value | couponValue(coupon)}}</span>
-            </div>
-            <div class="info">
-              <span>{{coupon.couponType | couponType(coupon)}}</span>
-            </div>
-          </div>
-          <div class="description">
-            <!-- <div class="coupon-from">
-              <span>{{coupon.from || '平台放送'}}</span>
-            </div> -->
-            <div class="coupon-date">
-              <span>{{coupon.createdAt | couponDate}}</span>
-            </div>
-          </div>
-
-          <div class="action">
-            <i class="icon-right" v-if="selectedCoupon && selectedCoupon.couponKey === coupon.couponKey"></i>
-          </div>
-        </div>
+        <coupon-item v-for="coupon in couponsToShow" :key="coupon.couponKey" 
+        :coupon="coupon" :selected-coupon="selectedCoupon" :filter="filter" @select-coupon="selectItem"></coupon-item>
       </template>
       <template v-else>
         <div class="no-coupon">还没有优惠券呢 ^_^</div>
@@ -44,13 +22,10 @@
 <script>
 import { Tab, TabItem } from 'vux'
 import { mapGetters } from 'vuex'
-import fecha from 'fecha'
 
 import DealHeader from '@/components/DealHeader'
 import DealContent from '@/components/DealContent'
-
-import storage from '@/util/storage'
-import Coupon from '@/models/Coupon'
+import CouponItem from '@/components/CouponItem'
 
 export default {
   name: 'CouponView',
@@ -59,22 +34,12 @@ export default {
     TabItem,
     DealHeader,
     DealContent,
+    CouponItem
   },
   data() {
     return {
       filter: 'avaliable',
       couponsToShow: []
-    }
-  },
-  filters: {
-    couponType(value, coupon) {
-      return new Coupon(coupon.couponType, coupon.value).getTypeText()
-    },
-    couponValue(value, coupon) {
-      return new Coupon(coupon.couponType, coupon.value).getValueText()
-    },
-    couponDate(v) {
-      return fecha.format(new Date(v), 'YYYY-MM-DD')
     }
   },
   computed: {
@@ -116,66 +81,6 @@ export default {
     padding: 10px;
     background-color: $greyBackground;
     height: 100vh;
-
-    .coupon-item {
-      @include flexboxCenter;
-      margin: 5px 0;
-      background-color: white;
-      height: 100px;
-      
-
-      .abstract {
-        flex: 2;
-        height: 100%;
-        
-        color: white;
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-
-        &.avaliable {
-          background-color: $primaryColor;
-        }
-
-        &.disabled {
-          background-color: $warnColor;
-        }
-
-        .money,
-        .info {
-          @include flexboxCenter;
-        }
-
-        .info {
-          font-size: 0.9rem;
-        }
-
-      }
-
-      .description {
-        flex: 5;
-        height: 100%;
-        color: $text;
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-
-        .coupon-from,
-        .coupon-date {
-          @include flexboxCenter;
-        }
-      }
-
-      .action {
-        flex: 1;
-        height: 100%;
-        color: $primaryColor;
-        @include flexboxCenter;
-        .icon-right {
-          font-size: 2rem;
-        }
-      }
-    }
 
     .no-coupon {
       display: flex;

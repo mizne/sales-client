@@ -58,8 +58,10 @@ export default {
                     content: '啊哦, 店铺已打烊, 只能看不能买了, 明天再来吧 ^_^'
                   })
                 }
-
                 document.title = vm.tenantName
+              })
+              .then(_ => {
+                vm.$store.dispatch('FETCH_DELIVERY_FEE')
               })
 
             vm.$store.dispatch('FETCH_USER_STATUS')
@@ -69,7 +71,8 @@ export default {
                 if (status.tableStatus === 0) {// 空桌
                   vm.$router.push({ name: 'Home' })
                   
-                  if (storage.has('couponType')) {
+                  // 可以领取优惠券
+                  if (storage.has('coupons')) {
                     vm.$store.dispatch('RECEIVE_COUPON')
                   }
                 } else if (status.tableStatus === 1) {// 已下购物车
@@ -86,7 +89,7 @@ export default {
               .then(coupons => {
                 if (coupons.length > 0) {
                   vToast({
-                    content: `恭喜您, 您有 ${coupons.length} 张优惠券, 在订单页面可查看 ^_^`,
+                    content: `恭喜您, 您有 ${coupons.length} 张优惠券 ^_^`,
                     position: 'top'
                   })
                 }

@@ -38,18 +38,16 @@ class CouponService {
   bindCoupon() {
     const tenantId = storage.get('tenantId')
     const consigneeId = storage.get('consigneeId')
-    const couponType = storage.get('couponType')
-    const couponValue = storage.get('couponValue')
     const couponRate = storage.get('couponRate')
     const phoneNumber = storage.get('phoneNumber')
+    const coupons = storage.get('coupons')
 
     const params = {
       tenantId,
       consigneeId,
-      couponType,
-      couponValue,
       couponRate,
-      phoneNumber
+      phoneNumber,
+      coupons
     }
 
     return getBizTypeHttp()
@@ -58,7 +56,7 @@ class CouponService {
         Logger.info({
           module: 'CouponService',
           method: 'bindCoupon',
-          description: `领取优惠券, consigneeId: ${consigneeId}, couponType: ${couponType}, couponValue: ${couponValue}, couponRate: ${couponRate}`
+          description: `领取优惠券, consigneeId: ${consigneeId}, couponRate: ${couponRate}, coupons: ${JSON.stringify(coupons)}`
         })
       })
       .catch(exceptionHandler('CouponService', 'bindCoupon'))

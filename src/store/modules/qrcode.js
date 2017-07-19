@@ -21,13 +21,12 @@ const actions = {
         storage.remove('consigneeId')
       }
 
-      if (info.couponType) {
-        storage.set('couponType', info.couponType)
-        storage.set('couponValue', info.couponValue)
-        storage.set('couponRate', info.couponRate)
+      // 存储多条优惠券信息
+      if (info.coupons) {
+        storage.set('coupons', info.coupons)
+        storage.set('couponRate', '0.5')
       } else {
-        storage.remove('couponType')
-        storage.remove('couponValue')
+        storage.remove('coupons')
         storage.remove('couponRate')
       }
 

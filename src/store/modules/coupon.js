@@ -7,6 +7,7 @@ import router from '@/router/index'
 import { RECEIVE_COUPON } from '@/store/modules/phoneVerify'
 
 const state = {
+  allCoupons: [],
   avaliableCoupons: [],
   disableCoupons: [],
   couponText: '',
@@ -14,6 +15,9 @@ const state = {
 }
 
 const mutations = {
+  SET_ALL_COUPONS(state, coupons) {
+    state.allCoupons = coupons
+  },
   SET_AVALIABLE_COUPONS(state, coupons) {
     state.avaliableCoupons = coupons
   },
@@ -31,19 +35,17 @@ const mutations = {
 const actions = {
   // 领取优惠券
   RECEIVE_COUPON: ({ commit }) => {
-    const coupon = new Coupon(
-      storage.get('couponType'),
-      storage.get('couponValue')
-    )
-    const text = coupon.getText()
+    const coupons = storage.get('coupons').map(e => new Coupon(e.couponType, e.couponValue))
+
+    const text = `<p>是否领取 ${coupons.length} 张优惠券?</p>` + coupons.map(e => `<p>${e.getText()}</p>`).join(``)
 
     if (storage.has('phoneNumber')) {
-      return vConfirm({ content: `是否领取 ${text}?` }).then(
+      return vConfirm({ content: text }).then(
         () => {
           return CouponService.checkPhone(storage.get('phoneNumber'))
             .then(_ => CouponService.bindCoupon())
             .then(() => {
-              vToast({ content: '恭喜, 领取成功, 可在订单页面查看 ^_^' })
+              vToast({ content: '恭喜, 领取成功 ^_^' })
             })
             .catch(() => {
               vToast({ content: '啊哦, 领取失败 -_-' })
@@ -54,7 +56,7 @@ const actions = {
         }
       )
     } else {
-      return vConfirm({ content: `是否领取 ${text}?` }).then(
+      return vConfirm({ content: text }).then(
         () => {
           commit('SET_PURPOSE_OF_PHONE_VERIFY', RECEIVE_COUPON)
           router.push({ name: 'PhoneVerify' })
@@ -81,9 +83,11 @@ const actions = {
         }
       })
       : () => true
+      
       const avaliableCoupons = coupons.filter(predicate)
       const disableCoupons = coupons.filter(not(predicate))
 
+      commit('SET_ALL_COUPONS', coupons)
       commit('SET_AVALIABLE_COUPONS', avaliableCoupons)
       commit('SET_DISABLE_COUPONS', disableCoupons)
       const couponText =
@@ -119,6 +123,9 @@ const actions = {
 }
 
 const getters = {
+  allCoupons(state) {
+    return state.allCoupons
+  },
   avaliableCoupons(state) {
     return state.avaliableCoupons
   },

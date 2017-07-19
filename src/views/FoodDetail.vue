@@ -2,7 +2,7 @@
   <div class="food-detail-container">
     <deal-header title="详情">
     </deal-header>
-
+  
     <deal-content>
       <div class="food-info">
         <div :style="{'width': '100%', 'height': '250px', 'background': `url(${foodDetail.food.image})`, 'background-size': 'contain'}">
@@ -17,7 +17,7 @@
         <div class="price">
           <i class="icon-money"></i>
           <span class="normal-price">{{foodDetail.food.price}}/份</span>
-
+  
           <span class="vip-text">会员:</span>
           <span class="vip-price">{{foodDetail.food.vipPrice}}/份</span>
         </div>
@@ -32,28 +32,28 @@
       </div>
       <div class="food-comment">
         <h3>商品评价</h3>
-
+  
         <template v-if="foodDetail.food.Ratings.length">
           <div v-for="(comment, index) in foodDetail.food.Ratings" :key="comment.$index">
             <comment-item :comment="comment" @change="changeThumbs($event, comment)"></comment-item>
           </div>
         </template>
-
+  
         <template v-else>
           <p>这个商品还没有评论呢</p>
         </template>
-
+  
         <div class="leave-message" v-if="hasPhoneNumber">
           <x-textarea :max="50" v-model="commentText" placeholder="说两句话吧, 您的评价和建议, 将会为我们的改进, 提供很好的参考。"></x-textarea>
           <x-button type="default" @click.native="commitComment">提交</x-button>
         </div>
       </div>
     </deal-content>
-
+  
     <deal-footer>
-      <shop-cart-bar :add-more="isAddMoreFood" :shop-cart="shopCart" :food-cost="tempShopCartFoodCost" :food-count="tempShopCartFoodCount" @go-shopcart="toShopCart"></shop-cart-bar>
+      <shop-cart-bar :add-more="isAddMoreFood" :shop-cart="shoppingCart" :food-cost="tempShoppingCartFoodCost" :food-count="tempShoppingCartFoodCount" @go-shopcart="toShopCart"></shop-cart-bar>
     </deal-footer>
-
+  
     <transition enter-active-class="animated fadeInUp" leave-active-class="animated fadeOutDown">
       <div class="select-area" v-if="showSelection">
         <div class="food-content">
@@ -65,7 +65,7 @@
               <i class="icon-money"></i>{{foodDetail.food.price}}</span>
             <span class="cancel" @click="showSelection=false">X</span>
           </div>
-
+  
           <div class="food-detail">
             <div class="food-quantity">
               <div class="title">
@@ -77,7 +77,7 @@
                 <!--<x-number v-model="food.quantity" :step="0.1"></x-number>-->
               </div>
             </div>
-
+  
             <div class="food-taste">
               <div class="title">
                 默认
@@ -88,7 +88,7 @@
                 </div>
               </div>
             </div>
-
+  
             <div class="food-remark">
               <div class="title">
                 备注
@@ -97,11 +97,11 @@
             </div>
           </div>
         </div>
-
+  
         <div class="food-btn" @click="addShopCart">加购物车</div>
       </div>
     </transition>
-
+  
   </div>
 </template>
 <script>
@@ -190,7 +190,7 @@ export default {
   computed: {
     ...mapGetters([
       'foodDetail',
-      'tempShopCart',
+      'tempShoppingCart',
       'isAddMoreFood',
     ])
   },
@@ -204,8 +204,8 @@ export default {
 
       // 初始化 选中食物的 数量 remark
       const foodId = this.foodDetail.food.id
-      if (this.tempShopCart[foodId]) {
-        const { num, remark: info } = this.tempShopCart[foodId]
+      if (this.tempShoppingCart[foodId]) {
+        const { num, remark: info } = this.tempShoppingCart[foodId]
         this.food.quantity = num
         const [tasteText, remark] = info.split(/\n/)
         this.food.remark = remark

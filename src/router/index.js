@@ -3,6 +3,7 @@ import Router from 'vue-router'
 
 import Home from '@/views/Home'
 import Menu from '@/views/Menu'
+import AllCoupon from '@/views/AllCoupon'
 import ShoppingCart from '@/views/ShoppingCart'
 import PhoneVerify from '@/views/PhoneVerify'
 import PeopleNumber from '@/views/PeopleNumber'
@@ -40,6 +41,11 @@ const routes = [
     path: '/menu',
     name: 'Menu',
     component: Menu,
+  },
+  {
+    path: '/all-coupon',
+    name: 'AllCoupon',
+    component: AllCoupon
   },
   {
     path: '/food-detail',

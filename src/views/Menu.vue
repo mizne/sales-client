@@ -15,6 +15,9 @@
       <span class="menu" slot="left">
         <i class="icon-menu" @click="show"></i>
       </span>
+      <span class="menu" slot="right">
+        <i class="icon-discount" @click="toCoupon"></i>
+      </span>
     </deal-header>
 
     <deal-content>
@@ -139,6 +142,9 @@ export default {
     },
     show() {
       this.showMenu = !this.showMenu
+    },
+    toCoupon() {
+      this.$router.push({ name: 'AllCoupon' })
     },
     selectFoodType(foodType, index) {
       this.menuCurrentIndex = index
