@@ -76,7 +76,7 @@
       </div>
     </deal-content>
   
-    <deal-footer>
+    <deal-footer v-if="payEnd">
       <bill-bar @to-shopcomment="toShopComment"></bill-bar>
     </deal-footer>
   </div>
@@ -342,6 +342,10 @@ export default {
         }
       }
     }
+  }
+
+  .deal-footer-container {
+    background-color: black;
   }
 }
 </style>
