@@ -193,6 +193,8 @@ export default {
     _toPay() {
       const { brwoser, support } = checkBrowserForPay()
 
+      window.alert(brwoser, support)
+
       if (brwoser === WEIXIN_BROWSER) {
         if (support) {
           return this.$store.dispatch('FETCH_WECHATPAY_URL')

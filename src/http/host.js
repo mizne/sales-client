@@ -1,7 +1,4 @@
 export default {
-  production: 'http://deal.xiaovbao.cn/api/v4',
-  development: 'http://deal.xiaovbao.cn/api/v4',
-
   qrcode: 'https://deal.xiaovbao.cn/api/test/customer',
   deal: 'https://deal.xiaovbao.cn/api/test/customer/deal',
   eshop: 'https://deal.xiaovbao.cn/api/test/customer/eshop',

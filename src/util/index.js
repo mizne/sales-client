@@ -80,7 +80,7 @@ const checkBrowserForPay = function() {
   } else if (ua.indexOf('AlipayClient') >= 0) {
     // 支付宝浏览器
     return {
-      browser: WEIXIN_BROWSER,
+      browser: ALI_BROWSER,
       support: true
     }
   } else {
