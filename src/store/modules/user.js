@@ -50,7 +50,6 @@ const actions = {
             UserService.getDeliveryFee(Math.round(distance))
             .then(deliveryFee => {
               commit('SET_DELIVERY_FEE', deliveryFee)
-              window.alert(`配送费: ${deliveryFee} 元`)
             })
           })
         })

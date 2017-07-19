@@ -17,11 +17,9 @@ class UserService {
   }
 
   getDeliveryFee(distance) {
-    // return getBizTypeHttp()
-    // .get(`/deliveryFee?distance=${distance}&tenantId=${storage.get('tenantId')}`)
-    // .catch(exceptionHandler('UserService', 'getDeliveryFee'))
-
-    return Promise.resolve(11)
+    return getBizTypeHttp()
+    .get(`/deliveryFee?distance=${distance}&tenantId=${storage.get('tenantId')}`)
+    .catch(exceptionHandler('UserService', 'getDeliveryFee'))
   }
 
   _getStatusForDeal() {
