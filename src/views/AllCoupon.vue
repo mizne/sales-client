@@ -29,7 +29,7 @@ export default {
     CouponItem
   },
   computed: {
-    ...mapGetters(['allCoupons'])
+    ...mapGetters(['allCoupons', 'tenantName'])
   },
   created() {
     this.$store.dispatch('FETCH_AVALIABLE_COUPONS')

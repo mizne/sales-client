@@ -37,6 +37,16 @@ const mutationMaps = [
     mutationKey: 'SET_NEED_CHOOSE_PEOPLE_NUMBER_PAGE',
     stateKey: 'needChoosePeopleNumberPage',
     initValue: false
+  }, 
+  {
+    mutationKey: 'SET_TENANT_LONGITUDE',
+    stateKey: 'tenantLongitude',
+    initValue: ''
+  },
+  {
+    mutationKey: 'SET_TENANT_LATITUDE',
+    stateKey: 'tenantLatitude',
+    initValue: ''
   }
 ]
 
@@ -65,6 +75,9 @@ const actions = {
       commit('SET_VIP_AMOUNT', config.vipFee)
       commit('SET_ALMOST_VIP_AMOUNT', config.vipRemindFee)
       commit('SET_HOME_IMAGE', config.homeImage)
+
+      commit('SET_TENANT_LONGITUDE', config.longitude)
+      commit('SET_TENANT_LATITUDE', config.latitude)
       commit('SET_VIP_TOAST', true)// TODO 后台提供
       commit('SET_NEED_CHOOSE_PEOPLE_NUMBER_PAGE', false)// TODO 后台提供
 

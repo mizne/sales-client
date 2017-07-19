@@ -11,15 +11,14 @@
       </div>
     </div>
     <div class="description">
-      <!-- <div class="coupon-from">
-                  <span>{{coupon.from || '平台放送'}}</span>
-                </div> -->
-      <div class="coupon-date">
-        <span>{{coupon.createdAt | couponDate}}</span>
+      <div class="coupon-from">
+        <span>{{merchant}}</span>
       </div>
       <div class="coupon-date">
-        <span>{{coupon.InvalidDate | couponDate}}</span>
+        <span>{{coupon.createdAt | couponDate}} </span> -- 
+        <span> {{coupon.InvalidDate | couponDate}}</span>
       </div>
+  
     </div>
   
     <div class="action">
@@ -41,6 +40,9 @@ export default {
       type: Object,
       default: null
     },
+    merchant: {
+      type: String
+    },
     filter: {
       type: String,
       default: 'avaliable'
@@ -54,7 +56,7 @@ export default {
       return new Coupon(coupon.couponType, coupon.value).getValueText()
     },
     couponDate(v) {
-      return fecha.format(new Date(v), 'YYYY-MM-DD')
+      return fecha.format(new Date(v), 'YYYY.MM.DD')
     }
   },
   methods: {
@@ -106,12 +108,17 @@ export default {
     height: 100%;
     color: $text;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     flex-direction: column;
+    align-items: center;
 
     .coupon-from,
     .coupon-date {
       @include flexboxCenter;
+    }
+
+    .coupon-date {
+      font-size: .9rem;
     }
   }
 

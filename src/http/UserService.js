@@ -16,6 +16,14 @@ class UserService {
     }
   }
 
+  getDeliveryFee(distance) {
+    // return getBizTypeHttp()
+    // .get(`/deliveryFee?distance=${distance}&tenantId=${storage.get('tenantId')}`)
+    // .catch(exceptionHandler('UserService', 'getDeliveryFee'))
+
+    return Promise.resolve(11)
+  }
+
   _getStatusForDeal() {
     let query =
       `?` +
@@ -29,7 +37,7 @@ class UserService {
 
     return getBizTypeHttp()
       .get(`/table${query}`)
-      .catch(exceptionHandler('TableService', 'getStatus'))
+      .catch(exceptionHandler('UserService', 'getStatus'))
   }
 
   _getStatusForEShop() {

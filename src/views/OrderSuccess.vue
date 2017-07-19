@@ -14,8 +14,8 @@
         <div class="line" v-if="!isDealBizType">
           <div class="btn-group">
             <!--<div class="edit-btn">
-                                          <x-button type="primary" @click.native="editOrder">修改</x-button>
-                                        </div>-->
+                                              <x-button type="primary" @click.native="editOrder">修改</x-button>
+                                            </div>-->
             <div class="cancel-btn" style="margin-left: 10px;">
               <x-button type="primary" @click.native="cancelOrder">取消</x-button>
             </div>
@@ -84,6 +84,15 @@
             </swipeout-item>
           </div>
         </swipeout>
+  
+        <div class="delivery" v-if="!isDealBizType">
+          <span class="delivery-label">配送费:</span>
+          <span class="delivery-placeholder"></span>
+          <span class="delivery-value">
+            <i class="icon-money"></i>
+            <span>{{deliveryFee}}</span>
+          </span>
+        </div>
       </div>
     </deal-content>
   
@@ -125,7 +134,7 @@ export default {
     OrderBar
   },
   computed: {
-    ...mapGetters(['orderDetail', 'showIframe', 'isVip', 'couponText', 'selectedCoupon']),
+    ...mapGetters(['orderDetail', 'showIframe', 'isVip', 'couponText', 'selectedCoupon', 'deliveryFee']),
     totalPrice() {
       if (this.orderDetail) {
         if (this.isVip) {
@@ -183,9 +192,9 @@ export default {
       // 判断是否有用优惠券
       // 用了优惠券 则请求绑定优惠券和订单 再支付
       // 没用优惠券 直接支付
-      (this.selectedCoupon 
-      ? this.$store.dispatch('COUSUM_COUPON').catch(err => vToast({ content: '绑定优惠券失败' }))
-      : Promise.resolve('没选择优惠券'))
+      (this.selectedCoupon
+        ? this.$store.dispatch('COUSUM_COUPON').catch(err => vToast({ content: '绑定优惠券失败' }))
+        : Promise.resolve('没选择优惠券'))
         .then(_ => {
           this._toPay()
         })
@@ -354,6 +363,25 @@ export default {
               font-size: 1.3rem;
             }
           }
+        }
+      }
+
+      .delivery {
+        @include flexboxCenter;
+        height: 40px;
+        margin-top: 10px;
+        background-color: #fff;
+        text-align: center;
+        border-radius: 5px;
+        .delivery-label,
+        .delivery-placeholder,
+        .delivery-value {
+          flex: 1;
+          @include flexboxCenter;
+        }
+
+        .delivery-value {
+          color: $primaryColor;
         }
       }
     }

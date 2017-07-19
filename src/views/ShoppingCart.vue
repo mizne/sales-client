@@ -46,10 +46,19 @@
           </div>
         </template>
   
-        <div class="remark">
-          <x-textarea :max="50" v-model="remark" :placeholder="remarkPlaceholder"></x-textarea>
-        </div>
+      </div>
   
+      <div class="delivery" v-if="!isDealBizType">
+        <span class="delivery-label">配送费:</span>
+        <span class="delivery-placeholder"></span>
+        <span class="delivery-value">
+          <i class="icon-money"></i>
+          <span>{{deliveryFee}}</span>
+        </span>
+      </div>
+      
+      <div class="remark">
+        <x-textarea :max="50" v-model="remark" :placeholder="remarkPlaceholder"></x-textarea>
       </div>
     </deal-content>
   
@@ -115,7 +124,8 @@ export default {
   computed: {
     ...mapGetters([
       'shoppingCart',
-      'isVip'
+      'isVip',
+      'deliveryFee'
     ]),
   },
   methods: {
@@ -152,8 +162,8 @@ export default {
       this.isDealBizType = storage.get('bizType') === DEAL
 
       this.remarkPlaceholder = this.isDealBizType
-      ? '请填写备注'
-      : '该订单为代售商品, 如收货地址变更, 请填写具体地址, 默认为本二维码所在地址'
+        ? '请填写备注'
+        : '该订单为代售商品, 如收货地址变更, 请填写具体地址, 默认为本二维码所在地址'
     }
   },
   created() {
@@ -192,17 +202,11 @@ export default {
       }
     }
 
-    .remark {
-      margin-top: 10px;
-      div#placeholder {
-        color: #ff8f00;
-      }
-    }
 
 
     .order-list {
       margin-top: 10px;
-      margin-bottom: 50px;
+
 
 
       .order-item:not(:first-child) {
@@ -223,6 +227,34 @@ export default {
         .text {
           margin-left: 10px;
         }
+      }
+    }
+
+    .delivery {
+      @include flexboxCenter;
+      height: 40px;
+      margin-top: 10px;
+      background-color: #fff;
+      text-align: center;
+      border-radius: 5px;
+      .delivery-label,
+      .delivery-placeholder,
+      .delivery-value {
+        flex: 1;
+        @include flexboxCenter;
+      }
+
+      .delivery-value {
+        color: $primaryColor;
+      }
+    }
+
+
+    .remark {
+      margin-top: 10px;
+      margin-bottom: 50px;
+      div#placeholder {
+        color: #ff8f00;
       }
     }
   }

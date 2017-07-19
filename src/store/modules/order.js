@@ -1,6 +1,7 @@
 import { OrderService } from '@/http/index'
 import storage from '@/util/storage'
 import router from '@/router/index'
+import { ESHOP } from '@/util/constants'
 
 const state = {
   orderDetail: null,
@@ -68,9 +69,10 @@ const actions = {
       dinersNum: state.dinersNum
     }
 
-    if (rootState.coupon.selectedCoupon) {
+    // 代售 添加配送费
+    if (storage.get('bizType') === ESHOP) {
       Object.assign(params, {
-        couponKey: rootState.coupon.selectedCoupon.couponKey
+        deliveryFee: rootState.user.deliveryFee
       })
     }
 

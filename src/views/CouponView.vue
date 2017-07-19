@@ -11,7 +11,7 @@
 
       <template v-if="couponsToShow.length > 0">
         <coupon-item v-for="coupon in couponsToShow" :key="coupon.couponKey" 
-        :coupon="coupon" :selected-coupon="selectedCoupon" :filter="filter" @select-coupon="selectItem"></coupon-item>
+        :coupon="coupon" :merchant="tenantName" :selected-coupon="selectedCoupon" :filter="filter" @select-coupon="selectItem"></coupon-item>
       </template>
       <template v-else>
         <div class="no-coupon">还没有优惠券呢 ^_^</div>
@@ -43,7 +43,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['avaliableCoupons', 'disableCoupons', 'selectedCoupon'])
+    ...mapGetters(['avaliableCoupons', 'disableCoupons', 'selectedCoupon', 'tenantName'])
   },
   methods: {
     onItemClick(filter) {
