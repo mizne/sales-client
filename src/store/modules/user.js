@@ -5,7 +5,8 @@ import QRCodeInfo from '@/models/QRCodeInfo'
 const state = {
   isVip: false,
   deliveryFeeId: '',
-  deliveryFeeValue: 0
+  deliveryFeeValue: 0,
+  deliveryTime: ''
 }
 
 const mutations = {
@@ -17,6 +18,9 @@ const mutations = {
   },
   SET_DELIVERY_FEE_VALUE(state, value) {
     state.deliveryFeeValue = value
+  },
+  SET_DELIVERY_TIME(state, time) {
+    state.deliveryTime = time
   }
 }
 
@@ -55,9 +59,10 @@ const actions = {
             window.alert(`distance: ${distance}`)
 
             UserService.getDeliveryFee(Math.round(distance))
-            .then(({deliveryFeeId, deliveryFeeValue}) => {
+            .then(({deliveryFeeId, deliveryFeeValue, deliveryTime}) => {
               commit('SET_DELIVERY_FEE_ID', deliveryFeeId)
               commit('SET_DELIVERY_FEE_VALUE', deliveryFeeValue)
+              commit('SET_DELIVERY_TIME', deliveryTime)
             })
           })
         })

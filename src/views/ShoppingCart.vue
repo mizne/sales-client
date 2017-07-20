@@ -57,6 +57,15 @@
         </span>
       </div>
 
+      <div class="delivery" v-if="needDeliveryFee">
+        <span class="delivery-label">配送时间:</span>
+        <span class="delivery-placeholder"></span>
+        <span class="delivery-value">
+          <i class="icon-money"></i>
+          <span>{{deliveryTime}}</span>
+        </span>
+      </div>
+
       <div class="remark">
         <x-textarea :max="50" v-model="remark" :placeholder="remarkPlaceholder"></x-textarea>
       </div>
@@ -126,7 +135,8 @@ export default {
       'shoppingCart',
       'isVip',
       'needDeliveryFee',
-      'deliveryFeeValue'
+      'deliveryFeeValue',
+      'deliveryTime'
     ]),
   },
   methods: {

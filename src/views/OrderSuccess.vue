@@ -14,8 +14,8 @@
         <div class="line" v-if="!isDealBizType">
           <div class="btn-group">
             <!--<div class="edit-btn">
-                                                <x-button type="primary" @click.native="editOrder">修改</x-button>
-                                              </div>-->
+                                                  <x-button type="primary" @click.native="editOrder">修改</x-button>
+                                                </div>-->
             <div class="cancel-btn" style="margin-left: 10px;">
               <x-button type="primary" @click.native="cancelOrder">取消</x-button>
             </div>
@@ -93,6 +93,15 @@
             <span>{{deliveryFeeValue}}</span>
           </span>
         </div>
+  
+        <div class="delivery" v-if="needDeliveryFee">
+          <span class="delivery-label">配送时间:</span>
+          <span class="delivery-placeholder"></span>
+          <span class="delivery-value">
+            <i class="icon-money"></i>
+            <span>{{deliveryTime}}</span>
+          </span>
+        </div>
       </div>
     </deal-content>
   
@@ -141,7 +150,8 @@ export default {
       'couponText',
       'selectedCoupon',
       'needDeliveryFee',
-      'deliveryFeeValue'
+      'deliveryFeeValue',
+      'deliveryTime'
     ]),
     totalPrice() {
       if (this.orderDetail) {

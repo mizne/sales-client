@@ -12,7 +12,7 @@ class CouponService {
   // 检查当前号码 是否再可领取
   checkPhone(phoneNumber) {
     return getBizTypeHttp()
-      .get(`/coupon?phoneNumber=${phoneNumber}&tenantId=${QRCodeInfo.getTtenantId()}`)
+      .get(`/coupon?phoneNumber=${phoneNumber}&tenantId=${QRCodeInfo.getTenantId()}`)
       .catch(exceptionHandler('CouponService', 'checkPhone'))
   }
 
