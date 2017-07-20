@@ -53,10 +53,12 @@ const actions = {
     return OrderService.delOrder(state.orderDetail.tradeNo)
       .then(_ => {
         commit('SHOW_LOADING', false)
+        commit('SET_SELECTED_COUPON', null)
         router.replace({ name: 'Menu' })
       })
       .catch(err => {
         commit('SHOW_LOADING', false)
+        commit('SET_SELECTED_COUPON', null)
         router.replace({ name: 'Menu' })
         return Promise.reject(err)
       })

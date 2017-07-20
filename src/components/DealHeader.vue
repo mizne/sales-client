@@ -23,12 +23,6 @@ export default {
       required: true
     }
   },
-  data() {
-    return {
-    }
-  },
-  methods: {
-  }
 }
 </script>
 <style lang="scss" scoped>
@@ -56,7 +50,7 @@ export default {
 
     .header-left,
     .header-right {
-       width: 40px;
+       width: 50px;
     }
   }
 }
