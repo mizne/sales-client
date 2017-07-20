@@ -14,8 +14,8 @@
         <div class="line" v-if="!isDealBizType">
           <div class="btn-group">
             <!--<div class="edit-btn">
-                                                  <x-button type="primary" @click.native="editOrder">修改</x-button>
-                                                </div>-->
+                                                    <x-button type="primary" @click.native="editOrder">修改</x-button>
+                                                  </div>-->
             <div class="cancel-btn" style="margin-left: 10px;">
               <x-button type="primary" @click.native="cancelOrder">取消</x-button>
             </div>
@@ -287,9 +287,11 @@ export default {
         letter-spacing: 1px;
         display: flex;
 
-        .btn-group,
-        .placeholder {
+        .btn-group {
           flex: 1;
+        }
+        .placeholder {
+          flex: 3;
         }
 
         .btn-group {
