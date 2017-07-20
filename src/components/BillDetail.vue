@@ -36,7 +36,7 @@
           <span class="text">{{orderDetail.isVip ? orderDetail.totalVipPrice : orderDetail.totalPrice}}</span>
         </div>
         <div class="bill-mode">
-          <span>支付宝：</span>
+          <span>{{payMode}}：</span>
           <span class="text">{{orderDetail.isVip ? orderDetail.totalVipPrice : orderDetail.totalPrice}}</span>
         </div>
       </div>

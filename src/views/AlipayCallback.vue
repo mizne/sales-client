@@ -11,7 +11,7 @@
        :pay-time="payTime" pay-mode="支付宝"></bill-detail>
     </deal-content>
   
-    <deal-footer>
+    <deal-footer v-if="orderDetail">
       <bill-bar @to-shopcomment="toShopComment"></bill-bar>
     </deal-footer>
   </div>
@@ -23,6 +23,7 @@ import DealHeader from '@/components/DealHeader'
 import DealContent from '@/components/DealContent'
 import DealFooter from '@/components/DealFooter'
 import BillDetail from '@/components/BillDetail'
+import BillBar from '@/components/BillBar'
 
 import { objFrom } from '@/util/index'
 import { vAlert } from '@/util/vux-wrapper'
@@ -34,7 +35,8 @@ export default {
     DealHeader,
     DealContent,
     DealFooter,
-    BillDetail
+    BillDetail,
+    BillBar
   },
   computed: {
     ...mapGetters(['orderDetail', 'tenantName'])
