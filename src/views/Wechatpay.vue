@@ -63,6 +63,11 @@
               <span>已使用优惠券: {{orderDetail.couponValue | couponValue(orderDetail.couponType)}} </span>
             </div>
   
+            <div class="delivery-info" v-if="orderDetail.deliveryFee">
+              <span>配送费:</span>
+              <span>{{orderDetail.deliveryFee}} 元</span>
+            </div>
+  
             <div class="order-total">
               <span>总计</span>
               <span>{{isVip ? orderDetail.totalVipPrice : orderDetail.totalPrice}}元</span>
@@ -314,7 +319,8 @@ export default {
             align-items: center;
           }
 
-          .coupon-info {
+          .coupon-info,
+          .delivery-info {
             display: flex;
             justify-content: space-between;
             height: 50px;

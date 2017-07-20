@@ -2,9 +2,9 @@ import { CouponService } from '@/http/index'
 import { not } from '@/util/index'
 import Coupon from '@/models/Coupon'
 import { vConfirm, vToast } from '@/util/vux-wrapper'
-import router from '@/router/index'
 import { RECEIVE_COUPON } from '@/store/modules/phoneVerify'
 import QRCodeInfo from '@/models/QRCodeInfo'
+import router from '@/router/index'
 
 const state = {
   allCoupons: [],
@@ -82,7 +82,7 @@ const actions = {
       // 获取订单时 再请求可用优惠券(过滤掉 满减券 价格不够的)
       const predicate = rootState.order.orderDetail
       ? (e => {
-        if (e.couponType === 'reduce') {
+        if (e.couponType === Coupon.REDUCE) {
           let orderPrice = rootState.order.orderDetail.totalPrice
           // 如果有配送费 则加上
           if (rootState.user.deliveryFeeValue) {
