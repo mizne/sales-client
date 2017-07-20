@@ -1,4 +1,4 @@
-import { UserService } from '@/http/index'
+import { UserService, Logger } from '@/http/index'
 import { vAlert } from '@/util/vux-wrapper'
 import QRCodeInfo from '@/models/QRCodeInfo'
 
@@ -35,7 +35,6 @@ const actions = {
     // 代售业务且商户有经纬度才获取 配送费
     if (rootState.tenant.needDeliveryFee) {
       const { tenantLatitude, tenantLongitude } = rootState.tenant
-      window.alert(`tenantLatitude: ${tenantLatitude}, tenantLongitude: ${tenantLongitude}`)
       const merchantAddress = new qq.maps.LatLng(
         tenantLatitude,
         tenantLongitude
@@ -50,13 +49,16 @@ const actions = {
             res
           ) {
             const userAddress = new qq.maps.LatLng(res[0].lat, res[0].lng)
-            window.alert(`userLatitude: ${res[0].lat}, userLongitude: ${res[0].lng}`)
             const distance = qq.maps.geometry.spherical.computeDistanceBetween(
               userAddress,
               merchantAddress
             )
 
-            window.alert(`distance: ${distance}`)
+            Logger.info({
+              module: 'user',
+              method: 'FETCH_DELIVERY_FEE',
+              description: `userLatitude: ${res[0].lat}, userLongitude: ${res[0].lng}`
+            })
 
             UserService.getDeliveryFee(Math.round(distance))
             .then(({deliveryFeeId, deliveryFeeValue, deliveryTime}) => {
