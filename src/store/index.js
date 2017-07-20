@@ -13,12 +13,12 @@ import * as shoppingCart from './modules/shoppingCart'
 import * as tenant from './modules/tenant'
 import * as user from './modules/user'
 
-import plugins from './plugins'
+// import plugins from './plugins'
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
-  plugins,
+  // plugins,
 
   modules: {
     comment,
