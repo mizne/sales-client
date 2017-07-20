@@ -19,7 +19,7 @@ export default {
   },
   props: {
     orderCost: {
-      type: Number
+      type: String
     }
   },
   methods: {
