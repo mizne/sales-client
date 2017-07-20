@@ -14,8 +14,8 @@
         <div class="line" v-if="!isDealBizType">
           <div class="btn-group">
             <!--<div class="edit-btn">
-                                                      <x-button type="primary" @click.native="editOrder">修改</x-button>
-                                                    </div>-->
+                                                        <x-button type="primary" @click.native="editOrder">修改</x-button>
+                                                      </div>-->
             <div class="cancel-btn" style="margin-left: 10px;">
               <x-button type="primary" @click.native="cancelOrder">取消</x-button>
             </div>
@@ -248,14 +248,19 @@ export default {
   },
   created() {
     this._init()
-    
-    this.$store.dispatch('FETCH_ORDER')
-      .then(_ => {
-        this.$store.dispatch('FETCH_AVALIABLE_COUPONS')
-      })
-      .catch(err => {
-        vAlert({ content: '获取订单失败' })
-      })
+  },
+  beforeRouteEnter(to, from, next) {
+    next((vm) => {
+      if (from.name === 'ShoppingCart' || from.name === 'PhoneVerify' || from.name === 'Home') {
+        vm.$store.dispatch('FETCH_ORDER')
+          .then(_ => {
+            vm.$store.dispatch('FETCH_AVALIABLE_COUPONS')
+          })
+          .catch(err => {
+            vAlert({ content: '获取订单失败' })
+          })
+      }
+    })
   }
 }
 </script>
