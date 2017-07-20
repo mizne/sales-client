@@ -13,10 +13,7 @@
         </div>
         <div class="line" v-if="!isDealBizType">
           <div class="btn-group">
-            <!--<div class="edit-btn">
-                                                        <x-button type="primary" @click.native="editOrder">修改</x-button>
-                                                      </div>-->
-            <div class="cancel-btn" style="margin-left: 10px;">
+            <div class="cancel-btn">
               <x-button type="primary" @click.native="cancelOrder">取消</x-button>
             </div>
           </div>
@@ -280,6 +277,7 @@ export default {
       margin-top: 35px;
       .line {
         margin-top: 10px;
+        padding: 0 10px;
         font-size: 1.1rem;
         line-height: 1.5rem;
         color: $greyText;
