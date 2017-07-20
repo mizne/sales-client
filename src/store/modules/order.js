@@ -53,16 +53,17 @@ const actions = {
     return OrderService.delOrder(state.orderDetail.tradeNo)
       .then(_ => {
         commit('SHOW_LOADING', false)
-        router.push({ name: 'Menu' })
+        router.replace({ name: 'Menu' })
       })
       .catch(err => {
         commit('SHOW_LOADING', false)
-        router.push({ name: 'Menu' })
+        router.replace({ name: 'Menu' })
         return Promise.reject(err)
       })
   },
   ADD_ORDER: ({ commit, state, rootState }) => {
-    router.push({ name: 'Ordering' })
+    commit('SHOW_LOADING', true)
+    // router.push({ name: 'Ordering' })
     const params = {
       remark: state.orderRemark,
       dinersNum: state.dinersNum
@@ -77,9 +78,12 @@ const actions = {
 
     return OrderService.addOrder(params)
       .then(data => {
+        commit('SHOW_LOADING', false)
+        router.push({ name: 'OrderSuccess' })
         commit('ORDERING_SUCCESS')
       })
       .catch(err => {
+        commit('SHOW_LOADING', false)
         router.push({ name: 'OrderFailed' })
         return Promise.reject(err)
       })

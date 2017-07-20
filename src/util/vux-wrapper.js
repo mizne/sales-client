@@ -13,7 +13,7 @@ const vConfirm = function({ title = '提示', content = '小v宝 友情提醒' }
         resolve('ok')
       },
       onCancel() {
-        reject('cancel')
+        reject(`cancel confirm; content: ${content}`)
       }
     })
   })
