@@ -56,7 +56,7 @@ QRCodeInfo.prototype.isEShopBizType = function() {
   'phoneNumber'
 ].forEach(method => {
   QRCodeInfo.prototype['has' + capital(method)] = function(v) {
-    return this['get' + capital(method)] != null
+    return this['get' + capital(method)]() != null
   }
 })
 
