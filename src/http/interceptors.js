@@ -1,6 +1,6 @@
 import axios from 'axios'
 import host from './host.js'
-import * as Logger from './Logger'
+import Logger from './Logger'
 import QRCodeInfo from '@/models/QRCodeInfo'
 import { DEAL, ESHOP } from '@/util/constants'
 

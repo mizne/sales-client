@@ -1,5 +1,5 @@
 import { getBizTypeHttp, exceptionHandler } from './interceptors'
-import * as Logger from './Logger'
+import Logger from './Logger'
 
 import router from '@/router/index'
 import { vConfirm, vToast } from '@/util/vux-wrapper'

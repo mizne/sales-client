@@ -2,14 +2,14 @@ import { loggerHttp } from './interceptors'
 import QRCodeInfo, { capital } from '@/models/QRCodeInfo'
 
 const info = function(params) {
-  return _request('INFO')
+  return _request('INFO', params)
 }
 
 const error = function(params) {
-  return _request('ERROR')
+  return _request('ERROR', params)
 }
 
-function _request(level) {
+function _request(level, params) {
   Object.assign(params, {
     tenantId: QRCodeInfo.getTenantId(),
     tableName: QRCodeInfo.getTableName(),
@@ -30,4 +30,4 @@ function _request(level) {
   })
 }
 
-export { info, error }
+export default { info, error }
