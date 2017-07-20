@@ -6,7 +6,8 @@ const state = {
   isVip: false,
   deliveryFeeId: '',
   deliveryFeeValue: 0,
-  deliveryTime: ''
+  deliveryTime: '',
+  startPrice: ''
 }
 
 const mutations = {
@@ -21,6 +22,9 @@ const mutations = {
   },
   SET_DELIVERY_TIME(state, time) {
     state.deliveryTime = time
+  },
+  SET_START_PRICE(state, price) {
+    state.startPrice = price
   }
 }
 
@@ -62,10 +66,11 @@ const actions = {
             })
 
             UserService.getDeliveryFee(Math.round(distance))
-              .then(({ deliveryFeeId, deliveryFeeValue, deliveryTime }) => {
+              .then(({ deliveryFeeId, deliveryFeeValue, deliveryTime, startPrice }) => {
                 commit('SET_DELIVERY_FEE_ID', deliveryFeeId)
                 commit('SET_DELIVERY_FEE_VALUE', deliveryFeeValue)
                 commit('SET_DELIVERY_TIME', deliveryTime)
+                commit('SET_START_PRICE', startPrice)
                 return { deliveryFeeId, deliveryFeeValue, deliveryTime }
               })
               .then(({ deliveryFeeId, deliveryFeeValue, deliveryTime }) => {
@@ -73,7 +78,8 @@ const actions = {
                   module: 'user',
                   method: 'FETCH_DELIVERY_FEE',
                   description: `userLatitude: ${res[0]
-                    .lat}, userLongitude: ${res[0].lng}, deliveryFeeValue: ${deliveryFeeValue}, deliveryTime: ${deliveryTime}`
+                    .lat}, userLongitude: ${res[0]
+                    .lng}, deliveryFeeValue: ${deliveryFeeValue}, deliveryTime: ${deliveryTime}`
                 })
               })
           })
@@ -97,6 +103,9 @@ const getters = {
   },
   deliveryTime(state) {
     return state.deliveryTime
+  },
+  startPrice(state) {
+    return state.startPrice
   }
 }
 

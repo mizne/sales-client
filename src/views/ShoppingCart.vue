@@ -14,6 +14,15 @@
         </span>
       </div>
   
+      <div class="delivery" v-if="needDeliveryFee">
+        <span class="delivery-label">起送价:</span>
+        <span class="delivery-placeholder"></span>
+        <span class="delivery-value">
+          <i class="icon-money"></i>
+          <span>{{startPrice}}</span>
+        </span>
+      </div>
+  
       <div class="order-list">
         <template v-if="shoppingCart.foods.length > 0">
           <swipeout>
@@ -56,7 +65,7 @@
           <span>{{deliveryFeeValue}}</span>
         </span>
       </div>
-
+  
       <div class="delivery" v-if="needDeliveryFee">
         <span class="delivery-label">配送时间:</span>
         <span class="delivery-placeholder"></span>
@@ -64,7 +73,7 @@
           <span>{{deliveryTime}}</span>
         </span>
       </div>
-
+  
       <div class="remark">
         <x-textarea :max="50" v-model="remark" :placeholder="remarkPlaceholder"></x-textarea>
       </div>
@@ -79,9 +88,10 @@
         <i class="icon-pencil"></i>
         <span class="text">修改</span>
       </div>
-      <div class="right-area" @click="ensureOrder">
+      <div :class="['right-area', {'disabled': disableAddOrder}]" @click="ensureOrder">
         <i class="icon-order"></i>
-        <span class="text">下单</span>
+        <span class="text" v-if="needDeliveryFee">{{startPricePrompt}}</span>
+        <span class="text" v-else>下单</span>
       </div>
     </deal-footer>
   
@@ -135,8 +145,28 @@ export default {
       'isVip',
       'needDeliveryFee',
       'deliveryFeeValue',
-      'deliveryTime'
+      'deliveryTime',
+      'startPrice',
+      'orderDetail'
     ]),
+    startPricePrompt() {
+      if (this.orderDetail) {
+        return '下单'
+      } else {
+        if (this.shoppingCart.totalPrice < this.startPrice) {
+          return `还差 ${this.startPrice - this.shoppingCart.totalPrice} 元`
+        } else {
+          return '下单'
+        }
+      }
+
+    },
+    disableAddOrder() {
+      if (this.needDeliveryFee) {
+        return !this.orderDetail && (this.shoppingCart.totalPrice < this.startPrice)
+      }
+      return false
+    }
   },
   methods: {
     addMoreFood() {
@@ -289,6 +319,10 @@ export default {
     .right-area {
       color: #fff;
       background-color: $warnColor;
+
+      &.disabled {
+        background-color: #bbb14e;
+      }
     }
   }
 }

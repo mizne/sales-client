@@ -18,7 +18,6 @@
         <span>{{coupon.createdAt | couponDate}} </span> -- 
         <span> {{coupon.InvalidDate | couponDate}}</span>
       </div>
-  
     </div>
   
     <div class="action">

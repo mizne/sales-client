@@ -43,7 +43,15 @@
     </deal-content>
 
     <deal-footer>
-      <shop-cart-bar :add-more="isAddMoreFood" :shop-cart="shoppingCart" :food-cost="tempShoppingCartFoodCost" :food-count="tempShoppingCartFoodCount" @go-shopcart="toShopCart"></shop-cart-bar>
+      <template v-if="isDealBizType">
+        <deal-cart-bar :add-more="isAddMoreFood" :shop-cart="shoppingCart" :food-cost="tempShoppingCartFoodCost"
+       :food-count="tempShoppingCartFoodCount" @go-shopcart="toShopCart"></deal-cart-bar>
+      </template>
+      
+      <template v-else>
+        <deal-cart-bar :add-more="isAddMoreFood" :shop-cart="shoppingCart" :food-cost="tempShoppingCartFoodCost"
+       :food-count="tempShoppingCartFoodCount" @go-shopcart="toShopCart"></deal-cart-bar>
+      </template>
     </deal-footer>
 
     <back-top></back-top>
@@ -59,13 +67,15 @@ import DealContent from '@/components/DealContent'
 import DealFooter from '@/components/DealFooter'
 import BackTop from '@/components/BackTop'
 import FoodItem from '@/components/FoodItem'
-import ShopCartBar from '@/components/ShopCartBar'
+import DealShopCartBar from '@/components/deal/ShopCartBar'
+// import EShopShopCartBar from '@/components/eshop/ShopCartBar'
 import ScrollNotification from '@/components/ScrollNotification'
 
 import vipToast from '@/mixins/vip-toast'
 import toShoppingCartPrompt from '@/mixins/to-shopping-cart-prompt'
 import { createSteps } from '@/util/index'
 import { vToast } from '@/util/vux-wrapper'
+import QRCodeInfo from '@/models/QRCodeInfo'
 
 export default {
   name: 'Menu',
@@ -77,7 +87,8 @@ export default {
     DealFooter,
     BackTop,
     FoodItem,
-    ShopCartBar,
+    'deal-cart-bar': DealShopCartBar,
+    // 'eshop-cart-bar': EShopShopCartBar,
     ScrollNotification,
   },
   mixins: [vipToast, toShoppingCartPrompt],
@@ -87,7 +98,8 @@ export default {
       listHeight: [],// 菜单右边菜品子列表的高度
       foodsScrollY: 0,// 菜单右边滚动区的 滚动y轴偏差
       menuCurrentIndex: 0,// 菜单左边 当前选中索引,
-      promptText: ''// 滚动通知提示
+      promptText: '',// 滚动通知提示
+      isDealBizType: false
     }
   },
   computed: {
@@ -199,6 +211,9 @@ export default {
     _initRectTop() {
       this._rectTop = this.$refs.foodsWrapper.getBoundingClientRect().top
     }
+  },
+  created() {
+    this.isDealBizType = QRCodeInfo.isDealBizType()
   },
   mounted() {
     this._initAllFoods()

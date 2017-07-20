@@ -51,7 +51,8 @@
     </deal-content>
   
     <deal-footer>
-      <shop-cart-bar :add-more="isAddMoreFood" :shop-cart="shoppingCart" :food-cost="tempShoppingCartFoodCost" :food-count="tempShoppingCartFoodCount" @go-shopcart="toShopCart"></shop-cart-bar>
+      <deal-cart-bar :add-more="isAddMoreFood" :shop-cart="shoppingCart" :food-cost="tempShoppingCartFoodCost" 
+      :food-count="tempShoppingCartFoodCount" @go-shopcart="toShopCart"></deal-cart-bar>
     </deal-footer>
   
     <transition enter-active-class="animated fadeInUp" leave-active-class="animated fadeOutDown">
@@ -113,7 +114,7 @@ import DealHeader from '@/components/DealHeader'
 import DealContent from '@/components/DealContent'
 import DealFooter from '@/components/DealFooter'
 import CommentItem from '@//components/CommentItem'
-import ShopCartBar from '@/components/ShopCartBar'
+import DealShopCartBar from '@/components/deal/ShopCartBar'
 
 import QRCodeInfo from '@/models/QRCodeInfo'
 import vipToast from '@/mixins/vip-toast'
@@ -129,13 +130,14 @@ export default {
     DealContent,
     DealFooter,
     CommentItem,
-    ShopCartBar,
+    'deal-cart-bar': DealShopCartBar,
   },
   mixins: [vipToast, toShoppingCartPrompt],
   data() {
     return {
       hasPhoneNumber: false,
       showSelection: false,
+      isDealBizType: false,
       commentText: '',
       food: {
         quantity: 1,
@@ -275,6 +277,9 @@ export default {
           })
         })
     }
+  },
+  created() {
+    this.isDealBizType = QRCodeInfo.isDealBizType()
   }
 }
 </script>

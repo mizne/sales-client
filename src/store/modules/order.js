@@ -16,8 +16,8 @@ const mutations = {
   SET_ORDER_REMARK(state, remark) {
     state.orderRemark = remark
   },
-  ORDERING_SUCCESS(state) {
-    state.orderingSuccess = true
+  ORDERING_SUCCESS(state, flag) {
+    state.orderingSuccess = flag
   },
   SET_DINERS_NUM(state, number) {
     state.dinersNum = number
@@ -30,7 +30,7 @@ const actions = {
     return dispatch('ADD_ORDER')
   },
   ORDERING_SUCCESS: ({ commit }) => {
-    commit('ORDERING_SUCCESS')
+    commit('ORDERING_SUCCESS', true)
     commit('RESET_SHOPPING_CART')
   },
   EDIT_ORDER: ({ commit, dispatch }, foodParams) => {
@@ -54,11 +54,15 @@ const actions = {
       .then(_ => {
         commit('SHOW_LOADING', false)
         commit('SET_SELECTED_COUPON', null)
+        commit('SET_ORDER_DETAIL', null)
+        commit('ORDERING_SUCCESS', false)
         router.replace({ name: 'Menu' })
       })
       .catch(err => {
         commit('SHOW_LOADING', false)
         commit('SET_SELECTED_COUPON', null)
+        commit('SET_ORDER_DETAIL', null)
+        commit('ORDERING_SUCCESS', false)
         router.replace({ name: 'Menu' })
         return Promise.reject(err)
       })

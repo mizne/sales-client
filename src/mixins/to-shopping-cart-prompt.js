@@ -5,7 +5,7 @@ import QRCodeInfo from '@/models/QRCodeInfo'
 
 export default {
   computed: {
-    ...mapGetters(['tempShoppingCartFoodCost', 'tempShoppingCartFoodCount', 'shoppingCart', 'hasClosed'])
+    ...mapGetters(['tempShoppingCartFoodCost', 'tempShoppingCartFoodCount', 'shoppingCart', 'hasClosed', 'orderDetail'])
   },
   methods: {
     toShopCart() {
@@ -14,10 +14,10 @@ export default {
         return vAlert({ content: '真的不能买啦, 明天再来吧 ^_^' })
       }
 
-      // 如果临时购物车和购物车 都没有 则提示 还没有点菜
+      // 如果 临时购物车和购物车 都没有商品 则提示 还没有点菜
       if (
-        this.tempShoppingCartFoodCost === 0 &&
-        this.shoppingCart.totalPrice === 0
+        this.tempShoppingCartFoodCost === 0 
+        && this.shoppingCart.totalPrice === 0
       ) {
         return vAlert({ content: '购物车还是空的呢 ^_^' })
       } else {

@@ -41,7 +41,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '../assets/css/main.scss';
+@import '../../assets/css/main.scss';
 .shopcart-bar-container {
   width: 100%;
   display: flex;

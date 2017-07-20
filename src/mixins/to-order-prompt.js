@@ -13,6 +13,10 @@ export default {
         return vAlert({ content: '购物车为空呢 ^_^' })
       }
 
+      if (this.disableAddOrder) {
+        return vAlert({ content: this.startPricePrompt + ' 起送呢 ^_^' })
+      }
+
       if (QRCodeInfo.isDealBizType()) {
         this.$store.commit('SET_ORDER_REMARK', this.remark)
 
