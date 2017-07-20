@@ -82,6 +82,9 @@ const getters = {
   },
   deliveryFeeValue(state) {
     return state.deliveryFeeValue
+  },
+  deliveryTime(state) {
+    return state.deliveryTime
   }
 }
 

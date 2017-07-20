@@ -61,7 +61,6 @@
         <span class="delivery-label">配送时间:</span>
         <span class="delivery-placeholder"></span>
         <span class="delivery-value">
-          <i class="icon-money"></i>
           <span>{{deliveryTime}}</span>
         </span>
       </div>
