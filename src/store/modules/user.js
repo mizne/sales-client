@@ -31,6 +31,7 @@ const actions = {
     // 代售才获取 配送费
     if (QRCodeInfo.isEShopBizType()) {
       const { tenantLatitude, tenantLongitude } = rootState.tenant
+      window.alert(`tenantLatitude: ${tenantLatitude}, tenantLongitude: ${tenantLongitude}`)
       const merchantAddress = new qq.maps.LatLng(
         tenantLatitude,
         tenantLongitude
@@ -45,10 +46,13 @@ const actions = {
             res
           ) {
             const userAddress = new qq.maps.LatLng(res[0].lat, res[0].lng)
+            window.alert(`userLatitude: ${res[0].lat}, userLongitude: ${res[0].lng}`)
             const distance = qq.maps.geometry.spherical.computeDistanceBetween(
               userAddress,
               merchantAddress
             )
+
+            window.alert(`distance: ${distance}`)
 
             UserService.getDeliveryFee(Math.round(distance))
             .then(({deliveryFeeId, deliveryFeeValue}) => {
