@@ -62,15 +62,15 @@
             <div class="coupon-info" v-if="orderDetail.couponValue">
               <span>已使用优惠券: {{orderDetail.couponValue | couponValue(orderDetail.couponType)}} </span>
             </div>
-
+  
             <div class="delivery-info" v-if="orderDetail.deliveryFee">
-              <span>配送费:</span> 
+              <span>配送费:</span>
               <span>{{orderDetail.deliveryFee}} 元</span>
             </div>
   
             <div class="order-total">
               <span>总计</span>
-              <span>{{isVip ? orderDetail.totalVipPrice : orderDetail.totalPrice}}元</span>
+              <span>{{totalPrice}}元</span>
             </div>
           </div>
   
@@ -107,7 +107,22 @@ export default {
     BillBar
   },
   computed: {
-    ...mapGetters(['orderDetail', 'tenantName', 'isVip'])
+    ...mapGetters(['orderDetail', 'tenantName', 'isVip']),
+    totalPrice() {
+      if (this.isVip) {
+        if (this.orderDetail.deliveryFee) {
+          return this.orderDetail.totalVipPrice + this.orderDetail.deliveryFee
+        } else {
+          return this.orderDetail.totalVipPrice
+        }
+      } else {
+        if (this.orderDetail.deliveryFee) {
+          return this.orderDetail.totalPrice + this.orderDetail.deliveryFee
+        } else {
+          return this.orderDetail.totalPrice
+        }
+      }
+    }
   },
   filters: {
     // 格式化后台返回下单时间 只显示时间部分
