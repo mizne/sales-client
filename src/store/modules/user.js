@@ -28,8 +28,8 @@ const actions = {
     })
   },
   FETCH_DELIVERY_FEE: ({ commit, rootState }) => {
-    // 代售才获取 配送费
-    if (QRCodeInfo.isEShopBizType()) {
+    // 代售业务且商户有经纬度才获取 配送费
+    if (rootState.tenant.needDeliveryFee) {
       const { tenantLatitude, tenantLongitude } = rootState.tenant
       window.alert(`tenantLatitude: ${tenantLatitude}, tenantLongitude: ${tenantLongitude}`)
       const merchantAddress = new qq.maps.LatLng(

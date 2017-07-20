@@ -48,7 +48,7 @@
   
       </div>
   
-      <div class="delivery" v-if="!isDealBizType">
+      <div class="delivery" v-if="needDeliveryFee">
         <span class="delivery-label">配送费:</span>
         <span class="delivery-placeholder"></span>
         <span class="delivery-value">
@@ -125,6 +125,7 @@ export default {
     ...mapGetters([
       'shoppingCart',
       'isVip',
+      'needDeliveryFee',
       'deliveryFeeValue'
     ]),
   },

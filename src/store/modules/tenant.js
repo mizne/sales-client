@@ -1,6 +1,7 @@
 import { generateMutations, generateGetters } from '@/store/helper.js'
 import { TenantService } from '@/http/index'
 import { dateBetween } from '@/util/index'
+import QRCodeInfo from '@/models/QRCodeInfo'
 
 const mutationMaps = [
   {
@@ -30,14 +31,14 @@ const mutationMaps = [
   },
   {
     mutationKey: 'SET_HAS_CLOSED',
-    stateKey: 'hasClosed',// 是否打烊
+    stateKey: 'hasClosed', // 是否打烊
     initValue: false
-  }, 
+  },
   {
     mutationKey: 'SET_NEED_CHOOSE_PEOPLE_NUMBER_PAGE',
     stateKey: 'needChoosePeopleNumberPage',
     initValue: false
-  }, 
+  },
   {
     mutationKey: 'SET_TENANT_LONGITUDE',
     stateKey: 'tenantLongitude',
@@ -47,12 +48,15 @@ const mutationMaps = [
     mutationKey: 'SET_TENANT_LATITUDE',
     stateKey: 'tenantLatitude',
     initValue: ''
+  },
+  {
+    mutationKey: 'SET_NEED_DELIVERY_FEE',
+    stateKey: 'needDeliveryFee',
+    initValue: false
   }
 ]
 
-const gettersSeed = [
-  ...mutationMaps.map(e => e.stateKey)
-]
+const gettersSeed = [...mutationMaps.map(e => e.stateKey)]
 
 const stateSeed = mutationMaps.reduce((accu, curr) => {
   accu[curr.stateKey] = curr.initValue
@@ -69,17 +73,22 @@ const mutations = {
 
 const actions = {
   FETCH_TENANT_CONFIG: ({ commit }) => {
-    return TenantService.getConfig()
-    .then(config => {
+    return TenantService.getConfig().then(config => {
       commit('SET_TENANT_NAME', config.name)
       commit('SET_VIP_AMOUNT', config.vipFee)
       commit('SET_ALMOST_VIP_AMOUNT', config.vipRemindFee)
       commit('SET_HOME_IMAGE', config.homeImage)
 
-      commit('SET_TENANT_LONGITUDE', config.longitude)
-      commit('SET_TENANT_LATITUDE', config.latitude)
-      commit('SET_VIP_TOAST', true)// TODO 后台提供
-      commit('SET_NEED_CHOOSE_PEOPLE_NUMBER_PAGE', false)// TODO 后台提供
+      if (config.longitude) {
+        commit('SET_TENANT_LONGITUDE', config.longitude)
+        commit('SET_TENANT_LATITUDE', config.latitude)
+        if (QRCodeInfo.isEShopBizType()) {
+          commit('SET_NEED_DELIVERY_FEE', true)
+        }
+      }
+
+      commit('SET_VIP_TOAST', true) // TODO 后台提供
+      commit('SET_NEED_CHOOSE_PEOPLE_NUMBER_PAGE', false) // TODO 后台提供
 
       // 店铺已打烊
       if (!dateBetween(config.startTime, config.endTime)) {
