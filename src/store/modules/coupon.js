@@ -10,7 +10,6 @@ const state = {
   allCoupons: [],
   avaliableCoupons: [],
   disableCoupons: [],
-  couponText: '',
   selectedCoupon: null
 }
 
@@ -23,9 +22,6 @@ const mutations = {
   },
   SET_DISABLE_COUPONS(state, coupons) {
     state.disableCoupons = coupons
-  },
-  SET_COUPON_TEXT(state, couponText) {
-    state.couponText = couponText
   },
   SET_SELECTED_COUPON(state, coupon) {
     state.selectedCoupon = coupon
@@ -104,7 +100,6 @@ const actions = {
       commit('SET_DISABLE_COUPONS', disableCoupons)
       const couponText =
         avaliableCoupons.length > 0 ? `${avaliableCoupons.length} 张可用` : '无可用'
-      commit('SET_COUPON_TEXT', couponText)
 
       return coupons
     })
@@ -115,13 +110,11 @@ const actions = {
     if (coupon) {
       const couponText = new Coupon(coupon.couponType, coupon.value).getText()
 
-      commit('SET_COUPON_TEXT', couponText)
     } else {
       const couponText =
         state.avaliableCoupons.length > 0
           ? `${state.avaliableCoupons.length} 张可用`
           : '无可用'
-      commit('SET_COUPON_TEXT', couponText)
     }
   },
   // 使用优惠券

@@ -121,6 +121,7 @@ import QRCodeInfo from '@/models/QRCodeInfo'
 import { vAlert, vConfirm, vToast } from '@/util/vux-wrapper'
 import { checkBrowserForPay } from '@/util/index'
 import { WEIXIN_BROWSER, ALI_BROWSER, UNKNOWN_BROWSER, DEAL } from '@/util/constants'
+import Coupon from '@/models/Coupon'
 
 export default {
   name: 'OrderSuccess',
@@ -143,7 +144,7 @@ export default {
       'orderDetail',
       'showIframe',
       'isVip',
-      'couponText',
+      'avaliableCoupons',
       'selectedCoupon',
       'needDeliveryFee',
       'deliveryFeeValue',
@@ -158,6 +159,13 @@ export default {
         }
       }
     },
+    couponText() {
+      if (this.selectedCoupon) {
+        return new Coupon(this.selectedCoupon.couponType, this.selectedCoupon.value).getText()
+      } else {
+        return this.avaliableCoupons.length > 0 ? `${this.avaliableCoupons.length} 张可用` : '无可用'
+      }
+    }
   },
   data() {
     return {

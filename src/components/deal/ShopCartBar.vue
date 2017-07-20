@@ -7,7 +7,7 @@
       <span>{{foodCost}}</span>
     </div>
     <div class="right-area">
-      <x-button class="btn" type="warn" @click.native="toShopCart">购物车</x-button>
+      <x-button class="btn" type="warn" @click.native="toShopCart">购物车{{shopCart.totalNum | normalize}}</x-button>
     </div>
   </div>
 </template>
@@ -33,6 +33,11 @@ export default {
       type: Number
     }
   },
+  filters: {
+    normalize(v) {
+      return v ? `(${String(v)})` : ''
+    }
+  },
   methods: {
     toShopCart() {
       this.$emit('go-shopcart')
@@ -45,7 +50,7 @@ export default {
 .shopcart-bar-container {
   width: 100%;
   display: flex;
-  
+
   .left-area {
     @include flexboxCenter;
     flex: 1;
