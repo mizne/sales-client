@@ -1,6 +1,5 @@
 import { getBizTypeHttp, exceptionHandler } from './interceptors'
-import storage from '@/util/storage'
-import { DEAL, ESHOP } from '@/util/constants'
+import QRCodeInfo, { capital } from '@/models/QRCodeInfo'
 
 class ShoppingCartService {
   addShoppingCart(params) {
@@ -9,9 +8,8 @@ class ShoppingCartService {
     return getBizTypeHttp()
       .post('/shoppingCart', params)
       .then(tableUser => {
-        const bizType = storage.get('bizType')
-        if (bizType === DEAL) {
-          storage.set('tableUser', tableUser)
+        if (QRCodeInfo.isDealBizType()) {
+          QRCodeInfo.setTableUser(tableUser)
         }
       })
       .catch(exceptionHandler('ShopCartService', 'addShoppingCart'))
@@ -34,35 +32,32 @@ class ShoppingCartService {
   }
 
   _addParams(params) {
-    const bizType = storage.get('bizType')
-    if (bizType === DEAL) {
+    if (QRCodeInfo.isDealBizType()) {
       Object.assign(params, {
-        tenantId: storage.get('tenantId'),
-        tableName: storage.get('tableName')
+        tenantId: QRCodeInfo.getTenantId(),
+        tableName: QRCodeInfo.getTableName()
       })
-      if (storage.has('tableUser')) {
-        params.tableUser = storage.get('tableUser')
+      if (QRCodeInfo.hasTableUser()) {
+        params.tableUser = QRCodeInfo.getTableUser()
       }
-    } else if (bizType === ESHOP) {
+    } else if (QRCodeInfo.isEShopBizType()) {
       Object.assign(params, {
-        tenantId: storage.get('tenantId'),
-        consigneeId: storage.get('consigneeId'),
-        tableName: storage.get('tableName'),
-        phoneNumber: storage.get('phoneNumber')
+        tenantId: QRCodeInfo.getTenantId(),
+        consigneeId: QRCodeInfo.getConsigneeId(),
+        tableName: QRCodeInfo.getTableName(),
+        phoneNumber: QRCodeInfo.getPhoneNumber()
       })
     } else {
-      console.error(`Unknown biz type: ${bizType}`)
+      console.error(`Unknown biz type: ${QRCodeInfo.getBizType()}`)
     }
   }
 
   _getParams(foodParams) {
-    const bizType = storage.get('bizType')
-
-    if (bizType === DEAL) {
+    if (QRCodeInfo.isDealBizType()) {
       return {
         condition: {
-          tenantId: storage.get('tenantId'),
-          tableName: storage.get('tableName'),
+          tenantId: QRCodeInfo.getTenantId(),
+          tableName: QRCodeInfo.getTableName(),
           tableUser: foodParams.tableUser
         },
         food: {
@@ -70,13 +65,13 @@ class ShoppingCartService {
           foodCount: foodParams.foodCount
         }
       }
-    } else if (bizType === ESHOP) {
+    } else if (QRCodeInfo.isEShopBizType()) {
       return {
         condition: {
-          tenantId: storage.get('tenantId'),
-          consigneeId: storage.get('consigneeId'),
-          tableName: storage.get('tableName'),
-          phoneNumber: storage.get('phoneNumber')
+          tenantId: QRCodeInfo.getTenantId(),
+          consigneeId: QRCodeInfo.getConsigneeId(),
+          tableName: QRCodeInfo.getTableName(),
+          phoneNumber: QRCodeInfo.getPhoneNumber()
         },
         food: {
           foodId: foodParams.foodId,
@@ -84,17 +79,17 @@ class ShoppingCartService {
         }
       }
     } else {
-      console.error(`Unknown biz type: ${bizType}`)
+      console.error(`Unknown biz type: ${QRCodeInfo.getBizType()}`)
     }
   }
 
   _getQuery() {
     const keys =
-      storage.get('bizType') === DEAL
+      QRCodeInfo.isDealBizType()
         ? ['tenantId', 'tableName']
         : ['tenantId', 'consigneeId', 'tableName', 'phoneNumber']
 
-    const query = `?` + keys.map(key => `${key}=${storage.get(key)}`).join('&')
+    const query = `?` + keys.map(key => `${key}=${QRCodeInfo['get' + capital(key)]()}`).join('&')
 
     return query
   }

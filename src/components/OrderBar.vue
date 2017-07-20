@@ -13,12 +13,11 @@
 <script>
 import { XButton } from 'vux'
 export default {
-  name: 'ShopCartBar',
+  name: 'OrderBar',
   components: {
     XButton
   },
   props: {
-
     orderCost: {
       type: Number
     }

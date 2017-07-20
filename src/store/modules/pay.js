@@ -1,5 +1,4 @@
 import { AlipayService, WechatService } from '@/http/index'
-import storage from '@/util/storage'
 import router from '@/router/index'
 
 // 阿里支付 URL前缀

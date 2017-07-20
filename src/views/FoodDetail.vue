@@ -115,7 +115,7 @@ import DealFooter from '@/components/DealFooter'
 import CommentItem from '@//components/CommentItem'
 import ShopCartBar from '@/components/ShopCartBar'
 
-import storage from '@/util/storage'
+import QRCodeInfo from '@/models/QRCodeInfo'
 import vipToast from '@/mixins/vip-toast'
 import toShoppingCartPrompt from '@/mixins/to-shopping-cart-prompt'
 import { vToast } from '@/util/vux-wrapper'
@@ -195,7 +195,7 @@ export default {
     ])
   },
   created() {
-    this.hasPhoneNumber = storage.has('phoneNumber')
+    this.hasPhoneNumber = QRCodeInfo.hasPhoneNumber()
 
     if (this.foodDetail.food.unit === '斤') {
       window.setTimeout(() => {
@@ -263,7 +263,7 @@ export default {
       }
 
       const params = {
-        phoneNumber: storage.get('phoneNumber'),
+        phoneNumber: QRCodeInfo.getPhoneNumber(),
         comment: this.commentText,
         foodId: this.foodDetail.food.id,
       }

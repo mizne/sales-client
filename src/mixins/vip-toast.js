@@ -1,5 +1,4 @@
 import { mapGetters } from 'vuex'
-import storage from '@/util/storage'
 import { vToast } from '@/util/vux-wrapper'
 
 export default {

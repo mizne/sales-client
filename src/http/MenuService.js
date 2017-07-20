@@ -1,6 +1,5 @@
 import { getBizTypeHttp, exceptionHandler } from './interceptors'
-import storage from '@/util/storage'
-import { DEAL, ESHOP } from '@/util/constants'
+import QRCodeInfo, { capital } from '@/models/QRCodeInfo'
 
 class MenuService {
   getAllFoods() {
@@ -27,13 +26,13 @@ class MenuService {
 
   _getQuery() {
     const keys =
-      storage.get('bizType') === DEAL
+      QRCodeInfo.isDealBizType()
         ? ['tenantId']
         : ['tenantId', 'consigneeId']
 
     const query =
       `?` +
-      keys.map(key => `${key}=${storage.get(key)}`).join('&')
+      keys.map(key => `${key}=${QRCodeInfo['get' + capital(key)]()}`).join('&')
 
     return query
   }

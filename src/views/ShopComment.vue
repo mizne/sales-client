@@ -27,7 +27,7 @@ import DealContent from '@/components/DealContent'
 import DealFooter from '@/components/DealFooter'
 import Rating from '@/components/Rating'
 
-import storage from '@/util/storage' 
+import QRCodeInfo from '@/models/QRCodeInfo'
 import { vToast } from '@/util/vux-wrapper'
 
 export default {
@@ -74,7 +74,7 @@ export default {
         return accu
       }, {})
       const params = {
-        phoneNumber: storage.get('phoneNumber'),
+        phoneNumber: QRCodeInfo.getPhoneNumber(),
         comment: this.commentText,
         ...score
       }

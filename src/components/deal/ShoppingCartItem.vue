@@ -21,7 +21,7 @@
 </template>
 <script>
 import { XNumber } from 'vux'
-import storage from '@/util/storage'
+import QRCodeInfo from '@/models/QRCodeInfo'
 
 export default {
   name: 'DealShoppingCartItem',
@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     isMe(tableUser) {
-      return storage.get('tableUser') === tableUser
+      return QRCodeInfo.getTableUser() === tableUser
     },
     editFood(item, offset) {
       const num = offset ? item.num + offset : item.num

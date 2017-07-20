@@ -1,39 +1,33 @@
 import { loggerHttp } from './interceptors'
-import storage from '@/util/storage'
+import QRCodeInfo, { capital } from '@/models/QRCodeInfo'
 
-const info = function (params) {
+const info = function(params) {
+  return _request('INFO')
+}
+
+const error = function(params) {
+  return _request('ERROR')
+}
+
+function _request(level) {
   Object.assign(params, {
-    tenantId: storage.get('tenantId'),
-    consigneeId: storage.get('consigneeId'),
-    tableName: storage.get('tableName'),
-    phoneNumber: storage.get('phoneNumber') || 'Unknow phone',
-    level: 'INFO',
+    tenantId: QRCodeInfo.getTenantId(),
+    tableName: QRCodeInfo.getTableName(),
+    phoneNumber: QRCodeInfo.getPhoneNumber() || 'Unknow phone',
+    level
   })
 
-  return loggerHttp.post('/eshop-client/error-message', params)
-  .catch(err => {
+  let url
+  if (QRCodeInfo.isDealBizType()) {
+    url = '/deal-client/error-message'
+  } else if (QRCodeInfo.isEShopBizType()) {
+    url = '/eshop-client/error-message'
+    params.consigneeId = QRCodeInfo.getConsigneeId()
+  }
+
+  return loggerHttp.post(url, params).catch(err => {
     // ignore
   })
-
 }
 
-const error = function (params) {
-  Object.assign(params, {
-    tenantId: storage.get('tenantId'),
-    consigneeId: storage.get('consigneeId'),
-    tableName: storage.get('tableName'),
-    phoneNumber: storage.get('phoneNumber') || 'Unknow phone',
-    level: 'ERROR',
-  })
-
-  return loggerHttp.post('/eshop-client/error-message', params)
-  .catch(err => {
-    // ignore
-  })
-}
-
-
-export {
-  info,
-  error
-}
+export { info, error }

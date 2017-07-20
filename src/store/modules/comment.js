@@ -1,5 +1,4 @@
 import { CommentService } from '@/http/index'
-import storage from '@/util/storage'
 
 const state = {
   shopComments: [],

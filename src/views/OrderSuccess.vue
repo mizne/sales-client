@@ -90,7 +90,7 @@
           <span class="delivery-placeholder"></span>
           <span class="delivery-value">
             <i class="icon-money"></i>
-            <span>{{deliveryFee}}</span>
+            <span>{{deliveryFeeValue}}</span>
           </span>
         </div>
       </div>
@@ -112,7 +112,7 @@ import DealFooter from '@/components/DealFooter'
 import ScrollNotification from '@/components/ScrollNotification'
 import OrderBar from '@/components/OrderBar'
 
-import storage from '@/util/storage'
+import QRCodeInfo from '@/models/QRCodeInfo'
 import { vAlert, vConfirm, vToast } from '@/util/vux-wrapper'
 import { checkBrowserForPay } from '@/util/index'
 import { WEIXIN_BROWSER, ALI_BROWSER, UNKNOWN_BROWSER, DEAL } from '@/util/constants'
@@ -134,7 +134,7 @@ export default {
     OrderBar
   },
   computed: {
-    ...mapGetters(['orderDetail', 'showIframe', 'isVip', 'couponText', 'selectedCoupon', 'deliveryFee']),
+    ...mapGetters(['orderDetail', 'showIframe', 'isVip', 'couponText', 'selectedCoupon', 'deliveryFeeValue']),
     totalPrice() {
       if (this.orderDetail) {
         if (this.isVip) {
@@ -221,7 +221,7 @@ export default {
       }
     },
     _init() {
-      this.isDealBizType = storage.get('bizType') === DEAL
+      this.isDealBizType = QRCodeInfo.isDealBizType()
 
       this.promptText = this.isDealBizType
         ? '欢迎光顾小店'

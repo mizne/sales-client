@@ -3,7 +3,7 @@ import * as Logger from './Logger'
 
 import router from '@/router/index'
 import { vConfirm, vToast } from '@/util/vux-wrapper'
-import storage from '@/util/storage'
+import QRCodeInfo, { capital } from '@/models/QRCodeInfo'
 
 import Coupon from '@/models/Coupon'
 import { DEAL, ESHOP } from '@/util/constants'
@@ -12,19 +12,19 @@ class CouponService {
   // 检查当前号码 是否再可领取
   checkPhone(phoneNumber) {
     return getBizTypeHttp()
-      .get(`/coupon?phoneNumber=${phoneNumber}&tenantId=${storage.get('tenantId')}`)
+      .get(`/coupon?phoneNumber=${phoneNumber}&tenantId=${QRCodeInfo.getTtenantId()}`)
       .catch(exceptionHandler('CouponService', 'checkPhone'))
   }
 
   getAvaliableCoupons() {
-    if (storage.has('phoneNumber')) {
+    if (QRCodeInfo.hasPhoneNumber()) {
       const keys =
-        storage.get('bizType') === DEAL
+        QRCodeInfo.isDealBizType()
           ? ['tenantId', 'phoneNumber']
           : ['tenantId', 'consigneeId', 'phoneNumber']
 
       const query =
-        `?` + keys.map(key => `${key}=${storage.get(key)}`).join('&')
+        `?` + keys.map(key => `${key}=${QRCodeInfo['get' + capital(key)]()}`).join('&')
 
       return getBizTypeHttp()
         .get(`/availableCoupon${query}`)
@@ -36,11 +36,11 @@ class CouponService {
 
   // 领取优惠券
   bindCoupon() {
-    const tenantId = storage.get('tenantId')
-    const consigneeId = storage.get('consigneeId')
-    const couponRate = storage.get('couponRate')
-    const phoneNumber = storage.get('phoneNumber')
-    const coupons = storage.get('coupons')
+    const tenantId = QRCodeInfo.getTenantId()
+    const consigneeId = QRCodeInfo.getConsigneeId()
+    const couponRate = QRCodeInfo.getCouponRate()
+    const phoneNumber = QRCodeInfo.getPhoneNumber()
+    const coupons = QRCodeInfo.getCoupons()
 
     const params = {
       tenantId,
@@ -64,18 +64,16 @@ class CouponService {
 
   // 使用优惠券
   consumCoupon(couponKey, tradeNo) {
-    const bizType = storage.get('bizType')
-
     const params = {
-      tenantId: storage.get('tenantId'),
-      phoneNumber: storage.get('phoneNumber'),
+      tenantId: QRCodeInfo.getTenantId(),
+      phoneNumber: QRCodeInfo.getPhoneNumber(),
       couponKey,
       tradeNo
     }
 
-    if (bizType === ESHOP) {
+    if (QRCodeInfo.isEShopBizType()) {
       Object.assign(params, {
-        consigneeId: storage.get('consigneeId')
+        consigneeId: QRCodeInfo.getConsigneeId()
       })
     }
 

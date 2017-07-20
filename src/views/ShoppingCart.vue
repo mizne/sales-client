@@ -53,10 +53,10 @@
         <span class="delivery-placeholder"></span>
         <span class="delivery-value">
           <i class="icon-money"></i>
-          <span>{{deliveryFee}}</span>
+          <span>{{deliveryFeeValue}}</span>
         </span>
       </div>
-      
+
       <div class="remark">
         <x-textarea :max="50" v-model="remark" :placeholder="remarkPlaceholder"></x-textarea>
       </div>
@@ -90,7 +90,7 @@ import DealFooter from '@/components/DealFooter'
 import EShopShoppingCartItem from '@/components/eshop/ShoppingCartItem'
 import DealShoppingCartItem from '@/components/deal/ShoppingCartItem'
 
-import storage from '@/util/storage'
+import QRCodeInfo from '@/models/QRCodeInfo'
 import { vAlert, vToast } from '@/util/vux-wrapper'
 import { DEAL } from '@/util/constants'
 import toOrderPrompt from '@/mixins/to-order-prompt'
@@ -125,7 +125,7 @@ export default {
     ...mapGetters([
       'shoppingCart',
       'isVip',
-      'deliveryFee'
+      'deliveryFeeValue'
     ]),
   },
   methods: {
@@ -159,7 +159,7 @@ export default {
       this.$store.dispatch('EDIT_SHOPPING_CART', params)
     },
     _init() {
-      this.isDealBizType = storage.get('bizType') === DEAL
+      this.isDealBizType = QRCodeInfo.isDealBizType()
 
       this.remarkPlaceholder = this.isDealBizType
         ? '请填写备注'

@@ -1,10 +1,10 @@
 import { CouponService } from '@/http/index'
 import { not } from '@/util/index'
 import Coupon from '@/models/Coupon'
-import storage from '@/util/storage'
 import { vConfirm, vToast } from '@/util/vux-wrapper'
 import router from '@/router/index'
 import { RECEIVE_COUPON } from '@/store/modules/phoneVerify'
+import QRCodeInfo from '@/models/QRCodeInfo'
 
 const state = {
   allCoupons: [],
@@ -35,14 +35,14 @@ const mutations = {
 const actions = {
   // 领取优惠券
   RECEIVE_COUPON: ({ commit }) => {
-    const coupons = storage.get('coupons').map(e => new Coupon(e.couponType, e.couponValue))
+    const coupons = QRCodeInfo.getCoupons().map(e => new Coupon(e.couponType, e.couponValue))
 
     const text = `<p>是否领取 ${coupons.length} 张优惠券?</p>` + coupons.map(e => `<p>${e.getText()}</p>`).join(``)
 
-    if (storage.has('phoneNumber')) {
+    if (QRCodeInfo.hasPhoneNumber()) {
       return vConfirm({ content: text }).then(
         () => {
-          return CouponService.checkPhone(storage.get('phoneNumber'))
+          return CouponService.checkPhone(QRCodeInfo.getPhoneNumber())
             .then(_ => CouponService.bindCoupon())
             .then(() => {
               vToast({ content: '恭喜, 领取成功 ^_^' })

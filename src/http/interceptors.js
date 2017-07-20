@@ -1,7 +1,8 @@
 import axios from 'axios'
 import host from './host.js'
 import * as Logger from './Logger'
-import storage from '@/util/storage'
+import QRCodeInfo from '@/models/QRCodeInfo'
+import { DEAL, ESHOP } from '@/util/constants'
 
 const qrcodeHttp = axios.create({
   baseURL: host.qrcode,
@@ -98,11 +99,11 @@ const exceptionHandler = (module, method) => err => {
 }
 
 const getBizTypeHttp = function() {
-  const bizType = storage.get('bizType')
+  const bizType = QRCodeInfo.getBizType()
   switch (bizType) {
-    case 'deal':
+    case DEAL:
       return dealHttp
-    case 'eshop':
+    case ESHOP:
       return eshopHttp
     default:
       Logger.error({

@@ -1,5 +1,4 @@
 import { ShoppingCartService } from '@/http/index'
-import storage from '@/util/storage'
 import router from '@/router/index'
 
 const state = {

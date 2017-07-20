@@ -77,7 +77,7 @@ import DealContent from '@/components/DealContent'
 import DealFooter from '@/components/DealFooter'
 import DealDialog from '@/components/DealDialog'
 
-import storage from '@/util/storage'
+import QRCodeInfo from '@/models/QRCodeInfo'
 
 export default {
   name: 'OrderSuccess',
@@ -105,7 +105,7 @@ export default {
     }
   },
   created() {
-    this.phoneNumber = storage.get('phoneNumber')
+    this.phoneNumber = QRCodeInfo.getPhoneNumber()
   }
 }
 </script>

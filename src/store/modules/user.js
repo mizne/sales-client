@@ -1,19 +1,22 @@
 import { UserService } from '@/http/index'
 import { vAlert } from '@/util/vux-wrapper'
-import { ESHOP } from '@/util/constants'
-import storage from '@/util/storage'
+import QRCodeInfo from '@/models/QRCodeInfo'
 
 const state = {
   isVip: false,
-  deliveryFee: 0
+  deliveryFeeId: '',
+  deliveryFeeValue: 0
 }
 
 const mutations = {
   SET_IS_VIP(state, isVip) {
     state.isVip = isVip
   },
-  SET_DELIVERY_FEE(state, fee) {
-    state.deliveryFee = fee
+  SET_DELIVERY_FEE_ID(state, id) {
+    state.deliveryFeeId = id
+  },
+  SET_DELIVERY_FEE_VALUE(state, value) {
+    state.deliveryFeeValue = value
   }
 }
 
@@ -26,7 +29,7 @@ const actions = {
   },
   FETCH_DELIVERY_FEE: ({ commit, rootState }) => {
     // 代售才获取 配送费
-    if (storage.get('bizType') === ESHOP) {
+    if (QRCodeInfo.isEShopBizType()) {
       const { tenantLatitude, tenantLongitude } = rootState.tenant
       const merchantAddress = new qq.maps.LatLng(
         tenantLatitude,
@@ -48,8 +51,9 @@ const actions = {
             )
 
             UserService.getDeliveryFee(Math.round(distance))
-            .then(deliveryFee => {
-              commit('SET_DELIVERY_FEE', deliveryFee)
+            .then(({deliveryFeeId, deliveryFeeValue}) => {
+              commit('SET_DELIVERY_FEE_ID', deliveryFeeId)
+              commit('SET_DELIVERY_FEE_VALUE', deliveryFeeValue)
             })
           })
         })
@@ -64,8 +68,11 @@ const getters = {
   isVip(state) {
     return state.isVip
   },
-  deliveryFee(state) {
-    return state.deliveryFee
+  deliveryFeeId(state) {
+    return state.deliveryFeeId
+  },
+  deliveryFeeValue(state) {
+    return state.deliveryFeeValue
   }
 }
 

@@ -1,8 +1,7 @@
 import { mapGetters } from 'vuex'
-import storage from '@/util/storage'
-import { DEAL, ESHOP } from '@/util/constants'
 import { ADD_SHOPPING_CART } from '@/store/modules/phoneVerify'
 import { vAlert, vToast } from '@/util/vux-wrapper'
+import QRCodeInfo from '@/models/QRCodeInfo'
 
 export default {
   computed: {
@@ -22,17 +21,16 @@ export default {
       ) {
         return vAlert({ content: '购物车还是空的呢 ^_^' })
       } else {
-        const bizType = storage.get('bizType')
         // 点餐 业务
-        if (bizType === DEAL) {
+        if (QRCodeInfo.isDealBizType()) {
           this.$store.dispatch('ADD_SHOPPING_CART').catch(err => {
             vToast({
               content: '添加购物车失败, 请稍后重试 ^_^',
             })
           })
-        } else if (bizType === ESHOP) {
+        } else if (QRCodeInfo.isEShopBizType()) {
           // 代售 需先提供手机号码
-          if (storage.has('phoneNumber')) {
+          if (QRCodeInfo.hasPhoneNumber()) {
             this.$store.dispatch('ADD_SHOPPING_CART').catch(err => {
               vToast({ content: '添加购物车失败, 请稍后重试 ^_^' })
             })
@@ -41,7 +39,7 @@ export default {
             this.$router.push({ name: 'PhoneVerify' })
           }
         } else {
-          console.error(`Unknown biz type: ${bizType}`)
+          console.error(`Unknown biz type: ${QRCodeInfo.getBizType()}`)
         }
       }
     }

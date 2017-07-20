@@ -1,7 +1,6 @@
 import { OrderService } from '@/http/index'
-import storage from '@/util/storage'
 import router from '@/router/index'
-import { ESHOP } from '@/util/constants'
+import QRCodeInfo from '@/models/QRCodeInfo'
 
 const state = {
   orderDetail: null,
@@ -39,10 +38,10 @@ const actions = {
 
     const params = {
       condition: {
-        tenantId: storage.get('tenantId'),
-        consigneeId: storage.get('consigneeId'),
-        tableName: storage.get('tableName'),
-        phoneNumber: storage.get('phoneNumber')
+        tenantId: QRCodeInfo.getTenantId(),
+        consigneeId: QRCodeInfo.getConsigneeId(),
+        tableName: QRCodeInfo.getTableName(),
+        phoneNumber: QRCodeInfo.getPhoneNumber()
       },
       food: foodParams
     }
@@ -70,9 +69,9 @@ const actions = {
     }
 
     // 代售 添加配送费
-    if (storage.get('bizType') === ESHOP) {
+    if (QRCodeInfo.isEShopBizType()) {
       Object.assign(params, {
-        deliveryFee: rootState.user.deliveryFee
+        deliveryFeeId: rootState.user.deliveryFeeId
       })
     }
 

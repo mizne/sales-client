@@ -1,6 +1,5 @@
 import { getBizTypeHttp, exceptionHandler } from './interceptors'
-import storage from '@/util/storage'
-import { DEAL, ESHOP } from '@/util/constants'
+import QRCodeInfo, { capital } from '@/models/QRCodeInfo'
 
 class SMSService {
   getCode(phoneNumber) {
@@ -23,29 +22,27 @@ class SMSService {
 
   _getQuery() {
     const keys =
-      storage.get('bizType') === DEAL
+      QRCodeInfo.isDealBizType()
         ? ['tenantId']
         : ['tenantId', 'consigneeId']
 
-    const query = `?` + keys.map(key => `${key}=${storage.get(key)}`).join('&')
+    const query = `?` + keys.map(key => `${key}=${QRCodeInfo['get' + capital(key)]()}`).join('&')
 
     return query
   }
 
   _addPramas(params) {
-    const bizType = storage.get('bizType')
-
-    if (bizType === DEAL) {
+    if (QRCodeInfo.isDealBizType()) {
       Object.assign(params, {
-        tenantId: storage.get('tenantId')
+        tenantId: QRCodeInfo.getTenantId()
       })
-    } else if (bizType === ESHOP) {
+    } else if (QRCodeInfo.isEShopBizType()) {
       Object.assign(params, {
-        tenantId: storage.get('tenantId'),
-        consigneeId: storage.get('consigneeId')
+        tenantId: QRCodeInfo.getTenantId(),
+        consigneeId: QRCodeInfo.getConsigneeId()
       })
     } else {
-      console.error(`Unknown biz type: ${bizType}`)
+      console.error(`Unknown biz type: ${QRCodeInfo.getBizType()}`)
     }
   }
 }

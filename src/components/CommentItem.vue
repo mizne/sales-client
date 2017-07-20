@@ -25,6 +25,7 @@
 <script>
 import fecha from 'fecha'
 export default {
+  name: 'CommentItem',
   props: {
     comment: {
       type: Object,

@@ -1,6 +1,6 @@
 import { QRCodeService } from '@/http/index'
-import storage from '@/util/storage'
 import { ESHOP } from '@/util/constants'
+import QRCodeInfo from '@/models/QRCodeInfo'
 
 const state = {
 }
@@ -11,23 +11,23 @@ const mutations = {
 const actions = {
   FETCH_QRCODE_INFO: ({ commit }, qrcodeId) => {
     return QRCodeService.getQRCodeInfo(qrcodeId).then(info => {
-      storage.set('bizType', info.bizType)
-      storage.set('tenantId', info.tenantId)
-      storage.set('tableName', info.tableName)
+      QRCodeInfo.setBizType(info.bizType)
+      QRCodeInfo.setTenantId(info.tenantId)
+      QRCodeInfo.setTableName(info.tableName)
 
       if (info.bizType === ESHOP) {
-        storage.set('consigneeId', info.consigneeId)
+        QRCodeInfo.setConsigneeId(info.consigneeId)
       } else {
-        storage.remove('consigneeId')
+        QRCodeInfo.removeConsigneeId()
       }
 
       // 存储多条优惠券信息
       if (info.coupons) {
-        storage.set('coupons', info.coupons)
-        storage.set('couponRate', '0.5')
+        QRCodeInfo.setCoupons(info.coupons)
+        QRCodeInfo.setCouponRate(info.couponRate)
       } else {
-        storage.remove('coupons')
-        storage.remove('couponRate')
+        QRCodeInfo.removeCoupons()
+        QRCodeInfo.removeCouponRate()
       }
 
       // storage.set('phoneNumber', '13721080281')// TOFIX 测试桩

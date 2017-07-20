@@ -26,7 +26,6 @@ import DealContent from '@/components/DealContent'
 import DealFooter from '@/components/DealFooter'
 
 import { objFrom } from '@/util/index'
-import storage from '@/util/storage'
 
 export default {
   name: 'PeopleNumber',

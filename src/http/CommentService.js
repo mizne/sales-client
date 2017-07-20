@@ -1,10 +1,10 @@
 import { getBizTypeHttp, exceptionHandler } from './interceptors'
-import storage from '@/util/storage'
 import { DEAL, ESHOP } from '@/util/constants'
+import QRCodeInfo, { capital } from '@/models/QRCodeInfo'
 
 class CommentService {
   getShopComment() {
-    const query = `?tenantId=${storage.get('tenantId')}`
+    const query = `?tenantId=${QRCodeInfo.getTenantId()}`
 
     return getBizTypeHttp()
       .get(`/comments/merchant${query}`)
@@ -38,18 +38,17 @@ class CommentService {
   }
 
   _addShopInfo(params) {
-    const bizType = storage.get('bizType')
-    if (bizType === DEAL) {
+    if (QRCodeInfo.isDealBizType()) {
       Object.assign(params, {
-        tenantId: storage.get('tenantId')
+        tenantId: QRCodeInfo.getTtenantId()
       })
-    } else if (bizType === ESHOP)  {
+    } else if (QRCodeInfo.isEShopBizType())  {
       Object.assign(params, {
-        tenantId: storage.get('tenantId'),
-        consigneeId: storage.get('consigneeId')
+        tenantId: QRCodeInfo.getTtenantId(),
+        consigneeId: QRCodeInfo.getConsigneeId()
       })
     } else {
-      console.error(`Unknown biz type: ${bizType}`)
+      console.error(`Unknown biz type: ${QRCodeInfo.getBizType()}`)
     }
   }
 }

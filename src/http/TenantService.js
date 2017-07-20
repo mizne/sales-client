@@ -1,9 +1,9 @@
 import { getBizTypeHttp, exceptionHandler } from './interceptors'
-import storage from '@/util/storage'
+import QRCodeInfo from '@/models/QRCodeInfo'
 
 class TenantService {
   getConfig() {
-    const query = `?tenantId=${storage.get('tenantId')}`
+    const query = `?tenantId=${QRCodeInfo.getTenantId()}`
 
     return getBizTypeHttp()
       .get(`/tenantInfo${query}`)

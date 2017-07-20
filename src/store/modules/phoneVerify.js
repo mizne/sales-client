@@ -1,7 +1,7 @@
 import { SMSService, CouponService } from '@/http/index'
 import router from '@/router/index'
-import storage from '@/util/storage'
 import { vToast } from '@/util/vux-wrapper'
+import QRCodeInfo from '@/models/QRCodeInfo'
 
 // 验证手机号码目的
 export const ADD_SHOPPING_CART = 'ADD_SHOPPING_CART'
@@ -25,7 +25,7 @@ const actions = {
   VERIFY_SMS_CODE: ({ commit, dispatch, rootState }, { phoneNumber, verifyCode }) => {
     commit('SHOW_LOADING', true)
     return SMSService.verifyCode({ phoneNumber, verifyCode }).then(_ => {
-      storage.set('phoneNumber', phoneNumber)
+      QRCodeInfo.setPhoneNumber(phoneNumber)
 
       // 代售业务 下购物车时 需要的验证手机号码
       if (state.purposeOfPhoneVerify === ADD_SHOPPING_CART) {

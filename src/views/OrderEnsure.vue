@@ -56,7 +56,7 @@ import DealHeader from '@/components/DealHeader'
 import DealContent from '@/components/DealContent'
 import DealFooter from '@/components/DealFooter'
 
-import storage from '@/util/storage'
+import QRCodeInfo from '@/models/QRCodeInfo'
 import { vAlert } from '@/util/vux-wrapper'
 import { WEIXIN_BROWSER } from '@/util/constants'
 
@@ -73,7 +73,7 @@ export default {
   },
   computed: {
     phoneNumber() {
-      return storage.get('phoneNumber')
+      return QRCodeInfo.getPhoneNumber()
     },
     ...mapGetters(['orderDetail', 'showIframe', 'isVip'])
   },

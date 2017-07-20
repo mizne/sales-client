@@ -1,6 +1,5 @@
 import { getBizTypeHttp, exceptionHandler } from './interceptors'
-import storage from '@/util/storage'
-import { DEAL, ESHOP } from '@/util/constants'
+import QRCodeInfo, { capital } from '@/models/QRCodeInfo'
 
 class OrderService {
   addOrder(params) {
@@ -26,43 +25,46 @@ class OrderService {
   }
 
   delOrder(tradeNo) {
+    const keys =
+      QRCodeInfo.isDealBizType()
+        ? ['tenantId', 'tableName', 'phoneNumber']
+        : ['tenantId', 'consigneeId', 'tableName', 'phoneNumber']
+
     const query =
-      '?' +
-      ['tenantId', 'consigneeId', 'tableName', 'phoneNumber']
-        .map(key => (storage.has(key) ? `${key}=${storage.get(key)}` : ''))
-        .join('&')
+      `?` +
+      keys.map(key => `${key}=${QRCodeInfo['get' + capital(key)]()}`).join('&')
+
     return getBizTypeHttp()
       .delete(`/order${query}`)
       .catch(exceptionHandler('OrderService', 'delOrder'))
   }
 
   _addParams(params) {
-    const bizType = storage.get('bizType')
-    if (bizType === DEAL) {
+    if (QRCodeInfo.isDealBizType()) {
       Object.assign(params, {
-        tenantId: storage.get('tenantId'),
-        tableName: storage.get('tableName'),
-        phoneNumber: storage.get('phoneNumber')
+        tenantId: QRCodeInfo.getTenantId(),
+        tableName: QRCodeInfo.getTableName(),
+        phoneNumber: QRCodeInfo.getPhoneNumber()
       })
-    } else if (bizType === ESHOP) {
+    } else if (QRCodeInfo.isEShopBizType()) {
       Object.assign(params, {
-        tenantId: storage.get('tenantId'),
-        consigneeId: storage.get('consigneeId'),
-        tableName: storage.get('tableName'),
-        phoneNumber: storage.get('phoneNumber')
+        tenantId: QRCodeInfo.getTenantId(),
+        consigneeId: QRCodeInfo.getConsigneeId(),
+        tableName: QRCodeInfo.getTableName(),
+        phoneNumber: QRCodeInfo.getPhoneNumber()
       })
     } else {
-      console.error(`Unknown biz type: ${bizType}`)
+      console.error(`Unknown biz type: ${QRCodeInfo.getBizType()}`)
     }
   }
 
   _getQuery(tradeNo) {
     const keys =
-      storage.get('bizType') === DEAL
+      QRCodeInfo.isDealBizType()
         ? ['tenantId', 'tableName']
         : ['tenantId', 'consigneeId', 'tableName', 'phoneNumber']
 
-    let query = `?` + keys.map(key => `${key}=${storage.get(key)}`).join('&')
+    let query = `?` + keys.map(key => `${key}=${QRCodeInfo['get' + capital(key)]()}`).join('&')
 
     // 获取未支付订单 没有tradeNo, 获取支付后订单 有tradeNo
     query += tradeNo ? `&tradeNo=${tradeNo}` : ''

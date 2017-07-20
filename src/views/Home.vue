@@ -22,7 +22,7 @@ import { mapGetters } from 'vuex'
 
 import { objFrom } from '@/util/index'
 import { vAlert, vToast } from '@/util/vux-wrapper'
-import storage from '@/util/storage'
+import QRCodeInfo from '@/models/QRCodeInfo'
 
 export default {
   name: 'Home',
@@ -72,7 +72,7 @@ export default {
                   vm.$router.push({ name: 'Home' })
                   
                   // 可以领取优惠券
-                  if (storage.has('coupons')) {
+                  if (QRCodeInfo.hasCoupons()) {
                     vm.$store.dispatch('RECEIVE_COUPON')
                   }
                 } else if (status.tableStatus === 1) {// 已下购物车

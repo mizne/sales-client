@@ -65,7 +65,6 @@ import ScrollNotification from '@/components/ScrollNotification'
 import vipToast from '@/mixins/vip-toast'
 import toShoppingCartPrompt from '@/mixins/to-shopping-cart-prompt'
 import { createSteps } from '@/util/index'
-import storage from '@/util/storage'
 import { vToast } from '@/util/vux-wrapper'
 
 export default {

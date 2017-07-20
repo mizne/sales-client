@@ -29,7 +29,6 @@ import DealHeader from '@/components/DealHeader'
 import DealContent from '@/components/DealContent'
 import DealFooter from '@/components/DealFooter'
 
-import storage from '@/util/storage'
 import { vToast, vAlert } from '@/util/vux-wrapper'
 
 export default {

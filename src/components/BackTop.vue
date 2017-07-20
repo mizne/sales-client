@@ -6,6 +6,7 @@
 </template>
 <script>
 export default {
+  name: 'BackTop',
   data() {
     return {
       show: false,

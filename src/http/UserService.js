@@ -1,24 +1,21 @@
 import { getBizTypeHttp, exceptionHandler } from './interceptors'
-import storage from '@/util/storage'
-import { DEAL, ESHOP } from '@/util/constants'
+import QRCodeInfo, { capital } from '@/models/QRCodeInfo'
 
 class UserService {
   getStatus() {
-    const bizType = storage.get('bizType')
-
-    if (bizType === DEAL) {
+    if (QRCodeInfo.isDealBizType()) {
       return this._getStatusForDeal()
-    } else if (bizType === ESHOP) {
+    } else if (QRCodeInfo.isEShopBizType()) {
       return this._getStatusForEShop()
     } else {
-      console.error(`Unknown biz type: ${bizType}`)
-      return Promise.reject(`Unknown biz type: ${bizType}`)
+      console.error(`Unknown biz type: ${QRCodeInfo.getBizType()}`)
+      return Promise.reject(`Unknown biz type: ${QRCodeInfo.getBizType()}`)
     }
   }
 
   getDeliveryFee(distance) {
     return getBizTypeHttp()
-    .get(`/deliveryFee?distance=${distance}&tenantId=${storage.get('tenantId')}`)
+    .get(`/deliveryFee?distance=${distance}&tenantId=${QRCodeInfo.getTenantId()}`)
     .catch(exceptionHandler('UserService', 'getDeliveryFee'))
   }
 
@@ -26,11 +23,11 @@ class UserService {
     let query =
       `?` +
       ['tenantId', 'tableName']
-        .map(key => `${key}=${storage.get(key)}`)
+        .map(key => `${key}=${QRCodeInfo['get' + capital(key)]()}`)
         .join('&')
 
-    query += storage.get('phoneNumber')
-      ? `&phoneNumber=${storage.get('phoneNumber')}`
+    query += QRCodeInfo.hasPhoneNumber()
+      ? `&phoneNumber=${QRCodeInfo.getPhoneNumber()}`
       : ''
 
     return getBizTypeHttp()
@@ -39,15 +36,12 @@ class UserService {
   }
 
   _getStatusForEShop() {
-    if (storage.has('phoneNumber')) {
+    if (QRCodeInfo.hasPhoneNumber()) {
       let query =
         `?` +
-        ['tenantId', 'tableName', 'consigneeId']
-          .map(key => (storage.has(key) ? `${key}=${storage.get(key)}` : ''))
-          .filter(e => e)
+        ['tenantId', 'tableName', 'consigneeId', 'phoneNumber']
+          .map(key => `${key}=${QRCodeInfo['get' + capital(key)]()}`)
           .join('&')
-
-      query += `&phoneNumber=${storage.get('phoneNumber')}`
 
       return getBizTypeHttp()
         .get(`/table${query}`)
