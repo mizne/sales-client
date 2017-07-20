@@ -25,6 +25,8 @@ function _request(level, params) {
     params.consigneeId = QRCodeInfo.getConsigneeId()
   }
 
+  console.log(url, params)
+
   return loggerHttp.post(url, params).catch(err => {
     // ignore
   })

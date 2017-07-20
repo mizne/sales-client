@@ -57,15 +57,25 @@ const actions = {
             Logger.info({
               module: 'user',
               method: 'FETCH_DELIVERY_FEE',
-              description: `userLatitude: ${res[0].lat}, userLongitude: ${res[0].lng}`
+              description: `userLatitude: ${res[0].lat}, userLongitude: ${res[0]
+                .lng}`
             })
 
             UserService.getDeliveryFee(Math.round(distance))
-            .then(({deliveryFeeId, deliveryFeeValue, deliveryTime}) => {
-              commit('SET_DELIVERY_FEE_ID', deliveryFeeId)
-              commit('SET_DELIVERY_FEE_VALUE', deliveryFeeValue)
-              commit('SET_DELIVERY_TIME', deliveryTime)
-            })
+              .then(({ deliveryFeeId, deliveryFeeValue, deliveryTime }) => {
+                commit('SET_DELIVERY_FEE_ID', deliveryFeeId)
+                commit('SET_DELIVERY_FEE_VALUE', deliveryFeeValue)
+                commit('SET_DELIVERY_TIME', deliveryTime)
+                return { deliveryFeeId, deliveryFeeValue, deliveryTime }
+              })
+              .then(({ deliveryFeeId, deliveryFeeValue, deliveryTime }) => {
+                Logger.info({
+                  module: 'user',
+                  method: 'FETCH_DELIVERY_FEE',
+                  description: `userLatitude: ${res[0]
+                    .lat}, userLongitude: ${res[0].lng}, deliveryFeeValue: ${deliveryFeeValue}, deliveryTime: ${deliveryTime}`
+                })
+              })
           })
         })
       } else {
