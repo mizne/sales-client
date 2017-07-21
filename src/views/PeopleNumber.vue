@@ -19,20 +19,14 @@
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
-
 import DealHeader from '@/components/DealHeader'
 import DealContent from '@/components/DealContent'
-import DealFooter from '@/components/DealFooter'
-
-import { objFrom } from '@/util/index'
 
 export default {
   name: 'PeopleNumber',
   components: {
-    'deal-header': DealHeader,
-    'deal-content': DealContent,
-    'deal-footer': DealFooter,
+    DealHeader,
+    DealContent,
   },
   data() {
     return {
@@ -50,8 +44,6 @@ export default {
       // 发送 就餐人数请求 
       this.$store.dispatch('CHOOSE_PEOPLE_NUMBER', number)
     }
-  },
-  created() {
   },
   mounted() {
     window.setTimeout(() => {

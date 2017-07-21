@@ -1,7 +1,7 @@
 <template>
   <div class="shopping-cart-container">
     <deal-header title="购物车">
-      <x-button slot="left" @click.native="addMoreFood" :mini="true" type="primary">继续加菜</x-button>
+      <x-button slot="left" @click.native="addMoreFood" :mini="true" type="primary">继续添加</x-button>
     </deal-header>
   
     <deal-content>
@@ -191,14 +191,15 @@ export default {
       this.remarkPlaceholder = this.isDealBizType
         ? '请填写备注'
         : '该订单为代售商品, 如收货地址变更, 请填写具体地址, 默认为本二维码所在地址'
+
+      this.$store.dispatch('FETCH_SHOPPING_CART')
+        .catch(err => {
+          vToast({ content: '啊哦, 获取购物车失败, 请重试下 ^_^' })
+        })
     }
   },
   created() {
     this._init()
-    this.$store.dispatch('FETCH_SHOPPING_CART')
-      .catch(err => {
-        vToast({ content: '啊哦, 获取购物车失败, 请重试下 ^_^' })
-      })
   }
 }
 </script>
@@ -228,7 +229,7 @@ export default {
         color: $primaryColor;
       }
     }
-    
+
     .delivery {
       @include flexboxCenter;
       height: 40px;

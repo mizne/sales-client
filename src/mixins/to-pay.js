@@ -1,7 +1,7 @@
 import { mapGetters } from 'vuex'
-import { vToast } from '@/util/vux-wrapper'
+import { vToast, vAlert } from '@/util/vux-wrapper'
 import { checkBrowserForPay } from '@/util/index'
-import { WEIXIN_BROWSER, ALI_BROWSER, UNKNOWN_BROWSER, DEAL } from '@/util/constants'
+import { WEIXIN_BROWSER } from '@/util/constants'
 
 export default {
   computed: {
@@ -12,7 +12,7 @@ export default {
       // 判断是否有用优惠券
       // 用了优惠券 则请求绑定优惠券和订单 再支付
       // 没用优惠券 直接支付
-      ;(this.selectedCoupon
+      (this.selectedCoupon
         ? this.$store
             .dispatch('COUSUM_COUPON')
             .catch(err => vToast({ content: '绑定优惠券失败' }))

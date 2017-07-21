@@ -23,7 +23,7 @@ export default {
   name: 'Delivery',
   props: {
     deliveryFeeValue: {
-      type: Number
+      type: String
     },
     deliveryTime: {
       type: String

@@ -6,7 +6,7 @@
       <div class="food-name">{{item.name}}</div>
       <div class="food-money">
         <div class="food-price">{{isVip ? item.vipPrice : item.price}} 元/{{item.unit}}</div>
-        <template v-if="item.unit === '份'">
+        <template v-if="item.unit === '份' || item.unit === '条' || item.unit === '瓶' || item.unit === '个' || item.unit === '盒' || item.unit === '块' || item.unit === '桶'">
           <i v-if="isEditable" class="icon-sub" @click="editFood(item, -1)"></i>
           <div class="food-count">{{item.num}}</div>
           <i v-if="isEditable" class="icon-plus" @click="editFood(item, 1)"></i>

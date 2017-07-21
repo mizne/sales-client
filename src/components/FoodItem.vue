@@ -21,7 +21,7 @@
         </div>
       </div>
     </div>
-    <div class="food-action" v-if="(food.unit === '份' || food.unit === '条' || food.unit === '瓶') && food.rest > 0">
+    <div class="food-action" v-if="(food.unit === '份' || food.unit === '条' || food.unit === '瓶' || food.unit === '个' || food.unit === '盒' || food.unit === '块' || food.unit === '桶') && food.rest > 0">
       <span class="sub">
         <i class="icon-sub" v-show="foodCount > 0" @click="removeFood"></i>
       </span>

@@ -1,7 +1,7 @@
 <template>
   <div class="shopcart-bar-container">
     <div class="left-area">
-      <span>{{addMore ? '新增' : ''}}菜品</span>
+      <span>{{addMore ? '新增' : ''}}商品</span>
       <div class="food-count">{{foodCount}}</div>
       <i class="icon-money"></i>
       <span>{{foodCost}}</span>
@@ -13,6 +13,7 @@
 </template>
 <script>
 import { XButton } from 'vux'
+
 export default {
   name: 'ShopCartBar',
   components: {

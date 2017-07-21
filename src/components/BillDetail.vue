@@ -95,13 +95,13 @@ export default {
     totalPrice() {
       if (this.orderDetail.isVip) {
         if (this.orderDetail.deliveryFee) {
-          return +this.orderDetail.totalVipPrice + (+this.orderDetail.deliveryFee)
+          return (+this.orderDetail.totalVipPrice) + (+this.orderDetail.deliveryFee)
         } else {
           return this.orderDetail.totalVipPrice
         }
       } else {
         if (this.orderDetail.deliveryFee) {
-          return +this.orderDetail.totalPrice + (+this.orderDetail.deliveryFee)
+          return (+this.orderDetail.totalPrice) + (+this.orderDetail.deliveryFee)
         } else {
           return this.orderDetail.totalPrice
         }

@@ -16,10 +16,10 @@
         </div>
         <div class="price">
           <i class="icon-money"></i>
-          <span class="normal-price">{{foodDetail.food.price}}/份</span>
+          <span class="normal-price">{{foodDetail.food.price + '/' + foodDetail.food.unit}}</span>
   
           <span class="vip-text" v-if="needVipToast">会员:</span>
-          <span class="vip-price" v-if="needVipToast">{{foodDetail.food.vipPrice}}/份</span>
+          <span class="vip-price" v-if="needVipToast">{{foodDetail.food.price + '/' + foodDetail.food.unit}}</span>
         </div>
         <div class="addCart" v-if="foodDetail.food.unit === '斤'" @click="toggleSelection()">
           <x-button type="primary">斤数/口味</x-button>
