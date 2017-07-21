@@ -58,6 +58,11 @@ const mutationMaps = [
     mutationKey: 'SET_NEED_ORDER_CONFIRM_PAGE',
     stateKey: 'needOrderConfirmPage',
     initValue: false
+  },
+  {
+    mutationKey: 'SET_OFFICIAL_NEWS',
+    stateKey: 'officialNews',
+    initValue: '广告位招租'
   }
 ]
 
@@ -84,6 +89,9 @@ const actions = {
       commit('SET_ALMOST_VIP_AMOUNT', config.vipRemindFee)
       commit('SET_HOME_IMAGE', config.homeImage)
       commit('SET_NEED_ORDER_CONFIRM_PAGE', config.needOrderConfirmPage)
+      commit('SET_OFFICIAL_NEWS', config.officialNews)
+      commit('SET_VIP_TOAST', config.needVip) 
+      commit('SET_NEED_CHOOSE_PEOPLE_NUMBER_PAGE', !!config.needChoosePeopleNumberPage)
 
       if (config.longitude) {
         commit('SET_TENANT_LONGITUDE', config.longitude)
@@ -92,9 +100,6 @@ const actions = {
           commit('SET_NEED_DELIVERY_FEE', true)
         }
       }
-
-      commit('SET_VIP_TOAST', config.needVip) 
-      commit('SET_NEED_CHOOSE_PEOPLE_NUMBER_PAGE', !!config.needChoosePeopleNumberPage)
 
       // 店铺已打烊
       if (!dateBetween(config.startTime, config.endTime)) {

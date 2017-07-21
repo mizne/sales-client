@@ -21,7 +21,7 @@
     </deal-header>
   
     <deal-content>
-      <scroll-notification :text="promptText"></scroll-notification>
+      <scroll-notification :text="officialNews"></scroll-notification>
       <div class="left-tab">
         <ul class="dish-type-container">
           <li class="dish-type" :class="{'selected': menuCurrentIndex === index}" @click="selectFoodType(item, index)" v-for="(item, index) in allFoods" :key="item.id">
@@ -86,7 +86,6 @@ export default {
       listHeight: [],// 菜单右边菜品子列表的高度
       foodsScrollY: 0,// 菜单右边滚动区的 滚动y轴偏差
       menuCurrentIndex: 0,// 菜单左边 当前选中索引,
-      promptText: '',// 滚动通知提示
     }
   },
   computed: {
@@ -94,7 +93,8 @@ export default {
       'allFoods',
       'isAddMoreFood',
       'showMode',
-      'needVipToast'
+      'needVipToast',
+      'officialNews'
     ])
   },
   watch: {
