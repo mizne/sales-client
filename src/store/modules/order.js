@@ -85,11 +85,13 @@ const actions = {
     return OrderService.addOrder(params)
       .then(data => {
         commit('SHOW_LOADING', false)
+        commit('RESET_SHOPPING_CART')
         router.push({ name: 'OrderSuccess' })
         commit('ORDERING_SUCCESS')
       })
       .catch(err => {
         commit('SHOW_LOADING', false)
+        commit('RESET_SHOPPING_CART')
         router.push({ name: 'OrderFailed' })
         return Promise.reject(err)
       })
