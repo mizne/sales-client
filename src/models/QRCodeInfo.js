@@ -61,7 +61,16 @@ QRCodeInfo.prototype.isEShopBizType = function() {
 })
 
 // 批量添加 remove 方法
-;['consigneeId'].forEach(method => {
+;[
+  'bizType',
+  'tenantId',
+  'tableName',
+  'consigneeId',
+  'coupons',
+  'couponRate',
+  'tableUser',
+  'phoneNumber'
+].forEach(method => {
   QRCodeInfo.prototype['remove' + capital(method)] = function() {
     storage.remove(method)
     return this
