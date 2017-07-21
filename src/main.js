@@ -18,7 +18,7 @@ Vue.use(ToastPlugin)
 Vue.use(AlertPlugin)
 Vue.use(ConfirmPlugin)
 Vue.config.productionTip = false
-Vue.config.devtools = true
+// Vue.config.devtools = true
 
 /* eslint-disable no-new */
 new Vue({

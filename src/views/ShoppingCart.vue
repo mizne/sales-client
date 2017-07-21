@@ -57,22 +57,7 @@
   
       </div>
   
-      <div class="delivery" v-if="needDeliveryFee">
-        <span class="delivery-label">配送费:</span>
-        <span class="delivery-placeholder"></span>
-        <span class="delivery-value">
-          <i class="icon-money"></i>
-          <span>{{deliveryFeeValue}}</span>
-        </span>
-      </div>
-  
-      <div class="delivery" v-if="needDeliveryFee">
-        <span class="delivery-label">配送时间:</span>
-        <span class="delivery-placeholder"></span>
-        <span class="delivery-value">
-          <span>{{deliveryTime}}</span>
-        </span>
-      </div>
+      <delivery v-if="needDeliveryFee" :delivery-fee-value="deliveryFeeValue" :delivery-time="deliveryTime"></delivery>
   
       <div class="remark">
         <x-textarea :max="50" v-model="remark" :placeholder="remarkPlaceholder"></x-textarea>
@@ -107,6 +92,7 @@ import DealContent from '@/components/DealContent'
 import DealFooter from '@/components/DealFooter'
 import EShopShoppingCartItem from '@/components/eshop/ShoppingCartItem'
 import DealShoppingCartItem from '@/components/deal/ShoppingCartItem'
+import Delivery from '@/components/Delivery'
 
 import QRCodeInfo from '@/models/QRCodeInfo'
 import { vAlert, vToast } from '@/util/vux-wrapper'
@@ -127,6 +113,7 @@ export default {
     PopupRadio,
     XButton,
     XTextarea,
+    Delivery,
     'eshop-item': EShopShoppingCartItem,
     'deal-item': DealShoppingCartItem
   },
@@ -241,14 +228,28 @@ export default {
         color: $primaryColor;
       }
     }
+    
+    .delivery {
+      @include flexboxCenter;
+      height: 40px;
+      margin-top: 10px;
+      background-color: #fff;
+      text-align: center;
+      border-radius: 5px;
+      .delivery-label,
+      .delivery-placeholder,
+      .delivery-value {
+        flex: 1;
+        @include flexboxCenter;
+      }
 
-
+      .delivery-value {
+        color: $primaryColor;
+      }
+    }
 
     .order-list {
       margin-top: 10px;
-
-
-
       .order-item:not(:first-child) {
         margin-top: 1px;
       }
@@ -269,26 +270,6 @@ export default {
         }
       }
     }
-
-    .delivery {
-      @include flexboxCenter;
-      height: 40px;
-      margin-top: 10px;
-      background-color: #fff;
-      text-align: center;
-      border-radius: 5px;
-      .delivery-label,
-      .delivery-placeholder,
-      .delivery-value {
-        flex: 1;
-        @include flexboxCenter;
-      }
-
-      .delivery-value {
-        color: $primaryColor;
-      }
-    }
-
 
     .remark {
       margin-top: 10px;

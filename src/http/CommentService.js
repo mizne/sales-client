@@ -4,7 +4,7 @@ import QRCodeInfo, { capital } from '@/models/QRCodeInfo'
 
 class CommentService {
   getShopComment() {
-    const query = `?tenantId=${QRCodeInfo.getTenantId()}`
+    const query = this._getQuery()
 
     return getBizTypeHttp()
       .get(`/comments/merchant${query}`)
@@ -19,6 +19,19 @@ class CommentService {
         return merchantRatings
       })
       .catch(exceptionHandler('CommentService', 'getShopComment'))
+  }
+  
+  _getQuery() {
+    const keys =
+      QRCodeInfo.isDealBizType()
+        ? ['tenantId']
+        : ['tenantId', 'consigneeId']
+
+    const query =
+      `?` +
+      keys.map(key => `${key}=${QRCodeInfo['get' + capital(key)]()}`).join('&')
+
+    return query
   }
 
   addShopComment(params) {

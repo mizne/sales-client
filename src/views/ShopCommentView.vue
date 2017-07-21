@@ -129,7 +129,8 @@ export default {
       }
 
       .content {
-        
+        @include flexboxCenter;
+        min-height: 50px;
 
         .rating-item {
           margin-top: 5px;

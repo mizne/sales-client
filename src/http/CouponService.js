@@ -29,6 +29,7 @@ class CouponService {
       return getBizTypeHttp()
         .get(`/availableCoupon${query}`)
         .catch(exceptionHandler('CouponService', 'getAvaliableCoupons'))
+        
     } else {
       return Promise.resolve([])
     }

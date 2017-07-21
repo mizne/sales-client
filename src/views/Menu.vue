@@ -10,7 +10,7 @@
         <span class="text">无图模式</span>
       </li>
     </deal-dialog>
-
+  
     <deal-header title="菜单">
       <span class="menu" slot="left">
         <i class="icon-menu" @click="show"></i>
@@ -19,7 +19,7 @@
         <i class="icon-discount" @click="toCoupon"></i>
       </span>
     </deal-header>
-
+  
     <deal-content>
       <scroll-notification :text="promptText"></scroll-notification>
       <div class="left-tab">
@@ -30,30 +30,20 @@
           </li>
         </ul>
       </div>
-
+  
       <div class="right-content" ref="foodsWrapper">
         <li class="food-type-container" v-for="(subFoods, index) in allFoods" :key="subFoods.id">
           <div class="food-type-title" :class="{selected: index === menuCurrentIndex}">{{subFoods.name}}</div>
-          <food-item v-for="food in subFoods.foods" :key="food.id" :mode="showMode" :need-vip="needVipToast"
-          :food="food" :type-index="index" @add-food="addFood(food, index)" 
-          @remove-food="removeFood(food, index)" @show-detail="showDetail(food,index)">
+          <food-item v-for="food in subFoods.foods" :key="food.id" :mode="showMode" :need-vip="needVipToast" :food="food" :type-index="index" @add-food="addFood(food, index)" @remove-food="removeFood(food, index)" @show-detail="showDetail(food,index)">
           </food-item>
         </li>
       </div>
     </deal-content>
-
+  
     <deal-footer>
-      <template v-if="isDealBizType">
-        <deal-cart-bar :add-more="isAddMoreFood" :shop-cart="shoppingCart" :food-cost="tempShoppingCartFoodCost"
-       :food-count="tempShoppingCartFoodCount" @go-shopcart="toShopCart"></deal-cart-bar>
-      </template>
-      
-      <template v-else>
-        <deal-cart-bar :add-more="isAddMoreFood" :shop-cart="shoppingCart" :food-cost="tempShoppingCartFoodCost"
-       :food-count="tempShoppingCartFoodCount" @go-shopcart="toShopCart"></deal-cart-bar>
-      </template>
+      <deal-cart-bar :add-more="isAddMoreFood" :shop-cart="shoppingCart" :food-cost="tempShoppingCartFoodCost" :food-count="tempShoppingCartFoodCount" @go-shopcart="toShopCart"></deal-cart-bar>
     </deal-footer>
-
+  
     <back-top></back-top>
   </div>
 </template>
@@ -68,7 +58,6 @@ import DealFooter from '@/components/DealFooter'
 import BackTop from '@/components/BackTop'
 import FoodItem from '@/components/FoodItem'
 import DealShopCartBar from '@/components/deal/ShopCartBar'
-// import EShopShopCartBar from '@/components/eshop/ShopCartBar'
 import ScrollNotification from '@/components/ScrollNotification'
 
 import vipToast from '@/mixins/vip-toast'
@@ -88,7 +77,6 @@ export default {
     BackTop,
     FoodItem,
     'deal-cart-bar': DealShopCartBar,
-    // 'eshop-cart-bar': EShopShopCartBar,
     ScrollNotification,
   },
   mixins: [vipToast, toShoppingCartPrompt],
@@ -99,7 +87,6 @@ export default {
       foodsScrollY: 0,// 菜单右边滚动区的 滚动y轴偏差
       menuCurrentIndex: 0,// 菜单左边 当前选中索引,
       promptText: '',// 滚动通知提示
-      isDealBizType: false
     }
   },
   computed: {
@@ -211,9 +198,6 @@ export default {
     _initRectTop() {
       this._rectTop = this.$refs.foodsWrapper.getBoundingClientRect().top
     }
-  },
-  created() {
-    this.isDealBizType = QRCodeInfo.isDealBizType()
   },
   mounted() {
     this._initAllFoods()

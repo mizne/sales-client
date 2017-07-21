@@ -3,7 +3,7 @@
     <deal-header title="账单">
     </deal-header>
   
-    <deal-content>
+    <deal-content v-if="orderDetail">
       <div class="bill-cost">
         <i class="icon-money"></i>
         <span class="text">{{isVip ? orderDetail.totalVipPrice : orderDetail.totalPrice}}</span>
@@ -21,9 +21,6 @@
             <span>{{isVip ? orderDetail.totalVipPrice : orderDetail.totalPrice}}</span>
           </span>
         </div>
-        <div class="abstract" v-if="orderDetail.couponValue">
-          <span>已使用优惠券: {{orderDetail.couponValue}} 元</span>
-        </div>
         <div class="item" v-for="item in orderDetail.foods" :key="item.id">
           <div class="name">{{item.name}}</div>
   
@@ -36,6 +33,7 @@
           </div>
         </div>
   
+        <delivery v-if="needDeliveryFee" :delivery-fee-value="deliveryFeeValue" :delivery-time="deliveryTime"></delivery>
       </div>
     </deal-content>
   
@@ -55,10 +53,11 @@ import { mapGetters } from 'vuex'
 import DealHeader from '@/components/DealHeader'
 import DealContent from '@/components/DealContent'
 import DealFooter from '@/components/DealFooter'
+import Delivery from '@/components/Delivery'
 
 import QRCodeInfo from '@/models/QRCodeInfo'
-import { vAlert } from '@/util/vux-wrapper'
-import { WEIXIN_BROWSER } from '@/util/constants'
+import toPayMixin from '@/mixins/to-pay'
+
 
 export default {
   name: 'OrderEnsure',
@@ -66,39 +65,25 @@ export default {
     DealHeader,
     DealContent,
     DealFooter,
+    Delivery
   },
-  data() {
-    return {
-    }
-  },
+  mixins: [toPayMixin],
   computed: {
     phoneNumber() {
       return QRCodeInfo.getPhoneNumber()
     },
-    ...mapGetters(['orderDetail', 'showIframe', 'isVip'])
+    ...mapGetters([
+      'orderDetail', 
+      'showIframe', 
+      'isVip', 
+      'needDeliveryFee',
+      'deliveryFeeValue',
+      'deliveryTime'
+      ])
   },
   methods: {
     ensure() {
-      this._toPay()
-    },
-    _toPay() {
-      const { brwoser, support } = checkBrowserForPay()
-
-      if (brwoser === WEIXIN_BROWSER) {
-        if (support) {
-          this.$store.dispatch('FETCH_WECHATPAY_URL')
-            .catch(_ => {
-              vAlert({ content: '不好意思, 微信重定向地址获取失败 -_-' })
-            })
-        } else {
-          vAlert({ content: '您的微信版本过低, 不支持支付功能, 请升级微信版本 ^_^' })
-        }
-      } else {
-        this.$store.dispatch('FETCH_ALIPAY_URL')
-          .catch(_ => {
-            vAlert({ content: '不好意思, 阿里支付请求参数获取失败 -_-' })
-          })
-      }
+      this.payImmediately()
     },
   }
 }

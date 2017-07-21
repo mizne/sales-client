@@ -51,8 +51,7 @@
     </deal-content>
   
     <deal-footer>
-      <deal-cart-bar :add-more="isAddMoreFood" :shop-cart="shoppingCart" :food-cost="tempShoppingCartFoodCost" 
-      :food-count="tempShoppingCartFoodCount" @go-shopcart="toShopCart"></deal-cart-bar>
+      <deal-cart-bar :add-more="isAddMoreFood" :shop-cart="shoppingCart" :food-cost="tempShoppingCartFoodCost" :food-count="tempShoppingCartFoodCount" @go-shopcart="toShopCart"></deal-cart-bar>
     </deal-footer>
   
     <transition enter-active-class="animated fadeInUp" leave-active-class="animated fadeOutDown">
@@ -238,6 +237,12 @@ export default {
       console.log(ev, comment)
     },
     addShopCart() {
+      if (this.food.quantity <= 0) {
+        return this.$vux.toast.show({
+          text: '必须为正数呢 ^_^',
+          type: 'text',
+        })
+      }
       const tasteText = this.tastes.reduce((accu, curr) => {
         return accu.concat(curr)
       }, [])
@@ -261,7 +266,9 @@ export default {
     },
     commitComment() {
       if (!this.commentText) {
-        return
+        return vToast({
+          content: '还没有填写呢 ^_^'
+        })
       }
 
       const params = {

@@ -82,22 +82,7 @@
           </div>
         </swipeout>
   
-        <div class="delivery" v-if="needDeliveryFee">
-          <span class="delivery-label">配送费:</span>
-          <span class="delivery-placeholder"></span>
-          <span class="delivery-value">
-            <i class="icon-money"></i>
-            <span>{{deliveryFeeValue}}</span>
-          </span>
-        </div>
-  
-        <div class="delivery" v-if="needDeliveryFee">
-          <span class="delivery-label">配送时间:</span>
-          <span class="delivery-placeholder"></span>
-          <span class="delivery-value">
-            <span>{{deliveryTime}}</span>
-          </span>
-        </div>
+        <delivery v-if="needDeliveryFee" :delivery-fee-value="deliveryFeeValue" :delivery-time="deliveryTime"></delivery>
       </div>
     </deal-content>
   
@@ -116,12 +101,12 @@ import DealContent from '@/components/DealContent'
 import DealFooter from '@/components/DealFooter'
 import ScrollNotification from '@/components/ScrollNotification'
 import OrderBar from '@/components/OrderBar'
+import Delivery from '@/components/Delivery'
 
 import QRCodeInfo from '@/models/QRCodeInfo'
 import { vAlert, vConfirm, vToast } from '@/util/vux-wrapper'
-import { checkBrowserForPay } from '@/util/index'
-import { WEIXIN_BROWSER, ALI_BROWSER, UNKNOWN_BROWSER, DEAL } from '@/util/constants'
 import Coupon from '@/models/Coupon'
+import toPayMixin from '@/mixins/to-pay'
 
 export default {
   name: 'OrderSuccess',
@@ -137,8 +122,10 @@ export default {
     Group,
     Cell,
     ScrollNotification,
-    OrderBar
+    OrderBar,
+    Delivery
   },
+  mixins: [toPayMixin],
   computed: {
     ...mapGetters([
       'orderDetail',
@@ -148,7 +135,8 @@ export default {
       'selectedCoupon',
       'needDeliveryFee',
       'deliveryFeeValue',
-      'deliveryTime'
+      'deliveryTime',
+      'needOrderConfirmPage'
     ]),
     totalPrice() {
       if (this.orderDetail) {
@@ -208,38 +196,14 @@ export default {
         foodCount: food.num
       })
     },
-    // 如果不需要 订单确认页面 则直接买单
-    // 否则 跳到订单确认页面
+
     toPay() {
-      // 判断是否有用优惠券
-      // 用了优惠券 则请求绑定优惠券和订单 再支付
-      // 没用优惠券 直接支付
-      (this.selectedCoupon
-        ? this.$store.dispatch('COUSUM_COUPON').catch(err => vToast({ content: '绑定优惠券失败' }))
-        : Promise.resolve('没选择优惠券'))
-        .then(_ => {
-          this._toPay()
-        })
-    },
-    _toPay() {
-      const { browser, support } = checkBrowserForPay()
-
-      if (browser === WEIXIN_BROWSER) {
-        if (support) {
-          return this.$store.dispatch('FETCH_WECHATPAY_URL')
-            .catch(_ => {
-              vAlert({ content: '不好意思, 微信重定向地址获取失败 -_-' })
-            })
-
-        } else {
-          vAlert({ content: '您的微信版本过低, 不支持支付功能, 请升级微信版本 ^_^' })
-        }
+      // 如果不需要 订单确认页面 则直接买单
+      // 否则 跳到订单确认页面
+      if (this.needOrderConfirmPage) {
+        this.$router.push({ name: 'OrderEnsure' })
       } else {
-        return this.$store.dispatch('FETCH_ALIPAY_URL')
-          .catch(_ => {
-            vAlert({ content: '不好意思, 阿里支付请求参数获取失败 -_-' })
-          })
-
+        this.payImmediately()
       }
     },
     _init() {
@@ -256,9 +220,15 @@ export default {
   },
   beforeRouteEnter(to, from, next) {
     next((vm) => {
-      if (from.name === 'ShoppingCart' || from.name === 'PhoneVerify' || from.name === 'Home') {
+      // 分别从
+      // 购物车页面 代售业务从购物车进来 下单
+      // 验证电话号码页面 点餐业务没电话号码 验证完 则下单
+      // 主页 有订单情况下 则直接进入
+      // 订单失败页面 下订单失败则继续下单
+      if (from.name === 'ShoppingCart' || from.name === 'PhoneVerify' || from.name === 'Home' || from.name === 'OrderFailed') {
         vm.$store.dispatch('FETCH_ORDER')
           .then(_ => {
+            // 获取可用优惠券 根据订单价格 过滤不可用的满减券
             vm.$store.dispatch('FETCH_AVALIABLE_COUPONS')
           })
           .catch(err => {
@@ -387,25 +357,6 @@ export default {
               font-size: 1.3rem;
             }
           }
-        }
-      }
-
-      .delivery {
-        @include flexboxCenter;
-        height: 40px;
-        margin-top: 10px;
-        background-color: #fff;
-        text-align: center;
-        border-radius: 5px;
-        .delivery-label,
-        .delivery-placeholder,
-        .delivery-value {
-          flex: 1;
-          @include flexboxCenter;
-        }
-
-        .delivery-value {
-          color: $primaryColor;
         }
       }
     }

@@ -9,7 +9,7 @@
         :coupon="coupon" :merchant="tenantName"></coupon-item>
       </template>
       <template v-else>
-        <div class="no-coupon">还没有优惠券呢 ^_^</div>
+        <div class="no-coupon">还没有优惠券呢, 还不快去扫码领取 ^_^</div>
       </template>
     </deal-content>
   </div>
@@ -52,6 +52,8 @@ export default {
       justify-content: center;
       align-items: center;
       height: 50px;
+      position: relative;
+      top: 30%;
     }
   }
 }
