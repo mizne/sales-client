@@ -42,9 +42,4 @@ export default {
       }
     },
   },
-  created() {
-    // this.promptText = this.needVipToast ? 
-    // `满${this.vipAmount}元立可成为会员哦, 亲 ^_^`
-    // : '最新公告'
-  }
 }
