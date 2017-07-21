@@ -5,7 +5,7 @@ import QRCodeInfo from '@/models/QRCodeInfo'
 const state = {
   isVip: false,
   deliveryFeeId: '',
-  deliveryFeeValue: 0,
+  deliveryFeeValue: '',
   deliveryTime: '',
   startPrice: ''
 }
