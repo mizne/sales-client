@@ -53,11 +53,11 @@ class CommentService {
   _addShopInfo(params) {
     if (QRCodeInfo.isDealBizType()) {
       Object.assign(params, {
-        tenantId: QRCodeInfo.getTtenantId()
+        tenantId: QRCodeInfo.getTenantId()
       })
     } else if (QRCodeInfo.isEShopBizType())  {
       Object.assign(params, {
-        tenantId: QRCodeInfo.getTtenantId(),
+        tenantId: QRCodeInfo.getTenantId(),
         consigneeId: QRCodeInfo.getConsigneeId()
       })
     } else {
