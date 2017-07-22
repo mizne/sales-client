@@ -40,14 +40,14 @@ const actions = {
           return CouponService.checkPhone(QRCodeInfo.getPhoneNumber())
             .then(_ => CouponService.bindCoupon())
             .then(() => {
-              vToast({ content: '恭喜, 领取成功 ^_^' })
+              vToast({ type: 'success', content: '恭喜, 领取成功 ^_^' })
             })
             .catch(() => {
               vToast({ content: '啊哦, 领取失败 -_-' })
             })
         },
         () => {
-          vToast({ content: '取消领取 ^_^' })
+          vToast({ type: 'cancel', content: '取消领取 ^_^' })
         }
       )
     } else {
@@ -57,7 +57,7 @@ const actions = {
           router.push({ name: 'PhoneVerify' })
         },
         () => {
-          vToast({ content: '取消领取优惠券 ^_^' })
+          vToast({ type: 'cancel', content: '取消领取 ^_^' })
         }
       )
     }

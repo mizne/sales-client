@@ -35,7 +35,7 @@ const actions = {
       } else if (state.purposeOfPhoneVerify === RECEIVE_COUPON) {
         CouponService.bindCoupon()
           .then(_ => {
-            vToast({ content: '恭喜, 领取优惠券成功 ^_^' })
+            vToast({ type: 'success', content: '恭喜, 领取优惠券成功 ^_^' })
             commit('SHOW_LOADING', false)
             router.push({ name: 'Menu' })
           })

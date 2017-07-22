@@ -181,7 +181,13 @@ export default {
     cancelOrder() {
       vConfirm({ content: '确定取消订单?' })
         .then(_ => {
-          this.$store.dispatch('CANCEL_ORDER')
+          return this.$store.dispatch('CANCEL_ORDER')
+        })
+        .then(_ => {
+          vToast({
+            type: 'success',
+            content: '取消成功'
+          })
         })
     },
     deleteFood(food) {
