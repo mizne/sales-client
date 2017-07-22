@@ -38,4 +38,16 @@ export default class Coupon {
         console.error(`Unknown coupon type: ${this.type}`)
     }
   }
+
+  computePrice(srcPrice) {
+    switch(this.type) {
+      case Coupon.AMOUNT: return srcPrice - this.value
+      case Coupon.DISCOUNT: return parseFloat((this.value * srcPrice).toFixed(2))
+      case Coupon.REDUCE: 
+        const [, free] = this.value.split('-')
+        return srcPrice - free
+      default: 
+        console.error(`Unknown coupon type: ${this.type}`)
+    }
+  }
 }

@@ -140,11 +140,22 @@ export default {
     ]),
     totalPrice() {
       if (this.orderDetail) {
+        let resultPrice = 0
         if (this.isVip) {
-          return this.orderDetail.totalVipPrice
+          resultPrice = this.orderDetail.totalVipPrice
         } else {
-          return this.orderDetail.totalPrice
+          resultPrice = this.orderDetail.totalPrice
         }
+
+        if (this.selectedCoupon) {
+          resultPrice = new Coupon(this.selectedCoupon.couponType, this.selectedCoupon.value).computePrice(resultPrice)
+        }
+
+        if (this.deliveryFeeValue) {
+          resultPrice += (+this.deliveryFeeValue)
+        }
+
+        return resultPrice
       }
     },
     couponText() {
