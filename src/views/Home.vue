@@ -1,6 +1,7 @@
 <template>
-  <div class="home-container" :style="homeStyle">
-  
+  <div class="home-container">
+    <div class="background" :style="homeStyle"></div>
+
     <group class="phone" label-width="4.5em" label-margin-right="2em" label-align="right">
       <cell title="全国统一客服热线" value="025-86662644"></cell>
     </group>
@@ -109,7 +110,11 @@ export default {
   bottom: 0;
   left: 0;
   right: 0;
-  background-size: 100% 100% !important;
+
+  .background {
+    height: calc(100% - 133px);
+    background-size: 100% 100% !important;
+  }
 
   .phone {
     position: absolute;

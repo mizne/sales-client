@@ -59,6 +59,7 @@ export default {
         })
           .catch(err => {
             vAlert({
+              type: 'cancel',
               content: err.message || '验证码未知错误'
             })
               .then(_ => {
@@ -89,6 +90,7 @@ export default {
           })
           .catch(err => {
             vAlert({
+              type: 'cancel',
               content: err.message || '服务器异常'
             })
               .then(_ => {
