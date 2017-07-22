@@ -82,7 +82,7 @@ const actions = {
           let orderPrice = rootState.order.orderDetail.totalPrice
           // 如果有配送费 则加上
           if (rootState.user.deliveryFeeValue) {
-            orderPrice += rootState.user.deliveryFeeValue
+            orderPrice += (+rootState.user.deliveryFeeValue)
           }
           const couponValue = Number(e.value.split('-')[0])
           return orderPrice >= couponValue
