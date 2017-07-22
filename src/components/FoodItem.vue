@@ -169,12 +169,12 @@ export default {
       flex: 1;
       @include flexboxCenter;
 
-      font-size: 1.3rem;
+      font-size: 1.1rem;
     }
 
     .icon-plus, .icon-sub {
       color: $primaryColor;
-      font-size: 1.3rem;
+      font-size: 1.1rem;
     }
 
   }

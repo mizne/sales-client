@@ -298,8 +298,8 @@ export default {
       position: absolute;
       top: 35px;
       left: 80px;
-      width: calc(100% - 100px);
-      padding: 0 10px 40px 10px;
+      width: calc(100% - 90px);
+      padding: 0 5px 40px 5px;
 
       .food-type-container {
         text-align: left;
