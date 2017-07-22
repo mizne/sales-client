@@ -40,7 +40,7 @@ export default {
   },
   filters: {
     normalize(v) {
-      return Number(v).toFixed(1) + '千米'
+      return Number(v/1000).toFixed(1) + '千米'
     }
   }
 }
