@@ -76,7 +76,7 @@
       <div :class="['right-area', {'disabled': disableAddOrder}]" @click="ensureOrder">
         <i class="icon-order"></i>
         <span class="text" v-if="needDeliveryFee">{{startPricePrompt}}</span>
-        <span class="text" v-else>下单</span>
+        <span class="text" v-else>去结算</span>
       </div>
     </deal-footer>
   
