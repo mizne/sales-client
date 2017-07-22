@@ -5,7 +5,7 @@ class UserService {
   getStatus() {
     if (QRCodeInfo.isDealBizType()) {
       return this._getStatusForDeal()
-    } else if (QRCodeInfo.isEShopBizType()) {
+    } else if (QRCodeInfo.isEShopBizType() || QRCodeInfo.isGroupShoppingBizType()) {
       return this._getStatusForEShop()
     } else {
       console.error(`Unknown biz type: ${QRCodeInfo.getBizType()}`)

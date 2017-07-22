@@ -72,7 +72,7 @@ class CouponService {
       tradeNo
     }
 
-    if (QRCodeInfo.isEShopBizType()) {
+    if (QRCodeInfo.isEShopBizType() || QRCodeInfo.isGroupShoppingBizType()) {
       Object.assign(params, {
         consigneeId: QRCodeInfo.getConsigneeId()
       })

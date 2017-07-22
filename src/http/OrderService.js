@@ -46,7 +46,7 @@ class OrderService {
         tableName: QRCodeInfo.getTableName(),
         phoneNumber: QRCodeInfo.getPhoneNumber()
       })
-    } else if (QRCodeInfo.isEShopBizType()) {
+    } else if (QRCodeInfo.isEShopBizType() || QRCodeInfo.isGroupShoppingBizType()) {
       Object.assign(params, {
         tenantId: QRCodeInfo.getTenantId(),
         consigneeId: QRCodeInfo.getConsigneeId(),

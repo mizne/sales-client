@@ -40,7 +40,7 @@ class ShoppingCartService {
       if (QRCodeInfo.hasTableUser()) {
         params.tableUser = QRCodeInfo.getTableUser()
       }
-    } else if (QRCodeInfo.isEShopBizType()) {
+    } else if (QRCodeInfo.isEShopBizType() || QRCodeInfo.isGroupShoppingBizType()) {
       Object.assign(params, {
         tenantId: QRCodeInfo.getTenantId(),
         consigneeId: QRCodeInfo.getConsigneeId(),
@@ -65,7 +65,7 @@ class ShoppingCartService {
           foodCount: foodParams.foodCount
         }
       }
-    } else if (QRCodeInfo.isEShopBizType()) {
+    } else if (QRCodeInfo.isEShopBizType() || QRCodeInfo.isGroupShoppingBizType()) {
       return {
         condition: {
           tenantId: QRCodeInfo.getTenantId(),

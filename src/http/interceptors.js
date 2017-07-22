@@ -2,7 +2,7 @@ import axios from 'axios'
 import host from './host.js'
 import Logger from './Logger'
 import QRCodeInfo from '@/models/QRCodeInfo'
-import { DEAL, ESHOP } from '@/util/constants'
+import { DEAL, ESHOP, GROUP_SHOPPING } from '@/util/constants'
 
 const qrcodeHttp = axios.create({
   baseURL: host.qrcode,
@@ -104,6 +104,7 @@ const getBizTypeHttp = function() {
     case DEAL:
       return dealHttp
     case ESHOP:
+    case GROUP_SHOPPING:
       return eshopHttp
     default:
       Logger.error({

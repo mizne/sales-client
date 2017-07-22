@@ -1,5 +1,5 @@
 import { QRCodeService } from '@/http/index'
-import { ESHOP } from '@/util/constants'
+import { ESHOP, GROUP_SHOPPING } from '@/util/constants'
 import QRCodeInfo from '@/models/QRCodeInfo'
 
 const state = {
@@ -15,7 +15,7 @@ const actions = {
       QRCodeInfo.setTenantId(info.tenantId)
       QRCodeInfo.setTableName(info.tableName)
 
-      if (info.bizType === ESHOP) {
+      if (info.bizType === ESHOP || info.bizType === GROUP_SHOPPING) {
         QRCodeInfo.setConsigneeId(info.consigneeId)
       } else {
         QRCodeInfo.removeConsigneeId()

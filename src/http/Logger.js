@@ -20,7 +20,7 @@ function _request(level, params) {
   let url
   if (QRCodeInfo.isDealBizType()) {
     url = '/deal-client/error-message'
-  } else if (QRCodeInfo.isEShopBizType()) {
+  } else if (QRCodeInfo.isEShopBizType() || QRCodeInfo.isGroupShoppingBizType()) {
     url = '/eshop-client/error-message'
     params.consigneeId = QRCodeInfo.getConsigneeId()
   }

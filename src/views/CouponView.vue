@@ -27,6 +27,8 @@ import DealHeader from '@/components/DealHeader'
 import DealContent from '@/components/DealContent'
 import CouponItem from '@/components/CouponItem'
 
+import { vToast } from '@/util/vux-wrapper'
+
 export default {
   name: 'CouponView',
   components: {
@@ -61,8 +63,18 @@ export default {
 
       if (this.selectedCoupon && this.selectedCoupon.couponKey === coupon.couponKey) {
         this.$store.dispatch('SELECT_COUPON', null)
+        vToast({
+          type: 'success',
+          content: '已取消优惠券'
+        })
+        this.$router.back()
       } else {
         this.$store.dispatch('SELECT_COUPON', coupon)
+        vToast({
+          type: 'cancel',
+          content: '已选中优惠券'
+        })
+        this.$router.back()
       }
     }
   },

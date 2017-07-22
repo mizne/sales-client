@@ -237,6 +237,10 @@ export default {
             vAlert({ content: '获取订单失败' })
           })
       }
+
+      if (from.name === 'Alipay') {
+        vm.$store.commit('SET_SHOW_IFRAME', false)
+      }
     })
   }
 }

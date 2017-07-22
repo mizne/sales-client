@@ -28,7 +28,7 @@ export default {
               content: '添加购物车失败, 请稍后重试 ^_^',
             })
           })
-        } else if (QRCodeInfo.isEShopBizType()) {
+        } else if (QRCodeInfo.isEShopBizType() || QRCodeInfo.isGroupShoppingBizType()) {
           // 代售 需先提供手机号码
           if (QRCodeInfo.hasPhoneNumber()) {
             this.$store.dispatch('ADD_SHOPPING_CART').catch(err => {

@@ -94,10 +94,10 @@ export default {
   margin-top: 10px;
   padding-bottom: 10px;
   border-bottom: 1px solid $greyText;
-  height: 110px;
+  height: 80px;
 
   .food-img {
-    flex: 1;
+    width: 80px;
     // background: url(../assets/images/default.jpg);
     // background-size: 100% 100%;
     height: 100%;

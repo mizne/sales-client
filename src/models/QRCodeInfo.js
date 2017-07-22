@@ -1,5 +1,5 @@
 import storage from '@/util/storage'
-import { DEAL, ESHOP } from '@/util/constants'
+import { DEAL, ESHOP, GROUP_SHOPPING } from '@/util/constants'
 
 const methods = [
   'bizType',
@@ -19,6 +19,10 @@ QRCodeInfo.prototype.isDealBizType = function() {
 
 QRCodeInfo.prototype.isEShopBizType = function() {
   return this.getBizType() === ESHOP
+}
+
+QRCodeInfo.prototype.isGroupShoppingBizType = function() {
+  return this.getBizType() === GROUP_SHOPPING
 }
 
 // 批量添加 set 方法

@@ -55,7 +55,7 @@ class CommentService {
       Object.assign(params, {
         tenantId: QRCodeInfo.getTenantId()
       })
-    } else if (QRCodeInfo.isEShopBizType())  {
+    } else if (QRCodeInfo.isEShopBizType() || QRCodeInfo.isGroupShoppingBizType())  {
       Object.assign(params, {
         tenantId: QRCodeInfo.getTenantId(),
         consigneeId: QRCodeInfo.getConsigneeId()

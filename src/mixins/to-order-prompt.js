@@ -30,7 +30,7 @@ export default {
           this.$store.commit('SET_PURPOSE_OF_PHONE_VERIFY', ADD_ORDER)
           this.$router.push({ name: 'PhoneVerify' })
         }
-      } else if (QRCodeInfo.isEShopBizType()) {
+      } else if (QRCodeInfo.isEShopBizType() || QRCodeInfo.isGroupShoppingBizType()) {
         this.$store.commit('SET_ORDER_REMARK', this.remark)
         this.$store.dispatch('ADD_ORDER').catch(err => {
           vToast({ content: '啊哦, 下订单失败, 请重试下 ^_^' })
