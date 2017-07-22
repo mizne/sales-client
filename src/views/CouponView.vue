@@ -69,14 +69,18 @@ export default {
           type: 'cancel',
           content: '已取消优惠券'
         })
-        this.$router.back()
+        window.setTimeout(() => {
+          this.$router.back()
+        }, 500)
       } else {
         this.$store.dispatch('SELECT_COUPON', coupon)
         vToast({
           type: 'success',
           content: '已选中优惠券'
         })
-        this.$router.back()
+        window.setTimeout(() => {
+          this.$router.back()
+        }, 500)
       }
     }
   },

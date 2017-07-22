@@ -203,7 +203,9 @@ export default {
 
       this.remarkPlaceholder = this.isDealBizType
         ? '请填写备注'
-        : '该订单为代售商品, 如收货地址变更, 请填写具体地址, 默认为本二维码所在地址'
+        : QRCodeInfo.isEShopBizType() ?
+          '该订单为代售商品, 如收货地址变更, 请填写具体地址, 默认为本二维码所在地址'
+          : '该订单为群购订单, 请备注您的微信号'
 
       this.$store.dispatch('FETCH_SHOPPING_CART')
         .catch(err => {
