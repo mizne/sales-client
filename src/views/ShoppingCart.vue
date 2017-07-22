@@ -5,7 +5,9 @@
     </deal-header>
   
     <deal-content>
-      <div class="table-info">
+      <scroll-notification v-if="allCoupons.length" :text="couponNews"></scroll-notification>
+  
+      <div class="table-info" :class="{'hasScroll': allCoupons.length > 0}">
         <span class="table-number">桌号: {{shoppingCart.tableName}}</span>
         <span class="food-count">合计: {{shoppingCart.totalNum}}份</span>
         <span class="food-cost">
@@ -93,6 +95,7 @@ import DealFooter from '@/components/DealFooter'
 import EShopShoppingCartItem from '@/components/eshop/ShoppingCartItem'
 import DealShoppingCartItem from '@/components/deal/ShoppingCartItem'
 import Delivery from '@/components/Delivery'
+import ScrollNotification from '@/components/ScrollNotification'
 
 import QRCodeInfo from '@/models/QRCodeInfo'
 import { vAlert, vToast } from '@/util/vux-wrapper'
@@ -115,7 +118,8 @@ export default {
     XTextarea,
     Delivery,
     'eshop-item': EShopShoppingCartItem,
-    'deal-item': DealShoppingCartItem
+    'deal-item': DealShoppingCartItem,
+    ScrollNotification
   },
   mixins: [toOrderPrompt],
   data() {
@@ -135,8 +139,13 @@ export default {
       'deliveryTime',
       'deliveryDistance',
       'startPrice',
-      'orderDetail'
+      'orderDetail',
+      'allCoupons',
+
     ]),
+    couponNews() {
+      return `您有 ${this.allCoupons.length} 张优惠券 在结算页面可选择`
+    },
     startPricePrompt() {
       if (this.orderDetail) {
         return '下单'
@@ -220,6 +229,11 @@ export default {
       background-color: #fff;
       text-align: center;
       border-radius: 5px;
+
+      &.hasScroll {
+        margin-top: 40px;
+      }
+
       .table-number,
       .food-count,
       .food-cost {

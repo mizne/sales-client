@@ -82,7 +82,7 @@
           </div>
         </swipeout>
   
-        <delivery v-if="needDeliveryFee" :delivery-fee-value="deliveryFeeValue" :delivery-time="deliveryTime"></delivery>
+        <delivery v-if="needDeliveryFee" :delivery-distance="deliveryDistance" :delivery-fee-value="deliveryFeeValue" :delivery-time="deliveryTime"></delivery>
       </div>
     </deal-content>
   
@@ -135,6 +135,7 @@ export default {
       'selectedCoupon',
       'needDeliveryFee',
       'deliveryFeeValue',
+      'deliveryDistance',
       'deliveryTime',
       'needOrderConfirmPage'
     ]),

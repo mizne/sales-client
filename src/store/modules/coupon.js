@@ -44,7 +44,7 @@ const actions = {
               dispatch('FETCH_AVALIABLE_COUPONS')
             })
             .catch((err) => {
-              vToast({ content: `啊哦, ${err.message} -_-` })
+              vToast({ content: `啊哦, ${err.message}, 您已有很多优惠券啦 -_-` })
               dispatch('FETCH_AVALIABLE_COUPONS')
             })
         },
