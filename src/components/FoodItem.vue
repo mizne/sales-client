@@ -1,10 +1,10 @@
 <template>
-  <li class="food-item">
+  <li class="food-item" @click="showDetails">
     <div v-if="mode === 'picMode'" class="food-img">
       <img class="img" :src="food.image" alt="">
     </div>
 
-    <div class="food-info" @click="showDetails">
+    <div class="food-info">
       <div class="title">{{food.name}}</div>
       <div class="favorite">
         <i class="icon-like"></i>
@@ -22,14 +22,14 @@
       </div>
     </div>
     <div class="food-action" v-if="(food.unit === '份' || food.unit === '条' || food.unit === '瓶' || food.unit === '个' || food.unit === '盒' || food.unit === '块' || food.unit === '桶') && food.rest > 0">
-      <span class="sub">
-        <i class="icon-sub" v-show="foodCount > 0" @click="removeFood"></i>
+      <span class="sub" @click="removeFood">
+        <i class="icon-sub" v-show="foodCount > 0"></i>
       </span>
       <span class="food-count">
         {{foodCount > 0 ? foodCount : ''}}
       </span>
-      <span class="plus">
-        <i class="icon-plus" @click="addFood"></i>
+      <span class="plus" @click="addFood">
+        <i class="icon-plus"></i>
       </span>
     </div>
     <div class="food-action" v-if="food.unit === '斤' && food.rest > 0" @click="showDetails">
@@ -72,10 +72,12 @@ export default {
     }
   },
   methods: {
-    removeFood() {
+    removeFood(ev) {
+      ev.stopPropagation()
       this.$emit('remove-food')
     },
-    addFood() {
+    addFood(ev) {
+      ev.stopPropagation()
       this.$emit('add-food')
     },
     showDetails() {
@@ -109,6 +111,7 @@ export default {
 
   .food-info {
     flex: 3;
+    font-size: .8rem;
     /*margin-left: 5px;*/
     .title,
     .favorite,

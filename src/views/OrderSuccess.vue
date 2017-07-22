@@ -34,7 +34,7 @@
       </div>
   
       <div class="order-detail">
-        <group>
+        <group class="coupon-area">
           <cell title="优惠券" :value="couponText" @click.native="toCoupon" :is-link="true"></cell>
         </group>
         <div class="abstract">
@@ -319,6 +319,10 @@ export default {
     .order-detail {
       margin: 10px 10px 0 10px;
       color: #888;
+
+      .coupon-area {
+        color: $warnColor;
+      }
 
       .abstract {
         display: flex;
