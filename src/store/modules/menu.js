@@ -52,7 +52,7 @@ const mutations = {
   ADD_FOOD(state, { food, num = 1, remark = '', typeIndex }) {
     // 临时购物车 food 数量加一
     if (state.tempShoppingCart[food.id]) {
-      if (food.unit === '份') {
+      if (food.unit === '份' ||  food.unit === '条' || food.unit === '瓶' || food.unit === '个' || food.unit === '盒' || food.unit === '块' || food.unit === '桶') {
         state.tempShoppingCart[food.id].num += 1
         state.tempShoppingCart[food.id].remark = remark
       } else if (food.unit === '斤') {

@@ -227,10 +227,6 @@ export default {
       // 订单失败页面 下订单失败则继续下单
       if (from.name === 'ShoppingCart' || from.name === 'PhoneVerify' || from.name === 'Home' || from.name === 'OrderFailed') {
         vm.$store.dispatch('FETCH_ORDER')
-          .then(_ => {
-            // 获取可用优惠券 根据订单价格 过滤不可用的满减券
-            vm.$store.dispatch('FETCH_AVALIABLE_COUPONS')
-          })
           .catch(err => {
             vAlert({ content: '获取订单失败' })
           })

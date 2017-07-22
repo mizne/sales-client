@@ -1,5 +1,7 @@
 import { OrderService } from '@/http/index'
 import router from '@/router/index'
+import { not } from '@/util/index'
+import Coupon from '@/models/Coupon'
 import QRCodeInfo from '@/models/QRCodeInfo'
 
 const state = {
@@ -96,7 +98,7 @@ const actions = {
         return Promise.reject(err)
       })
   },
-  FETCH_ORDER: ({ commit }, tradeNo) => {
+  FETCH_ORDER: ({ commit, dispatch, rootState }, tradeNo) => {
     commit('SHOW_LOADING', true)
 
     return OrderService.getOrder(tradeNo)
@@ -107,6 +109,36 @@ const actions = {
         //   router.push({ name: 'Menu' })
         // }
         commit('SET_IS_VIP', order.isVip)
+
+        // 根据订单价格 过滤出可用优惠券
+        const predicate = e => {
+          if (e.couponType === Coupon.REDUCE) {
+            let orderPrice = order.totalPrice
+            // 如果有配送费 则加上
+            if (rootState.user.deliveryFeeValue) {
+              orderPrice += +rootState.user.deliveryFeeValue
+            }
+            const couponValue = Number(e.value.split('-')[0])
+            return orderPrice >= couponValue
+          } else {
+            return true
+          }
+        }
+
+        const avaliableCoupons = rootState.coupon.allCoupons.filter(predicate)
+        const disableCoupons = rootState.coupon.allCoupons.filter(
+          not(predicate)
+        )
+
+        // 如果选中的优惠券 不在可用优惠券内 则置空选中优惠券
+        if (rootState.coupon.selectedCoupon) {
+          if (disableCoupons.find(e => e.couponKey === rootState.coupon.selectedCoupon.couponKey)) {
+            dispatch('SELECT_COUPON', null)
+          }
+        }
+        commit('SET_AVALIABLE_COUPONS', avaliableCoupons)
+        commit('SET_DISABLE_COUPONS', disableCoupons)
+
         return order
       })
       .catch(err => {
