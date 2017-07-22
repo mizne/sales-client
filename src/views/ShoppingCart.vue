@@ -57,7 +57,7 @@
   
       </div>
   
-      <delivery v-if="needDeliveryFee" :delivery-fee-value="deliveryFeeValue" :delivery-time="deliveryTime"></delivery>
+      <delivery v-if="needDeliveryFee" :delivery-distance="deliveryDistance" :delivery-fee-value="deliveryFeeValue" :delivery-time="deliveryTime"></delivery>
   
       <div class="remark">
         <x-textarea :max="50" v-model="remark" :placeholder="remarkPlaceholder"></x-textarea>
@@ -133,6 +133,7 @@ export default {
       'needDeliveryFee',
       'deliveryFeeValue',
       'deliveryTime',
+      'deliveryDistance',
       'startPrice',
       'orderDetail'
     ]),

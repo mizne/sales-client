@@ -19,7 +19,7 @@ const mutations = {
 }
 
 const actions = {
-  FETCH_SMS_CODE: ({ commit }, phoneNumber) => {
+  FETCH_SMS_CODE: ({ commit, dispatch }, phoneNumber) => {
     return SMSService.getCode(phoneNumber)
   },
   VERIFY_SMS_CODE: ({ commit, dispatch, rootState }, { phoneNumber, verifyCode }) => {
@@ -37,11 +37,13 @@ const actions = {
           .then(_ => {
             vToast({ type: 'success', content: '恭喜, 领取优惠券成功 ^_^' })
             commit('SHOW_LOADING', false)
+            dispatch('FETCH_AVALIABLE_COUPONS')
             router.push({ name: 'Menu' })
           })
           .catch(_ => {
             vToast({ content: '啊哦, 领取优惠券失败 -_-' })
             commit('SHOW_LOADING', false)
+            dispatch('FETCH_AVALIABLE_COUPONS')
             router.push({ name: 'Menu' })
           })
           // 点餐业务 下订单时 需要的验证手机号码

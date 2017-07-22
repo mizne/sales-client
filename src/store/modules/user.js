@@ -7,6 +7,7 @@ const state = {
   deliveryFeeId: '',
   deliveryFeeValue: '',
   deliveryTime: '',
+  deliveryDistance: 0,
   startPrice: ''
 }
 
@@ -22,6 +23,9 @@ const mutations = {
   },
   SET_DELIVERY_TIME(state, time) {
     state.deliveryTime = time
+  },
+  SET_DELIVERY_DISTANCE(state, distance) {
+    state.deliveryDistance = distance
   },
   SET_START_PRICE(state, price) {
     state.startPrice = price
@@ -53,10 +57,11 @@ const actions = {
             res
           ) {
             const userAddress = new qq.maps.LatLng(res[0].lat, res[0].lng)
-            const distance = qq.maps.geometry.spherical.computeDistanceBetween(
+            const distance = Math.round(qq.maps.geometry.spherical.computeDistanceBetween(
               userAddress,
               merchantAddress
-            )
+            ))
+            commit('SET_DELIVERY_DISTANCE', distance)
 
             Logger.info({
               module: 'user',
@@ -65,14 +70,21 @@ const actions = {
                 .lng}`
             })
 
-            UserService.getDeliveryFee(Math.round(distance))
-              .then(({ deliveryFeeId, deliveryFeeValue, deliveryTime, startPrice }) => {
-                commit('SET_DELIVERY_FEE_ID', deliveryFeeId)
-                commit('SET_DELIVERY_FEE_VALUE', deliveryFeeValue)
-                commit('SET_DELIVERY_TIME', deliveryTime)
-                commit('SET_START_PRICE', startPrice)
-                return { deliveryFeeId, deliveryFeeValue, deliveryTime }
-              })
+            UserService.getDeliveryFee(distance)
+              .then(
+                ({
+                  deliveryFeeId,
+                  deliveryFeeValue,
+                  deliveryTime,
+                  startPrice
+                }) => {
+                  commit('SET_DELIVERY_FEE_ID', deliveryFeeId)
+                  commit('SET_DELIVERY_FEE_VALUE', deliveryFeeValue)
+                  commit('SET_DELIVERY_TIME', deliveryTime)
+                  commit('SET_START_PRICE', startPrice)
+                  return { deliveryFeeId, deliveryFeeValue, deliveryTime }
+                }
+              )
               .then(({ deliveryFeeId, deliveryFeeValue, deliveryTime }) => {
                 Logger.info({
                   module: 'user',
@@ -103,6 +115,9 @@ const getters = {
   },
   deliveryTime(state) {
     return state.deliveryTime
+  },
+  deliveryDistance(state) {
+    return state.deliveryDistance
   },
   startPrice(state) {
     return state.startPrice

@@ -1,6 +1,13 @@
 <template>
   <div class="delivery-container">
     <div class="delivery">
+      <span class="delivery-label">距离:</span>
+      <span class="delivery-placeholder"></span>
+      <span class="delivery-value">
+        <span>{{deliveryDistance | normalize}}</span>
+      </span>
+    </div>
+    <div class="delivery">
       <span class="delivery-label">配送费:</span>
       <span class="delivery-placeholder"></span>
       <span class="delivery-value">
@@ -8,7 +15,6 @@
         <span>{{deliveryFeeValue}}</span>
       </span>
     </div>
-  
     <div class="delivery">
       <span class="delivery-label">配送时间:</span>
       <span class="delivery-placeholder"></span>
@@ -27,6 +33,14 @@ export default {
     },
     deliveryTime: {
       type: String
+    },
+    deliveryDistance: {
+      type: Number
+    }
+  },
+  filters: {
+    normalize(v) {
+      return Number(v).toFixed(1) + '千米'
     }
   }
 }

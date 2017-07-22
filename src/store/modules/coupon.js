@@ -29,7 +29,7 @@ const mutations = {
 
 const actions = {
   // 领取优惠券
-  RECEIVE_COUPON: ({ commit }) => {
+  RECEIVE_COUPON: ({ commit, dispatch }) => {
     const coupons = QRCodeInfo.getCoupons().map(e => new Coupon(e.couponType, e.couponValue))
 
     const text = `<p>是否领取 ${coupons.length} 张优惠券?</p>` + coupons.map(e => `<p>${e.getText()}</p>`).join(``)
@@ -41,9 +41,11 @@ const actions = {
             .then(_ => CouponService.bindCoupon())
             .then(() => {
               vToast({ type: 'success', content: '恭喜, 领取成功 ^_^' })
+              dispatch('FETCH_AVALIABLE_COUPONS')
             })
             .catch(() => {
               vToast({ content: '啊哦, 领取失败 -_-' })
+              dispatch('FETCH_AVALIABLE_COUPONS')
             })
         },
         () => {
