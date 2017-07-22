@@ -4,18 +4,20 @@
     </deal-header>
   
     <deal-content>
-      <tab>
+      <div class="tabs">
+        <tab>
         <tab-item selected @on-item-click="onItemClick('avaliable')">可用</tab-item>
         <tab-item @on-item-click="onItemClick('disabled')">不可用</tab-item>
       </tab>
+      </div>
 
-      <template v-if="couponsToShow.length > 0">
+      <div class="coupon-items" v-if="couponsToShow.length > 0">
         <coupon-item v-for="coupon in couponsToShow" :key="coupon.couponKey" 
         :coupon="coupon" :merchant="tenantName" :selected-coupon="selectedCoupon" :filter="filter" @select-coupon="selectItem"></coupon-item>
-      </template>
-      <template v-else>
-        <div class="no-coupon">还没有优惠券呢, 还不快去扫码领取 ^_^</div>
-      </template>
+      </div>
+      <div v-else class="no-coupon">
+        <div>还没有优惠券呢, 还不快去扫码领取 ^_^</div>
+      </div>
     </deal-content>
   </div>
 </template>
@@ -90,9 +92,19 @@ export default {
   .deal-header-container {}
 
   .deal-content-container {
-    padding: 10px;
     background-color: $greyBackground;
     height: 100vh;
+
+    .tabs {
+      position: fixed;
+      width: 100%;
+    }
+
+    .coupon-items {
+      .coupon-item:first-child {
+        margin-top: 50px;
+      }
+    }
 
     .no-coupon {
       display: flex;
