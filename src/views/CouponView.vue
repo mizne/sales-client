@@ -64,14 +64,14 @@ export default {
       if (this.selectedCoupon && this.selectedCoupon.couponKey === coupon.couponKey) {
         this.$store.dispatch('SELECT_COUPON', null)
         vToast({
-          type: 'success',
+          type: 'cancel',
           content: '已取消优惠券'
         })
         this.$router.back()
       } else {
         this.$store.dispatch('SELECT_COUPON', coupon)
         vToast({
-          type: 'cancel',
+          type: 'success',
           content: '已选中优惠券'
         })
         this.$router.back()
