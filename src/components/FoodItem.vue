@@ -83,8 +83,6 @@ export default {
     showDetails() {
       this.$emit('show-detail')
     },
-  },
-  created() {
   }
 }
 </script>

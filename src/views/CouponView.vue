@@ -105,6 +105,8 @@ export default {
     }
 
     .coupon-items {
+      padding: 0 10px;
+      
       .coupon-item:first-child {
         margin-top: 50px;
       }
