@@ -7,63 +7,66 @@
     <deal-content>
       <scroll-notification v-if="allCoupons.length" :text="couponNews"></scroll-notification>
   
-      <div class="table-info" :class="{'hasScroll': allCoupons.length > 0}">
-        <span class="table-number">桌号: {{shoppingCart.tableName}}</span>
-        <span class="food-count">合计: {{shoppingCart.totalNum}}份</span>
-        <span class="food-cost">
-          <i class="icon-money"></i>
-          <span>{{shoppingCart.totalPrice}}</span>
-        </span>
-      </div>
+      <div class="content">
+        <div class="table-info" :class="{'hasScroll': allCoupons.length > 0}">
+          <span class="table-number">桌号: {{shoppingCart.tableName}}</span>
+          <span class="food-count">合计: {{shoppingCart.totalNum}}份</span>
+          <span class="food-cost">
+            <i class="icon-money"></i>
+            <span>{{shoppingCart.totalPrice}}</span>
+          </span>
+        </div>
   
-      <div class="delivery" v-if="needDeliveryFee">
-        <span class="delivery-label">起送价:</span>
-        <span class="delivery-placeholder"></span>
-        <span class="delivery-value">
-          <i class="icon-money"></i>
-          <span>{{startPrice}}</span>
-        </span>
-      </div>
+        <div class="delivery" v-if="needDeliveryFee">
+          <span class="delivery-label">起送价:</span>
+          <span class="delivery-placeholder"></span>
+          <span class="delivery-value">
+            <i class="icon-money"></i>
+            <span>{{startPrice}}</span>
+          </span>
+        </div>
   
-      <div class="order-list">
-        <template v-if="shoppingCart.foods.length > 0">
-          <swipeout>
-            <div v-for="item in shoppingCart.foods" :key="item.$index">
-              <swipeout-item transition-mode="follow">
-                <div slot="right-menu">
-                  <swipeout-button @click.native="deleteFood(item)" type="warn">删除</swipeout-button>
-                </div>
-                <div slot="content">
-  
-                  <template v-if="isDealBizType">
-                    <deal-item :is-editable="isEditable" :is-vip="isVip" :item="item" @edit-food="editFood"></deal-item>
-                  </template>
-                  <template v-else>
-                    <eshop-item :is-editable="isEditable" :is-vip="isVip" :item="item" @edit-food="editFood"></eshop-item>
-                  </template>
-  
-                  <div class="food-remark" v-if="item.unit === '斤'" style="padding: 10px;">
-                    <p>备注： {{item.remark}}</p>
+        <div class="order-list">
+          <template v-if="shoppingCart.foods.length > 0">
+            <swipeout>
+              <div v-for="item in shoppingCart.foods" :key="item.$index">
+                <swipeout-item transition-mode="follow">
+                  <div slot="right-menu">
+                    <swipeout-button @click.native="deleteFood(item)" type="warn">删除</swipeout-button>
                   </div>
-                </div>
-              </swipeout-item>
+                  <div slot="content">
+  
+                    <template v-if="isDealBizType">
+                      <deal-item :is-editable="isEditable" :is-vip="isVip" :item="item" @edit-food="editFood"></deal-item>
+                    </template>
+                    <template v-else>
+                      <eshop-item :is-editable="isEditable" :is-vip="isVip" :item="item" @edit-food="editFood"></eshop-item>
+                    </template>
+  
+                    <div class="food-remark" v-if="item.unit === '斤'" style="padding: 10px;">
+                      <p>备注： {{item.remark}}</p>
+                    </div>
+                  </div>
+                </swipeout-item>
+              </div>
+            </swipeout>
+          </template>
+          <template v-else>
+            <div class="order-tip">
+              <i class="icon-tip"></i>
+              <span class="text">您还未点菜哟 ^_^</span>
             </div>
-          </swipeout>
-        </template>
-        <template v-else>
-          <div class="order-tip">
-            <i class="icon-tip"></i>
-            <span class="text">您还未点菜哟 ^_^</span>
-          </div>
-        </template>
+          </template>
   
+        </div>
+  
+        <delivery v-if="needDeliveryFee" :delivery-distance="deliveryDistance" :delivery-fee-value="deliveryFeeValue" :delivery-time="deliveryTime"></delivery>
+  
+        <div class="remark">
+          <x-textarea :max="50" v-model="remark" :placeholder="remarkPlaceholder"></x-textarea>
+        </div>
       </div>
   
-      <delivery v-if="needDeliveryFee" :delivery-distance="deliveryDistance" :delivery-fee-value="deliveryFeeValue" :delivery-time="deliveryTime"></delivery>
-  
-      <div class="remark">
-        <x-textarea :max="50" v-model="remark" :placeholder="remarkPlaceholder"></x-textarea>
-      </div>
     </deal-content>
   
     <deal-footer>
@@ -219,79 +222,80 @@ export default {
   .deal-header-container {}
 
   .deal-content-container {
-    padding: 10px;
     background-color: $greyBackground;
-
-    .table-info {
-      @include flexboxCenter;
-      height: 40px;
-      margin-top: 10px;
-      background-color: #fff;
-      text-align: center;
-      border-radius: 5px;
-
-      &.hasScroll {
-        margin-top: 40px;
-      }
-
-      .table-number,
-      .food-count,
-      .food-cost {
-        flex: 1;
-      }
-
-      .food-cost {
-        color: $primaryColor;
-      }
-    }
-
-    .delivery {
-      @include flexboxCenter;
-      height: 40px;
-      margin-top: 10px;
-      background-color: #fff;
-      text-align: center;
-      border-radius: 5px;
-      .delivery-label,
-      .delivery-placeholder,
-      .delivery-value {
-        flex: 1;
+    .content {
+      padding: 10px;
+      .table-info {
         @include flexboxCenter;
-      }
-
-      .delivery-value {
-        color: $primaryColor;
-      }
-    }
-
-    .order-list {
-      margin-top: 10px;
-      .order-item:not(:first-child) {
-        margin-top: 1px;
-      }
-
-      .order-tip {
-        @include flexboxCenter;
-        color: $primaryColor;
+        height: 40px;
+        margin-top: 10px;
         background-color: #fff;
-        height: 200px;
+        text-align: center;
         border-radius: 5px;
 
-        .icon-tip {
-          transform: scale(1.5);
-          margin-top: 6px;
+        &.hasScroll {
+          margin-top: 40px;
         }
-        .text {
-          margin-left: 10px;
+
+        .table-number,
+        .food-count,
+        .food-cost {
+          flex: 1;
+        }
+
+        .food-cost {
+          color: $primaryColor;
         }
       }
-    }
 
-    .remark {
-      margin-top: 10px;
-      margin-bottom: 50px;
-      div#placeholder {
-        color: #ff8f00;
+      .delivery {
+        @include flexboxCenter;
+        height: 40px;
+        margin-top: 10px;
+        background-color: #fff;
+        text-align: center;
+        border-radius: 5px;
+        .delivery-label,
+        .delivery-placeholder,
+        .delivery-value {
+          flex: 1;
+          @include flexboxCenter;
+        }
+
+        .delivery-value {
+          color: $primaryColor;
+        }
+      }
+
+      .order-list {
+        margin-top: 10px;
+        .order-item:not(:first-child) {
+          margin-top: 1px;
+        }
+
+        .order-tip {
+          @include flexboxCenter;
+          color: $primaryColor;
+          background-color: #fff;
+          height: 200px;
+          border-radius: 5px;
+
+          .icon-tip {
+            transform: scale(1.5);
+            margin-top: 6px;
+          }
+          .text {
+            margin-left: 10px;
+          }
+        }
+      }
+
+      .remark {
+        margin-top: 10px;
+        margin-bottom: 50px;
+        div#placeholder {
+          color: #ff8f00;
+        }
       }
     }
   }
