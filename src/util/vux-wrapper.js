@@ -39,7 +39,7 @@ const vAlert = function({
 const vToast = function({
   content = '小v宝 友情提醒',
   type = 'text',
-  time = 3e3,
+  time = 5e3,
   position = 'default'
 }) {
   return Vue.$vux.toast.show({

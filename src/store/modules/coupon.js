@@ -43,8 +43,8 @@ const actions = {
               vToast({ type: 'success', content: '恭喜, 领取成功 ^_^' })
               dispatch('FETCH_AVALIABLE_COUPONS')
             })
-            .catch(() => {
-              vToast({ content: '啊哦, 领取失败 -_-' })
+            .catch((err) => {
+              vToast({ content: `啊哦, ${err.message} -_-` })
               dispatch('FETCH_AVALIABLE_COUPONS')
             })
         },
