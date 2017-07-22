@@ -40,7 +40,7 @@ const eshopHttp = axios.create({
         }
       } else {
         return Promise.reject(
-          new Error('server resp format error, has no resCode field')
+          new Error('服务器异常了')
         )
       }
     },
