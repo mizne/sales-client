@@ -1,14 +1,14 @@
 <template>
   <div class="home-container">
     <div class="background" :style="homeStyle"></div>
-
+  
     <group class="phone" label-width="4.5em" label-margin-right="2em" label-align="right">
       <cell title="全国统一客服热线" value="025-86662644"></cell>
     </group>
     <footer class="footer">
       <router-link to="/menu">
         <i class="icon-edit"></i>
-        <div class="text">去点餐</div>
+        <div class="text">去{{bizTypeText}}</div>
       </router-link>
       <router-link to="/shop-comment-view">
         <i class="icon-comment"></i>
@@ -31,16 +31,19 @@ export default {
     Group,
     Cell
   },
+  data() {
+    return { bizTypeText: '' }
+  },
   computed: {
     ...mapGetters(['hasClosed', 'homeImage', 'tenantName']),
     homeStyle() {
       return {
         'background': `url(${this.homeImage}) no-repeat`,
       }
-    }
+    },
   },
   beforeRouteEnter(to, from, next) {
-    
+
     next(vm => {
       // 从 首页进来 初始化状态及配置信息
       // 从 其他页面后退进来 不作初始化请求 让其直接进入home页
@@ -52,7 +55,10 @@ export default {
         }
         vm.$store.dispatch('FETCH_QRCODE_INFO', qrcodeId)
           .then(_ => {
+            vm.bizTypeText = QRCodeInfo.getBizTypeText()
+            document.title = QRCodeInfo.getDocumentTitle()
 
+            // 获取商户配置信息
             vm.$store.dispatch('FETCH_TENANT_CONFIG')
               .then(_ => {
                 if (vm.hasClosed) {
@@ -66,13 +72,14 @@ export default {
                 vm.$store.dispatch('FETCH_DELIVERY_FEE')
               })
 
+            // 获取当前用户状态
             vm.$store.dispatch('FETCH_USER_STATUS')
-              .then(status => {
+              .then(([status, coupons]) => {
                 // 通过桌状态 路由页面
                 // 空桌 可领取优惠券
                 if (status.tableStatus === 0) {// 空桌
                   vm.$router.push({ name: 'Home' })
-                  
+
                   // 可以领取优惠券
                   if (QRCodeInfo.hasCoupons()) {
                     vm.$store.dispatch('RECEIVE_COUPON')
@@ -85,10 +92,7 @@ export default {
                   console.error(`Unknown table status; status: `, status.tableStatus)
                   vm.$router.push({ name: 'Home' })
                 }
-              })
 
-            vm.$store.dispatch('FETCH_AVALIABLE_COUPONS')
-              .then(coupons => {
                 if (coupons.length > 0) {
                   vToast({
                     content: `恭喜您, 您有 ${coupons.length} 张优惠券 ^_^`,

@@ -28,23 +28,23 @@ const mutations = {
 }
 
 const actions = {
-  // 领取优惠券
+  // 预领取优惠券
   RECEIVE_COUPON: ({ commit, dispatch }) => {
-    const coupons = QRCodeInfo.getCoupons().map(e => new Coupon(e.couponType, e.couponValue))
+    const coupons = QRCodeInfo.getCoupons().map(
+      e => new Coupon(e.couponType, e.couponValue)
+    )
 
-    const text = `<p>是否领取 ${coupons.length} 张优惠券?</p>` + coupons.map(e => `<p>${e.getText()}</p>`).join(``)
+    const text =
+      `<p>是否领取 ${coupons.length} 张优惠券?</p>` +
+      coupons.map(e => `<p>${e.getText()}</p>`).join(``)
 
     if (QRCodeInfo.hasPhoneNumber()) {
       return vConfirm({ content: text }).then(
         () => {
           return CouponService.checkPhone(QRCodeInfo.getPhoneNumber())
-            .then(_ => CouponService.bindCoupon())
-            .then(() => {
-              vToast({ type: 'success', content: '恭喜, 领取成功 ^_^' })
-              dispatch('FETCH_AVALIABLE_COUPONS')
-            })
-            .catch((err) => {
-              vToast({ content: `啊哦, ${err.message}, 您已有很多优惠券啦 -_-` })
+            .then(_ => dispatch('BIND_COUPON'))
+            .catch(err => {
+              vToast({ content: `啊哦, ${err.message} -_-` })
               dispatch('FETCH_AVALIABLE_COUPONS')
             })
         },
@@ -63,6 +63,18 @@ const actions = {
         }
       )
     }
+  },
+  // 领取优惠券
+  BIND_COUPON: ({ commit, dispatch }) => {
+    return CouponService.bindCoupon()
+      .then(_ => {
+        vToast({ type: 'success', content: '恭喜, 领取成功 ^_^' })
+        dispatch('FETCH_AVALIABLE_COUPONS')
+      })
+      .catch(err => {
+        vToast({ content: `啊哦, ${err.message} -_-` })
+        dispatch('FETCH_AVALIABLE_COUPONS')
+      })
   },
   // 获取可用优惠券
   FETCH_AVALIABLE_COUPONS: ({ commit, rootState }) => {

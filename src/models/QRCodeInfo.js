@@ -33,6 +33,24 @@ QRCodeInfo.prototype.getShoppingCartRemarkPlaceholder = function() {
       : '该订单为群购订单, 请备注您的微信号'
 }
 
+QRCodeInfo.prototype.getBizTypeText = function() {
+  const map = {
+    [DEAL]: '点餐',
+    [ESHOP]: '选购',
+    [GROUP_SHOPPING]: '群购'
+  }
+  return map[this.getBizType()]
+}
+
+QRCodeInfo.prototype.getDocumentTitle = function() {
+  const map = {
+    [DEAL]: '小v宝e点餐',
+    [ESHOP]: '小v宝e代售',
+    [GROUP_SHOPPING]: '小v宝e群购'
+  }
+  return map[this.getBizType()]
+}
+
 // 批量添加 set 方法
 methods.forEach(method => {
   // 添加 set 方法

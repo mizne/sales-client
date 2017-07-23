@@ -33,19 +33,13 @@ const actions = {
         dispatch('ADD_SHOPPING_CART')
         // 领取优惠券时 需要的验证手机号码
       } else if (state.purposeOfPhoneVerify === RECEIVE_COUPON) {
-        CouponService.bindCoupon()
-          .then(_ => {
-            vToast({ type: 'success', content: '恭喜, 领取优惠券成功 ^_^' })
-            commit('SHOW_LOADING', false)
-            dispatch('FETCH_AVALIABLE_COUPONS')
-            router.push({ name: 'Menu' })
-          })
-          .catch(_ => {
-            vToast({ content: '啊哦, 领取优惠券失败 -_-' })
-            commit('SHOW_LOADING', false)
-            dispatch('FETCH_AVALIABLE_COUPONS')
-            router.push({ name: 'Menu' })
-          })
+        dispatch('BIND_COUPON')
+        .then(_ => {
+          router.push({ name: 'Menu' })
+        })
+        .catch(_ => {
+          router.push({ name: 'Menu' })
+        })
           // 点餐业务 下订单时 需要的验证手机号码
       } else if (state.purposeOfPhoneVerify === ADD_ORDER) {
         commit('SHOW_LOADING', false)

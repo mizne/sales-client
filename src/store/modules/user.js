@@ -3,12 +3,12 @@ import { vAlert } from '@/util/vux-wrapper'
 import QRCodeInfo from '@/models/QRCodeInfo'
 
 const state = {
-  isVip: false,
-  deliveryFeeId: '',
-  deliveryFeeValue: '',
-  deliveryTime: '',
-  deliveryDistance: 0,
-  startPrice: ''
+  isVip: false,// 是否vip
+  deliveryFeeId: '',// 配送id
+  deliveryFeeValue: '',// 配送费
+  deliveryTime: '',// 配送所需时间
+  deliveryDistance: 0,// 配送距离
+  startPrice: ''// 起送价格
 }
 
 const mutations = {
@@ -33,10 +33,14 @@ const mutations = {
 }
 
 const actions = {
-  FETCH_USER_STATUS: ({ commit }) => {
-    return UserService.getStatus().then(status => {
+  FETCH_USER_STATUS: ({ commit, dispatch }) => {
+    return Promise.all([
+      UserService.getStatus(),
+      dispatch('FETCH_AVALIABLE_COUPONS')
+    ])
+    .then(([status, coupons]) => {
       commit('SET_IS_VIP', status.isVip)
-      return status
+      return [status, coupons]
     })
   },
   FETCH_DELIVERY_FEE: ({ commit, rootState }) => {
@@ -57,10 +61,12 @@ const actions = {
             res
           ) {
             const userAddress = new qq.maps.LatLng(res[0].lat, res[0].lng)
-            const distance = Math.round(qq.maps.geometry.spherical.computeDistanceBetween(
-              userAddress,
-              merchantAddress
-            ))
+            const distance = Math.round(
+              qq.maps.geometry.spherical.computeDistanceBetween(
+                userAddress,
+                merchantAddress
+              )
+            )
             commit('SET_DELIVERY_DISTANCE', distance)
 
             Logger.info({
