@@ -44,7 +44,7 @@ const actions = {
           return CouponService.checkPhone(QRCodeInfo.getPhoneNumber())
             .then(_ => dispatch('BIND_COUPON'))
             .catch(err => {
-              vToast({ content: `啊哦, ${err.message} -_-` })
+              vToast({ content: `啊哦, ${err.message || '校验手机号码失败'} -_-` })
               dispatch('FETCH_AVALIABLE_COUPONS')
             })
         },
@@ -72,7 +72,7 @@ const actions = {
         dispatch('FETCH_AVALIABLE_COUPONS')
       })
       .catch(err => {
-        vToast({ content: `啊哦, ${err.message} -_-` })
+        vToast({ content: `啊哦, ${err.message || '领取失败'} -_-` })
         dispatch('FETCH_AVALIABLE_COUPONS')
       })
   },

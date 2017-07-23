@@ -1,13 +1,13 @@
-import { getBizTypeHttp, exceptionHandler } from './interceptors'
 import QRCodeInfo from '@/models/QRCodeInfo'
+import { BaseService } from './BaseService'
 
-class TenantService {
+class TenantService extends BaseService {
   getConfig() {
     const query = `?tenantId=${QRCodeInfo.getTenantId()}`
 
-    return getBizTypeHttp()
+    return this.getBizTypeHttp()
       .get(`/tenantInfo${query}`)
-      .catch(exceptionHandler('TenantService', 'getConfig'))
+      .catch(this.exceptionHandler('TenantService', 'getConfig'))
   }
 }
 

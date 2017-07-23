@@ -51,17 +51,17 @@ QRCodeInfo.prototype.getDocumentTitle = function() {
   return map[this.getBizType()]
 }
 
-// 批量添加 set 方法
+// 批量添加方法
 methods.forEach(method => {
   // 添加 set 方法
   QRCodeInfo.prototype['set' + capital(method)] = function(v) {
-    storage.set(method, v)
+    storage.set(addPrefix(method), v)
     return this
   }
 
   // 添加 get 方法
   QRCodeInfo.prototype['get' + capital(method)] = function() {
-    return storage.get(method)
+    return storage.get(addPrefix(method))
   }
 
   // 添加 has 方法
@@ -71,10 +71,14 @@ methods.forEach(method => {
 
   // 添加 remove 方法
   QRCodeInfo.prototype['remove' + capital(method)] = function() {
-    storage.remove(method)
+    storage.remove(addPrefix(method))
     return this
   }
 })
+
+function addPrefix(method) {
+  return `XIAO_V_BAO_${method}`
+}
 
 // 将字符串 s 首字母大写
 export function capital(s) {

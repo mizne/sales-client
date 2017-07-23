@@ -1,32 +1,29 @@
-import { getBizTypeHttp, exceptionHandler } from './interceptors'
-import QRCodeInfo, { capital } from '@/models/QRCodeInfo'
+import { DEAL, ESHOP, GROUP_SHOPPING } from '@/util/constants'
+import { BaseService } from './BaseService'
 
-class WechatService {
+class WechatService extends BaseService {
   redirect() {
-    return getBizTypeHttp()
-    .get(`/wechatpay/redirctUrl`)
-    .catch(exceptionHandler('WechatService', 'redirect'))
+    return this.getBizTypeHttp()
+      .get(`/wechatpay/redirctUrl`)
+      .catch(this.exceptionHandler('WechatService', 'redirect'))
   }
 
   getWechatPayParams(code) {
-    const query = this._getQuery(code)
+    let query = this._getQuery()
+    query += `&code=${code}`
 
-    return getBizTypeHttp()
-    .get(`/wechatpay/wap${query}`)
-    .catch(exceptionHandler('WechatService', 'getWechatPayParams'))
+    return this.getBizTypeHttp()
+      .get(`/wechatpay/wap${query}`)
+      .catch(this.exceptionHandler('WechatService', 'getWechatPayParams'))
   }
 
   _getQuery(code) {
-    const keys =
-      QRCodeInfo.isDealBizType()
-        ? ['tenantId', 'tableName']
-        : ['tenantId', 'consigneeId', 'tableName', 'phoneNumber']
-
-    const query =
-      `?code=${code}&` +
-      keys.map(key => `${key}=${QRCodeInfo['get' + capital(key)]()}`).join('&')
-
-    return query
+    const map = {
+      [DEAL]: ['tenantId', 'tableName'],
+      [ESHOP]: ['tenantId', 'consigneeId', 'tableName', 'phoneNumber'],
+      [GROUP_SHOPPING]: ['tenantId', 'consigneeId', 'tableName', 'phoneNumber']
+    }
+    return this.getBizTypeQuery(map)
   }
 }
 

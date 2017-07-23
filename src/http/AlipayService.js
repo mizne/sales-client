@@ -1,27 +1,22 @@
-import { getBizTypeHttp, exceptionHandler } from './interceptors'
-import { DEAL, ESHOP } from '@/util/constants'
-import QRCodeInfo, { capital } from '@/models/QRCodeInfo'
+import { DEAL, ESHOP, GROUP_SHOPPING } from '@/util/constants'
+import { BaseService } from './BaseService'
 
-class AlipayService {
+class AlipayService extends BaseService {
   getWapParams(tradeNo) {
     const query = this._getQuery()
 
-    return getBizTypeHttp()
+    return this.getBizTypeHttp()
       .get(`/alipay/wap${query}&tradeNo=${tradeNo}`)
-      .catch(exceptionHandler('AlipayService', 'getWapParams'))
+      .catch(this.exceptionHandler('AlipayService', 'getWapParams'))
   }
 
   _getQuery() {
-    const keys =
-      QRCodeInfo.isDealBizType()
-        ? ['tenantId', 'tableName', 'phoneNumber']
-        : ['tenantId', 'consigneeId', 'tableName', 'phoneNumber']
-
-    const query =
-      `?` +
-      keys.map(key => `${key}=${QRCodeInfo['get' + capital(key)]()}`).join('&')
-
-    return query
+    const map = {
+      [DEAL]: ['tenantId', 'tableName', 'phoneNumber'],
+      [ESHOP]: ['tenantId', 'consigneeId', 'tableName', 'phoneNumber'],
+      [GROUP_SHOPPING]: ['tenantId', 'consigneeId', 'tableName', 'phoneNumber']
+    }
+    return this.getBizTypeQuery(map)
   }
 }
 

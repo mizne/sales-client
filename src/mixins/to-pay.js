@@ -15,7 +15,7 @@ export default {
       (this.selectedCoupon
         ? this.$store
             .dispatch('COUSUM_COUPON')
-            .catch(err => vToast({ content: '绑定优惠券失败' }))
+            .catch(err => vToast({ content: '使用优惠券失败' }))
         : Promise.resolve('没选择优惠券')).then(_ => {
         this._toPay()
       })

@@ -1,4 +1,4 @@
-import { SMSService, CouponService } from '@/http/index'
+import { SMSService } from '@/http/index'
 import router from '@/router/index'
 import { vToast } from '@/util/vux-wrapper'
 import QRCodeInfo from '@/models/QRCodeInfo'

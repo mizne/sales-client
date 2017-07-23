@@ -1,11 +1,10 @@
-import { getBizTypeHttp, exceptionHandler } from './interceptors'
-import QRCodeInfo, { capital } from '@/models/QRCodeInfo'
+import { DEAL, ESHOP, GROUP_SHOPPING } from '@/util/constants'
+import { BaseService } from './BaseService'
 
-class MenuService {
+class MenuService extends BaseService {
   getAllFoods() {
     const query = this._getQuery()
-
-    return getBizTypeHttp()
+    return this.getBizTypeHttp()
       .get(`/menu${query}`)
       .then(menu => {
         // 按时间倒序 排列 商品评论
@@ -21,20 +20,17 @@ class MenuService {
 
         return menu
       })
-      .catch(exceptionHandler('MenuService', 'getAllFoods'))
+      .catch(this.exceptionHandler('MenuService', 'getAllFoods'))
   }
 
   _getQuery() {
-    const keys =
-      QRCodeInfo.isDealBizType()
-        ? ['tenantId']
-        : ['tenantId', 'consigneeId']
-
-    const query =
-      `?` +
-      keys.map(key => `${key}=${QRCodeInfo['get' + capital(key)]()}`).join('&')
-
-    return query
+    const map = {
+      [DEAL]: ['tenantId'],
+      [ESHOP]: ['tenantId', 'consigneeId'],
+      [GROUP_SHOPPING]: ['tenantId', 'consigneeId']
+    }
+    
+    return this.getBizTypeQuery(map)
   }
 }
 

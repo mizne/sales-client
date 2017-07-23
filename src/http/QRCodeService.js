@@ -1,10 +1,11 @@
-import { qrcodeHttp, exceptionHandler } from './interceptors'
+import { qrcodeHttp } from './interceptors'
+import { BaseService } from './BaseService'
 
-class QRCodeService {
+class QRCodeService extends BaseService {
   getQRCodeInfo(qrcodeId) {
 
     return qrcodeHttp.get(`/QRCodeTemplate?QRCodeTemplateId=${qrcodeId}`)
-    .catch(exceptionHandler('QRCodeService', 'getQRCodeInfo'))
+    .catch(this.exceptionHandler('QRCodeService', 'getQRCodeInfo'))
   }
 }
 

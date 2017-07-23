@@ -30,7 +30,6 @@ const actions = {
         QRCodeInfo.removeCouponRate()
       }
 
-      // storage.set('phoneNumber', '13721080281')// TOFIX 测试桩
     })
   }
 }

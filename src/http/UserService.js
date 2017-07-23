@@ -1,51 +1,51 @@
-import { getBizTypeHttp, exceptionHandler } from './interceptors'
-import QRCodeInfo, { capital } from '@/models/QRCodeInfo'
+import QRCodeInfo from '@/models/QRCodeInfo'
+import { BaseService } from './BaseService'
+import { DEAL, ESHOP, GROUP_SHOPPING } from '@/util/constants'
 
-class UserService {
+class UserService extends BaseService {
   getStatus() {
-    if (QRCodeInfo.isDealBizType()) {
-      return this._getStatusForDeal()
-    } else if (QRCodeInfo.isEShopBizType() || QRCodeInfo.isGroupShoppingBizType()) {
-      return this._getStatusForEShop()
-    } else {
-      console.error(`Unknown biz type: ${QRCodeInfo.getBizType()}`)
-      return Promise.reject(`Unknown biz type: ${QRCodeInfo.getBizType()}`)
+    const map = {
+      [DEAL]: this._getStatusForDeal.bind(this),
+      [ESHOP]: this._getStatusForEShop.bind(this),
+      [GROUP_SHOPPING]: this._getStatusForEShop.bind(this)
     }
+
+    if (!map[QRCodeInfo.getBizType()]) {
+      throw new Error(`Unknown biz type: ${QRCodeInfo.getBizType()}`)
+    }
+
+    return map[QRCodeInfo.getBizType()]()
   }
 
   getDeliveryFee(distance) {
-    return getBizTypeHttp()
+    return this.getBizTypeHttp()
     .get(`/deliveryFee?distance=${distance}&tenantId=${QRCodeInfo.getTenantId()}`)
-    .catch(exceptionHandler('UserService', 'getDeliveryFee'))
+    .catch(this.exceptionHandler('UserService', 'getDeliveryFee'))
   }
 
   _getStatusForDeal() {
-    let query =
-      `?` +
-      ['tenantId', 'tableName']
-        .map(key => `${key}=${QRCodeInfo['get' + capital(key)]()}`)
-        .join('&')
+    const map = {
+      [DEAL]: ['tenantId', 'tableName']
+    }
+    const query = this.getBizTypeQuery(map)
 
-    query += QRCodeInfo.hasPhoneNumber()
-      ? `&phoneNumber=${QRCodeInfo.getPhoneNumber()}`
-      : ''
-
-    return getBizTypeHttp()
+    return this.getBizTypeHttp()
       .get(`/table${query}`)
-      .catch(exceptionHandler('UserService', 'getStatus'))
+      .catch(this.exceptionHandler('UserService', 'getStatus'))
   }
 
   _getStatusForEShop() {
     if (QRCodeInfo.hasPhoneNumber()) {
-      let query =
-        `?` +
-        ['tenantId', 'tableName', 'consigneeId', 'phoneNumber']
-          .map(key => `${key}=${QRCodeInfo['get' + capital(key)]()}`)
-          .join('&')
+      const map = {
+        [ESHOP]: ['tenantId', 'tableName', 'consigneeId', 'phoneNumber'],
+        [GROUP_SHOPPING]: ['tenantId', 'tableName', 'consigneeId', 'phoneNumber']
+      }
 
-      return getBizTypeHttp()
+      let query = this.getBizTypeQuery(map)
+
+      return this.getBizTypeHttp()
         .get(`/table${query}`)
-        .catch(exceptionHandler('UserService', 'getStatus'))
+        .catch(this.exceptionHandler('UserService', 'getStatus'))
     } else {
       return Promise.resolve({
         isVip: false,

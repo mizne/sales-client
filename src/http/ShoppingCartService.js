@@ -1,97 +1,85 @@
-import { getBizTypeHttp, exceptionHandler } from './interceptors'
-import QRCodeInfo, { capital } from '@/models/QRCodeInfo'
+import QRCodeInfo from '@/models/QRCodeInfo'
+import { DEAL, ESHOP, GROUP_SHOPPING } from '@/util/constants'
+import { BaseService } from './BaseService'
 
-class ShoppingCartService {
+class ShoppingCartService extends BaseService {
   addShoppingCart(params) {
     this._addParams(params)
 
-    return getBizTypeHttp()
+    return this.getBizTypeHttp()
       .post('/shoppingCart', params)
       .then(tableUser => {
         if (QRCodeInfo.isDealBizType()) {
           QRCodeInfo.setTableUser(tableUser)
         }
       })
-      .catch(exceptionHandler('ShopCartService', 'addShoppingCart'))
+      .catch(this.exceptionHandler('ShopCartService', 'addShoppingCart'))
   }
 
   editShoppingCart(foodParams) {
     const params = this._getParams(foodParams)
 
-    return getBizTypeHttp()
+    return this.getBizTypeHttp()
       .put('/shoppingCart', params)
-      .catch(exceptionHandler('ShopCartService', 'editShoppingCart'))
+      .catch(this.exceptionHandler('ShopCartService', 'editShoppingCart'))
   }
 
   getShoppingCart() {
     const query = this._getQuery()
 
-    return getBizTypeHttp()
+    return this.getBizTypeHttp()
       .get(`/shoppingCart${query}`)
-      .catch(exceptionHandler('ShopCartService', 'getShoppingCart'))
+      .catch(this.exceptionHandler('ShopCartService', 'getShoppingCart'))
   }
 
   _addParams(params) {
+    const map = {
+      [DEAL]: ['tenantId', 'tableName'],
+      [ESHOP]: ['tenantId', 'consigneeId', 'tableName', 'phoneNumber'],
+      [GROUP_SHOPPING]: ['tenantId', 'consigneeId', 'tableName', 'phoneNumber']
+    }
+
+    this.addBizTypeParams(params, map)
+
+    // 点餐业务 加上不同人的点餐标识
     if (QRCodeInfo.isDealBizType()) {
-      Object.assign(params, {
-        tenantId: QRCodeInfo.getTenantId(),
-        tableName: QRCodeInfo.getTableName()
-      })
       if (QRCodeInfo.hasTableUser()) {
-        params.tableUser = QRCodeInfo.getTableUser()
+        Object.assign(params, { tableUser: QRCodeInfo.getTableUser() })
       }
-    } else if (QRCodeInfo.isEShopBizType() || QRCodeInfo.isGroupShoppingBizType()) {
-      Object.assign(params, {
-        tenantId: QRCodeInfo.getTenantId(),
-        consigneeId: QRCodeInfo.getConsigneeId(),
-        tableName: QRCodeInfo.getTableName(),
-        phoneNumber: QRCodeInfo.getPhoneNumber()
-      })
-    } else {
-      console.error(`Unknown biz type: ${QRCodeInfo.getBizType()}`)
     }
   }
 
   _getParams(foodParams) {
-    if (QRCodeInfo.isDealBizType()) {
-      return {
-        condition: {
-          tenantId: QRCodeInfo.getTenantId(),
-          tableName: QRCodeInfo.getTableName(),
-          tableUser: foodParams.tableUser
-        },
-        food: {
-          foodId: foodParams.foodId,
-          foodCount: foodParams.foodCount
-        }
+    const params = {
+      condition: {},
+      food: {
+        foodId: foodParams.foodId,
+        foodCount: foodParams.foodCount
       }
-    } else if (QRCodeInfo.isEShopBizType() || QRCodeInfo.isGroupShoppingBizType()) {
-      return {
-        condition: {
-          tenantId: QRCodeInfo.getTenantId(),
-          consigneeId: QRCodeInfo.getConsigneeId(),
-          tableName: QRCodeInfo.getTableName(),
-          phoneNumber: QRCodeInfo.getPhoneNumber()
-        },
-        food: {
-          foodId: foodParams.foodId,
-          foodCount: foodParams.foodCount
-        }
-      }
-    } else {
-      console.error(`Unknown biz type: ${QRCodeInfo.getBizType()}`)
     }
+
+    const map = {
+      [DEAL]: ['tenantId', 'tableName'],
+      [ESHOP]: ['tenantId', 'consigneeId', 'tableName', 'phoneNumber'],
+      [GROUP_SHOPPING]: ['tenantId', 'consigneeId', 'tableName', 'phoneNumber']
+    }
+
+    this.addBizTypeParams(params.condition, map)
+    // 点餐业务 加上不同人的点餐标识
+    if (QRCodeInfo.isDealBizType()) {
+      Object.assign(params.condition, { tableUser: foodParams.tableUser })
+    }
+
+    return params
   }
 
   _getQuery() {
-    const keys =
-      QRCodeInfo.isDealBizType()
-        ? ['tenantId', 'tableName']
-        : ['tenantId', 'consigneeId', 'tableName', 'phoneNumber']
-
-    const query = `?` + keys.map(key => `${key}=${QRCodeInfo['get' + capital(key)]()}`).join('&')
-
-    return query
+    const map = {
+      [DEAL]: ['tenantId', 'tableName'],
+      [ESHOP]: ['tenantId', 'consigneeId', 'tableName', 'phoneNumber'],
+      [GROUP_SHOPPING]: ['tenantId', 'consigneeId', 'tableName', 'phoneNumber']
+    }
+    return this.getBizTypeQuery(map)
   }
 }
 

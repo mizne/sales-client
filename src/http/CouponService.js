@@ -1,86 +1,83 @@
-import { getBizTypeHttp, exceptionHandler } from './interceptors'
 import Logger from './Logger'
+import QRCodeInfo from '@/models/QRCodeInfo'
+import { DEAL, ESHOP, GROUP_SHOPPING } from '@/util/constants'
+import { BaseService } from './BaseService'
 
-import router from '@/router/index'
-import { vConfirm, vToast } from '@/util/vux-wrapper'
-import QRCodeInfo, { capital } from '@/models/QRCodeInfo'
-
-import Coupon from '@/models/Coupon'
-import { DEAL, ESHOP } from '@/util/constants'
-
-class CouponService {
+class CouponService extends BaseService {
   // 检查当前号码 是否再可领取
   checkPhone(phoneNumber) {
-    return getBizTypeHttp()
-      .get(`/coupon?phoneNumber=${phoneNumber}&tenantId=${QRCodeInfo.getTenantId()}`)
-      .catch(exceptionHandler('CouponService', 'checkPhone'))
+    return this.getBizTypeHttp()
+      .get(
+        `/coupon?phoneNumber=${phoneNumber}&tenantId=${QRCodeInfo.getTenantId()}`
+      )
+      .catch(this.exceptionHandler('CouponService', 'checkPhone'))
   }
 
   getAvaliableCoupons() {
     if (QRCodeInfo.hasPhoneNumber()) {
-      const keys =
-        QRCodeInfo.isDealBizType()
-          ? ['tenantId', 'phoneNumber']
-          : ['tenantId', 'consigneeId', 'phoneNumber']
+      const map = {
+        [DEAL]: ['tenantId', 'phoneNumber'],
+        [ESHOP]: ['tenantId', 'consigneeId', 'phoneNumber'],
+        [GROUP_SHOPPING]: ['tenantId', 'consigneeId', 'phoneNumber']
+      }
+      const query = this.getBizTypeQuery(map)
 
-      const query =
-        `?` + keys.map(key => `${key}=${QRCodeInfo['get' + capital(key)]()}`).join('&')
-
-      return getBizTypeHttp()
+      return this.getBizTypeHttp()
         .get(`/availableCoupon${query}`)
-        .catch(exceptionHandler('CouponService', 'getAvaliableCoupons'))
-        
+        .catch(this.exceptionHandler('CouponService', 'getAvaliableCoupons'))
     } else {
       return Promise.resolve([])
     }
   }
 
-  // 领取优惠券
+  // 领取优惠券(只有代售或群购业务才有)
   bindCoupon() {
-    const tenantId = QRCodeInfo.getTenantId()
-    const consigneeId = QRCodeInfo.getConsigneeId()
-    const couponRate = QRCodeInfo.getCouponRate()
-    const phoneNumber = QRCodeInfo.getPhoneNumber()
-    const coupons = QRCodeInfo.getCoupons()
-
-    const params = {
-      tenantId,
-      consigneeId,
-      couponRate,
-      phoneNumber,
-      coupons
+    const map = {
+      [ESHOP]: [
+        'tenantId',
+        'phoneNumber',
+        'consigneeId',
+        'couponRate',
+        'coupons'
+      ],
+      [GROUP_SHOPPING]: [
+        'tenantId',
+        'phoneNumber',
+        'consigneeId',
+        'couponRate',
+        'coupons'
+      ]
     }
+    const params = {}
+    this.addBizTypeParams(params, map)
 
-    return getBizTypeHttp()
+    return this.getBizTypeHttp()
       .post('/coupon', params)
       .then(_ => {
         Logger.info({
           module: 'CouponService',
           method: 'bindCoupon',
-          description: `领取优惠券, consigneeId: ${consigneeId}, couponRate: ${couponRate}, coupons: ${JSON.stringify(coupons)}`
+          description: `领取优惠券, consigneeId: ${QRCodeInfo.getConsigneeId()}, couponRate: ${QRCodeInfo.getCouponRate()}, coupons: ${JSON.stringify(
+            QRCodeInfo.getCoupons()
+          )}`
         })
       })
-      .catch(exceptionHandler('CouponService', 'bindCoupon'))
+      .catch(this.exceptionHandler('CouponService', 'bindCoupon'))
   }
 
   // 使用优惠券
   consumCoupon(couponKey, tradeNo) {
-    const params = {
-      tenantId: QRCodeInfo.getTenantId(),
-      phoneNumber: QRCodeInfo.getPhoneNumber(),
-      couponKey,
-      tradeNo
+    const map = {
+      [DEAL]: ['tenantId', 'phoneNumber'],
+      [ESHOP]: ['tenantId', 'phoneNumber', 'consigneeId'],
+      [GROUP_SHOPPING]: ['tenantId', 'phoneNumber', 'consigneeId']
     }
+    const params = { couponKey, tradeNo }
+    this.addBizTypeParams(params, map)
 
-    if (QRCodeInfo.isEShopBizType() || QRCodeInfo.isGroupShoppingBizType()) {
-      Object.assign(params, {
-        consigneeId: QRCodeInfo.getConsigneeId()
-      })
-    }
-
-    return getBizTypeHttp()
-    .post('/couponBindTradeNo', params)
-    .catch(exceptionHandler('CouponService', 'consumCoupon'))
+    return this.getBizTypeHttp()
+      .post('/couponBindTradeNo', params)
+      .catch(this.exceptionHandler('CouponService', 'consumCoupon'))
   }
 }
 

@@ -1,49 +1,42 @@
-import { getBizTypeHttp, exceptionHandler } from './interceptors'
-import QRCodeInfo, { capital } from '@/models/QRCodeInfo'
+import { DEAL, ESHOP, GROUP_SHOPPING } from '@/util/constants'
+import { BaseService } from './BaseService'
 
-class SMSService {
+class SMSService extends BaseService {
   getCode(phoneNumber) {
     let query = this._getQuery()
 
     query += `&phoneNumber=${phoneNumber}`
 
-    return getBizTypeHttp()
+    return this.getBizTypeHttp()
       .get(`/smscode${query}`)
-      .catch(exceptionHandler('SMSService', 'getCode'))
+      .catch(this.exceptionHandler('SMSService', 'getCode'))
   }
 
   verifyCode(params) {
     this._addPramas(params)
 
-    return getBizTypeHttp()
+    return this.getBizTypeHttp()
       .post(`/smscode`, params)
-      .catch(exceptionHandler('SMSService', 'verifyCode'))
+      .catch(this.exceptionHandler('SMSService', 'verifyCode'))
   }
 
   _getQuery() {
-    const keys =
-      QRCodeInfo.isDealBizType()
-        ? ['tenantId']
-        : ['tenantId', 'consigneeId']
-
-    const query = `?` + keys.map(key => `${key}=${QRCodeInfo['get' + capital(key)]()}`).join('&')
-
-    return query
+    const map = {
+      [DEAL]: ['tenantId'],
+      [ESHOP]: ['tenantId', 'consigneeId'],
+      [GROUP_SHOPPING]: ['tenantId', 'consigneeId']
+    }
+    return this.getBizTypeQuery(map)
   }
 
   _addPramas(params) {
-    if (QRCodeInfo.isDealBizType()) {
-      Object.assign(params, {
-        tenantId: QRCodeInfo.getTenantId()
-      })
-    } else if (QRCodeInfo.isEShopBizType() || QRCodeInfo.isGroupShoppingBizType()) {
-      Object.assign(params, {
-        tenantId: QRCodeInfo.getTenantId(),
-        consigneeId: QRCodeInfo.getConsigneeId()
-      })
-    } else {
-      console.error(`Unknown biz type: ${QRCodeInfo.getBizType()}`)
+    const map = {
+      [DEAL]: ['tenantId'],
+      [ESHOP]: ['tenantId', 'consigneeId'],
+      [GROUP_SHOPPING]: ['tenantId', 'consigneeId']
     }
+
+    this.addBizTypeParams(params, map)
   }
 }
 

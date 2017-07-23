@@ -28,7 +28,6 @@ import BillDetail from '@/components/BillDetail'
 
 import { objFrom } from '@/util/index'
 import { vAlert } from '@/util/vux-wrapper'
-import Coupon from '@/models/Coupon'
 
 export default {
   name: 'Wechatpay',
@@ -123,7 +122,7 @@ export default {
         document.attachEvent('onWeixinJSBridgeReady', onBridgeReady.bind(this))
       }
     } else {
-      onBridgeReady()
+      onBridgeReady.bind(this)()
     }
 
     // {
@@ -148,126 +147,6 @@ export default {
     padding: 10px;
     height: 100vh;
     background-color: $greyBackground;
-
-    .bill-content {
-      @include flexboxCenter;
-      flex-direction: column;
-      margin-top: 10px;
-      background-color: $greyBackground;
-      color: #888;
-      .bill-header {
-        @include flexboxCenter;
-        width: 90%;
-        height: 30px;
-        background-color: white;
-        border-radius: 35px;
-
-        .bill-inner-header {
-          @include flexboxCenter;
-          width: 90%;
-          height: 15px;
-          background-color: #96a596;
-          border-radius: 35px;
-
-          .block {
-            width: 95%;
-            height: 3px;
-            background-color: #000;
-          }
-        }
-      }
-
-      .bill-detail {
-        background-color: white;
-        width: 80%;
-
-        .tenant-name {
-          @include flexboxCenter;
-          height: 60px;
-          font-size: 1.3rem;
-        }
-
-        .bill-abstract {
-          padding: 0 10px;
-          font-size: 1.1rem;
-          padding-bottom: 20px;
-          border-bottom: 1px solid $greyText;
-          .table-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 30px;
-          }
-
-          .ordering-time,
-          .pay-time {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            height: 30px;
-          }
-        }
-
-        .money-info {
-          padding: 0 10px;
-          border-bottom: 1px solid $greyText;
-          .bill-money,
-          .bill-mode {
-            height: 40px;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-          }
-
-          .bill-money {
-            .text {
-              color: $primaryColor$primaryColor;
-            }
-          }
-        }
-
-
-
-        .order-detail {
-          padding: 0 10px;
-          .order-title,
-          .order-item,
-          .order-total {
-            height: 50px;
-            display: flex;
-            border-bottom: 1px solid $greyText;
-            align-items: center;
-          }
-
-          .coupon-info,
-          .delivery-info {
-            display: flex;
-            justify-content: space-between;
-            height: 50px;
-            align-items: center;
-            border-bottom: 1px solid #999;
-          }
-
-          .order-title {
-            justify-content: flex-start;
-          }
-
-          .order-item {
-            justify-content: space-between;
-          }
-
-          .order-total {
-            justify-content: space-between;
-          }
-        }
-
-        .welcome {
-          @include flexboxCenter;
-          height: 80px;
-          font-size: 2rem;
-        }
-      }
-    }
   }
 
   .deal-footer-container {

@@ -98,22 +98,24 @@ const actions = {
         return Promise.reject(err)
       })
   },
-  FETCH_ORDER: ({ commit, dispatch, rootState }, tradeNo) => {
+  FETCH_ORDER: ({ commit, dispatch, rootState, state }, tradeNo) => {
     commit('SHOW_LOADING', true)
 
     return OrderService.getOrder(tradeNo)
       .then(order => {
         commit('SHOW_LOADING', false)
         commit('SET_ORDER_DETAIL', order)
-        // if (order.foods.length === 0) {
-        //   router.push({ name: 'Menu' })
-        // }
         commit('SET_IS_VIP', order.isVip)
-
+        return order
+      })
+      .then(_ => {
+        return dispatch('FETCH_AVALIABLE_COUPONS')
+      })
+      .then(allCoupons => {
         // 根据订单价格 过滤出可用优惠券
         const predicate = e => {
           if (e.couponType === Coupon.REDUCE) {
-            let orderPrice = order.totalPrice
+            let orderPrice = state.orderDetail.totalPrice
             // 如果有配送费 则加上
             if (rootState.user.deliveryFeeValue) {
               orderPrice += +rootState.user.deliveryFeeValue
@@ -125,21 +127,23 @@ const actions = {
           }
         }
 
-        const avaliableCoupons = rootState.coupon.allCoupons.filter(predicate)
-        const disableCoupons = rootState.coupon.allCoupons.filter(
+        const avaliableCoupons = allCoupons.filter(predicate)
+        const disableCoupons = allCoupons.filter(
           not(predicate)
         )
 
         // 如果选中的优惠券 不在可用优惠券内 则置空选中优惠券
         if (rootState.coupon.selectedCoupon) {
-          if (disableCoupons.find(e => e.couponKey === rootState.coupon.selectedCoupon.couponKey)) {
+          if (
+            disableCoupons.find(
+              e => e.couponKey === rootState.coupon.selectedCoupon.couponKey
+            )
+          ) {
             dispatch('SELECT_COUPON', null)
           }
         }
         commit('SET_AVALIABLE_COUPONS', avaliableCoupons)
         commit('SET_DISABLE_COUPONS', disableCoupons)
-
-        return order
       })
       .catch(err => {
         commit('SHOW_LOADING', false)

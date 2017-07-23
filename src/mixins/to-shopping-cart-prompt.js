@@ -29,7 +29,7 @@ export default {
             })
           })
         } else if (QRCodeInfo.isEShopBizType() || QRCodeInfo.isGroupShoppingBizType()) {
-          // 代售 需先提供手机号码
+          // 代售 群购业务 需先提供手机号码
           if (QRCodeInfo.hasPhoneNumber()) {
             this.$store.dispatch('ADD_SHOPPING_CART').catch(err => {
               vToast({ content: '添加购物车失败, 请稍后重试 ^_^' })

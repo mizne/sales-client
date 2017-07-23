@@ -2,7 +2,6 @@ import axios from 'axios'
 import host from './host.js'
 import Logger from './Logger'
 import QRCodeInfo from '@/models/QRCodeInfo'
-import { DEAL, ESHOP, GROUP_SHOPPING } from '@/util/constants'
 
 const qrcodeHttp = axios.create({
   baseURL: host.qrcode,
@@ -39,9 +38,7 @@ const eshopHttp = axios.create({
           return Promise.reject(new Error(resp.data.result))
         }
       } else {
-        return Promise.reject(
-          new Error('服务器异常了')
-        )
+        return Promise.reject(new Error('服务器异常了'))
       }
     },
     function(error) {
@@ -89,30 +86,4 @@ loggerHttp.interceptors.response.use(
   }
 )
 
-const exceptionHandler = (module, method) => err => {
-  Logger.error({
-    module,
-    method,
-    description: `${method} failed; err: ${err.message}`
-  })
-  return Promise.reject(err)
-}
-
-const getBizTypeHttp = function() {
-  const bizType = QRCodeInfo.getBizType()
-  switch (bizType) {
-    case DEAL:
-      return dealHttp
-    case ESHOP:
-    case GROUP_SHOPPING:
-      return eshopHttp
-    default:
-      Logger.error({
-        module: 'interceptors',
-        method: 'getBizTypeHttp',
-        description: `Unknown biz type: ${bizType}}`
-      })
-  }
-}
-
-export { getBizTypeHttp, qrcodeHttp, loggerHttp, exceptionHandler }
+export { dealHttp, eshopHttp, qrcodeHttp, loggerHttp }

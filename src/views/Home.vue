@@ -24,6 +24,7 @@ import { mapGetters } from 'vuex'
 import { objFrom } from '@/util/index'
 import { vAlert, vToast } from '@/util/vux-wrapper'
 import QRCodeInfo from '@/models/QRCodeInfo'
+import { EMPTY_STATUS, SHOPPING_CART_STATUS, ORDER_SUCCESS_STATUS } from '@/util/constants'
 
 export default {
   name: 'Home',
@@ -35,7 +36,7 @@ export default {
     return { bizTypeText: '' }
   },
   computed: {
-    ...mapGetters(['hasClosed', 'homeImage', 'tenantName']),
+    ...mapGetters(['hasClosed', 'homeImage', 'tenantName', 'needDeliveryFee']),
     homeStyle() {
       return {
         'background': `url(${this.homeImage}) no-repeat`,
@@ -43,7 +44,6 @@ export default {
     },
   },
   beforeRouteEnter(to, from, next) {
-
     next(vm => {
       // 从 首页进来 初始化状态及配置信息
       // 从 其他页面后退进来 不作初始化请求 让其直接进入home页
@@ -67,26 +67,28 @@ export default {
                   })
                 }
                 document.title = vm.tenantName
-              })
-              .then(_ => {
-                vm.$store.dispatch('FETCH_DELIVERY_FEE')
+
+                // 代售业务且商户有经纬度才获取 配送费
+                if (vm.needDeliveryFee) {
+                  vm.$store.dispatch('FETCH_DELIVERY_FEE')
+                }
               })
 
             // 获取当前用户状态
             vm.$store.dispatch('FETCH_USER_STATUS')
               .then(([status, coupons]) => {
-                // 通过桌状态 路由页面
+                // 通过桌状态 路由页面W
                 // 空桌 可领取优惠券
-                if (status.tableStatus === 0) {// 空桌
+                if (status.tableStatus === EMPTY_STATUS) {// 空桌
                   vm.$router.push({ name: 'Home' })
 
                   // 可以领取优惠券
                   if (QRCodeInfo.hasCoupons()) {
                     vm.$store.dispatch('RECEIVE_COUPON')
                   }
-                } else if (status.tableStatus === 1) {// 已下购物车
+                } else if (status.tableStatus === SHOPPING_CART_STATUS) {// 已下购物车
                   vm.$router.push({ name: 'ShoppingCart' })
-                } else if (status.tableStatus === 2) {// 已下单
+                } else if (status.tableStatus === ORDER_SUCCESS_STATUS) {// 已下单
                   vm.$router.push({ name: 'OrderSuccess' })
                 } else {
                   console.error(`Unknown table status; status: `, status.tableStatus)
@@ -101,6 +103,8 @@ export default {
                 }
               })
           })
+      } else {
+        vm.bizTypeText = QRCodeInfo.getBizTypeText()
       }
     })
   }

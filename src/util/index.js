@@ -26,7 +26,11 @@ const objFrom = function(search) {
   return arr.reduce((accu, curr) => {
     const [key, val] = curr.split('=')
     if (accu[key]) {
-      accu[key] = [accu[key], val]
+      if (typeof accu[key] === 'string') {
+        accu[key] = [accu[key], val]
+      } else if (Array.isArray(accu[key])) {
+        accu[key] = [...accu[key], val]
+      }
     } else {
       accu[key] = val
     }
