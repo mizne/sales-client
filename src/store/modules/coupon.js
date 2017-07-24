@@ -99,7 +99,7 @@ const actions = {
   COUSUM_COUPON: ({ commit, state, rootState }) => {
     // 将选中的优惠券 和 订单号绑定
     return CouponService.consumCoupon(
-      state.selectedCoupon.couponKey,
+      state.selectedCoupon? state.selectedCoupon.couponKey : '',
       rootState.order.orderDetail.tradeNo
     )
   }

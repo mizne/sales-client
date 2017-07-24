@@ -106,6 +106,7 @@ const actions = {
         commit('SHOW_LOADING', false)
         commit('SET_ORDER_DETAIL', order)
         commit('SET_IS_VIP', order.isVip)
+        
         return order
       })
       .then(_ => {
@@ -132,16 +133,14 @@ const actions = {
           not(predicate)
         )
 
-        // 如果选中的优惠券 不在可用优惠券内 则置空选中优惠券
-        if (rootState.coupon.selectedCoupon) {
-          if (
-            disableCoupons.find(
-              e => e.couponKey === rootState.coupon.selectedCoupon.couponKey
-            )
-          ) {
-            dispatch('SELECT_COUPON', null)
-          }
+        // 初始化选中优惠券
+        if (state.orderDetail.couponKey) {
+          const selectedCoupon = avaliableCoupons.find(e => e.couponKey === state.orderDetail.couponKey)
+          dispatch('SELECT_COUPON', selectedCoupon)
+        } else {
+          dispatch('SELECT_COUPON', null)
         }
+
         commit('SET_AVALIABLE_COUPONS', avaliableCoupons)
         commit('SET_DISABLE_COUPONS', disableCoupons)
       })

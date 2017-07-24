@@ -11,14 +11,14 @@ export default {
     payImmediately() {
       // 判断是否有用优惠券
       // 用了优惠券 则请求绑定优惠券和订单 再支付
-      // 没用优惠券 直接支付
-      (this.selectedCoupon
-        ? this.$store
-            .dispatch('COUSUM_COUPON')
-            .catch(err => vToast({ content: '使用优惠券失败' }))
-        : Promise.resolve('没选择优惠券')).then(_ => {
-        this._toPay()
-      })
+      // 没用优惠券 则置空
+
+      this.$store
+        .dispatch('COUSUM_COUPON')
+        .catch(_ => vToast({ content: '使用优惠券失败' }))
+        .then(_ => {
+          this._toPay()
+        })
     },
 
     _toPay() {

@@ -9,7 +9,7 @@
       <div class="tip">
         <div class="line">
           <i class="icon-point"></i>
-          <span>若退出, 再扫二维码, 即可加菜或买单</span>
+          <span>若退出, 再扫二维码, 即可加单或买单</span>
         </div>
         <div class="line" v-if="!isDealBizType">
           <div class="btn-group">
