@@ -252,7 +252,6 @@ export default {
   },
   created() {
     this._init()
-    vAlert({ content: 'create....' })
   },
   beforeRouteEnter(to, from, next) {
     next((vm) => {
