@@ -1,7 +1,7 @@
 <template>
   <div class="shopcart-bar-container">
     <div class="left-area">
-      <span>共计</span>
+      <span>共</span>
       <i class="icon-money"></i>
       <span>{{orderCost}}</span>
     </div>
@@ -19,7 +19,7 @@ export default {
   },
   props: {
     orderCost: {
-      type: Number
+      type: String
     }
   },
   methods: {
@@ -39,6 +39,7 @@ export default {
   .left-area {
     @include flexboxCenter;
     flex: 1;
+    font-size: .9rem;
 
     .food-count {
       @include flexboxCenter;

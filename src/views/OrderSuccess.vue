@@ -142,6 +142,8 @@ export default {
     totalPrice() {
       if (this.orderDetail) {
         let resultPrice = 0
+        let freePrice = 0
+
         if (this.isVip) {
           resultPrice = this.orderDetail.totalVipPrice
         } else {
@@ -156,7 +158,16 @@ export default {
           resultPrice += (+this.deliveryFeeValue)
         }
 
-        return resultPrice
+        if (this.isVip) {
+          freePrice = this.orderDetail.totalVipPrice - resultPrice
+        } else {
+          freePrice = this.orderDetail.totalPrice - resultPrice
+        }
+
+        if (freePrice > 0) {
+          return resultPrice + `(已优惠 ${freePrice} 元)`
+        }
+        return String(resultPrice)
       }
     },
     couponText() {

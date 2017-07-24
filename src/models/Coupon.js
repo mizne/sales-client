@@ -1,4 +1,10 @@
 export default class Coupon {
+  /**
+   * Creates an instance of Coupon.
+   * @param {any} type 优惠券类型
+   * @param {any} value 优惠券数值
+   * @memberof Coupon
+   */
   constructor(type, value) {
     this.type = type
     this.value = value
@@ -8,6 +14,12 @@ export default class Coupon {
   static DISCOUNT = 'discount'
   static REDUCE = 'reduce'
 
+  /**
+   * 获取不同类型的优惠券 描述文本
+   * 
+   * @returns 描述文本
+   * @memberof Coupon
+   */
   getText() {
     const valueText = this.getValueText()
     const typeText = this.getTypeText()
@@ -15,6 +27,12 @@ export default class Coupon {
     return `${valueText} ${typeText}`
   }
 
+  /**
+   * 获取不同类型的优惠券 类型描述文本
+   * 
+   * @returns 类型描述文本
+   * @memberof Coupon
+   */
   getTypeText() {
     switch(this.type) {
       case Coupon.AMOUNT: return `优惠券`
@@ -27,6 +45,12 @@ export default class Coupon {
     }
   }
 
+  /**
+   * 获取不同类型的优惠券 数值描述文本
+   * 
+   * @returns 数值描述文本
+   * @memberof Coupon
+   */
   getValueText() {
     switch(this.type) {
       case Coupon.AMOUNT: return `${this.value} 元`
@@ -39,6 +63,14 @@ export default class Coupon {
     }
   }
 
+  
+  /**
+   * 
+   * 
+   * @param {any} srcPrice 原始价格
+   * @returns 计算优惠券后的 价格
+   * @memberof Coupon
+   */
   computePrice(srcPrice) {
     switch(this.type) {
       case Coupon.AMOUNT: return srcPrice - this.value
