@@ -132,7 +132,6 @@ const actions = {
         const disableCoupons = allCoupons.filter(
           not(predicate)
         )
-
         // 初始化选中优惠券
         if (state.orderDetail.couponKey) {
           const selectedCoupon = avaliableCoupons.find(e => e.couponKey === state.orderDetail.couponKey)

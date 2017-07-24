@@ -261,12 +261,12 @@ export default {
       // 验证电话号码页面 点餐业务没电话号码 验证完 则下单
       // 主页 有订单情况下 则直接进入
       // 订单失败页面 下订单失败则继续下单
-      // if (from.name === 'ShoppingCart' || from.name === 'Wechatpay' || from.name === 'Alipay' || from.name === 'PhoneVerify' || from.name === 'Home' || from.name === 'OrderFailed') {
+      if (from.name !== 'CouponView') {
         vm.$store.dispatch('FETCH_ORDER')
           .catch(err => {
             vAlert({ content: '获取订单失败' })
           })
-      // }
+      }
 
       if (from.name === 'Alipay') {
         vm.$store.commit('SET_SHOW_IFRAME', false)
