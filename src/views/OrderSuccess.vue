@@ -252,10 +252,11 @@ export default {
   },
   created() {
     this._init()
+    vAlert({ content: 'create....' })
   },
   beforeRouteEnter(to, from, next) {
     next((vm) => {
-      vAlert({ content: '获取订单中....' })
+      
       // 分别从
       // 购物车页面 代售业务从购物车进来 下单
       // 验证电话号码页面 点餐业务没电话号码 验证完 则下单
