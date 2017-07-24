@@ -6,14 +6,19 @@
       <cell title="全国统一客服热线" value="025-86662644"></cell>
     </group>
     <footer class="footer">
-      <router-link to="/menu">
-        <i class="icon-edit"></i>
-        <div class="text">去{{bizTypeText}}</div>
-      </router-link>
-      <router-link to="/shop-comment-view">
-        <i class="icon-comment"></i>
-        <div class="text">商家评价</div>
-      </router-link>
+      <div class="item">
+        <router-link to="/menu">
+          <div class="text">去{{bizTypeText}}</div>
+        </router-link>
+      </div>
+      <div class="item">
+        <router-link to="/shop-comment-view">
+          <div class="text">商家评价</div>
+        </router-link>
+        <router-link to="/vip-card">
+          <div class="text">我的</div>
+        </router-link>
+      </div>
     </footer>
   </div>
 </template>
@@ -141,20 +146,32 @@ export default {
     text-align: center;
     padding: 5px 0;
     background-color: $greyBackground;
-
+    height: 50px;
     display: flex;
 
-    a {
-      display: inline-block;
+    .item {
+      @include flexboxCenter;
       flex: 1;
-      text-decoration: none;
-      color: black;
 
       &:first-child {
+        a {
+          color: white;
+        }
+        background-color: $warnColor;
         border-right: 1px solid black;
       }
       &:last-child {
         border-left: 1px solid black;
+      }
+      a {
+        @include flexboxCenter;
+        display: inline-block;
+        flex: 1;
+        text-decoration: none;
+        color: black;
+        .text {
+          flex: 1;
+        }
       }
     }
   }

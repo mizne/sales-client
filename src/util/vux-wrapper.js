@@ -4,11 +4,13 @@ import { AlertPlugin, ConfirmPlugin } from 'vux'
 Vue.use(AlertPlugin)
 Vue.use(ConfirmPlugin)
 
-const vConfirm = function({ title = '提示', content = '小v宝 友情提醒' }) {
+const vConfirm = function({ title = '提示', content = '小v宝 友情提醒', confirmText, cancelText }) {
   return new Promise((resolve, reject) => {
     Vue.$vux.confirm.show({
       title,
       content,
+      confirmText,
+      cancelText,
       onConfirm() {
         resolve('ok')
       },

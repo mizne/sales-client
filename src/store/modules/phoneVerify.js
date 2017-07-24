@@ -7,6 +7,7 @@ import QRCodeInfo from '@/models/QRCodeInfo'
 export const ADD_SHOPPING_CART = 'ADD_SHOPPING_CART'
 export const RECEIVE_COUPON = 'RECEIVE_COUPON'
 export const ADD_ORDER = 'ADD_ORDER'
+export const VERIFY_USER = 'VERIFY_USER'
 
 const state = {
   purposeOfPhoneVerify: ''

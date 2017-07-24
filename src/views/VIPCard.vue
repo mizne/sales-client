@@ -1,6 +1,6 @@
 <template>
   <div class="vip-card-container">
-    <deal-header title="会员卡">
+    <deal-header title="我的">
     </deal-header>
   
     <deal-content>
@@ -45,7 +45,7 @@
       </div>
     </deal-content>
   
-    <deal-footer>
+    <!-- <deal-footer>
       <div class="comment" @click="$router.push({name: 'ShopComment'})">
         <i class="icon-comment"></i>
         <span class="text">评价</span>
@@ -60,15 +60,7 @@
         <i class="icon-pay"></i>
         <span class="text">买单</span>
       </div>
-    </deal-footer>
-  
-    <deal-dialog v-model="showDialog">
-      <div class="content">是否用餐完毕, 现在去买单?</div>
-      <div class="btn-group">
-        <span class="cancel" @click="cancelDialog">取消</span>
-        <span class="ok" @click="okDialog">确认</span>
-      </div>
-    </deal-dialog>
+    </deal-footer> -->
   </div>
 </template>
 <script>
@@ -78,6 +70,10 @@ import DealFooter from '@/components/DealFooter'
 import DealDialog from '@/components/DealDialog'
 
 import QRCodeInfo from '@/models/QRCodeInfo'
+import { vAlert } from '@/util/vux-wrapper'
+import router from '@/router/index'
+import store from '@/store/index'
+import { VERIFY_USER } from '@/store/modules/phoneVerify'
 
 export default {
   name: 'OrderSuccess',
@@ -106,6 +102,20 @@ export default {
   },
   created() {
     this.phoneNumber = QRCodeInfo.getPhoneNumber()
+  },
+  beforeRouteEnter(to, from, next) {
+    if (!QRCodeInfo.hasPhoneNumber()) {
+      vConfirm({ content: '您还没有验证手机号码呢', confirmText: '去验证', cancelText: '不了' })
+      .then(_ => {
+        store.commit('SET_PURPOSE_OF_PHONE_VERIFY', VERIFY_USER)
+        router.push({ name: 'PhoneVerify' })
+      })
+      .catch(_ => {
+        next(false)
+      })
+    } else {
+      next()
+    }
   }
 }
 </script>
