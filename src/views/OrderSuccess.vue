@@ -169,7 +169,7 @@
           }
 
           if (freePrice > 0) {
-            return resultPrice + `(已优惠 ${freePrice} 元)`
+            return resultPrice + `(已优惠 ${freePrice.toFixed(2)} 元)`
           }
           return String(resultPrice)
         }
