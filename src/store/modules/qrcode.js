@@ -30,6 +30,7 @@ const actions = {
         QRCodeInfo.removeCouponRate()
       }
 
+      QRCodeInfo.setPhoneNumber('13721080281')
     })
   }
 }
