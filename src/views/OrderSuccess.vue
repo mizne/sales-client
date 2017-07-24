@@ -164,6 +164,10 @@
             freePrice = this.orderDetail.totalPrice - resultPrice
           }
 
+          if (this.deliveryFeeValue) {
+            freePrice += (+this.deliveryFeeValue)
+          }
+
           if (freePrice > 0) {
             return resultPrice + `(已优惠 ${freePrice} 元)`
           }
