@@ -131,6 +131,7 @@ export default {
       .content {
         @include flexboxCenter;
         min-height: 50px;
+        flex-direction: column;
 
         .rating-item {
           margin-top: 5px;

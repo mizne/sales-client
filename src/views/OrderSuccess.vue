@@ -3,7 +3,7 @@
     <deal-header title="下单成功">
       <x-button slot="left" @click.native="addMoreFood" :mini="true" type="primary">继续添加</x-button>
     </deal-header>
-  
+
     <deal-content v-if="orderDetail">
       <scroll-notification :text="promptText"></scroll-notification>
       <div class="tip">
@@ -23,8 +23,8 @@
       <div class="order-info">
         <div class="table-number">
           <span style="margin-left: 20px;">台
-            <span style="width: 30px; display:inline-block"></span>
-            号：</span>
+            <span style="width: 30px; display:inline-block"></span> 号：
+          </span>
           <span>{{orderDetail.tableName}}</span>
         </div>
         <div class="order-time">
@@ -32,7 +32,7 @@
           <span>{{orderDetail.time | time}}</span>
         </div>
       </div>
-  
+
       <div class="order-detail">
         <group class="coupon-area">
           <cell title="优惠券" :value="couponText" @click.native="toCoupon" :is-link="true"></cell>
@@ -49,7 +49,7 @@
             <span>{{orderDetail.totalVipPrice}}</span>
           </span>
         </div>
-  
+
         <swipeout :disabled="isDealBizType">
           <div v-for="item in orderDetail.foods" :key="item.id">
             <swipeout-item transition-mode="follow">
@@ -81,344 +81,343 @@
             </swipeout-item>
           </div>
         </swipeout>
-  
+
         <delivery v-if="needDeliveryFee" :delivery-distance="deliveryDistance" :delivery-fee-value="deliveryFeeValue" :delivery-time="deliveryTime"></delivery>
       </div>
     </deal-content>
-  
+
     <deal-footer>
       <order-bar :order-cost="totalPrice" @to-pay="toPay"></order-bar>
     </deal-footer>
-  
+
     <div class="deal-mask" v-show="showIframe"></div>
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
-import { Swipeout, SwipeoutItem, SwipeoutButton, XButton, XNumber, Group, Cell } from 'vux'
-import DealHeader from '@/components/DealHeader'
-import DealContent from '@/components/DealContent'
-import DealFooter from '@/components/DealFooter'
-import ScrollNotification from '@/components/ScrollNotification'
-import OrderBar from '@/components/OrderBar'
-import Delivery from '@/components/Delivery'
+  import { mapGetters } from 'vuex'
+  import { Swipeout, SwipeoutItem, SwipeoutButton, XButton, XNumber, Group, Cell } from 'vux'
+  import DealHeader from '@/components/DealHeader'
+  import DealContent from '@/components/DealContent'
+  import DealFooter from '@/components/DealFooter'
+  import ScrollNotification from '@/components/ScrollNotification'
+  import OrderBar from '@/components/OrderBar'
+  import Delivery from '@/components/Delivery'
 
-import QRCodeInfo from '@/models/QRCodeInfo'
-import { vAlert, vConfirm, vToast } from '@/util/vux-wrapper'
-import Coupon from '@/models/Coupon'
-import toPayMixin from '@/mixins/to-pay'
+  import QRCodeInfo from '@/models/QRCodeInfo'
+  import { vAlert, vConfirm, vToast } from '@/util/vux-wrapper'
+  import Coupon from '@/models/Coupon'
+  import toPayMixin from '@/mixins/to-pay'
 
-export default {
-  name: 'OrderSuccess',
-  components: {
-    DealHeader,
-    DealContent,
-    DealFooter,
-    Swipeout,
-    SwipeoutItem,
-    SwipeoutButton,
-    XButton,
-    XNumber,
-    Group,
-    Cell,
-    ScrollNotification,
-    OrderBar,
-    Delivery
-  },
-  mixins: [toPayMixin],
-  computed: {
-    ...mapGetters([
-      'orderDetail',
-      'showIframe',
-      'isVip',
-      'avaliableCoupons',
-      'selectedCoupon',
-      'needDeliveryFee',
-      'deliveryFeeValue',
-      'deliveryDistance',
-      'deliveryTime',
-      'needOrderConfirmPage'
-    ]),
-    totalPrice() {
-      if (this.orderDetail) {
-        let resultPrice = 0
-        let freePrice = 0
+  export default {
+    name: 'OrderSuccess',
+    components: {
+      DealHeader,
+      DealContent,
+      DealFooter,
+      Swipeout,
+      SwipeoutItem,
+      SwipeoutButton,
+      XButton,
+      XNumber,
+      Group,
+      Cell,
+      ScrollNotification,
+      OrderBar,
+      Delivery
+    },
+    mixins: [toPayMixin],
+    computed: {
+      ...mapGetters([
+        'orderDetail',
+        'showIframe',
+        'isVip',
+        'avaliableCoupons',
+        'selectedCoupon',
+        'needDeliveryFee',
+        'deliveryFeeValue',
+        'deliveryDistance',
+        'deliveryTime',
+        'needOrderConfirmPage'
+      ]),
+      totalPrice() {
+        if (this.orderDetail) {
+          let resultPrice = 0
+          let freePrice = 0
 
-        if (this.isVip) {
-          resultPrice = this.orderDetail.totalVipPrice
-        } else {
-          resultPrice = this.orderDetail.totalPrice
+          if (this.isVip) {
+            resultPrice = this.orderDetail.totalVipPrice
+          } else {
+            resultPrice = this.orderDetail.totalPrice
+          }
+
+          if (this.selectedCoupon) {
+            resultPrice = new Coupon(this.selectedCoupon.couponType, this.selectedCoupon.value).computePrice(resultPrice)
+          }
+
+          if (this.deliveryFeeValue) {
+            resultPrice += (+this.deliveryFeeValue)
+          }
+
+          if (this.isVip) {
+            freePrice = this.orderDetail.totalVipPrice - resultPrice
+          } else {
+            freePrice = this.orderDetail.totalPrice - resultPrice
+          }
+
+          if (freePrice > 0) {
+            return resultPrice + `(已优惠 ${freePrice} 元)`
+          }
+          return String(resultPrice)
         }
-
+      },
+      couponText() {
         if (this.selectedCoupon) {
-          resultPrice = new Coupon(this.selectedCoupon.couponType, this.selectedCoupon.value).computePrice(resultPrice)
-        }
-
-        if (this.deliveryFeeValue) {
-          resultPrice += (+this.deliveryFeeValue)
-        }
-
-        if (this.isVip) {
-          freePrice = this.orderDetail.totalVipPrice - resultPrice
+          return new Coupon(this.selectedCoupon.couponType, this.selectedCoupon.value).getText()
         } else {
-          freePrice = this.orderDetail.totalPrice - resultPrice
+          return this.avaliableCoupons.length > 0 ? `${this.avaliableCoupons.length} 张可用` : '无可用'
+        }
+      }
+    },
+    data() {
+      return {
+        promptText: '',
+        isEditable: false,
+        isDealBizType: false
+      }
+    },
+    filters: {
+      // 格式化后台返回下单时间 只显示时间部分
+      time(v) {
+        return v && v.split(' ')[1]
+      }
+    },
+    methods: {
+      toCoupon() {
+        this.$router.push({ name: 'CouponView' })
+      },
+      addMoreFood() {
+        this.$store.dispatch('ADD_MORE_FOOD')
+      },
+      editOrder() {
+        this.isEditable = !this.isEditable
+      },
+      cancelOrder() {
+        vConfirm({ content: '确定取消订单?' })
+          .then(_ => {
+            return this.$store.dispatch('CANCEL_ORDER')
+          })
+          .then(_ => {
+            vToast({
+              type: 'success',
+              content: '取消成功'
+            })
+          })
+      },
+      deleteFood(food) {
+        this.$store.dispatch('EDIT_ORDER', {
+          foodId: food.id,
+          foodCount: 0
+        })
+      },
+      editFood(food) {
+        this.$store.dispatch('EDIT_ORDER', {
+          foodId: food.id,
+          foodCount: food.num
+        })
+      },
+
+      toPay() {
+        // 如果不需要 订单确认页面 则直接买单
+        // 否则 跳到订单确认页面
+        if (this.needOrderConfirmPage) {
+          this.$router.push({ name: 'OrderEnsure' })
+        } else {
+          this.payImmediately()
+        }
+      },
+      _init() {
+        this.isDealBizType = QRCodeInfo.isDealBizType()
+
+        this.promptText = this.isDealBizType
+          ? '欢迎光顾小店'
+          : 'e代售提醒您先买单, 订单10分钟后失效'
+
+      }
+    },
+    created() {
+      this._init()
+    },
+    beforeRouteEnter(to, from, next) {
+      next((vm) => {
+        // 分别从
+        // 购物车页面 代售业务从购物车进来 下单
+        // 验证电话号码页面 点餐业务没电话号码 验证完 则下单
+        // 主页 有订单情况下 则直接进入
+        // 订单失败页面 下订单失败则继续下单
+        if (from.name === 'ShoppingCart' || from.name === 'PhoneVerify' || from.name === 'Home' || from.name === 'OrderFailed') {
+          vm.$store.dispatch('FETCH_ORDER')
+            .catch(err => {
+              vAlert({ content: '获取订单失败' })
+            })
         }
 
-        if (freePrice > 0) {
-          return resultPrice + `(已优惠 ${freePrice} 元)`
+        if (from.name === 'Alipay') {
+          vm.$store.commit('SET_SHOW_IFRAME', false)
         }
-        return String(resultPrice)
-      }
-    },
-    couponText() {
-      if (this.selectedCoupon) {
-        return new Coupon(this.selectedCoupon.couponType, this.selectedCoupon.value).getText()
-      } else {
-        return this.avaliableCoupons.length > 0 ? `${this.avaliableCoupons.length} 张可用` : '无可用'
-      }
-    }
-  },
-  data() {
-    return {
-      promptText: '',
-      isEditable: false,
-      isDealBizType: false
-    }
-  },
-  filters: {
-    // 格式化后台返回下单时间 只显示时间部分
-    time(v) {
-      return v && v.split(' ')[1]
-    }
-  },
-  methods: {
-    toCoupon() {
-      this.$router.push({ name: 'CouponView' })
-    },
-    addMoreFood() {
-      this.$store.dispatch('ADD_MORE_FOOD')
-    },
-    editOrder() {
-      this.isEditable = !this.isEditable
-    },
-    cancelOrder() {
-      vConfirm({ content: '确定取消订单?' })
-        .then(_ => {
-          return this.$store.dispatch('CANCEL_ORDER')
-        })
-        .then(_ => {
-          vToast({
-            type: 'success',
-            content: '取消成功'
-          })
-        })
-    },
-    deleteFood(food) {
-      this.$store.dispatch('EDIT_ORDER', {
-        foodId: food.id,
-        foodCount: 0
       })
-    },
-    editFood(food) {
-      this.$store.dispatch('EDIT_ORDER', {
-        foodId: food.id,
-        foodCount: food.num
-      })
-    },
-
-    toPay() {
-      // 如果不需要 订单确认页面 则直接买单
-      // 否则 跳到订单确认页面
-      if (this.needOrderConfirmPage) {
-        this.$router.push({ name: 'OrderEnsure' })
-      } else {
-        this.payImmediately()
-      }
-    },
-    _init() {
-      this.isDealBizType = QRCodeInfo.isDealBizType()
-
-      this.promptText = this.isDealBizType
-        ? '欢迎光顾小店'
-        : 'e代售提醒您先买单, 订单10分钟后失效'
-
     }
-  },
-  created() {
-    this._init()
-  },
-  beforeRouteEnter(to, from, next) {
-    next((vm) => {
-      // 分别从
-      // 购物车页面 代售业务从购物车进来 下单
-      // 验证电话号码页面 点餐业务没电话号码 验证完 则下单
-      // 主页 有订单情况下 则直接进入
-      // 订单失败页面 下订单失败则继续下单
-      if (from.name === 'ShoppingCart' || from.name === 'PhoneVerify' || from.name === 'Home' || from.name === 'OrderFailed') {
-        vm.$store.dispatch('FETCH_ORDER')
-          .catch(err => {
-            vAlert({ content: '获取订单失败' })
-          })
-      }
-
-      if (from.name === 'Alipay') {
-        vm.$store.commit('SET_SHOW_IFRAME', false)
-      }
-    })
   }
-}
+
 </script>
 <style lang="scss" scoped>
-@import '../assets/css/main.scss';
+  @import '../assets/css/main.scss';
 
-.order-success-container {
-  .deal-header-container {}
+  .order-success-container {
+    .deal-header-container {}
 
-  .deal-content-container {
+    .deal-content-container {
 
-    background-color: $greyBackground;
-    overflow-x: hidden;
-    overflow-y: auto;
+      background-color: $greyBackground;
+      overflow-x: hidden;
+      overflow-y: auto;
 
-    .tip {
-      margin-top: 35px;
-      .line {
-        margin-top: 10px;
-        padding: 0 10px;
-        font-size: 1.1rem;
-        line-height: 1.5rem;
-        color: $greyText;
-        letter-spacing: 1px;
-        display: flex;
-
-        .btn-group {
-          flex: 1;
-        }
-        .placeholder {
-          flex: 3;
-        }
-
-        .btn-group {
+      .tip {
+        margin-top: 35px;
+        .line {
+          margin-top: 10px;
+          padding: 0 10px;
+          font-size: 1.1rem;
+          line-height: 1.5rem;
+          color: $greyText;
+          letter-spacing: 1px;
           display: flex;
-          .edit-btn,
-          .cancel-btn {
+
+          .btn-group {
             flex: 1;
+          }
+          .placeholder {
+            flex: 3;
+          }
+
+          .btn-group {
+            display: flex;
+            .edit-btn,
+            .cancel-btn {
+              flex: 1;
+            }
           }
         }
       }
-    }
 
-    .order-info {
-      @include flexboxCenter;
-      height: 40px;
-      margin: 10px 10px 0 10px;
-      color: $greyText;
-      background-color: #fff;
-      border-radius: 5px;
-
-      .table-number,
-      .order-time {
-        flex: 1;
-      }
-
-      .table-number {
-        display: flex;
-        justify-content: flex-start;
-      }
-    }
-
-    .order-detail {
-      margin: 10px 10px 0 10px;
-      color: #888;
-
-      .coupon-area {
-        color: $warnColor;
-      }
-
-      .abstract {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        height: 50px;
-        background-color: #fff;
-
-        .total-cost {
-          color: $primaryColor;
-        }
-      }
-
-      .order-item {
-        margin-top: 2px;
-        height: 100px;
-        background-color: #fff;
-        height: 60px;
-        display: flex;
-        padding: 10px;
+      .order-info {
+        @include flexboxCenter;
+        height: 40px;
+        margin: 10px 10px 0 10px;
+        color: $greyText;
         background-color: #fff;
         border-radius: 5px;
 
-        .item-detail {
-          flex: 4;
-          padding: 0 10px;
+        .table-number,
+        .order-time {
+          flex: 1;
+        }
 
-          .food-name {
-            text-align: left;
+        .table-number {
+          display: flex;
+          justify-content: flex-start;
+        }
+      }
+
+      .order-detail {
+        margin: 10px 10px 0 10px;
+        color: #888;
+
+        .coupon-area {
+          color: $warnColor;
+        }
+
+        .abstract {
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          height: 50px;
+          background-color: #fff;
+
+          .total-cost {
+            color: $primaryColor;
           }
+        }
 
-          .food-money {
-            display: flex;
-            margin-top: 14px;
-            color: #c1d0be;
-            height: 27px;
+        .order-item {
+          margin-top: 2px;
+          height: 100px;
+          background-color: #fff;
+          height: 60px;
+          display: flex;
+          padding: 10px;
+          background-color: #fff;
+          border-radius: 5px;
 
-            .food-price {
-              flex: 3;
-            }
-            .food-count {
-              @include flexboxCenter;
-              flex: 1;
-            }
+          .item-detail {
+            flex: 4;
+            padding: 0 10px;
 
-            .food-price {
+            .food-name {
               text-align: left;
             }
 
-            i {
-              @include flexboxCenter;
-              flex: 2;
-              color: $primaryColor;
-              font-size: 1.3rem;
+            .food-money {
+              display: flex;
+              margin-top: 14px;
+              color: #c1d0be;
+              height: 27px;
+
+              .food-price {
+                flex: 3;
+              }
+              .food-count {
+                @include flexboxCenter;
+                flex: 1;
+              }
+
+              .food-price {
+                text-align: left;
+              }
+
+              i {
+                @include flexboxCenter;
+                flex: 2;
+                color: $primaryColor;
+                font-size: 1.3rem;
+              }
             }
           }
         }
       }
     }
-  }
 
-  .deal-footer-container {
-    background-color: black;
-  }
+    .deal-footer-container {
+      background-color: black;
+    }
 
-  iframe {
-    border: none;
-    width: 100%;
-    height: 80%;
-    position: fixed;
-    bottom: 0;
-    transform: translateX(-50%);
-    z-index: 2000;
-  }
+    iframe {
+      border: none;
+      width: 100%;
+      height: 80%;
+      position: fixed;
+      bottom: 0;
+      transform: translateX(-50%);
+      z-index: 2000;
+    }
 
-  .deal-mask {
-    position: fixed;
-    top: 40px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.4);
-    z-index: 1000;
+    .deal-mask {
+      position: fixed;
+      top: 40px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.4);
+      z-index: 1000;
+    }
   }
-}
 </style>
-
-
