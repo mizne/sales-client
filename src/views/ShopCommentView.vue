@@ -85,7 +85,7 @@ export default {
   data() {
     return {
       totalTitle: '总体评价',
-      totalRating: 4.4,
+      totalRating: 5,
       selectedIndexes: []
     }
   },

@@ -91,7 +91,7 @@ export default {
 
     this.$store.dispatch('FETCH_WECHATPAY_PARAMS', obj.code)
       .then(data => {
-        this.tradeNo = data.trade_no
+        this.tradeNo = data.trade_no.slice(0, -4)
         data.timeStamp = data.timestamp
         this.payTime = fecha.format(new Date(data.timestamp * 1000), 'YYYY-MM-DD HH:mm:ss')
         delete data.timestamp
