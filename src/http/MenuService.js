@@ -9,6 +9,7 @@ class MenuService extends BaseService {
       .then(menu => {
         // 按时间倒序 排列 商品评论
         menu.forEach(subMenu => {
+          subMenu.foods = subMenu.foods.filter(e => e)
           subMenu.foods.forEach((food, i) => {
             food.Ratings.sort((a, b) => {
               const milliSecondsA = new Date(a.rateTime).getTime()
