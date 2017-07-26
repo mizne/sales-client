@@ -94,7 +94,7 @@ export default {
   margin-top: 10px;
   padding-bottom: 10px;
   border-bottom: 1px solid $greyText;
-  height: 80px;
+  height: 100px;
 
   .food-img {
     width: 80px;
