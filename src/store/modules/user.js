@@ -8,7 +8,8 @@ const state = {
   deliveryFeeValue: '', // 配送费
   deliveryTime: '', // 配送所需时间
   deliveryDistance: 0, // 配送距离
-  startPrice: '' // 起送价格
+  startPrice: '', // 起送价格
+  distanceTooFar: false
 }
 
 const mutations = {
@@ -29,6 +30,9 @@ const mutations = {
   },
   SET_START_PRICE(state, price) {
     state.startPrice = price
+  },
+  SET_DISTANCE_TOO_FAR(state, flag) {
+    state.distanceTooFar = flag
   }
 }
 
@@ -92,6 +96,10 @@ const actions = {
                 description: `userLatitude: ${userLatitude}, userLongitude: ${userLongitude}, deliveryFeeValue: ${deliveryFeeValue}, deliveryTime: ${deliveryTime}`
               })
             })
+            .catch(_ => {
+              commit('SET_DISTANCE_TOO_FAR', true)
+              vAlert({ content: '距离过远, 不支持配送 -_-' })
+            })
         })
       })
     } else {
@@ -118,6 +126,9 @@ const getters = {
   },
   startPrice(state) {
     return state.startPrice
+  },
+  distanceTooFar(state) {
+    return state.distanceTooFar
   }
 }
 

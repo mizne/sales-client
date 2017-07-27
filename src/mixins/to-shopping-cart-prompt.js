@@ -5,13 +5,24 @@ import QRCodeInfo from '@/models/QRCodeInfo'
 
 export default {
   computed: {
-    ...mapGetters(['tempShoppingCartFoodCost', 'tempShoppingCartFoodCount', 'shoppingCart', 'hasClosed', 'orderDetail'])
+    ...mapGetters([
+      'tempShoppingCartFoodCost', 
+      'tempShoppingCartFoodCount', 
+      'shoppingCart', 
+      'hasClosed', 
+      'orderDetail',
+      'distanceTooFar'
+    ])
   },
   methods: {
     toShopCart() {
       // 如果 店铺已打烊
       if (this.hasClosed) {
         return vAlert({ content: '真的不能买啦, 明天再来吧 ^_^' })
+      }
+
+      if (this.distanceTooFar) {
+        return vAlert({ content: '距离过远, 不支持配送 -_-' })
       }
 
       // 如果 临时购物车和购物车 都没有商品 则提示 还没有点菜
