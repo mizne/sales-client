@@ -67,7 +67,7 @@ const actions = {
           Logger.info({
             module: 'user',
             method: 'FETCH_DELIVERY_FEE',
-            description: `userLatitude: ${userLatitude}, userLongitude: ${userLongitude}`
+            description: `userLatitude: ${userLatitude}, userLongitude: ${userLongitude}, distance: ${distance} 米`
           })
 
           UserService.getDeliveryFee(distance)
