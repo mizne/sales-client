@@ -70,7 +70,7 @@ import DealFooter from '@/components/DealFooter'
 import DealDialog from '@/components/DealDialog'
 
 import QRCodeInfo from '@/models/QRCodeInfo'
-import { vAlert } from '@/util/vux-wrapper'
+import { vAlert, vConfirm } from '@/util/vux-wrapper'
 import router from '@/router/index'
 import store from '@/store/index'
 import { VERIFY_USER } from '@/store/modules/phoneVerify'
