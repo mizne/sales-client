@@ -102,6 +102,7 @@ const actions = {
       if (config.longitude) {
         commit('SET_TENANT_LONGITUDE', config.longitude)
         commit('SET_TENANT_LATITUDE', config.latitude)
+        // 代售才需配送费
         if (QRCodeInfo.isEShopBizType()) {
           commit('SET_NEED_DELIVERY_FEE', true)
         }
