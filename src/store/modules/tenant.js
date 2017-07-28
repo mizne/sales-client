@@ -93,6 +93,12 @@ const actions = {
       commit('SET_VIP_TOAST', config.needVip) 
       commit('SET_NEED_CHOOSE_PEOPLE_NUMBER_PAGE', config.needChoosePeopleNumberPage)
 
+      // 特殊处理 酒店总二维码未上线
+      const qrcodeId = QRCodeInfo.getQrcodeId()
+      if (qrcodeId === '201707181644304037001' || qrcodeId === '201707181644304037002') {
+        commit('SET_OFFICIAL_NEWS', '很多商户正上线中, 敬请期待, 预计一星期')
+      }
+
       if (config.longitude) {
         commit('SET_TENANT_LONGITUDE', config.longitude)
         commit('SET_TENANT_LATITUDE', config.latitude)

@@ -2,6 +2,7 @@ import storage from '@/util/storage'
 import { DEAL, ESHOP, GROUP_SHOPPING } from '@/util/constants'
 
 const methods = [
+  'qrcodeId',
   'bizType',
   'tenantId',
   'tableName',

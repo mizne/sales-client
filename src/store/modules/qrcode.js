@@ -11,6 +11,7 @@ const mutations = {
 const actions = {
   FETCH_QRCODE_INFO: ({ commit }, qrcodeId) => {
     return QRCodeService.getQRCodeInfo(qrcodeId).then(info => {
+      QRCodeInfo.setQrcodeId(qrcodeId)
       QRCodeInfo.setBizType(info.bizType)
       QRCodeInfo.setTenantId(info.tenantId)
       QRCodeInfo.setTableName(info.tableName)
