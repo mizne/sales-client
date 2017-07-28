@@ -88,10 +88,10 @@ const actions = {
       commit('SET_VIP_AMOUNT', config.vipFee)
       commit('SET_ALMOST_VIP_AMOUNT', config.vipRemindFee)
       commit('SET_HOME_IMAGE', config.homeImage)
-      commit('SET_NEED_ORDER_CONFIRM_PAGE', config.needOrderConfirmPage)
+      commit('SET_NEED_ORDER_CONFIRM_PAGE', config.needOrderConfirmPage || false)
       commit('SET_OFFICIAL_NEWS', config.officialNews)
-      commit('SET_VIP_TOAST', config.needVip) 
-      commit('SET_NEED_CHOOSE_PEOPLE_NUMBER_PAGE', config.needChoosePeopleNumberPage)
+      commit('SET_VIP_TOAST', config.needVip || false) 
+      commit('SET_NEED_CHOOSE_PEOPLE_NUMBER_PAGE', config.needChoosePeopleNumberPage || false)
 
       // 特殊处理 酒店总二维码未上线
       const qrcodeId = QRCodeInfo.getQrcodeId()

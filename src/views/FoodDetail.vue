@@ -196,8 +196,9 @@ export default {
     ])
   },
   created() {
+    this.isDealBizType = QRCodeInfo.isDealBizType()
     this.hasPhoneNumber = QRCodeInfo.hasPhoneNumber()
-
+    
     if (this.foodDetail.food.unit === '斤') {
       window.setTimeout(() => {
         this.showSelection = true
@@ -285,9 +286,6 @@ export default {
         })
     }
   },
-  created() {
-    this.isDealBizType = QRCodeInfo.isDealBizType()
-  }
 }
 </script>
 <style lang="scss" scoped>

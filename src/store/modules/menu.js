@@ -5,11 +5,6 @@ import Vue from 'vue'
 
 const mutationMaps = [
   {
-    mutationKey: 'SET_FOOD_DETAIL',
-    stateKey: 'foodDetail', // 选中的食物详情
-    initValue: null
-  },
-  {
     mutationKey: 'SET_SHOW_MODE',
     stateKey: 'showMode', // Menu.vue 菜单显示模式 有图/无图
     initValue: 'picMode'
@@ -35,6 +30,7 @@ const stateSeed = mutationMaps.reduce((accu, curr) => {
 
 const state = {
   ...stateSeed,
+  foodDetail: null,
   tempShoppingCart: {}, // 临时购物车
   allFoods: [], // 所有食物
   hasPromptCustomerToBuyShop: false
@@ -48,6 +44,9 @@ const mutations = {
       e.foods = e.foods.filter(f => f)
     })
     state.allFoods = foods
+  },
+  SET_FOOD_DETAIL(state, {food, typeIndex}) {
+    state.foodDetail = {food, typeIndex}
   },
   ADD_FOOD(state, { food, num = 1, remark = '', typeIndex }) {
     // 临时购物车 food 数量加一
@@ -117,7 +116,9 @@ const actions = {
 
 const getters = {
   ...generateGetters(gettersSeed, state),
-
+  foodDetail(state) {
+    return state.foodDetail
+  },
   tempShoppingCartFoodCount(state) {
     return Object.keys(state.tempShoppingCart).reduce((accu, curr) => {
       return accu + state.tempShoppingCart[curr].num
