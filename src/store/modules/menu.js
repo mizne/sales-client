@@ -138,7 +138,7 @@ const getters = {
       }
     })
 
-    return total
+    return Number(total.toFixed(2))
   },
 
   allFoods(state) {
