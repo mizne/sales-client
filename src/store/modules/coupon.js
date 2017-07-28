@@ -44,7 +44,7 @@ const actions = {
           return CouponService.checkPhone(QRCodeInfo.getPhoneNumber())
             .then(_ => dispatch('BIND_COUPON'))
             .catch(err => {
-              vToast({ content: `啊哦, 校验手机号码失败 -_-` })
+              vToast({ content: `啊哦, ${err.message} -_-` })
               dispatch('FETCH_AVALIABLE_COUPONS')
             })
         },
