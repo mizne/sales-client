@@ -34,7 +34,7 @@
     </div>
     <div class="food-action" v-if="food.unit === '斤' && food.rest > 0" @click="showDetails">
       <span v-if="hasChoose">已点</span>
-      <span v-else style="font-size: .9rem">点击选择斤数/口味</span>
+      <span v-else style="font-size: .7rem">点击选择斤数/口味</span>
     </div>
 
   </li>
