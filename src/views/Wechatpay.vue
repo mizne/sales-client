@@ -39,7 +39,7 @@ export default {
     BillDetail
   },
   computed: {
-    ...mapGetters(['orderDetail', 'tenantName', 'needDeliveryFee']),
+    ...mapGetters(['orderDetail', 'tenantName']),
   },
   data() {
     return {
@@ -87,10 +87,6 @@ export default {
     this.$store.dispatch('FETCH_TENANT_CONFIG')
       .then(_ => {
         document.title = this.tenantName
-
-        if (this.needDeliveryFee) {
-          this.$store.dispatch('FETCH_DELIVERY_FEE')
-        }
       })
 
     this.$store.dispatch('FETCH_WECHATPAY_PARAMS', obj.code)
