@@ -39,7 +39,7 @@ export default {
     BillBar
   },
   computed: {
-    ...mapGetters(['orderDetail', 'tenantName'])
+    ...mapGetters(['orderDetail', 'tenantName', 'needDeliveryFee'])
   },
   data() {
     return {
@@ -59,6 +59,10 @@ export default {
     this.$store.dispatch('FETCH_TENANT_CONFIG')
       .then(_ => {
         document.title = this.tenantName
+
+        if (this.needDeliveryFee) {
+          this.$store.dispatch('FETCH_DELIVERY_FEE')
+        }
       })
 
     this.$store.dispatch('FETCH_ORDER', obj.out_trade_no)
