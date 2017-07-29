@@ -77,8 +77,8 @@ const actions = {
       dinersNum: state.dinersNum
     }
 
-    // 代售 添加配送费
-    if (QRCodeInfo.isEShopBizType()) {
+    // 代售且商家有经纬度 添加配送费
+    if (rootState.tenant.needDeliveryFee) {
       Object.assign(params, {
         deliveryFeeId: rootState.user.deliveryFeeId
       })
@@ -98,6 +98,8 @@ const actions = {
         return Promise.reject(err)
       })
   },
+
+  // TODO: 如果有配送费ID 根据配送费查询deliveryFee
   FETCH_ORDER: ({ commit, dispatch, rootState, state }, tradeNo) => {
     commit('SHOW_LOADING', true)
 
