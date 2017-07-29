@@ -57,7 +57,7 @@ export class BaseService {
         method,
         description: `${method} failed; err: ${err.message}`
       })
-      return Promise.reject(new Error('服务器异常'))
+      return Promise.reject(new Error(err.message || '服务器繁忙'))
     }
   }
 }
