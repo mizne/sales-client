@@ -38,7 +38,7 @@ const eshopHttp = axios.create({
           return Promise.reject(new Error(resp.data.result))
         }
       } else {
-        return Promise.reject(new Error('服务器异常了'))
+        return Promise.reject(new Error('服务器繁忙'))
       }
     },
     function(error) {
