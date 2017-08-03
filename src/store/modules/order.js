@@ -23,7 +23,6 @@ const state = {
 const mutations = {
   SET_ORDER_DETAIL(state, order) {
     const tenantId = QRCodeInfo.getTenantId()
-    window.alert(tenantId)
     Vue.set(state.orderDetail, tenantId, order)
   },
   SET_ORDER_REMARK(state, remark) {
@@ -124,7 +123,6 @@ const actions = {
         commit('SHOW_LOADING', false)
         commit('SET_ORDER_DETAIL', order)
         commit('SET_IS_VIP', order.isVip)
-        window.alert(JSON.stringify(order, null, 2))
         return order
       })
       .then(_ => {

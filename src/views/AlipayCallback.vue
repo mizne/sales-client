@@ -27,6 +27,7 @@ import BillBar from '@/components/BillBar'
 
 import { objFrom } from '@/util/index'
 import { vAlert } from '@/util/vux-wrapper'
+import QRCodeInfo from '@/models/QRCodeInfo'
 
 
 export default {
@@ -52,6 +53,9 @@ export default {
     }
   },
   created() {
+    const tenantId = QRCodeInfo.getTenantId()
+    this.$store.commit('SET_TENANT_ID', tenantId)
+    
     // 由于 Alipay 回调重新拉起应用, 故需 重新初始化状态
     const obj = objFrom(decodeURIComponent(location.search))
     this.payTime = obj.timestamp
@@ -62,9 +66,6 @@ export default {
       })
 
     this.$store.dispatch('FETCH_ORDER', obj.out_trade_no)
-    .then(_ => {
-      window.alert(JSON.stringify(this.orderDetail, null, 2))
-    })
       .catch(err => {
         vAlert({
           content: '获取订单失败 -_-',
