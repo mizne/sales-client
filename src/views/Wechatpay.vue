@@ -28,6 +28,7 @@ import BillDetail from '@/components/BillDetail'
 
 import { objFrom } from '@/util/index'
 import { vAlert } from '@/util/vux-wrapper'
+import QRCodeInfo from '@/models/QRCodeInfo'
 
 export default {
   name: 'Wechatpay',
@@ -82,6 +83,8 @@ export default {
     }
   },
   created() {
+    const tenantId = QRCodeInfo.getTenantId()
+    this.$store.commit('SET_TENANT_ID', tenantId)
     const obj = objFrom(decodeURIComponent(location.search))
 
     this.$store.dispatch('FETCH_TENANT_CONFIG')
