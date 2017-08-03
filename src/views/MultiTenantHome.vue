@@ -104,7 +104,7 @@ export default {
     width: 100%;
     z-index: 1000;
     top: 30%;
-    padding: 40px 10px;
+    padding: 10px 10px;
     box-sizing: border-box;
 
     ul {
