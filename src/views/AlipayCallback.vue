@@ -62,6 +62,9 @@ export default {
       })
 
     this.$store.dispatch('FETCH_ORDER', obj.out_trade_no)
+    .then(_ => {
+      window.alert(JSON.stringify(this.orderDetail, null, 2))
+    })
       .catch(err => {
         vAlert({
           content: '获取订单失败 -_-',
