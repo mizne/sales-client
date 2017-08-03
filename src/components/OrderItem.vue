@@ -5,7 +5,7 @@
         <div class="merchant">{{order.merchantName}} ></div>
         <div class="time">{{order.time | ago}}</div>
       </div>
-      <div class="status">
+      <div class="status" :class="{'uncomplete': order.status !== 2}">
         {{order.status | orderStatus}}
       </div>
     </div>
@@ -78,6 +78,9 @@ export default {
     }
     .status {
       
+    }
+    .uncomplete {
+      color: $warnColor;
     }
   }
 
