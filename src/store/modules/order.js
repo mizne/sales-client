@@ -23,6 +23,7 @@ const state = {
 const mutations = {
   SET_ORDER_DETAIL(state, order) {
     const tenantId = QRCodeInfo.getTenantId()
+    window.alert(tenantId)
     Vue.set(state.orderDetail, tenantId, order)
   },
   SET_ORDER_REMARK(state, remark) {
