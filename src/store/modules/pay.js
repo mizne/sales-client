@@ -1,5 +1,6 @@
 import { AlipayService, WechatService } from '@/http/index'
 import router from '@/router/index'
+import QRCodeInfo from '@/models/QRCodeInfo'
 
 // 阿里支付 URL前缀
 export const ALIPAY_PREFIX_URL = 'https://openapi.alipay.com/gateway.do?'
@@ -21,8 +22,9 @@ const mutations = {
 const actions = {
   FETCH_ALIPAY_URL: ({ commit, rootState }) => {
     router.push({ name: 'Alipay' })
+    const tenantId = QRCodeInfo.getTenantId()
 
-    return AlipayService.getWapParams(rootState.order.orderDetail.tradeNo)
+    return AlipayService.getWapParams(rootState.order.orderDetail[tenantId].tradeNo)
       .then(urlParams => {
         commit('SET_SHOW_IFRAME', true)
         const url = `${ALIPAY_PREFIX_URL}${urlParams}`

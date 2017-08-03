@@ -3,37 +3,52 @@ import router from '@/router/index'
 import { not } from '@/util/index'
 import Coupon from '@/models/Coupon'
 import QRCodeInfo from '@/models/QRCodeInfo'
+import Vue from 'vue'
 
 const state = {
-  orderDetail: null,
-  orderRemark: '',
-  orderingSuccess: false,
-  dinersNum: 1
+  // {
+  //   [tenantId]: OrderDetail,
+  //   ...
+  // }
+  orderDetail: {},
+  // {
+  //   [tenantId]: Remark,
+  //   ...
+  // }
+  orderRemark: {},
+  dinersNum: 1,
+  allOrders: []
 }
 
 const mutations = {
   SET_ORDER_DETAIL(state, order) {
-    state.orderDetail = order
+    const tenantId = QRCodeInfo.getTenantId()
+    Vue.set(state.orderDetail, tenantId, order)
   },
   SET_ORDER_REMARK(state, remark) {
-    state.orderRemark = remark
-  },
-  ORDERING_SUCCESS(state, flag) {
-    state.orderingSuccess = flag
+    const tenantId = QRCodeInfo.getTenantId()
+    Vue.set(state.orderRemark, tenantId, remark)
   },
   SET_DINERS_NUM(state, number) {
     state.dinersNum = number
+  },
+  SET_ALL_ORDERS(state, orders) {
+    state.allOrders = orders
   }
 }
 
 const actions = {
+  FETCH_ALL_ORDERS: ({ commit }, dateFormat) => {
+    commit('SHOW_LOADING', true)
+    return OrderService.getAllOrder(dateFormat)
+    .then(orders => {
+      commit('SHOW_LOADING', false)
+      commit('SET_ALL_ORDERS', orders)
+    })
+  },
   CHOOSE_PEOPLE_NUMBER: ({ commit, dispatch }, number) => {
     commit('SET_DINERS_NUM', number)
     return dispatch('ADD_ORDER')
-  },
-  ORDERING_SUCCESS: ({ commit }) => {
-    commit('ORDERING_SUCCESS', true)
-    commit('RESET_SHOPPING_CART')
   },
   EDIT_ORDER: ({ commit, dispatch }, foodParams) => {
     commit('SHOW_LOADING', true)
@@ -51,29 +66,29 @@ const actions = {
   },
   CANCEL_ORDER: ({ commit, state }) => {
     commit('SHOW_LOADING', true)
+    const tenantId = QRCodeInfo.getTenantId()
 
-    return OrderService.delOrder(state.orderDetail.tradeNo)
+    return OrderService.delOrder(state.orderDetail[tenantId].tradeNo)
       .then(_ => {
         commit('SHOW_LOADING', false)
         commit('SET_SELECTED_COUPON', null)
         commit('SET_ORDER_DETAIL', null)
-        commit('ORDERING_SUCCESS', false)
         router.replace({ name: 'Menu' })
       })
       .catch(err => {
         commit('SHOW_LOADING', false)
         commit('SET_SELECTED_COUPON', null)
         commit('SET_ORDER_DETAIL', null)
-        commit('ORDERING_SUCCESS', false)
         router.replace({ name: 'Menu' })
         return Promise.reject(err)
       })
   },
   ADD_ORDER: ({ commit, state, rootState }) => {
     commit('SHOW_LOADING', true)
-    // router.push({ name: 'Ordering' })
+    const tenantId = QRCodeInfo.getTenantId()
+
     const params = {
-      remark: state.orderRemark,
+      remark: state.orderRemark[tenantId],
       dinersNum: state.dinersNum
     }
 
@@ -89,7 +104,6 @@ const actions = {
         commit('SHOW_LOADING', false)
         commit('RESET_SHOPPING_CART')
         router.push({ name: 'OrderSuccess' })
-        commit('ORDERING_SUCCESS')
       })
       .catch(err => {
         commit('SHOW_LOADING', false)
@@ -102,6 +116,7 @@ const actions = {
   // TODO: 如果有配送费ID 根据配送费查询deliveryFee
   FETCH_ORDER: ({ commit, dispatch, rootState, state }, tradeNo) => {
     commit('SHOW_LOADING', true)
+    const tenantId = QRCodeInfo.getTenantId()
 
     return OrderService.getOrder(tradeNo)
       .then(order => {
@@ -118,7 +133,8 @@ const actions = {
         // 根据订单价格 过滤出可用优惠券
         const predicate = e => {
           if (e.couponType === Coupon.REDUCE) {
-            let orderPrice = state.orderDetail.totalPrice
+            const orderDetail = state.orderDetail[tenantId]
+            let orderPrice = orderDetail.isVip ? orderDetail.totalVipPrice : orderDetail.totalPrice
             // 如果有配送费 则加上
             if (rootState.user.deliveryFeeValue) {
               orderPrice += +rootState.user.deliveryFeeValue
@@ -135,8 +151,8 @@ const actions = {
           not(predicate)
         )
         // 初始化选中优惠券
-        if (state.orderDetail.couponKey) {
-          const selectedCoupon = avaliableCoupons.find(e => e.couponKey === state.orderDetail.couponKey)
+        if (state.orderDetail[tenantId].couponKey) {
+          const selectedCoupon = avaliableCoupons.find(e => e.couponKey === state.orderDetail[tenantId].couponKey)
           dispatch('SELECT_COUPON', selectedCoupon)
         } else {
           dispatch('SELECT_COUPON', null)
@@ -153,11 +169,11 @@ const actions = {
 }
 
 const getters = {
-  orderDetail(state) {
-    return state.orderDetail
+  orderDetail(state, getters) {
+    return state.orderDetail[getters.tenantId]
   },
-  orderingSuccess(state) {
-    return state.orderingSuccess
+  allOrders(state) {
+    return state.allOrders
   }
 }
 

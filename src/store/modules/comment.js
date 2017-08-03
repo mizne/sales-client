@@ -1,19 +1,26 @@
 import { CommentService } from '@/http/index'
+import QRCodeInfo from '@/models/QRCodeInfo'
+import Vue from 'vue'
 
 const state = {
-  shopComments: [],
+  // {
+  //   [tenantId]: Comments,
+  //   ...
+  // }
+  shopComments: {},
 }
 
 const mutations = {
   SET_SHOP_COMMENT(state, shopComments) {
-    state.shopComments = shopComments
+    const tenantId = QRCodeInfo.getTenantId()
+    Vue.set(state.shopComments, tenantId, shopComments)
   },
 }
 
 const actions = {
   FETCH_SHOP_COMMENT: ({ commit }) => {
-    return CommentService.getShopComment().then(merchantRatings => {
-      commit('SET_SHOP_COMMENT', merchantRatings)
+    return CommentService.getShopComment().then(shopComments => {
+      commit('SET_SHOP_COMMENT', shopComments)
     })
   },
 
@@ -27,8 +34,8 @@ const actions = {
 }
 
 const getters = {
-  shopComments(state) {
-    return state.shopComments
+  shopComments(state, getters) {
+    return state.shopComments[getters.tenantId] || []
   }
 }
 

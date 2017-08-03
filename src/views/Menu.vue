@@ -15,9 +15,6 @@
       <span class="menu" slot="left">
         <i class="icon-menu" @click="show"></i>
       </span>
-      <span class="menu" slot="right">
-        <i class="icon-discount" @click="toCoupon"></i>
-      </span>
     </deal-header>
   
     <deal-content>
@@ -48,6 +45,7 @@
   </div>
 </template>
 <script>
+import Vue from 'vue'
 import { mapGetters } from 'vuex'
 import { XButton } from 'vux'
 
@@ -141,9 +139,6 @@ export default {
     show() {
       this.showMenu = !this.showMenu
     },
-    toCoupon() {
-      this.$router.push({ name: 'AllCoupon' })
-    },
     selectFoodType(foodType, index) {
       this.menuCurrentIndex = index
       this._scrollFoods(index)
@@ -164,16 +159,19 @@ export default {
     },
     _initAllFoods() {
       return this.$store.dispatch('FETCH_ALL_FOODS')
-        .then(_ => {
-          this._initScroll()// 初始化scrollListener
-          this._calcHeight()// 初始化不同品种菜列表 的高度
-          this._initRectTop()// 初始化 菜品滚动区的视口top
-        })
         .catch(err => {
           vToast({
             content: '啊哦, 网络似乎出问题了, 稍后请重试下 ^_^',
           })
         })
+        .then(_ => {
+          Vue.nextTick(() => {
+            this._initScroll()// 初始化scrollListener
+            this._calcHeight()// 初始化不同品种菜列表 的高度
+            this._initRectTop()// 初始化 菜品滚动区的视口top
+          })
+        })
+
     },
     _initScroll() {
       document.addEventListener('scroll', this._scrollListener)

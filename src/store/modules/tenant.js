@@ -105,7 +105,13 @@ const actions = {
         // 代售才需配送费
         if (QRCodeInfo.isEShopBizType()) {
           commit('SET_NEED_DELIVERY_FEE', true)
+        } else {
+          commit('SET_NEED_DELIVERY_FEE', false)
         }
+      } else {
+        commit('SET_TENANT_LONGITUDE', '')
+        commit('SET_TENANT_LATITUDE', '')
+        commit('SET_NEED_DELIVERY_FEE', false)
       }
 
       // 店铺已打烊

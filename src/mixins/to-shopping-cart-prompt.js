@@ -11,6 +11,7 @@ export default {
       'shoppingCart', 
       'hasClosed', 
       'orderDetail',
+      'needDeliveryFee',
       'distanceTooFar'
     ])
   },
@@ -21,7 +22,7 @@ export default {
         return vAlert({ content: '真的不能买啦, 明天再来吧 ^_^' })
       }
 
-      if (this.distanceTooFar) {
+      if (this.needDeliveryFee && this.distanceTooFar) {
         return vAlert({ content: '距离过远, 不支持配送 -_-' })
       }
 

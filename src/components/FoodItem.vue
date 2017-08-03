@@ -40,6 +40,8 @@
   </li>
 </template>
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'FoodItem',
   props: {
@@ -61,14 +63,15 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(['tempShoppingCart']),
     foodCount() {
-      if (this.$store.state.menu.tempShoppingCart[this.food.id]) {
-        return this.$store.state.menu.tempShoppingCart[this.food.id].num
+      if (this.tempShoppingCart[this.food.id]) {
+        return this.tempShoppingCart[this.food.id].num
       }
       return 0
     },
     hasChoose() {
-      return !!this.$store.state.menu.tempShoppingCart[this.food.id]
+      return !!this.tempShoppingCart[this.food.id]
     }
   },
   methods: {

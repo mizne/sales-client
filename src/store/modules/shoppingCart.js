@@ -1,14 +1,14 @@
 import { ShoppingCartService } from '@/http/index'
 import router from '@/router/index'
+import QRCodeInfo from '@/models/QRCodeInfo'
+import Vue from 'vue'
 
 const state = {
-  shoppingCart: {
-    foods: [],
-    tableName: '',
-    totalNum: 0,
-    totalPrice: 0,
-    totalVipPrice: 0
-  },
+  // {
+  //   [tenantId]: ShoppingCart,
+  //   ...
+  // }
+  shoppingCart: {},
   isAddMoreFood: false
 }
 
@@ -17,16 +17,18 @@ const mutations = {
     state.isAddMoreFood = true
   },
   SET_SHOPPING_CART(state, shoppingCart) {
-    state.shoppingCart = shoppingCart
+    const tenantId = QRCodeInfo.getTenantId()
+    Vue.set(state.shoppingCart, tenantId, shoppingCart)
   },
   RESET_SHOPPING_CART(state) {
-    state.shoppingCart = {
+    const tenantId = QRCodeInfo.getTenantId()
+    Vue.set(state.shoppingCart, tenantId, {
       foods: [],
       tableName: '',
       totalNum: 0,
       totalPrice: 0,
       totalVipPrice: 0
-    }
+    })
   }
 }
 
@@ -42,38 +44,44 @@ const actions = {
   },
   ADD_SHOPPING_CART: ({ commit, rootState }) => {
     commit('SHOW_LOADING', true)
+    const tenantId = QRCodeInfo.getTenantId()
 
-    const foodArray = Object.keys(
-      rootState.menu.tempShoppingCart
-    ).map(foodId => {
-      return {
-        foodId: Number(foodId),
-        foodCount: rootState.menu.tempShoppingCart[foodId].num,
-        foodRemark: rootState.menu.tempShoppingCart[foodId].remark
-      }
-    })
+    if (rootState.menu.tempShoppingCart[tenantId]) {
+      const foodArray = Object.keys(
+        rootState.menu.tempShoppingCart[tenantId]
+      ).map(foodId => {
+        return {
+          foodId: Number(foodId),
+          foodCount: rootState.menu.tempShoppingCart[tenantId][foodId].num,
+          foodRemark: rootState.menu.tempShoppingCart[tenantId][foodId].remark
+        }
+      })
 
-    // 如果临时购物车有菜
-    if (foodArray.length > 0) {
-      const params = {
-        foods: foodArray
-      }
+      // 如果临时购物车有菜
+      if (foodArray.length > 0) {
+        const params = {
+          foods: foodArray
+        }
 
-      return ShoppingCartService.addShoppingCart(params)
-        .then(_ => {
+        return ShoppingCartService.addShoppingCart(params)
+          .then(_ => {
+            commit('SHOW_LOADING', false)
+            router.push({ name: 'ShoppingCart' })
+          })
+          .catch(err => {
+            commit('SHOW_LOADING', false)
+            return Promise.reject(err)
+          })
+      } else {
+        // 如果临时购物车没有菜(处于加菜状态)
+        return Promise.resolve().then(_ => {
           commit('SHOW_LOADING', false)
           router.push({ name: 'ShoppingCart' })
         })
-        .catch(err => {
-          commit('SHOW_LOADING', false)
-          return Promise.reject(err)
-        })
+      }
     } else {
-      // 如果临时购物车没有菜(处于加菜状态)
-      return Promise.resolve().then(_ => {
-        commit('SHOW_LOADING', false)
-        router.push({ name: 'ShoppingCart' })
-      })
+      commit('SHOW_LOADING', false)
+      router.push({ name: 'ShoppingCart' })
     }
   },
   FETCH_SHOPPING_CART: ({ commit, dispatch }) => {
@@ -100,8 +108,16 @@ const actions = {
 }
 
 const getters = {
-  shoppingCart(state) {
-    return state.shoppingCart
+  shoppingCart(state, getters) {
+    return (
+      state.shoppingCart[getters.tenantId] || {
+        foods: [],
+        tableName: '',
+        totalNum: 0,
+        totalPrice: 0,
+        totalVipPrice: 0
+      }
+    )
   },
   isAddMoreFood(state) {
     return state.isAddMoreFood

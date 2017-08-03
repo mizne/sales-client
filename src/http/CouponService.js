@@ -30,6 +30,16 @@ class CouponService extends BaseService {
     }
   }
 
+  getAllCoupons() {
+    if (QRCodeInfo.hasPhoneNumber()) {
+      return this.getBizTypeHttp()
+      .get(`/availableCoupon?phoneNumber=${QRCodeInfo.getPhoneNumber()}`)
+      .catch(this.exceptionHandler('CouponService', 'getAllCoupons'))
+    } else {
+      return Promise.resolve([])
+    }
+  }
+
   // 领取优惠券(只有代售或群购业务才有)
   bindCoupon() {
     const map = {

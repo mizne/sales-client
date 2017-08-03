@@ -5,10 +5,10 @@
     </deal-header>
   
     <deal-content>
-      <scroll-notification v-if="allCoupons.length" :text="couponNews"></scroll-notification>
+      <scroll-notification v-if="avaliableCoupons.length" :text="couponNews"></scroll-notification>
   
       <div class="content">
-        <div class="table-info" :class="{'hasScroll': allCoupons.length > 0}">
+        <div class="table-info" :class="{'hasScroll': avaliableCoupons.length > 0}">
           <span class="table-number">桌号: {{shoppingCart.tableName}}</span>
           <span class="food-count">合计: {{shoppingCart.totalNum}}份</span>
           <span class="food-cost">
@@ -143,11 +143,11 @@ export default {
       'deliveryDistance',
       'startPrice',
       'orderDetail',
-      'allCoupons',
+      'avaliableCoupons',
 
     ]),
     couponNews() {
-      return `您有 ${this.allCoupons.length} 张优惠券 在结算页面可选择`
+      return `您有 ${this.avaliableCoupons.length} 张优惠券 在结算页面可选择`
     },
     startPricePrompt() {
       if (this.orderDetail) {

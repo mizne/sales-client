@@ -170,6 +170,10 @@ export default {
           freePrice += (+this.deliveryFeeValue)
         }
 
+        if (resultPrice < 0) {
+          resultPrice = 0
+        }
+
         if (freePrice > 0) {
           return resultPrice + `(已优惠 ${freePrice.toFixed(2)} 元)`
         }

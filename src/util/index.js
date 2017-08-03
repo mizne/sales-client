@@ -1,4 +1,5 @@
 import { WEIXIN_BROWSER, ALI_BROWSER, UNKNOWN_BROWSER } from './constants'
+import fecha from 'fecha'
 
 const createSteps = (start, end, range = 10) => {
   if (start > end) {
@@ -96,4 +97,78 @@ const checkBrowserForPay = function() {
   }
 }
 
-export { createSteps, objFrom, dateBetween, not, checkBrowserForPay }
+// date: Date
+// 返回 date的 多少时间前的描述
+// 譬如 5秒前、40分钟前、3小时14分钟前
+const timeago = function (date) {
+  const now = new Date().getTime()
+  const d = date.getTime()
+  const diff = now - d
+  if (diff < 0) {
+    throw new Error(`date must before now; date: ${date}`)
+  } 
+  const oneSecond = 1 * 1000
+  const oneMinute = 60 * oneSecond
+  const oneHour = 60 * oneMinute
+  const oneDay = 24 * oneHour
+
+  if (diff < oneMinute) {
+    return `${Math.floor(diff / oneSecond)}秒前`
+  }
+
+  if (diff < oneHour) {
+    return `${Math.floor(diff / oneMinute)}分钟前`
+  }
+
+  if (diff < oneDay) {
+    const hours = Math.floor(diff / oneHour)
+    const minutes = Math.floor( (diff % oneHour)/oneMinute )
+
+    return `${hours}小时${minutes}分钟前`
+  }
+
+  return fecha.format(date, 'YYYY-MM-DD HH:mm')
+}
+
+// duration: week, month, year
+// 生成时间间隔
+// [startTime, endTime]
+// startTime: 一周前, 一月前, 一年前
+// endTime: 现在
+const generateBetweenDate = function (duration) {
+  const now = new Date().getTime()
+  let startTime
+  const endTime = fecha.format(new Date(now), 'YYYY/MM/DD HH:mm:ss')
+  const oneDay = 24 * 60 * 60 * 1000
+  const oneWeek = 7 * oneDay
+  const oneMonth = 31 * oneDay
+  const oneYear = 365 * oneDay
+
+  switch (duration) {
+    case generateBetweenDate.WEEK:
+      startTime = fecha.format(new Date(now - oneWeek), 'YYYY/MM/DD HH:mm:ss')
+      return [startTime, endTime]
+    case generateBetweenDate.MONTH:
+      startTime = fecha.format(new Date(now - oneMonth), 'YYYY/MM/DD HH:mm:ss')
+      return [startTime, endTime]
+    case generateBetweenDate.YEAR:
+      startTime = fecha.format(new Date(now - oneYear), 'YYYY/MM/DD HH:mm:ss')
+      return [startTime, endTime]
+    default:
+      throw new Error(`Unknown duration to generate between date; duration: ${duration}`)
+  }
+}
+generateBetweenDate.WEEK = 'week'
+generateBetweenDate.MONTH = 'month'
+generateBetweenDate.YEAR = 'year'
+
+
+export { 
+  createSteps, 
+  objFrom, 
+  dateBetween, 
+  not, 
+  checkBrowserForPay, 
+  timeago,
+  generateBetweenDate 
+}

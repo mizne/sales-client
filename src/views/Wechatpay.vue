@@ -2,7 +2,7 @@
   <div class="wechat-callback-container">
     <deal-header title="结账单">
       <span class="header-left" slot="left" style="width: 40px;">
-        <i class="icon-back" @click="$router.push({ name: 'OrderSuccess' })"></i>
+        <i class="icon-back" @click="$router.push({ name: 'Home' })"></i>
       </span>
     </deal-header>
   

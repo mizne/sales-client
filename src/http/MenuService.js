@@ -9,9 +9,6 @@ class MenuService extends BaseService {
       .then(menu => {
         // 按时间倒序 排列 商品评论
         menu.forEach(subMenu => {
-          // TOFIX 商品下架后 后台返回null的临时解决
-          subMenu.foods = subMenu.foods.filter(e => e)
-
           subMenu.foods.forEach((food, i) => {
             food.Ratings.sort((a, b) => {
               const milliSecondsA = new Date(a.rateTime).getTime()

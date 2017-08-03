@@ -5,6 +5,7 @@ const methods = [
   'qrcodeId',
   'bizType',
   'tenantId',
+  'tenants',
   'tableName',
   'consigneeId',
   'coupons',

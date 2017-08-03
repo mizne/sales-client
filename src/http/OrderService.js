@@ -1,5 +1,7 @@
 import { DEAL, ESHOP, GROUP_SHOPPING } from '@/util/constants'
 import { BaseService } from './BaseService'
+import QRCodeInfo from '@/models/QRCodeInfo'
+import { generateBetweenDate } from '@/util/index'
 
 class OrderService extends BaseService {
   addOrder(params) {
@@ -32,6 +34,22 @@ class OrderService extends BaseService {
     return this.getBizTypeHttp()
       .delete(`/order${query}`)
       .catch(this.exceptionHandler('OrderService', 'delOrder'))
+  }
+
+  getAllOrder(dateFormat) {
+    const [startTime, endTime] = generateBetweenDate(dateFormat)
+    const query = `?consigneeId=${QRCodeInfo.getConsigneeId()}&phoneNumber=${QRCodeInfo.getPhoneNumber()}&startTime=${startTime}&endTime=${endTime}`
+    return this.getBizTypeHttp()
+    .get(`/consignee/order${query}`)
+    .then(orders => {
+      orders.sort((a, b) => {
+        const aMilliseconds = new Date(a.time).getTime()
+        const bMilliseconds = new Date(b.time).getTime()
+        return bMilliseconds - aMilliseconds
+      })
+      return orders
+    })
+    .catch(this.exceptionHandler('OrderService', 'getAllOrder'))
   }
 
   _addParams(params) {

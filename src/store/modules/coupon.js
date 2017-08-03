@@ -4,12 +4,25 @@ import { vConfirm, vToast } from '@/util/vux-wrapper'
 import { RECEIVE_COUPON } from '@/store/modules/phoneVerify'
 import QRCodeInfo from '@/models/QRCodeInfo'
 import router from '@/router/index'
+import Vue from 'vue'
 
 const state = {
   allCoupons: [],
-  avaliableCoupons: [],
-  disableCoupons: [],
-  selectedCoupon: null
+  // {
+  //   [tenantId]: Coupons,
+  //   ...
+  // }
+  avaliableCoupons: {},
+  // {
+  //   [tenantId]: Coupons,
+  //   ...
+  // }
+  disableCoupons: {},
+  // {
+  //   [tenantId]: Coupon,
+  //   ...
+  // }
+  selectedCoupon: {}
 }
 
 const mutations = {
@@ -17,13 +30,16 @@ const mutations = {
     state.allCoupons = coupons
   },
   SET_AVALIABLE_COUPONS(state, coupons) {
-    state.avaliableCoupons = coupons
+    const tenantId = QRCodeInfo.getTenantId()
+    Vue.set(state.avaliableCoupons, tenantId, coupons)
   },
   SET_DISABLE_COUPONS(state, coupons) {
-    state.disableCoupons = coupons
+    const tenantId = QRCodeInfo.getTenantId()
+    Vue.set(state.disableCoupons, tenantId, coupons)
   },
   SET_SELECTED_COUPON(state, coupon) {
-    state.selectedCoupon = coupon
+    const tenantId = QRCodeInfo.getTenantId()
+    Vue.set(state.selectedCoupon, tenantId, coupon)
   }
 }
 
@@ -77,8 +93,24 @@ const actions = {
       })
   },
   // 获取可用优惠券
-  FETCH_AVALIABLE_COUPONS: ({ commit, rootState }) => {
+  FETCH_AVALIABLE_COUPONS: ({ commit }) => {
     return CouponService.getAvaliableCoupons().then(coupons => {
+      // 将优惠券 按照失效时间 倒序
+      coupons.sort((a, b) => {
+        const aMilliseconds = new Date(a.InvalidDate).getTime()
+        const bMilliseconds = new Date(b.InvalidDate).getTime()
+
+        return aMilliseconds - bMilliseconds
+      })
+
+      commit('SET_ALL_COUPONS', coupons)
+      return coupons
+    })
+  },
+
+  // 获取此用户的所有可用优惠券
+  FETCH_ALL_COUPONS: ({ commit }) => {
+    return CouponService.getAllCoupons().then(coupons => {
       // 将优惠券 按照失效时间 倒序
       coupons.sort((a, b) => {
         const aMilliseconds = new Date(a.InvalidDate).getTime()
@@ -98,9 +130,13 @@ const actions = {
   // 使用优惠券
   COUSUM_COUPON: ({ commit, state, rootState }) => {
     // 将选中的优惠券 和 订单号绑定
+    const tenantId = QRCodeInfo.getTenantId()
+
     return CouponService.consumCoupon(
-      state.selectedCoupon? state.selectedCoupon.couponKey : '',
-      rootState.order.orderDetail.tradeNo
+      state.selectedCoupon[tenantId]
+        ? state.selectedCoupon[tenantId].couponKey
+        : '',
+      rootState.order.orderDetail[tenantId].tradeNo
     )
   }
 }
@@ -109,14 +145,14 @@ const getters = {
   allCoupons(state) {
     return state.allCoupons
   },
-  avaliableCoupons(state) {
-    return state.avaliableCoupons
+  avaliableCoupons(state, getters) {
+    return state.avaliableCoupons[getters.tenantId] || []
   },
-  disableCoupons(state) {
-    return state.disableCoupons
+  disableCoupons(state, getters) {
+    return state.disableCoupons[getters.tenantId] || []
   },
-  selectedCoupon(state) {
-    return state.selectedCoupon
+  selectedCoupon(state, getters) {
+    return state.selectedCoupon[getters.tenantId]
   }
 }
 

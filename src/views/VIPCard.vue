@@ -16,18 +16,18 @@
             <span class="text">我的积分</span>
           </div>
   
-          <div class="bag">
+          <div class="bag" @click="toCoupon()">
             <i class="icon-bag"></i>
             <span class="text">我的券包</span>
           </div>
   
-          <div class="gift">
+          <div class="gift" @click="toOrder()">
             <i class="icon-gift"></i>
-            <span class="text">我的特权</span>
+            <span class="text">我的订单</span>
           </div>
         </div>
   
-        <div class="card-item points">
+        <!-- <div class="card-item points">
           <i class="icon-points"></i>
           <span class="text">积分换券</span>
           <i class="icon-forward"></i>
@@ -41,26 +41,9 @@
           <i class="icon-shop"></i>
           <span class="text">使用门店</span>
           <i class="icon-forward"></i>
-        </div>
+        </div> -->
       </div>
     </deal-content>
-  
-    <!-- <deal-footer>
-      <div class="comment" @click="$router.push({name: 'ShopComment'})">
-        <i class="icon-comment"></i>
-        <span class="text">评价</span>
-      </div>
-  
-      <div class="add-food">
-        <i class="icon-food"></i>
-        <span class="text">加菜</span>
-      </div>
-  
-      <div class="pay" @click="toPay">
-        <i class="icon-pay"></i>
-        <span class="text">买单</span>
-      </div>
-    </deal-footer> -->
   </div>
 </template>
 <script>
@@ -90,14 +73,11 @@ export default {
     }
   },
   methods: {
-    toPay() {
-      this.showDialog = true
+    toCoupon() {
+      this.$router.push({ name: 'AllCoupons' })
     },
-    cancelDialog() {
-      this.showDialog = false
-    },
-    okDialog() {
-      this.showDialog = false
+    toOrder() {
+      this.$router.push({ name: 'AllOrders' })
     }
   },
   created() {
@@ -128,6 +108,7 @@ export default {
   .deal-content-container {
     padding: 10px;
     background-color: $greyBackground;
+    bottom: 0;
 
     .phone-info {
       height: 50px;
