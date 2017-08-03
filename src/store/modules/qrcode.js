@@ -64,6 +64,7 @@ const actions = {
         QRCodeInfo.setQrcodeId(qrcodeId)
         QRCodeInfo.setBizType(ESHOP)
         QRCodeInfo.setConsigneeId(info[0].consigneeId)
+        QRCodeInfo.setTenantId('tenantId0')
 
         const tenants = info.map(e => ({
           id: e.tenantId,

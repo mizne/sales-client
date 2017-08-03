@@ -34,6 +34,7 @@ const actions = {
         dispatch('ADD_SHOPPING_CART')
         // 领取优惠券时 需要的验证手机号码
       } else if (state.purposeOfPhoneVerify === RECEIVE_COUPON) {
+        commit('SHOW_LOADING', false)
         dispatch('BIND_COUPON')
         .then(_ => {
           router.push({ name: 'Menu' })
@@ -49,7 +50,13 @@ const actions = {
         } else {
           dispatch('ADD_ORDER')
         }
+      } else if (state.purposeOfPhoneVerify === VERIFY_USER) {
+        commit('SHOW_LOADING', false)
+        router.push({ name: 'VIPCard' })
       }
+    })
+    .catch(err => {
+      commit('SHOW_LOADING', false)
     })
   }
 }

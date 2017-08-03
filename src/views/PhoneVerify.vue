@@ -57,15 +57,15 @@ export default {
           phoneNumber: this.phoneNumber,
           verifyCode: this.verifyCode
         })
-          .catch(err => {
-            vAlert({
-              type: 'cancel',
-              content: err.message || '验证码未知错误'
-            })
-              .then(_ => {
-                this.verifyCode = ''
-              })
+        .catch(err => {
+          vAlert({
+            type: 'cancel',
+            content: err.message || '验证码未知错误'
           })
+          .then(_ => {
+            this.verifyCode = ''
+          })
+        })
       }
     },
     fetchCode() {
