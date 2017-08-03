@@ -127,7 +127,7 @@ export default {
           img {
             position: relative;
             top: 15%;
-            height: 60px;
+            height: 40px;
           }
         }
         b {
