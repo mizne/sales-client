@@ -123,7 +123,7 @@ const actions = {
         commit('SHOW_LOADING', false)
         commit('SET_ORDER_DETAIL', order)
         commit('SET_IS_VIP', order.isVip)
-        
+        window.alert(JSON.stringify(order, null, 2))
         return order
       })
       .then(_ => {
