@@ -75,8 +75,6 @@ const actions = {
         }))
 
         QRCodeInfo.setTenants(tenants)
-
-        QRCodeInfo.removeTenantId()
       } else {
         console.error(`qrcode template id error; id: ${qrcodeId}`)
       }
