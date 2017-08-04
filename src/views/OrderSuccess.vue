@@ -203,7 +203,7 @@ export default {
   },
   methods: {
     toCoupon() {
-      this.$router.push({ name: 'CouponView' })
+      this.$router.push({ name: 'SelectCoupon' })
     },
     addMoreFood() {
       this.$store.dispatch('ADD_MORE_FOOD')
@@ -265,7 +265,7 @@ export default {
       // 验证电话号码页面 点餐业务没电话号码 验证完 则下单
       // 主页 有订单情况下 则直接进入
       // 订单失败页面 下订单失败则继续下单
-      if (from.name !== 'CouponView') {
+      if (from.name !== 'SelectCoupon') {
         vm.$store.dispatch('FETCH_ORDER')
           .catch(err => {
             vAlert({ content: '获取订单失败' })

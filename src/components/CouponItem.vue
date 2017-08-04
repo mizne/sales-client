@@ -116,6 +116,12 @@ export default {
       }
     }
 
+    .money {
+      i {
+        margin-top: 7px;
+      }
+    }
+
     .info {
       padding-left: 4px;
       font-size: 0.8rem;

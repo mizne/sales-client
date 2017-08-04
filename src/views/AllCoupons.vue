@@ -9,7 +9,7 @@
         :coupon="coupon" :merchant="tenantName"></coupon-item>
       </template>
       <template v-else>
-        <div class="no-coupon">还没有优惠券呢, 还不快去扫码领取 ^_^</div>
+        <no-coupon></no-coupon>
       </template>
     </deal-content>
   </div>
@@ -20,13 +20,15 @@ import { mapGetters } from 'vuex'
 import DealHeader from '@/components/DealHeader'
 import DealContent from '@/components/DealContent'
 import CouponItem from '@/components/CouponItem'
+import NoCoupon from '@/components/NoCoupon'
 
 export default {
   name: 'AllCoupons',
   components: {
     DealHeader,
     DealContent,
-    CouponItem
+    CouponItem,
+    NoCoupon
   },
   computed: {
     ...mapGetters(['allCoupons', 'tenantName'])
@@ -46,15 +48,6 @@ export default {
     padding: 10px;
     background-color: $greyBackground;
     height: 100vh;
-
-    .no-coupon {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 50px;
-      position: relative;
-      top: 30%;
-    }
   }
 }
 </style>

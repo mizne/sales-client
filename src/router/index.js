@@ -21,7 +21,7 @@ import Alipay from '@/views/Alipay'
 import FoodDetail from '@/views/FoodDetail'
 import ShopCommentView from '@/views/ShopCommentView'
 import Wechatpay from '@/views/Wechatpay'
-import CouponView from '@/views/CouponView'
+import SelectCoupon from '@/views/SelectCoupon'
 
 Vue.use(Router)
 
@@ -133,9 +133,9 @@ const routes = [
     name: 'Wechatpay',
     component: Wechatpay
   }, {
-    path: '/coupon-view',
-    name: 'CouponView',
-    component: CouponView
+    path: '/select-coupon',
+    name: 'SelectCoupon',
+    component: SelectCoupon
   }
 ]
 
