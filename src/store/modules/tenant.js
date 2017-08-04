@@ -59,11 +59,6 @@ const mutationMaps = [
     stateKey: 'needOrderConfirmPage',
     initValue: false
   },
-  {
-    mutationKey: 'SET_OFFICIAL_NEWS',
-    stateKey: 'officialNews',
-    initValue: '广告位招租'
-  }
 ]
 
 const gettersSeed = [...mutationMaps.map(e => e.stateKey)]
@@ -74,11 +69,15 @@ const stateSeed = mutationMaps.reduce((accu, curr) => {
 }, {})
 
 const state = {
-  ...stateSeed
+  ...stateSeed,
+  officialNews: '广告位招租'
 }
 
 const mutations = {
-  ...generateMutations(mutationMaps, state)
+  ...generateMutations(mutationMaps, state),
+  SET_OFFICIAL_NEWS(state, news) {
+    state.officialNews = news
+  }
 }
 
 const actions = {
@@ -127,7 +126,13 @@ const actions = {
 }
 
 const getters = {
-  ...generateGetters(gettersSeed, state)
+  ...generateGetters(gettersSeed, state),
+  officialNews(state) {
+    if (Array.isArray(state.officialNews)) {
+      return state.officialNews
+    }
+    return [state.officialNews]
+  }
 }
 
 export { state, mutations, actions, getters }

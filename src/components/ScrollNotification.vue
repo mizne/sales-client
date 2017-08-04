@@ -2,7 +2,9 @@
   <div class="scroll-notification-container">
     <i class="icon-laba"></i>
     <div class="content-wrapper">
-      <span ref="content">{{text}}</span>
+      <transition enter-active-class="animated fadeInDown" leave-active-class="animated fadeOutDown">
+        <div ref="content" v-show="show">{{texts[currentIndex]}}</div>
+      </transition>
     </div>
   
   </div>
@@ -12,8 +14,8 @@ import Vue from 'vue'
 export default {
   name: 'ScrollNotification',
   props: {
-    text: {
-      type: String,
+    texts: {
+      type: Array,
       required: true
     },
     time: {
@@ -23,33 +25,23 @@ export default {
   },
   data() {
     return {
-      timeId: null
+      timeId: null,
+      currentIndex: 0,
+      show: true
     }
   },
-  methods: {},
-  mounted() {
-    this.$refs.content.style.left = "100%"
-    // this.$refs.content.style.transform = "translateX(110%)"
-    this.$refs.content.classList.toggle('tran')
-    window.setTimeout(() => {
-      this.$refs.content.style.left = '0'
-      // this.$refs.content.style.transform = "translateX(-110%)"
-    }, 0)
+  methods: {
 
-    this.timeId = window.setInterval(() => {
-      this.$refs.content.style.left = "100%"
-      // this.$refs.content.style.transform = "translateX(110%)"
-      this.$refs.content.classList.toggle('tran')
-
-      window.setTimeout(() => {
-        this.$refs.content.style.left = "0"
-        // this.$refs.content.style.transform = "translateX(-110%)"
-        this.$refs.content.classList.toggle('tran')
-      }, 0)
-    }, this.time)
   },
-  beforeDestroy() {
-    window.clearInterval(this.timeId)
+  created() {
+    setInterval(() => {
+      this.show = false
+
+      const index = this.currentIndex
+      this.currentIndex = (index + 1) % (this.texts.length)
+
+      setTimeout(() => { this.show = true }, 0)
+    }, 3e3)
   }
 }
 </script>

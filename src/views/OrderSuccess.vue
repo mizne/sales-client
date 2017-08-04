@@ -5,7 +5,7 @@
     </deal-header>
   
     <deal-content v-if="orderDetail">
-      <scroll-notification :text="promptText"></scroll-notification>
+      <scroll-notification :texts="promptText"></scroll-notification>
       <div class="tip">
         <div class="line">
           <i class="icon-point"></i>
@@ -190,7 +190,7 @@ export default {
   },
   data() {
     return {
-      promptText: '',
+      promptText: [''],
       isEditable: false,
       isDealBizType: false
     }
@@ -249,8 +249,8 @@ export default {
       this.isDealBizType = QRCodeInfo.isDealBizType()
 
       this.promptText = this.isDealBizType
-        ? '欢迎光顾小店'
-        : 'e代售提醒您先买单, 订单10分钟后失效'
+        ? ['欢迎光顾小店']
+        : ['e代售提醒您先买单, 订单10分钟后失效']
 
     }
   },

@@ -5,7 +5,7 @@
     </deal-header>
   
     <deal-content>
-      <scroll-notification v-if="avaliableCoupons.length" :text="couponNews"></scroll-notification>
+      <scroll-notification v-if="avaliableCoupons.length" :texts="couponNews"></scroll-notification>
   
       <div class="content">
         <div class="table-info" :class="{'hasScroll': avaliableCoupons.length > 0}">
@@ -147,7 +147,7 @@ export default {
 
     ]),
     couponNews() {
-      return `您有 ${this.avaliableCoupons.length} 张优惠券 在结算页面可选择`
+      return [`您有 ${this.avaliableCoupons.length} 张优惠券 在结算页面可选择`]
     },
     startPricePrompt() {
       if (this.orderDetail) {

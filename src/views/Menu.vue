@@ -18,7 +18,7 @@
     </deal-header>
   
     <deal-content>
-      <scroll-notification :text="officialNews"></scroll-notification>
+      <scroll-notification :texts="officialNews"></scroll-notification>
       <div class="left-tab">
         <ul class="dish-type-container">
           <li class="dish-type" :class="{'selected': menuCurrentIndex === index}" @click="selectFoodType(item, index)" v-for="(item, index) in allFoods" :key="item.id">
