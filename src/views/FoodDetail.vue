@@ -303,8 +303,7 @@ export default {
       .favorite,
       .price {
         display: flex;
-        margin-left: 5px;
-        margin-top: 5px;
+        padding: 0 10px;
       }
       .favorite,
       .price {
@@ -353,7 +352,6 @@ export default {
       padding: 0 10px;
       h3 {
         text-align: left;
-        margin-left: 10px;
         margin-top: 10px;
         font-weight: 500;
         font-size: 18px;
