@@ -14,20 +14,20 @@ class CouponService extends BaseService {
   }
 
   getAvaliableCoupons() {
-    // if (QRCodeInfo.hasPhoneNumber()) {
-    //   const map = {
-    //     [DEAL]: ['tenantId', 'phoneNumber'],
-    //     [ESHOP]: ['tenantId', 'consigneeId', 'phoneNumber'],
-    //     [GROUP_SHOPPING]: ['tenantId', 'consigneeId', 'phoneNumber']
-    //   }
-    //   const query = this.getBizTypeQuery(map)
+    if (QRCodeInfo.hasPhoneNumber()) {
+      const map = {
+        [DEAL]: ['tenantId', 'phoneNumber'],
+        [ESHOP]: ['tenantId', 'consigneeId', 'phoneNumber'],
+        [GROUP_SHOPPING]: ['tenantId', 'consigneeId', 'phoneNumber']
+      }
+      const query = this.getBizTypeQuery(map)
 
-    //   return this.getBizTypeHttp()
-    //     .get(`/availableCoupon${query}`)
-    //     .catch(this.exceptionHandler('CouponService', 'getAvaliableCoupons'))
-    // } else {
+      return this.getBizTypeHttp()
+        .get(`/availableCoupon${query}`)
+        .catch(this.exceptionHandler('CouponService', 'getAvaliableCoupons'))
+    } else {
       return Promise.resolve([])
-    // }
+    }
   }
 
   getAllCoupons() {
