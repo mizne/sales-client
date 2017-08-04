@@ -102,6 +102,7 @@ export default {
     .tabs {
       position: fixed;
       width: 100%;
+      z-index: 1;
     }
 
     .coupon-items {
