@@ -13,6 +13,9 @@ import store from '@/store/index'
 import '@/util/polyfill.js'
 import '@/util/error-handler.js'
 
+import LogRocket from 'logrocket'
+
+LogRocket.init('49bwep/sales-zm4qk')
 FastClick.attach(document.body)
 Vue.use(ToastPlugin)
 Vue.use(AlertPlugin)

@@ -1,4 +1,7 @@
 import { Logger } from '@/http/index'
+import createPlugin from 'logrocket-vuex'
+import LogRocket from 'logrocket'
+
 
 const userActions = ['ADD_FOOD', 'REMOVE_FOOD']
 
@@ -20,4 +23,4 @@ const collectUserActionPlugin = store => {
   })
 }
 
-export default [collectUserActionPlugin]
+export default [collectUserActionPlugin, createPlugin(LogRocket)]
