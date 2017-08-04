@@ -120,6 +120,7 @@ export default {
     display: flex;
     flex-direction: column;
     .title {
+      font-size: .8rem;
       margin-left: 10px; 
     }
 
@@ -129,7 +130,6 @@ export default {
         flex: 3;
         font-size: .8rem;
         /*margin-left: 5px;*/
-        .title,
         .favorite,
         .price {
           margin-top: 5px;
