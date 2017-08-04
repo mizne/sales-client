@@ -3,40 +3,45 @@
     <div v-if="mode === 'picMode'" class="food-img">
       <img class="img" :src="food.image" alt="">
     </div>
-
-    <div class="food-info">
+  
+    <div class="food-detail">
       <div class="title">{{food.name}}</div>
-      <div class="favorite">
-        <i class="icon-like"></i>
-        <span class="text">{{food.sellCount}}</span>
-        <span class="empty" v-if="food.rest === 0">已售完</span>
-      </div>
-      <div class="price">
-        <i class="icon-money"></i>
-        <span class="normal-price">{{food.price}}/{{food.unit}}</span>
-
-        <div v-if="needVip">
-          <span class="vip-text">会员:</span>
-        <span class="vip-price">{{food.vipPrice}}/{{food.unit}}</span>
+  
+      <div class="description">
+        <div class="food-info">
+          <div class="favorite">
+            <i class="icon-like"></i>
+            <span class="text">{{food.sellCount}}</span>
+            <span class="empty" v-if="food.rest === 0">已售完</span>
+          </div>
+          <div class="price">
+            <i class="icon-money"></i>
+            <span class="normal-price">{{food.price}}/{{food.unit}}</span>
+  
+            <div v-if="needVip">
+              <span class="vip-text">会员:</span>
+              <span class="vip-price">{{food.vipPrice}}/{{food.unit}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="food-action" v-if="(food.unit === '份' || food.unit === '条' || food.unit === '瓶' || food.unit === '个' || food.unit === '盒' || food.unit === '块' || food.unit === '桶') && food.rest > 0">
+          <span class="sub" @click="removeFood">
+            <i class="icon-sub" v-show="foodCount > 0"></i>
+          </span>
+          <span class="food-count">
+            {{foodCount > 0 ? foodCount : ''}}
+          </span>
+          <span class="plus" @click="addFood">
+            <i class="icon-plus"></i>
+          </span>
+        </div>
+        <div class="food-action" v-if="food.unit === '斤' && food.rest > 0" @click="showDetails">
+          <span v-if="hasChoose">已点</span>
+          <span v-else style="font-size: .7rem">点击选择斤数/口味</span>
         </div>
       </div>
     </div>
-    <div class="food-action" v-if="(food.unit === '份' || food.unit === '条' || food.unit === '瓶' || food.unit === '个' || food.unit === '盒' || food.unit === '块' || food.unit === '桶') && food.rest > 0">
-      <span class="sub" @click="removeFood">
-        <i class="icon-sub" v-show="foodCount > 0"></i>
-      </span>
-      <span class="food-count">
-        {{foodCount > 0 ? foodCount : ''}}
-      </span>
-      <span class="plus" @click="addFood">
-        <i class="icon-plus"></i>
-      </span>
-    </div>
-    <div class="food-action" v-if="food.unit === '斤' && food.rest > 0" @click="showDetails">
-      <span v-if="hasChoose">已点</span>
-      <span v-else style="font-size: .7rem">点击选择斤数/口味</span>
-    </div>
-
+  
   </li>
 </template>
 <script>
@@ -97,11 +102,11 @@ export default {
   margin-top: 10px;
   padding-bottom: 10px;
   border-bottom: 1px solid $greyText;
-  height: 100px;
+  height: 70px;
+  font-size: .6rem;
 
   .food-img {
-    width: 80px;
-    // background: url(../assets/images/default.jpg);
+    width: 60px; // background: url(../assets/images/default.jpg);
     // background-size: 100% 100%;
     height: 100%;
     .img {
@@ -110,74 +115,86 @@ export default {
     }
   }
 
-  .food-info {
-    flex: 3;
-    font-size: .8rem;
-    /*margin-left: 5px;*/
-    .title,
-    .favorite,
-    .price {
-      margin-top: 5px;
-      margin-left:5px;
-    }
-    .title{
-      text-align:left;
-    }
-    .price{
-      margin-bottom:5px;
-    }
-
-    .favorite,
-    .price {
-      display: flex;
-      align-items: center;
-
-      .icon-like {
-        color: $primaryColor;
-      }
-      .text {
-        margin-left: 5px;
-        color: $primaryColor;
-      }
-      .empty {
-        margin-left: 10px;
-        color: $warnColor;
-      }
-    }
-
-    .price {
-      font-size: .9rem;
-      .vip-text {
-        margin-left: 10px;
-        color: $warnColor;
-      }
-      .vip-price,
-      .text
-      {
-        color: $warnColor;
-      }
-    }
-  }
-
-  .food-action {
+  .food-detail {
     flex: 1;
-    padding-top: 25px;
     display: flex;
-
-    .sub,
-    .food-count,
-    .plus {
-      flex: 1;
-      @include flexboxCenter;
-
-      font-size: 1.1rem;
+    flex-direction: column;
+    .title {
+      margin-left: 10px; 
     }
 
-    .icon-plus, .icon-sub {
-      color: $primaryColor;
-      font-size: 1.1rem;
-    }
+    .description {
+      display: flex;
+      .food-info {
+        flex: 3;
+        font-size: .8rem;
+        /*margin-left: 5px;*/
+        .title,
+        .favorite,
+        .price {
+          margin-top: 5px;
+          margin-left: 5px;
+        }
+        .title {
+          font-size: .7rem;
+          text-align: left;
+        }
+        .price {
+          margin-bottom: 5px;
+        }
 
+        .favorite,
+        .price {
+          display: flex;
+          align-items: center;
+
+          .icon-like {
+            color: $primaryColor;
+          }
+          .text {
+            margin-left: 5px;
+            color: $primaryColor;
+          }
+          .empty {
+            margin-left: 10px;
+            color: $warnColor;
+          }
+        }
+
+        .price {
+          font-size: .7rem;
+          .vip-text {
+            margin-left: 10px;
+            color: $warnColor;
+          }
+          .vip-price,
+          .text {
+            color: $warnColor;
+          }
+        }
+      }
+
+      .food-action {
+        flex: 1;
+        padding-top: 25px;
+        display: flex;
+
+        .sub,
+        .food-count,
+        .plus {
+          flex: 1;
+          @include flexboxCenter;
+
+          font-size: 1.1rem;
+        }
+
+        .icon-plus,
+        .icon-sub {
+          color: $primaryColor;
+          font-size: 1.1rem;
+        }
+      }
+    }
   }
 }
 </style>
