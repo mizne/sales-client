@@ -4,7 +4,7 @@
       <div class="money">
         <i v-if="coupon.couponType === 'discount'" class="icon-discount"></i>
         <i v-else class="icon-money"></i>
-        <span style="margin-left: 10px;">{{coupon.value | couponValue(coupon)}}</span>
+        <span class="number">{{coupon.value | couponValue(coupon)}}</span>
       </div>
       <div class="info">
         <span>{{coupon.couponType | couponType(coupon)}}</span>
@@ -15,7 +15,7 @@
         <span>{{merchant}}</span>
       </div>
       <div class="coupon-date">
-        <span>{{coupon.createdAt | couponDate}} </span> -- 
+        <span>{{coupon.createdAt | couponDate}} </span> --
         <span> {{coupon.InvalidDate | couponDate}}</span>
       </div>
     </div>
@@ -85,7 +85,20 @@ export default {
     flex-direction: column;
 
     &.avaliable {
-      background-color: $primaryColor;
+      position: relative;
+      background: radial-gradient(white 0, white 5px, $primaryColor 5px);
+      background-size: 15px 15px;
+      background-position: 9px 3px;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 10px;
+        right: 0;
+        background-color: #1AAD19 !important;
+      }
     }
 
     &.disabled {
@@ -95,10 +108,17 @@ export default {
     .money,
     .info {
       @include flexboxCenter;
+      z-index: 2;
+
+      .number {
+        font-size: 1.3rem;
+        margin-left: 5px;
+      }
     }
 
     .info {
-      font-size: 0.9rem;
+      padding-left: 4px;
+      font-size: 0.8rem;
     }
   }
 
