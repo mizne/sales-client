@@ -30,7 +30,6 @@ const actions = {
       if (Object.prototype.toString.call(info) === '[object Object]') {
         info = [info]
 
-
         QRCodeInfo.setQrcodeId(qrcodeId)
         QRCodeInfo.setBizType(info[0].bizType)
         QRCodeInfo.setTableName(info[0].tableName)
@@ -52,7 +51,7 @@ const actions = {
         }
 
         // 存储多条优惠券信息
-        if (info.coupons) {
+        if (info[0].coupons) {
           QRCodeInfo.setCoupons(info[0].coupons)
           QRCodeInfo.setCouponRate(info[0].couponRate)
         } else {
