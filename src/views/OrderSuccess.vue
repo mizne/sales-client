@@ -207,7 +207,7 @@ export default {
   },
   methods: {
     toCoupon() {
-      if (this.firstOrderDiscount) {
+      if (this.orderDetail.firstOrderDiscount) {
         return vAlert({ content: '抱歉, 您已享有首杯半价优惠, 不能使用其他优惠券了' })
       }
       this.$router.push({ name: 'SelectCoupon' })
