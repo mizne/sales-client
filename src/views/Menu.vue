@@ -154,7 +154,7 @@ export default {
       //   }
       //   window.scrollTo(0, step)
       // }, 1)
-  
+
       window.scrollTo(0, this.listHeight[index])
     },
     _initAllFoods() {
@@ -180,21 +180,29 @@ export default {
       document.removeEventListener('scroll', this._scrollListener)
     },
     _scrollListener() {
-      const rect = this.$refs.foodsWrapper.getBoundingClientRect()
-      const scrollY = -(rect.top - this._rectTop)
-      this.foodsScrollY = scrollY
+      if (this.$refs.foodsWrapper) {
+        const rect = this.$refs.foodsWrapper.getBoundingClientRect()
+        const scrollY = -(rect.top - this._rectTop)
+        this.foodsScrollY = scrollY
+      }
+
     },
     _calcHeight() {
-      const foodsList = this.$refs.foodsWrapper.querySelectorAll('.food-type-container')
-      let height = 0
-      this.listHeight.push(height)
-      for (let list of foodsList) {
-        height += list.offsetHeight
+      if (this.$refs.foodsWrapper) {
+        const foodsList = this.$refs.foodsWrapper.querySelectorAll('.food-type-container')
+        let height = 0
         this.listHeight.push(height)
+        for (let list of foodsList) {
+          height += list.offsetHeight
+          this.listHeight.push(height)
+        }
       }
+
     },
     _initRectTop() {
-      this._rectTop = this.$refs.foodsWrapper.getBoundingClientRect().top
+      if (this.$refs.foodsWrapper) {
+        this._rectTop = this.$refs.foodsWrapper.getBoundingClientRect().top
+      }
     }
   },
   mounted() {
