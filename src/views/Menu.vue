@@ -154,7 +154,7 @@ export default {
       //   }
       //   window.scrollTo(0, step)
       // }, 1)
-
+  
       window.scrollTo(0, this.listHeight[index])
     },
     _initAllFoods() {

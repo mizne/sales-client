@@ -15,7 +15,6 @@ export default {
   right: 0;
   bottom: 50px;
   left: 0;
-  overflow-y: overlay;
 }
 </style>
 
