@@ -152,8 +152,8 @@ export default {
           resultPrice = this.orderDetail.totalPrice
         }
 
-        if (this.firstOrderDiscount) {
-          resultPrice -= this.firstOrderDiscount
+        if (this.orderDetail.firstOrderDiscount) {
+          resultPrice -= this.orderDetail.firstOrderDiscount
         }
 
         if (this.selectedCoupon) {
