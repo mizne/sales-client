@@ -20,14 +20,6 @@ export default {
       'loading'
     ])
   },
-  created() {
-    // 每次从支付宝或微信 页面回来 重启应用
-    // 将 tenantId 初始化到vuex中
-    const tenantId = QRCodeInfo.getTenantId()
-    if (tenantId) {
-      this.$store.commit('SET_TENANT_ID', tenantId)
-    }
-  }
 }
 </script>
 <style lang="less">

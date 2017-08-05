@@ -262,14 +262,6 @@ export default {
   },
   created() {
     this._init()
-
-    // 处理从 微信支付页面 返回来的情况
-    if (!this.orderDetail) {
-      this.$store.dispatch('FETCH_ORDER')
-        .catch(err => {
-          vAlert({ content: '获取订单失败' })
-        })
-    }
   },
   beforeRouteEnter(to, from, next) {
     next((vm) => {
