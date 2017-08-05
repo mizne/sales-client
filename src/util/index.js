@@ -100,6 +100,7 @@ const checkBrowserForPay = function() {
 // date: Date
 // 返回 date的 多少时间前的描述
 // 譬如 5秒前、40分钟前、3小时14分钟前
+// 如 超过1天 则返回时间描述格式 YYYY-MM-DD HH:mm
 const timeago = function (date) {
   const now = new Date().getTime()
   const d = date.getTime()
