@@ -33,11 +33,11 @@
       <div class="money-info">
         <div class="bill-money">
           <span>账单金额{{isVip ? '(会员价)' : ''}}：</span>
-          <span class="text">{{orderDetail.isVip ? orderDetail.totalVipPrice : orderDetail.totalPrice}}</span>
+          <span class="text">{{orderDetail.actualAmount}}</span>
         </div>
         <div class="bill-mode">
           <span>{{payMode}}：</span>
-          <span class="text">{{orderDetail.isVip ? orderDetail.totalVipPrice : orderDetail.totalPrice}}</span>
+          <span class="text">{{orderDetail.actualAmount}}</span>
         </div>
       </div>
   
@@ -54,6 +54,10 @@
         <div class="coupon-info" v-if="orderDetail.couponValue">
           <span>已使用优惠券: {{orderDetail.couponValue | couponValue(orderDetail.couponType)}} </span>
         </div>
+
+        <div class="coupon-info" v-if="orderDetail.firstOrderDiscount">
+          <span>已享用首杯半价优惠: {{orderDetail.firstOrderDiscount}} 元</span>
+        </div>
   
         <div class="delivery-info" v-if="orderDetail.deliveryFee">
           <span>配送费:</span>
@@ -62,7 +66,7 @@
   
         <div class="order-total">
           <span>总计</span>
-          <span>{{totalPrice}}元</span>
+          <span>{{orderDetail.actualAmount}}元</span>
         </div>
       </div>
   
@@ -89,23 +93,6 @@ export default {
     },
     payMode: {
       type: String
-    }
-  },
-  computed: {
-    totalPrice() {
-      if (this.orderDetail.isVip) {
-        if (this.orderDetail.deliveryFee) {
-          return (+this.orderDetail.totalVipPrice) + (+this.orderDetail.deliveryFee)
-        } else {
-          return this.orderDetail.totalVipPrice
-        }
-      } else {
-        if (this.orderDetail.deliveryFee) {
-          return (+this.orderDetail.totalPrice) + (+this.orderDetail.deliveryFee)
-        } else {
-          return this.orderDetail.totalPrice
-        }
-      }
     }
   },
   filters: {

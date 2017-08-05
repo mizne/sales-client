@@ -152,6 +152,10 @@ export default {
           resultPrice = this.orderDetail.totalPrice
         }
 
+        if (this.firstOrderDiscount) {
+          resultPrice -= this.firstOrderDiscount
+        }
+
         if (this.selectedCoupon) {
           resultPrice = new Coupon(this.selectedCoupon.couponType, this.selectedCoupon.value).computePrice(resultPrice)
         }
@@ -171,7 +175,7 @@ export default {
         }
 
         if (resultPrice < 0) {
-          resultPrice = 0
+          resultPrice = 0.01
         }
 
         if (freePrice > 0) {
@@ -203,6 +207,9 @@ export default {
   },
   methods: {
     toCoupon() {
+      if (this.firstOrderDiscount) {
+        return vAlert({ content: '抱歉, 您已享有首杯半价优惠, 不能使用其他优惠券了' })
+      }
       this.$router.push({ name: 'SelectCoupon' })
     },
     addMoreFood() {

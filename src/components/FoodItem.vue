@@ -13,6 +13,7 @@
             <i class="icon-like"></i>
             <span class="text">{{food.sellCount}}</span>
             <span class="empty" v-if="food.rest === 0">已售完</span>
+            <span class="coupon" v-if="food.coupon">{{food.coupon}}</span>
           </div>
           <div class="price">
             <i class="icon-money"></i>
@@ -121,7 +122,7 @@ export default {
     flex-direction: column;
     .title {
       font-size: .8rem;
-      margin-left: 10px; 
+      margin-left: 10px;
     }
 
     .description {
@@ -130,23 +131,11 @@ export default {
         flex: 3;
         font-size: .8rem;
         /*margin-left: 5px;*/
-        .favorite,
-        .price {
-          margin-top: 5px;
-          margin-left: 5px;
-        }
-        .title {
-          font-size: .7rem;
-          text-align: left;
-        }
-        .price {
-          margin-bottom: 5px;
-        }
-
-        .favorite,
-        .price {
+        .favorite {
           display: flex;
           align-items: center;
+          margin-top: 5px;
+          margin-left: 5px;
 
           .icon-like {
             color: $primaryColor;
@@ -159,9 +148,21 @@ export default {
             margin-left: 10px;
             color: $warnColor;
           }
+
+          .coupon {
+            border: 1px solid $warnColor;
+            padding: 0 5px;
+            margin-left: 5px;
+            color: $warnColor;
+          }
         }
 
         .price {
+          margin-top: 5px;
+          margin-left: 5px;
+          margin-bottom: 5px;
+          display: flex;
+          align-items: center;
           font-size: .7rem;
           .vip-text {
             margin-left: 10px;
