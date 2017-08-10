@@ -11,7 +11,6 @@ import './assets/iconfont/iconfont.css'
 import App from './App'
 import router from '@/router/index'
 import store from '@/store/index'
-import '@/util/polyfill.js'
 import '@/util/error-handler.js'
 
 import LogRocket from 'logrocket'
