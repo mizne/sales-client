@@ -293,10 +293,10 @@ export default {
   .deal-header-container {}
 
   .deal-content-container {
-
     background-color: $greyBackground;
     overflow-x: hidden;
     overflow-y: auto;
+    margin-bottom: 50px;
 
     .tip {
       margin-top: 35px;

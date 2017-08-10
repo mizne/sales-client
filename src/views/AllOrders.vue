@@ -83,8 +83,7 @@ export default {
   .deal-content-container {
     padding: 10px;
     background-color: $greyBackground;
-    height: 100vh;
-
+    bottom: 0;
     .popup-radio {
       background-color: white;
     }

@@ -148,7 +148,6 @@ export default {
 
   .deal-content-container {
     padding: 10px;
-    height: 100vh;
     background-color: $greyBackground;
   }
 

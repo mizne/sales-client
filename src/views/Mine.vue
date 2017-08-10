@@ -110,6 +110,7 @@ export default {
 @import '../assets/css/main.scss';
 
 .vip-card-container {
+  height: 100vh;
   .deal-header-container {}
 
   .deal-content-container {

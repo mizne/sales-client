@@ -10,11 +10,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 .deal-content-container {
-  position: absolute;
-  top: 40px;
-  right: 0;
-  bottom: 50px;
-  left: 0;
+  position: relative;
+  min-height: calc(100vh - 60px);
 }
 </style>
 
