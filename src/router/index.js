@@ -16,7 +16,7 @@ import OrderEnsure from '@/views/OrderEnsure'
 import AlipayCallback from '@/views/AlipayCallback'
 import OrderFailed from '@/views/OrderFailed'
 import ShopComment from '@/views/ShopComment'
-import VIPCard from '@/views/VIPCard'
+import Mine from '@/views/Mine'
 import Alipay from '@/views/Alipay'
 import FoodDetail from '@/views/FoodDetail'
 import ShopCommentView from '@/views/ShopCommentView'
@@ -116,9 +116,9 @@ const routes = [
     component: ShopComment
   },
   {
-    path: '/vip-card',
-    name: 'VIPCard',
-    component: VIPCard
+    path: '/mine',
+    name: 'Mine',
+    component: Mine
   },
   {
     path: '/alipay',

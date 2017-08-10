@@ -15,7 +15,7 @@
     </div>
     <div class="price" v-if="order.status === 2">
       <i class="icon-money"></i>
-      {{order.actual_amount}}
+      {{order.actualAmount}}
     </div>
   </div>
 </template>

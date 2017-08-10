@@ -9,10 +9,14 @@ const state = {
   deliveryTime: '', // 配送所需时间
   deliveryDistance: 0, // 配送距离
   startPrice: '', // 起送价格
-  distanceTooFar: false
+  distanceTooFar: false,
+  tabIndex: 0
 }
 
 const mutations = {
+  SET_TAB_INDEX(state, index) {
+    state.tabIndex = index
+  },
   SET_IS_VIP(state, isVip) {
     state.isVip = isVip
   },
@@ -129,6 +133,9 @@ const getters = {
   },
   distanceTooFar(state) {
     return state.distanceTooFar
+  },
+  tabIndex(state) {
+    return state.tabIndex
   }
 }
 

@@ -15,7 +15,7 @@
         <router-link to="/shop-comment-view">
           <div class="text">商家评价</div>
         </router-link>
-        <router-link to="/vip-card">
+        <router-link to="/mine">
           <div class="text">我的</div>
         </router-link>
       </div>

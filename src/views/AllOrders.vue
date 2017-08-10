@@ -13,6 +13,10 @@
         <div class="no-order">还没有订单呢, 还不快去下单 ^_^</div>
       </template>
     </deal-content>
+
+    <deal-footer>
+      <tabs></tabs>
+    </deal-footer>
   </div>
 </template>
 <script>
@@ -21,6 +25,8 @@ import { mapGetters } from 'vuex'
 
 import DealHeader from '@/components/DealHeader'
 import DealContent from '@/components/DealContent'
+import DealFooter from '@/components/DealFooter'
+import Tabs from '@/components/Tabs'
 import OrderItem from '@/components/OrderItem'
 import { timeago, generateBetweenDate } from '@/util/index'
 const dateMap = {
@@ -33,6 +39,8 @@ export default {
   components: {
     DealHeader,
     DealContent,
+    DealFooter,
+    Tabs,
     OrderItem,
     PopupRadio
   },

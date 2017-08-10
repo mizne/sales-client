@@ -52,7 +52,7 @@ const actions = {
         }
       } else if (state.purposeOfPhoneVerify === VERIFY_USER) {
         commit('SHOW_LOADING', false)
-        router.push({ name: 'VIPCard' })
+        router.push({ name: 'Mine' })
       }
     })
     .catch(err => {

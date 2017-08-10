@@ -28,22 +28,27 @@
         </div>
   
         <!-- <div class="card-item points">
-          <i class="icon-points"></i>
-          <span class="text">积分换券</span>
-          <i class="icon-forward"></i>
-        </div>
-        <div class="card-item user">
-          <i class="icon-user"></i>
-          <span class="text">个人资料</span>
-          <i class="icon-forward"></i>
-        </div>
-        <div class="card-item shops">
-          <i class="icon-shop"></i>
-          <span class="text">使用门店</span>
-          <i class="icon-forward"></i>
-        </div> -->
+              <i class="icon-points"></i>
+              <span class="text">积分换券</span>
+              <i class="icon-forward"></i>
+            </div>
+            <div class="card-item user">
+              <i class="icon-user"></i>
+              <span class="text">个人资料</span>
+              <i class="icon-forward"></i>
+            </div>
+            <div class="card-item shops">
+              <i class="icon-shop"></i>
+              <span class="text">使用门店</span>
+              <i class="icon-forward"></i>
+            </div> -->
       </div>
     </deal-content>
+  
+    <deal-footer>
+      <tabs>
+      </tabs>
+    </deal-footer>
   </div>
 </template>
 <script>
@@ -51,6 +56,7 @@ import DealHeader from '@/components/DealHeader'
 import DealContent from '@/components/DealContent'
 import DealFooter from '@/components/DealFooter'
 import DealDialog from '@/components/DealDialog'
+import Tabs from '@/components/Tabs'
 
 import QRCodeInfo from '@/models/QRCodeInfo'
 import { vAlert, vConfirm } from '@/util/vux-wrapper'
@@ -64,7 +70,8 @@ export default {
     DealHeader,
     DealContent,
     DealFooter,
-    DealDialog
+    DealDialog,
+    Tabs
   },
   data() {
     return {
@@ -86,13 +93,13 @@ export default {
   beforeRouteEnter(to, from, next) {
     if (!QRCodeInfo.hasPhoneNumber()) {
       vConfirm({ content: '您还没有验证手机号码呢', confirmText: '去验证', cancelText: '不了' })
-      .then(_ => {
-        store.commit('SET_PURPOSE_OF_PHONE_VERIFY', VERIFY_USER)
-        router.push({ name: 'PhoneVerify' })
-      })
-      .catch(_ => {
-        next(false)
-      })
+        .then(_ => {
+          store.commit('SET_PURPOSE_OF_PHONE_VERIFY', VERIFY_USER)
+          router.push({ name: 'PhoneVerify' })
+        })
+        .catch(_ => {
+          next(false)
+        })
     } else {
       next()
     }
@@ -122,7 +129,7 @@ export default {
     .card-detail {
       margin-top: 10px;
       height: 230px;
-      
+
 
       .abstract {
         display: flex;
@@ -175,22 +182,9 @@ export default {
         i {
           transform: scale(2);
         }
-
-
       }
     }
   }
-
-  .deal-footer-container {
-    background-color: black;
-    .comment,
-    .add-food,
-    .pay,
-    {
-      flex: 1;
-    }
-  }
-
   .deal-dialog-container {
     .content {
       @include flexboxCenter;
