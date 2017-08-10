@@ -2,7 +2,6 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import FastClick from 'fastclick'
-import { ToastPlugin, AlertPlugin, ConfirmPlugin } from 'vux'
 import 'normalize.css'
 import 'animate.css'
 import 'babel-polyfill'
@@ -17,9 +16,6 @@ import LogRocket from 'logrocket'
 
 LogRocket.init('49bwep/sales-zm4qk')
 FastClick.attach(document.body)
-Vue.use(ToastPlugin)
-Vue.use(AlertPlugin)
-Vue.use(ConfirmPlugin)
 Vue.config.productionTip = false
 // Vue.config.devtools = true
 

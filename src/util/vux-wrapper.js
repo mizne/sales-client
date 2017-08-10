@@ -1,8 +1,9 @@
 import Vue from 'vue'
-import { AlertPlugin, ConfirmPlugin } from 'vux'
+import { AlertPlugin, ConfirmPlugin, ToastPlugin } from 'vux'
 
 Vue.use(AlertPlugin)
 Vue.use(ConfirmPlugin)
+Vue.use(ToastPlugin)
 
 const vConfirm = function({ title = '提示', content = '小v宝 友情提醒', confirmText, cancelText }) {
   return new Promise((resolve, reject) => {
