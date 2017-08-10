@@ -5,6 +5,7 @@ import FastClick from 'fastclick'
 import { ToastPlugin, AlertPlugin, ConfirmPlugin } from 'vux'
 import 'normalize.css'
 import 'animate.css'
+import 'babel-polyfill'
 
 import './assets/iconfont/iconfont.css'
 import App from './App'
