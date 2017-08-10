@@ -3,6 +3,7 @@
     <swiper :list="images" :auto="true" height="180px" dots-class="custom-bottom" dots-position="center"></swiper>
     <industry-area></industry-area>
     <promotions-area></promotions-area>
+    <recommend-area></recommend-area>
     <deal-footer>
       <tabs>
       </tabs>
@@ -19,6 +20,7 @@ import Tabs from '@/components/Tabs'
 import DealFooter from '@/components/DealFooter'
 import IndustryArea from '@/components/IndustryArea'
 import PromotionsArea from '@/components/PromotionsArea'
+import RecommendArea from '@/components/RecommendArea'
 
 export default {
   name: 'MultiTenantHome',
@@ -28,7 +30,8 @@ export default {
     Tabs,
     DealFooter,
     IndustryArea,
-    PromotionsArea
+    PromotionsArea,
+    RecommendArea
   },
   data() {
     return {
