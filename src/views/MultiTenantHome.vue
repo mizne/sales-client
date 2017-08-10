@@ -1,7 +1,7 @@
 <template>
   <div class="home-page">
     <img style="width:100%;height:100%;" src="../assets/images/dinning.jpg" alt="">
-    <div class="each-section">
+     <!-- <div class="each-section">
       <ul>
         <li v-for="item in path1" :key="item.$index" @click="toIndustry(item)">
           <span>
@@ -19,8 +19,10 @@
           <span>{{item.label}}</span>
         </li>
       </ul>
-    </div>
-  
+    </div>  -->
+
+    <a href="tel:18761342997">万鑫</a>
+    <a href="geopoint:108.954823,34.275891">我的位置</a>
     <footer>
       <x-button type="primary" @click.native="toMe">我的</x-button>
     </footer>
@@ -159,6 +161,17 @@ export default {
         }
       }
     }
+  }
+
+  a {
+     display: block;
+     width: 100%; 
+     height: 40px;
+     background-color: green;
+     color: white;
+     margin-top: 10px;
+     text-align: center;
+     line-height: 40px;
   }
 
   footer {
