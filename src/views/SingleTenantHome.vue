@@ -3,7 +3,7 @@
     <div class="background" :style="homeStyle"></div>
   
     <group class="phone" label-width="4.5em" label-margin-right="2em" label-align="right">
-      <cell title="全国统一客服热线" value="025-86662644"></cell>
+      <cell title="电话号码" value="025-86662644"></cell>
     </group>
     <footer class="footer">
       <div class="item">
@@ -119,7 +119,7 @@ export default {
   right: 0;
 
   .background {
-    height: calc(100% - 133px);
+    height: calc(100% - 103px);
     background-size: 100% 100% !important;
   }
 

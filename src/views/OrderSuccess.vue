@@ -1,12 +1,12 @@
 <template>
   <div class="order-success-container">
     <deal-header title="下单成功">
-      <x-button slot="left" @click.native="addMoreFood" :mini="true" type="primary">继续添加</x-button>
+      <!-- <x-button slot="left" @click.native="addMoreFood" :mini="true" type="primary">继续添加</x-button> -->
     </deal-header>
   
     <deal-content v-if="orderDetail">
-      <scroll-notification :texts="promptText"></scroll-notification>
-      <div class="tip">
+      <!-- <scroll-notification :texts="promptText"></scroll-notification> -->
+      <!-- <div class="tip">
         <div class="line">
           <i class="icon-point"></i>
           <span>若退出, 再扫二维码, 即可加单或买单</span>
@@ -19,7 +19,7 @@
           </div>
           <div class="placeholder"></div>
         </div>
-      </div>
+      </div> -->
       <div class="order-info">
         <div class="table-number">
           <span style="margin-left: 20px;">台
@@ -256,7 +256,7 @@ export default {
 
       this.promptText = this.isDealBizType
         ? ['欢迎光顾小店']
-        : ['e代售提醒您先买单, 订单10分钟后失效']
+        : ['小v宝e代售提醒您先买单, 订单10分钟后失效']
 
     }
   },
@@ -350,7 +350,7 @@ export default {
       color: #888;
 
       .coupon-area {
-        color: $warnColor;
+        // color: $warnColor;
       }
 
       .abstract {
@@ -359,9 +359,10 @@ export default {
         align-items: center;
         height: 50px;
         background-color: #fff;
+        color: #777;
 
         .total-cost {
-          color: $primaryColor;
+          // color: $primaryColor;
         }
       }
 
@@ -435,6 +436,15 @@ export default {
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.4);
     z-index: 1000;
+  }
+}
+</style>
+<style lang="scss">
+@import '../assets/css/main.scss';
+.coupon-area {
+  .weui-cell__ft {
+    // background-color: $warnColor;
+    font-weight: bold;
   }
 }
 </style>

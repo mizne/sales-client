@@ -46,6 +46,7 @@ export default {
 
     .title {
       flex: 1;
+      text-align: left;
     }
 
     .header-left,

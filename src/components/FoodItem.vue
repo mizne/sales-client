@@ -26,10 +26,10 @@
             <i class="icon-money"></i>
             <span class="normal-price">{{food.price}}/{{food.unit}}</span>
   
-            <div v-if="needVip">
+            <!-- <div v-if="needVip">
               <span class="vip-text">会员价:</span>
               <span class="vip-price">{{food.vipPrice}}/{{food.unit}}</span>
-            </div>
+            </div> -->
           </div>
         </div>
         <div class="food-action" v-if="(food.unit === '份' || food.unit === '条' || food.unit === '瓶' || food.unit === '个' || food.unit === '盒' || food.unit === '块' || food.unit === '桶') && food.rest > 0">
@@ -130,9 +130,9 @@ export default {
     flex: 1;
     display: flex;
     flex-direction: column;
+    padding-left: 10px;
     .title {
       font-size: .8rem;
-      margin-left: 10px;
       display: flex;
       .name {
         max-width: 160px;
@@ -159,7 +159,6 @@ export default {
           display: flex;
           align-items: center;
           margin-top: 5px;
-          margin-left: 5px;
 
           .icon-like {
             color: #777;
@@ -192,7 +191,6 @@ export default {
 
         .price {
           margin-top: 5px;
-          margin-left: 5px;
           margin-bottom: 5px;
           display: flex;
           align-items: center;
@@ -200,6 +198,9 @@ export default {
           .vip-text {
             margin-left: 10px;
             color: $warnColor;
+          }
+          .icon-money {
+            font-size: .7rem;
           }
           .vip-price,
           .text {

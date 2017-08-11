@@ -11,10 +11,10 @@
       </li>
     </deal-dialog>
   
-    <deal-header title="菜单">
-      <span class="menu" slot="left">
+    <deal-header :title="tenantName">
+      <!-- <span class="menu" slot="left">
         <i class="icon-menu" @click="show"></i>
-      </span>
+      </span> -->
     </deal-header>
   
     <deal-content>
@@ -93,7 +93,8 @@ export default {
       'showMode',
       'needVipToast',
       'officialNews',
-      'orderDetail'
+      'orderDetail',
+      'tenantName'
     ])
   },
   watch: {
@@ -263,7 +264,7 @@ export default {
       left: 0;
       bottom: 40px;
       width: 80px;
-      border-right: 1px solid $greyText;
+      border-right: 1px solid #EEE;
       overflow: overlay;
 
       .dish-type-container {

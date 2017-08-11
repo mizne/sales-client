@@ -1,7 +1,7 @@
 <template>
   <div class="shopping-cart-container">
     <deal-header title="购物车">
-      <x-button slot="left" @click.native="addMoreFood" :mini="true" type="primary">继续添加</x-button>
+      <!-- <x-button slot="left" @click.native="addMoreFood" :mini="true" type="primary">继续添加</x-button> -->
     </deal-header>
   
     <deal-content>
@@ -53,7 +53,7 @@
           </template>
           <template v-else>
             <div class="order-tip">
-              <i class="icon-tip"></i>
+              <!-- <i class="icon-tip"></i> -->
               <span class="text">您还未点菜哟 ^_^</span>
             </div>
           </template>
@@ -61,9 +61,12 @@
         </div>
   
         <delivery v-if="needDeliveryFee" :delivery-distance="deliveryDistance" :delivery-fee-value="deliveryFeeValue" :delivery-time="deliveryTime"></delivery>
-  
+
+        <div class="remark-label">
+          <span>收货地址: </span>
+        </div>
         <div class="remark">
-          <x-textarea :max="50" v-model="remark" :placeholder="remarkPlaceholder"></x-textarea>
+          <x-textarea :max="50" :rows="2" v-model="remark" :placeholder="remarkPlaceholder"></x-textarea>
         </div>
       </div>
   
@@ -230,6 +233,7 @@ export default {
         background-color: #fff;
         text-align: center;
         border-radius: 5px;
+        color: #777;
 
         &.hasScroll {
           margin-top: 40px;
@@ -242,7 +246,7 @@ export default {
         }
 
         .food-cost {
-          color: $primaryColor;
+          // color: $primaryColor;
         }
       }
 
@@ -274,6 +278,7 @@ export default {
         .order-tip {
           @include flexboxCenter;
           color: $primaryColor;
+          color: #777;
           background-color: #fff;
           height: 200px;
           border-radius: 5px;
@@ -286,6 +291,12 @@ export default {
             margin-left: 10px;
           }
         }
+      }
+
+      .remark-label {
+        color: #555;
+        padding-left: 5px;
+        margin-top: 10px;
       }
 
       .remark {

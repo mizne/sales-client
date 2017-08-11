@@ -56,7 +56,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   padding: 3px 10px;
-  background-color: lighten($primaryColor, 60%);
+  // background-color: lighten($primaryColor, 60%);
   color: $warnColor;
 
   .content-wrapper {
