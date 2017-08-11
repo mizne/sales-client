@@ -1,7 +1,7 @@
 <template>
   <li class="food-item" @click="showDetails">
-    <div v-if="mode === 'picMode'" class="food-img" :style="{'background-image': 'url('+food.image+')'}">
-      <!-- <img class="img" :src="food.image" alt=""> -->
+    <div v-if="mode === 'picMode'" class="food-img">
+       <img class="img" style="max-width: 100%; height: 100%;" :src="food.image" alt=""> 
     </div>
   
     <div class="food-detail">
@@ -82,6 +82,11 @@ export default {
     },
     hasChoose() {
       return !!this.tempShoppingCart[this.food.id]
+    },
+    backgroundStyle() {
+      return {
+        'background-image': `url(${this.food.image}) !important`
+      }
     }
   },
   methods: {
@@ -114,10 +119,8 @@ export default {
     width: 60px;
     height: 100%;
     background: center center no-repeat;
-    background-size: cover; // .img {
-    //   width: 100%;
-    //   height: 100%;
-    // }
+    background-size: cover; 
+    // background-image: url(../assets/images/default.jpg);
   }
 
   .food-detail {

@@ -199,7 +199,7 @@ export default {
     images() {
       return Array(3).fill({
         url: 'javascript:',
-        img: this.foodDetail.food.image
+        img: this.foodDetail.food.image || require('../assets/images/default.jpg')
       })
     }
   },
