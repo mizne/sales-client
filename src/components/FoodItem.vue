@@ -7,7 +7,7 @@
     <div class="food-detail">
       <div class="title">
         <div class="name">{{food.name}}</div>
-        <span class="coupon" v-if="food.coupon">{{food.coupon}}</span>
+        <div class="coupon" v-if="food.coupon">{{food.coupon}}</div>
       </div>
   
       <div class="description">
@@ -130,6 +130,7 @@ export default {
     .title {
       font-size: .8rem;
       margin-left: 10px;
+      display: flex;
       .name {
         max-width: 160px;
         overflow: hidden;
@@ -137,6 +138,7 @@ export default {
         text-overflow: ellipsis;
       }
       .coupon {
+        @include flexboxCenter;
         border: 1px solid $warnColor;
         padding: 0 5px;
         margin-left: 5px;
