@@ -7,6 +7,9 @@ class MenuService extends BaseService {
     return this.getBizTypeHttp()
       .get(`/menu${query}`)
       .then(menu => {
+        // 过滤食物为空的subMenu
+        menu = menu.filter(subMenu => subMenu.foods.length > 0)
+
         // 按时间倒序 排列 商品评论
         menu.forEach(subMenu => {
           subMenu.foods.forEach((food, i) => {
