@@ -113,6 +113,7 @@ export default {
   .food-img {
     width: 60px;
     height: 100%;
+    background: center center no-repeat;
     background-size: cover; // .img {
     //   width: 100%;
     //   height: 100%;
