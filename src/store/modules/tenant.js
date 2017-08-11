@@ -131,7 +131,7 @@ const getters = {
     if (Array.isArray(state.officialNews)) {
       return state.officialNews
     }
-    return [state.officialNews]
+    return state.officialNews.split('&')
   }
 }
 

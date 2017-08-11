@@ -5,7 +5,10 @@
     </div>
   
     <div class="food-detail">
-      <div class="title">{{food.name}}</div>
+      <div class="title">
+        <span class="name">{{food.name}}</span>
+        <span class="coupon" v-if="food.coupon">{{food.coupon}}</span>
+      </div>
   
       <div class="description">
         <div class="food-info">
@@ -14,7 +17,7 @@
             <span class="text">{{food.sellCount}}</span>
             <span class="rest" v-if="food.rest > 0">还剩 {{food.rest + food.unit}}</span>
             <span class="empty" v-if="food.rest === 0">已售完</span>
-            <span class="coupon" v-if="food.coupon">{{food.coupon}}</span>
+  
           </div>
           <div class="price">
             <i class="icon-money"></i>
@@ -124,6 +127,12 @@ export default {
     .title {
       font-size: .8rem;
       margin-left: 10px;
+      .coupon {
+        border: 1px solid $warnColor;
+        padding: 0 5px;
+        margin-left: 5px;
+        color: $warnColor;
+      }
     }
 
     .description {
@@ -151,13 +160,6 @@ export default {
           }
           .empty {
             margin-left: 10px;
-            color: $warnColor;
-          }
-
-          .coupon {
-            border: 1px solid $warnColor;
-            padding: 0 5px;
-            margin-left: 5px;
             color: $warnColor;
           }
         }
