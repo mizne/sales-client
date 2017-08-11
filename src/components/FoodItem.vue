@@ -15,7 +15,7 @@
           <div class="favorite">
             <i class="icon-like"></i>
             <span class="text">{{food.sellCount}}</span>
-            <span class="rest" v-if="food.rest > 0">还剩 {{food.rest + food.unit}}</span>
+             <!-- <span class="rest" v-if="food.rest > 0">还剩 {{food.rest + food.unit}}</span>  -->
             <span class="empty" v-if="food.rest === 0">已售完</span>
   
           </div>
@@ -30,8 +30,8 @@
           </div>
         </div>
         <div class="food-action" v-if="(food.unit === '份' || food.unit === '条' || food.unit === '瓶' || food.unit === '个' || food.unit === '盒' || food.unit === '块' || food.unit === '桶') && food.rest > 0">
-          <span class="sub" @click="removeFood">
-            <i class="icon-sub" v-show="foodCount > 0"></i>
+          <span class="sub" v-if="foodCount > 0" @click="removeFood">
+            <i class="icon-sub"></i>
           </span>
           <span class="food-count">
             {{foodCount > 0 ? foodCount : ''}}

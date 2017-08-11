@@ -5,9 +5,10 @@
   
     <deal-content>
       <div class="food-info">
-        <div :style="{'width': '100%', 'height': '250px', 'background': `url(${foodDetail.food.image})`, 'background-size': 'contain'}">
+        <swiper :list="images" :auto="true" height="400px" dots-class="custom-bottom" dots-position="center"></swiper>
+        <!-- <div :style="{'width': '100%', 'height': '250px', 'background': `url(${foodDetail.food.image})`, 'background-size': 'contain'}"> -->
           <!--<img style="width:100%;height:300px;" :src="foodDetail.food.image" alt="">-->
-        </div>
+        <!-- </div> -->
         <div class="title">{{foodDetail.food.name}}</div>
         <div class="favorite">
           <i class="icon-like"></i>
@@ -107,7 +108,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import fecha from 'fecha'
-import { XButton, XNumber, XTextarea } from 'vux'
+import { XButton, XNumber, XTextarea, Swiper } from 'vux'
 
 import DealHeader from '@/components/DealHeader'
 import DealContent from '@/components/DealContent'
@@ -129,6 +130,7 @@ export default {
     DealContent,
     DealFooter,
     CommentItem,
+    Swiper,
     'deal-cart-bar': DealShopCartBar,
   },
   mixins: [vipToast, toShoppingCartPrompt],
@@ -193,7 +195,13 @@ export default {
       'foodDetail',
       'tempShoppingCart',
       'isAddMoreFood',
-    ])
+    ]),
+    images() {
+      return Array(3).fill({
+        url: 'javascript:',
+        img: this.foodDetail.food.image
+      })
+    }
   },
   created() {
     this.isDealBizType = QRCodeInfo.isDealBizType()
