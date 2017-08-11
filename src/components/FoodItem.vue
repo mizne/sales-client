@@ -15,7 +15,7 @@
           <div class="favorite">
             <i class="icon-like"></i>
             <span class="text">{{food.sellCount}}</span>
-            <!-- <span class="rest" v-if="food.rest > 0">还剩 {{food.rest + food.unit}}</span>  -->
+             <span class="rest" v-if="food.rest > 0">还剩 {{food.rest + food.unit}}</span>  
             <span class="empty" v-if="food.rest === 0">已售完</span>
   
           </div>
