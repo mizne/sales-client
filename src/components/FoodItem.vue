@@ -1,7 +1,7 @@
 <template>
   <li class="food-item" @click="showDetails">
     <div v-if="mode === 'picMode'" class="food-img">
-       <img class="img" style="max-width: 100%; height: 100%;" :src="food.image" alt=""> 
+       <img class="img" style="width: 100%; height: 100%;" :src="food.image" alt=""> 
     </div>
   
     <div class="food-detail">
