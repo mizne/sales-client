@@ -13,10 +13,13 @@
       <div class="description">
         <div class="food-info">
           <div class="favorite">
-            <i class="icon-like"></i>
+            <!-- <i class="icon-like"></i> -->
+            <span class="title-text">已售</span>
             <span class="text">{{food.sellCount}}</span>
-             <span class="rest" v-if="food.rest > 0">还剩 {{food.rest + food.unit}}</span>  
+             <!-- <span class="rest" v-if="food.rest > 0">还剩 {{food.rest + food.unit}}</span>   -->
             <span class="empty" v-if="food.rest === 0">已售完</span>
+            <i class="icon-Zambia" v-if="food.Ratings.length > 0"></i>
+            <span class="zambia-count" v-if="food.Ratings.length > 0">{{food.Ratings.length}}</span>
   
           </div>
           <div class="price">
@@ -24,7 +27,7 @@
             <span class="normal-price">{{food.price}}/{{food.unit}}</span>
   
             <div v-if="needVip">
-              <span class="vip-text">会员:</span>
+              <span class="vip-text">会员价:</span>
               <span class="vip-price">{{food.vipPrice}}/{{food.unit}}</span>
             </div>
           </div>
@@ -109,15 +112,15 @@ export default {
 
 .food-item {
   display: flex;
-  margin-top: 10px;
+  padding-top: 10px;
   padding-bottom: 10px;
-  border-bottom: 1px solid $greyText;
+  border-bottom: 1px solid #EEE;
   height: 70px;
   font-size: .6rem;
 
   .food-img {
-    width: 60px;
-    height: 100%;
+    width: 65px;
+    height: 65px;
     background: center center no-repeat;
     background-size: cover; 
     // background-image: url(../assets/images/default.jpg);
@@ -159,19 +162,31 @@ export default {
           margin-left: 5px;
 
           .icon-like {
-            color: $primaryColor;
+            color: #777;
+          }
+          .title-text {
+            color: #777;
           }
           .text {
             margin-left: 5px;
-            color: $primaryColor;
+            color: #777;
           }
           .rest {
             margin-left: 5px;
-            color: $primaryColor;
+            color: #777;
           }
           .empty {
             margin-left: 10px;
             color: $warnColor;
+          }
+          i {
+            font-size: .9rem;
+            color: #777;
+            margin-left: 5px;
+          }
+          .zambia-count {
+            margin-left: 5px;
+            color: #777;
           }
         }
 

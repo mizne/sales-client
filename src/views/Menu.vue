@@ -270,12 +270,13 @@ export default {
         position: relative;
         .dish-type {
           @include flexboxCenter;
-          height: 45px;
+          height: 40px;
           font-size: .9rem;
           position: relative;
           overflow: hidden;
-          border-bottom: 1px solid $greyText;
+          border-bottom: 1px solid #EEE;
           text-align: center;
+          color: gray;
           cursor: pointer;
 
           .food-count {
@@ -310,11 +311,12 @@ export default {
 
       .food-type-container {
         text-align: left;
-        border-bottom: 10px solid lighten($primaryColor, 50%);
+        // border-bottom: 10px solid lighten($primaryColor, 50%);
         .food-type-title {
           display: flex;
           align-items: center;
-          background-color: lighten($primaryColor, 50%);
+          // background-color: lighten($primaryColor, 50%);
+          background-color: #EEE;
           height: 30px;
           padding-left: 5px;
         }
