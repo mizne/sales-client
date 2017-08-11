@@ -67,6 +67,12 @@ const mutations = {
 
     // 临时购物车 food 数量加一
     if (state.tempShoppingCart[tenantId][food.id]) {
+      if (state.tempShoppingCart[tenantId][food.id].num >= food.rest) {
+        return vAlert({
+          content: '库存不够了哦 ^_^'
+        })
+      }
+
       if (
         food.unit === '份' ||
         food.unit === '条' ||
