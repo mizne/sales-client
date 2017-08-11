@@ -1,6 +1,7 @@
 import { generateMutations, generateGetters } from '@/store/helper.js'
 import { MenuService } from '@/http/index'
 import { dateBetween } from '@/util/index'
+import { vAlert } from '@/util/vux-wrapper'
 import Vue from 'vue'
 import QRCodeInfo from '@/models/QRCodeInfo'
 
