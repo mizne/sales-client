@@ -113,7 +113,7 @@ export default {
       padding: 0 10px;
 
       .coupon-item:first-child {
-        margin-top: 50px;
+        padding-top: 50px;
       }
     }
   }
