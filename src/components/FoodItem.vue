@@ -1,12 +1,12 @@
 <template>
   <li class="food-item" @click="showDetails">
-    <div v-if="mode === 'picMode'" class="food-img">
-      <img class="img" :src="food.image" alt="">
+    <div v-if="mode === 'picMode'" class="food-img" :style="{'background-image': 'url('+food.image+')'}">
+      <!-- <img class="img" :src="food.image" alt=""> -->
     </div>
   
     <div class="food-detail">
       <div class="title">
-        <span class="name">{{food.name}}</span>
+        <div class="name">{{food.name}}</div>
         <span class="coupon" v-if="food.coupon">{{food.coupon}}</span>
       </div>
   
@@ -15,7 +15,7 @@
           <div class="favorite">
             <i class="icon-like"></i>
             <span class="text">{{food.sellCount}}</span>
-             <!-- <span class="rest" v-if="food.rest > 0">还剩 {{food.rest + food.unit}}</span>  -->
+            <!-- <span class="rest" v-if="food.rest > 0">还剩 {{food.rest + food.unit}}</span>  -->
             <span class="empty" v-if="food.rest === 0">已售完</span>
   
           </div>
@@ -111,13 +111,12 @@ export default {
   font-size: .6rem;
 
   .food-img {
-    width: 60px; // background: url(../assets/images/default.jpg);
-    // background-size: 100% 100%;
+    width: 60px;
     height: 100%;
-    .img {
-      width: 100%;
-      height: 100%;
-    }
+    background-size: cover; // .img {
+    //   width: 100%;
+    //   height: 100%;
+    // }
   }
 
   .food-detail {
@@ -127,6 +126,12 @@ export default {
     .title {
       font-size: .8rem;
       margin-left: 10px;
+      .name {
+        max-width: 160px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
       .coupon {
         border: 1px solid $warnColor;
         padding: 0 5px;
