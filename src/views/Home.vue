@@ -7,6 +7,7 @@
 import { mapGetters } from 'vuex'
 import { objFrom } from '@/util/index'
 import QRCodeInfo from '@/models/QRCodeInfo'
+import { vAlert } from '@/util/vux-wrapper'
 
 export default {
   name: 'Home',
@@ -39,6 +40,11 @@ export default {
         } else {
           this.$router.push({ name: 'SingleTenantHome' })
         }
+      })
+      .catch(err => {
+        vAlert({
+          content: '抱歉, 二维码已失效'
+        })
       })
   }
 }
