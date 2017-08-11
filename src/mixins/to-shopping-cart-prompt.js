@@ -30,6 +30,7 @@ export default {
       if (
         this.tempShoppingCartFoodCost === 0 
         && this.shoppingCart.totalPrice === 0
+        && !this.orderDetail
       ) {
         return vAlert({ content: '购物车还是空的呢 ^_^' })
       } else {

@@ -92,7 +92,8 @@ export default {
       'isAddMoreFood',
       'showMode',
       'needVipToast',
-      'officialNews'
+      'officialNews',
+      'orderDetail'
     ])
   },
   watch: {

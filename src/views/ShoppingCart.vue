@@ -74,10 +74,10 @@
         <i class="icon-refresh"></i>
         <span class="text">刷新</span>
       </div>
-      <div class="center-area" @click="editOrder">
+      <!-- <div class="center-area" @click="editOrder">
         <i class="icon-pencil"></i>
         <span class="text">修改</span>
-      </div>
+      </div> -->
       <div :class="['right-area', {'disabled': disableAddOrder}]" @click="ensureOrder">
         <i class="icon-order"></i>
         <span class="text" v-if="needDeliveryFee">{{startPricePrompt}}</span>
@@ -127,7 +127,7 @@ export default {
   mixins: [toOrderPrompt],
   data() {
     return {
-      isEditable: false,
+      isEditable: true,
       remark: '',
       isDealBizType: false,
       remarkPlaceholder: ''
