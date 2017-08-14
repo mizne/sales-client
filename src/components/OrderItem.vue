@@ -41,7 +41,10 @@ export default {
       return map[v]
     },
     ago(v) {
-      return timeago(new Date(v))
+      const [ymd, hms] = v.split(/\s+/)
+      const [year, month, day] = ymd.split('-')
+      const [hour, minute, second] = hms.split(':')
+      return timeago(new Date(year, month - 1, day, hour, minute, second))
     },
     foodDesc(foods) {
       const name = foods[0].name
