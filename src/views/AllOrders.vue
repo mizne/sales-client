@@ -15,7 +15,7 @@
     </deal-content>
 
     <deal-footer>
-      <tabs></tabs>
+      <tabs v-if="hasTabs"></tabs>
     </deal-footer>
   </div>
 </template>
@@ -29,6 +29,8 @@ import DealFooter from '@/components/DealFooter'
 import Tabs from '@/components/Tabs'
 import OrderItem from '@/components/OrderItem'
 import { timeago, generateBetweenDate } from '@/util/index'
+import QRCodeInfo from '@/models/QRCodeInfo'
+
 const dateMap = {
   [generateBetweenDate.WEEK]: '周',
   [generateBetweenDate.MONTH]: '月',
@@ -55,6 +57,7 @@ export default {
   },
   data() {
     return {
+      hasTabs: false,
       dateFormat: dateMap[generateBetweenDate.WEEK],
       dateFormats: [generateBetweenDate.WEEK, generateBetweenDate.MONTH, generateBetweenDate.YEAR].map(e => dateMap[e])
     }
@@ -70,6 +73,7 @@ export default {
     },
   },
   created() {
+    this.hasTabs = QRCodeInfo.hasTenants()
     this.$store.dispatch('FETCH_ALL_ORDERS', generateBetweenDate.WEEK)
   }
 }

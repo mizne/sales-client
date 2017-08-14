@@ -152,10 +152,10 @@ export default {
           color: white;
         }
         background-color: $warnColor;
-        border-right: 1px solid black;
+        // border-right: 1px solid black;
       }
       &:last-child {
-        border-left: 1px solid black;
+        // border-left: 1px solid black;
       }
       a {
         @include flexboxCenter;

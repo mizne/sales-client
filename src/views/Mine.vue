@@ -46,7 +46,7 @@
     </deal-content>
   
     <deal-footer>
-      <tabs>
+      <tabs v-if="hasTabs">
       </tabs>
     </deal-footer>
   </div>
@@ -75,7 +75,7 @@ export default {
   },
   data() {
     return {
-      showDialog: false,
+      hasTabs: false,
       phoneNumber: ''
     }
   },
@@ -89,6 +89,7 @@ export default {
   },
   created() {
     this.phoneNumber = QRCodeInfo.getPhoneNumber()
+    this.hasTabs = QRCodeInfo.hasTenants()
   },
   beforeRouteEnter(to, from, next) {
     if (!QRCodeInfo.hasPhoneNumber()) {
