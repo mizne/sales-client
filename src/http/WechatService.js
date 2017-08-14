@@ -19,7 +19,7 @@ class WechatService extends BaseService {
 
   _getQuery(code) {
     const map = {
-      [DEAL]: ['tenantId', 'tableName'],
+      [DEAL]: ['tenantId', 'tableName', 'phoneNumber'],
       [ESHOP]: ['tenantId', 'consigneeId', 'tableName', 'phoneNumber'],
       [GROUP_SHOPPING]: ['tenantId', 'consigneeId', 'tableName', 'phoneNumber']
     }
