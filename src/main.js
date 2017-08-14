@@ -13,9 +13,15 @@ import store from '@/store/index'
 import '@/util/error-handler.js'
 
 import LogRocket from 'logrocket'
+import VueAnalytics from 'vue-analytics'
 
 LogRocket.init('49bwep/sales-zm4qk')
 FastClick.attach(document.body)
+
+Vue.use(VueAnalytics, {
+  id: 'UA-104521154-1',
+  router
+})
 Vue.config.productionTip = false
 // Vue.config.devtools = true
 
