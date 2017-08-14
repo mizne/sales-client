@@ -20,8 +20,8 @@
   </div>
 </template>
 <script>
-import Coupon from '@/models/Coupon'
 import fecha from 'fecha'
+import Coupon from '@/models/Coupon'
 import { timeago } from '@/util/index'
 
 export default {
@@ -41,10 +41,14 @@ export default {
       return map[v]
     },
     ago(v) {
-      const [ymd, hms] = v.split(/\s+/)
-      const [year, month, day] = ymd.split('-')
-      const [hour, minute, second] = hms.split(':')
-      return timeago(new Date(year, month - 1, day, hour, minute, second))
+      // // 由于IOS Date构造器 不支持传入 2017-08-11 21-35-45 这样的字符串
+      // // 只支持 new Date(year, month, day, hour, minute, second)
+      // const [ymd, hms] = v.split(/\s+/)
+      // const [year, month, day] = ymd.split('-')
+      // const [hour, minute, second] = hms.split(':')
+      // return timeago(new Date(year, month - 1, day, hour, minute, second))
+
+      return timeago(fecha.parse(v, 'YYYY-MM-DD HH:mm:ss'))
     },
     foodDesc(foods) {
       const name = foods[0].name
