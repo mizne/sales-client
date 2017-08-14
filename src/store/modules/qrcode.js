@@ -25,12 +25,11 @@ const mutations = {
 const actions = {
   FETCH_QRCODE_INFO: ({ commit }, qrcodeId) => {
     return QRCodeService.getQRCodeInfo(qrcodeId).then(info => {
+      QRCodeInfo.setQrcodeId(qrcodeId)
       // 点餐业务、单代售业务、群购业务
       // if (info.length === 1) {
       if (Object.prototype.toString.call(info) === '[object Object]') {
         info = [info]
-
-        QRCodeInfo.setQrcodeId(qrcodeId)
         QRCodeInfo.setBizType(info[0].bizType)
         QRCodeInfo.setTableName(info[0].tableName)
 
@@ -60,7 +59,6 @@ const actions = {
         }
         // 酒店代售二维码 代售多个商户 未处理优惠券信息
       } else if (info.length >= 2) {
-        QRCodeInfo.setQrcodeId(qrcodeId)
         QRCodeInfo.setBizType(ESHOP)
         QRCodeInfo.setConsigneeId(info[0].consigneeId)
         QRCodeInfo.setTenantId('tenantId0')
