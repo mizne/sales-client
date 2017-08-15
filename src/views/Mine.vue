@@ -81,7 +81,7 @@ export default {
   },
   methods: {
     toPoints() {
-      this.$router.push({ name: 'OrderStatus' })
+      // this.$router.push({ name: 'OrderStatus' })
     },
     toCoupon() {
       this.$router.push({ name: 'AllCoupons' })
