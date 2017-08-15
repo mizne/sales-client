@@ -11,7 +11,7 @@
   
       <div class="card-detail">
         <div class="abstract">
-          <div class="points">
+          <div class="points" @click="toPoints()">
             <span class="number">10</span>
             <span class="text">我的积分</span>
           </div>
@@ -80,6 +80,9 @@ export default {
     }
   },
   methods: {
+    toPoints() {
+      this.$router.push({ name: 'OrderStatus' })
+    },
     toCoupon() {
       this.$router.push({ name: 'AllCoupons' })
     },

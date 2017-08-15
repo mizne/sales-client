@@ -163,6 +163,9 @@ generateBetweenDate.WEEK = 'week'
 generateBetweenDate.MONTH = 'month'
 generateBetweenDate.YEAR = 'year'
 
+const fillZero = (s) => {
+  return String(s).length < 2 ? '0' + String(s) : String(s)
+}
 
 export { 
   createSteps, 
@@ -171,5 +174,6 @@ export {
   not, 
   checkBrowserForPay, 
   timeago,
-  generateBetweenDate 
+  generateBetweenDate,
+  fillZero 
 }

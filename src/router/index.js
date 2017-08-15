@@ -13,6 +13,7 @@ import PhoneVerify from '@/views/PhoneVerify'
 import PeopleNumber from '@/views/PeopleNumber'
 import OrderSuccess from '@/views/OrderSuccess'
 import OrderEnsure from '@/views/OrderEnsure'
+import OrderStatus from '@/views/OrderStatus'
 import AlipayCallback from '@/views/AlipayCallback'
 import OrderFailed from '@/views/OrderFailed'
 import ShopComment from '@/views/ShopComment'
@@ -100,6 +101,11 @@ const routes = [
     path: '/order-ensure',
     name: 'OrderEnsure',
     component: OrderEnsure
+  },
+  {
+    path: '/order-status',
+    name: 'OrderStatus',
+    component: OrderStatus
   },
   {
     path: '/alipay-callback',
