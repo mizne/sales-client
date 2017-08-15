@@ -40,24 +40,6 @@
               <div class="time">20:45</div>
             </div>
           </timeline-item>
-          <timeline-item>
-            <div class="timeline-item">
-              <div class="name">等待接货</div>
-              <div class="time">20:45</div>
-            </div>
-          </timeline-item>
-          <timeline-item>
-            <div class="timeline-item">
-              <div class="name">等待接货</div>
-              <div class="time">20:45</div>
-            </div>
-          </timeline-item>
-          <timeline-item>
-            <div class="timeline-item">
-              <div class="name">等待接货</div>
-              <div class="time">20:45</div>
-            </div>
-          </timeline-item>
         </timeline>
   
         <wait-order v-if="current === 1" :order-time="orderTime" :duration="duration" @timeout="orderTimeout()"></wait-order>
@@ -109,7 +91,7 @@ export default {
     return {
       view: 'status',
       current: 1,
-      orderTime: '2017-08-15 15:51:45',
+      orderTime: '2017-08-15 18:21:00',
       duration: 5
     }
   },
@@ -118,12 +100,12 @@ export default {
       this.view = view
     },
     orderTimeout() {
-      console.log('order timeout!')
+      // console.log('order timeout!')
     }
   },
   created() {
     window.setInterval(() => {
-      this.current = (++this.current) % 7
+      this.current = (++this.current) % 4
     }, 2e3)
   }
 }

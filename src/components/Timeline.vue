@@ -16,11 +16,6 @@ export default {
       default: 0
     },
   },
-  data() {
-    return {
-      isWechat: false
-    }
-  },
   watch: {
     current(v) {
       if (typeof v === 'number') {
@@ -42,10 +37,6 @@ export default {
       })
     }
   },
-  created() {
-    console.log(`is wechat: ${this.$browser.isWechat}`)
-    this.isWechat = this.$browser.isWechat
-  }
 }
 </script>
 
