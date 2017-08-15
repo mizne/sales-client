@@ -103,7 +103,7 @@ export default {
       position: absolute;
       left: 3px;
       top: 3px;
-      margin: 0!important;
+      margin: 0 !important;
       color: #FFF;
     }
   }
