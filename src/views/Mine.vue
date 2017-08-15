@@ -88,6 +88,7 @@ export default {
     }
   },
   created() {
+    this.$store.commit('SET_TAB_INDEX', 3)
     this.phoneNumber = QRCodeInfo.getPhoneNumber()
     this.hasTabs = QRCodeInfo.hasTenants()
   },

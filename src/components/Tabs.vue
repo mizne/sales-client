@@ -33,7 +33,7 @@ export default {
     },
     toNearByShops() {
       this.$store.commit('SET_TAB_INDEX', 1)
-      this.$router.push({ name: 'Mine' })
+      this.$router.push({ name: 'Nearby' })
     },
     toAllOrders() {
       this.$store.commit('SET_TAB_INDEX', 2)

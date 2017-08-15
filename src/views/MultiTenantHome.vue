@@ -41,7 +41,9 @@ export default {
       }),
     }
   },
-
+  created() {
+    this.$store.commit('SET_TAB_INDEX', 0)
+  }
 }
 </script>
 <style lang="scss" scoped>

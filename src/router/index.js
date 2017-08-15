@@ -16,6 +16,7 @@ import OrderEnsure from '@/views/OrderEnsure'
 import AlipayCallback from '@/views/AlipayCallback'
 import OrderFailed from '@/views/OrderFailed'
 import ShopComment from '@/views/ShopComment'
+import Nearby from '@/views/Nearby'
 import Mine from '@/views/Mine'
 import Alipay from '@/views/Alipay'
 import FoodDetail from '@/views/FoodDetail'
@@ -114,6 +115,11 @@ const routes = [
     path: '/shop-comment',
     name: 'ShopComment',
     component: ShopComment
+  },
+  {
+    path: '/nearby',
+    name: 'Nearby',
+    component: Nearby
   },
   {
     path: '/mine',
