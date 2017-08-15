@@ -16,6 +16,11 @@ export default {
       default: 0
     },
   },
+  data() {
+    return {
+      isWechat: false
+    }
+  },
   watch: {
     current(v) {
       if (typeof v === 'number') {
@@ -36,6 +41,10 @@ export default {
         child.future = (index > this.current)
       })
     }
+  },
+  created() {
+    console.log(`is wechat: ${this.$browser.isWechat}`)
+    this.isWechat = this.$browser.isWechat
   }
 }
 </script>
@@ -103,6 +112,15 @@ export default {
       position: absolute;
       left: 3px;
       top: 3px;
+      margin: 0 !important;
+      color: #FFF;
+    }
+
+    &.weui-icon-success-no-circle.is-wechat-browser::before {
+      font-size: 14px;
+      position: absolute;
+      left: 5px;
+      top: 5px;
       margin: 0 !important;
       color: #FFF;
     }

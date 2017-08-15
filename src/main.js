@@ -5,6 +5,7 @@ import FastClick from 'fastclick'
 import 'normalize.css'
 import 'animate.css'
 import 'babel-polyfill'
+import VueVisitor from 'vue-visitor'
 
 import './assets/iconfont/iconfont.css'
 import App from './App'
@@ -18,6 +19,7 @@ import VueAnalytics from 'vue-analytics'
 LogRocket.init('49bwep/sales-zm4qk')
 FastClick.attach(document.body)
 
+Vue.use(VueVisitor)
 Vue.use(VueAnalytics, {
   id: 'UA-104521154-1',
   router
