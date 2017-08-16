@@ -24,9 +24,9 @@ import FoodDetail from '@/views/FoodDetail'
 import ShopCommentView from '@/views/ShopCommentView'
 import Wechatpay from '@/views/Wechatpay'
 import SelectCoupon from '@/views/SelectCoupon'
+import FetchOpenID from '@/views/FetchOpenID'
 
 Vue.use(Router)
-
 
 // 点餐流程
 // Home(主页) => Menu(菜单) => ShoppingCart(购物车) => PhoneVerify(?验证手机号码) => PeopleNumber(?选择人数) => OrderSuccess(订单详情) => OrderEnsure(?订单确认) => (Wechat/Ali)pay(支付)
@@ -60,7 +60,7 @@ const routes = [
   {
     path: '/menu',
     name: 'Menu',
-    component: Menu,
+    component: Menu
   },
   {
     path: '/all-coupon',
@@ -136,25 +136,32 @@ const routes = [
     path: '/alipay',
     name: 'Alipay',
     component: Alipay
-  }, {
+  },
+  {
     path: '/shop-comment-view',
     name: 'ShopCommentView',
     component: ShopCommentView
-  }, {
+  },
+  {
     path: '/wechatpay',
     name: 'Wechatpay',
     component: Wechatpay
-  }, {
+  },
+  {
     path: '/select-coupon',
     name: 'SelectCoupon',
     component: SelectCoupon
+  },
+  {
+    path: '/fetch-openid',
+    name: 'FetchOpenID',
+    component: FetchOpenID
   }
 ]
 
 const router = new Router({
   mode: 'history',
-  routes,
+  routes
 })
 
 export default router
-

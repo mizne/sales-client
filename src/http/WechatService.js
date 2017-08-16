@@ -1,11 +1,23 @@
-import { DEAL, ESHOP, GROUP_SHOPPING } from '@/util/constants'
+import {
+  DEAL,
+  ESHOP,
+  GROUP_SHOPPING,
+  MULTI_ESHOP,
+  FETCH_OPENID
+} from '@/util/constants'
 import { BaseService } from './BaseService'
 
 class WechatService extends BaseService {
-  redirect() {
+  redirectForPay() {
     return this.getBizTypeHttp()
       .get(`/wechatpay/redirctUrl`)
-      .catch(this.exceptionHandler('WechatService', 'redirect'))
+      .catch(this.exceptionHandler('WechatService', 'redirectForPay'))
+  }
+
+  redirectForOpenId() {
+    return this.getBizTypeHttp()
+      .get(`/fetch-openid/redirectUrl`)
+      .catch(this.exceptionHandler('WechatService', 'redirectForOpenid'))
   }
 
   getWechatPayParams(code) {
@@ -17,11 +29,22 @@ class WechatService extends BaseService {
       .catch(this.exceptionHandler('WechatService', 'getWechatPayParams'))
   }
 
+  getOpenId(code) {
+    let query = this._getQuery()
+    query += `&code=${code}`
+
+    return this.getBizTypeHttp()
+      .get(`/fetch-openid/wap${query}`)
+      .catch(this.exceptionHandler('WechatService', 'getOpenId'))
+  }
+
   _getQuery(code) {
     const map = {
       [DEAL]: ['tenantId', 'tableName', 'phoneNumber'],
       [ESHOP]: ['tenantId', 'consigneeId', 'tableName', 'phoneNumber'],
-      [GROUP_SHOPPING]: ['tenantId', 'consigneeId', 'tableName', 'phoneNumber']
+      [GROUP_SHOPPING]: ['tenantId', 'consigneeId', 'tableName', 'phoneNumber'],
+      [MULTI_ESHOP]: ['tenantId', 'consigneeId', 'tableName', 'phoneNumber'],
+      [FETCH_OPENID]: ['tenantId']
     }
     return this.getBizTypeQuery(map)
   }

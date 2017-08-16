@@ -1,13 +1,14 @@
 import QRCodeInfo from '@/models/QRCodeInfo'
 import { BaseService } from './BaseService'
-import { DEAL, ESHOP, GROUP_SHOPPING } from '@/util/constants'
+import { DEAL, ESHOP, GROUP_SHOPPING, MULTI_ESHOP } from '@/util/constants'
 
 class UserService extends BaseService {
   getStatus() {
     const map = {
       [DEAL]: this._getStatusForDeal.bind(this),
       [ESHOP]: this._getStatusForEShop.bind(this),
-      [GROUP_SHOPPING]: this._getStatusForEShop.bind(this)
+      [GROUP_SHOPPING]: this._getStatusForEShop.bind(this),
+      [MULTI_ESHOP]: this._getStatusForEShop.bind(this)
     }
 
     if (!map[QRCodeInfo.getBizType()]) {
@@ -38,7 +39,8 @@ class UserService extends BaseService {
     if (QRCodeInfo.hasPhoneNumber()) {
       const map = {
         [ESHOP]: ['tenantId', 'tableName', 'consigneeId', 'phoneNumber'],
-        [GROUP_SHOPPING]: ['tenantId', 'tableName', 'consigneeId', 'phoneNumber']
+        [GROUP_SHOPPING]: ['tenantId', 'tableName', 'consigneeId', 'phoneNumber'],
+        [MULTI_ESHOP]: ['tenantId', 'tableName', 'consigneeId', 'phoneNumber']
       }
 
       let query = this.getBizTypeQuery(map)

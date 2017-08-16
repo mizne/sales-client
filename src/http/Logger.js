@@ -1,6 +1,6 @@
 import { loggerHttp } from './interceptors'
 import QRCodeInfo, { capital } from '@/models/QRCodeInfo'
-import { DEAL, ESHOP, GROUP_SHOPPING } from '@/util/constants'
+import { DEAL, ESHOP, GROUP_SHOPPING, MULTI_ESHOP } from '@/util/constants'
 
 class Logger {
   info(params) {
@@ -15,13 +15,15 @@ class Logger {
     const map = {
       [DEAL]: ['tenantId', 'tableName', 'phoneNumber'],
       [ESHOP]: ['tenantId', 'tableName', 'phoneNumber', 'consigneeId'],
-      [GROUP_SHOPPING]: ['tenantId', 'tableName', 'phoneNumber', 'consigneeId']
+      [GROUP_SHOPPING]: ['tenantId', 'tableName', 'phoneNumber', 'consigneeId'],
+      [MULTI_ESHOP]: ['tenantId', 'tableName', 'phoneNumber', 'consigneeId']
     }
 
     const urlMap = {
       [DEAL]: '/deal-client/error-message',
       [ESHOP]: '/eshop-client/error-message',
-      [GROUP_SHOPPING]: '/eshop-client/error-message'
+      [GROUP_SHOPPING]: '/eshop-client/error-message',
+      [MULTI_ESHOP]: '/eshop-client/error-message'
     }
 
     const url = urlMap[QRCodeInfo.getBizType()]

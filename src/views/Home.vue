@@ -8,6 +8,7 @@ import { mapGetters } from 'vuex'
 import { objFrom } from '@/util/index'
 import QRCodeInfo from '@/models/QRCodeInfo'
 import { vAlert } from '@/util/vux-wrapper'
+import { WechatService } from '@/http/index'
 
 export default {
   name: 'Home',
@@ -35,6 +36,14 @@ export default {
 
     this.$store.dispatch('FETCH_QRCODE_INFO', qrcodeId)
       .then(_ => {
+        if (QRCodeInfo.isFetchOpenidBizType()) {
+          WechatService.redirectForOpenId()
+            .then(url => {
+              window.location.href = url
+            })
+          return
+        }
+
         if (QRCodeInfo.hasTenants()) {
           this.$router.push({ name: 'MultiTenantHome' })
         } else {

@@ -1,4 +1,4 @@
-import { DEAL, ESHOP, GROUP_SHOPPING } from '@/util/constants'
+import { DEAL, ESHOP, GROUP_SHOPPING, MULTI_ESHOP } from '@/util/constants'
 import { BaseService } from './BaseService'
 
 class AlipayService extends BaseService {
@@ -14,7 +14,8 @@ class AlipayService extends BaseService {
     const map = {
       [DEAL]: ['tenantId', 'tableName', 'phoneNumber'],
       [ESHOP]: ['tenantId', 'consigneeId', 'tableName', 'phoneNumber'],
-      [GROUP_SHOPPING]: ['tenantId', 'consigneeId', 'tableName', 'phoneNumber']
+      [GROUP_SHOPPING]: ['tenantId', 'consigneeId', 'tableName', 'phoneNumber'],
+      [MULTI_ESHOP]: ['tenantId', 'consigneeId', 'tableName', 'phoneNumber']
     }
     return this.getBizTypeQuery(map)
   }

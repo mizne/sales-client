@@ -1,4 +1,4 @@
-import { DEAL, ESHOP, GROUP_SHOPPING } from '@/util/constants'
+import { DEAL, ESHOP, GROUP_SHOPPING, MULTI_ESHOP } from '@/util/constants'
 import QRCodeInfo, { capital } from '@/models/QRCodeInfo'
 import { BaseService } from './BaseService'
 
@@ -25,7 +25,8 @@ class CommentService extends BaseService {
     const map = {
       [DEAL]: ['tenantId'],
       [ESHOP]: ['tenantId', 'consigneeId'],
-      [GROUP_SHOPPING]: ['tenantId', 'consigneeId']
+      [GROUP_SHOPPING]: ['tenantId', 'consigneeId'],
+      [MULTI_ESHOP]: ['tenantId', 'consigneeId']
     }
     return this.getBizTypeQuery(map)
   }
@@ -50,7 +51,8 @@ class CommentService extends BaseService {
     const map = {
       [DEAL]: ['tenantId'],
       [ESHOP]: ['tenantId', 'consigneeId'],
-      [GROUP_SHOPPING]: ['tenantId', 'consigneeId']
+      [GROUP_SHOPPING]: ['tenantId', 'consigneeId'],
+      [MULTI_ESHOP]: ['tenantId', 'consigneeId']
     }
     
     this.addBizTypeParams(params, map)

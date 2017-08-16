@@ -1,6 +1,6 @@
 import Logger from './Logger'
 import QRCodeInfo from '@/models/QRCodeInfo'
-import { DEAL, ESHOP, GROUP_SHOPPING } from '@/util/constants'
+import { DEAL, ESHOP, GROUP_SHOPPING, MULTI_ESHOP } from '@/util/constants'
 import { BaseService } from './BaseService'
 
 class CouponService extends BaseService {
@@ -17,8 +17,9 @@ class CouponService extends BaseService {
     if (QRCodeInfo.hasPhoneNumber()) {
       const map = {
         [DEAL]: ['tenantId', 'phoneNumber'],
-        [ESHOP]: ['tenantId', 'consigneeId', 'phoneNumber'],
-        [GROUP_SHOPPING]: ['tenantId', 'consigneeId', 'phoneNumber']
+        [ESHOP]: ['tenantId', 'phoneNumber'],
+        [GROUP_SHOPPING]: ['tenantId', 'phoneNumber'],
+        [MULTI_ESHOP]: ['phoneNumber']
       }
       const query = this.getBizTypeQuery(map)
 
@@ -80,7 +81,8 @@ class CouponService extends BaseService {
     const map = {
       [DEAL]: ['tenantId', 'phoneNumber'],
       [ESHOP]: ['tenantId', 'phoneNumber', 'consigneeId'],
-      [GROUP_SHOPPING]: ['tenantId', 'phoneNumber', 'consigneeId']
+      [GROUP_SHOPPING]: ['tenantId', 'phoneNumber', 'consigneeId'],
+      [MULTI_ESHOP]: ['tenantId', 'phoneNumber', 'consigneeId']
     }
     const params = { couponKey, tradeNo }
     this.addBizTypeParams(params, map)

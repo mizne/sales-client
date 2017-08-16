@@ -260,7 +260,7 @@ export default {
   .deal-content-container {
     .left-tab {
       position: fixed;
-      top: 65px;
+      top: 70px;
       left: 0;
       bottom: 40px;
       width: 80px;

@@ -26,7 +26,7 @@ export default {
       industryItems1: [
         {
           "name": "lobster",
-          "label": "龙虾",
+          "label": "美食",
           "icon": "lobster",
           "backgroundColor": "#f04134",
           // "badge": "1折"

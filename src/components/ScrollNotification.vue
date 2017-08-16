@@ -59,6 +59,8 @@ export default {
   background-color: #EEE;
   // background-color: lighten($primaryColor, 60%);
   color: $warnColor;
+  height: 30px;
+	box-sizing: border-box;
 
   .content-wrapper {
     flex: 1;

@@ -12,3 +12,9 @@ $themeColor: #04BE02;
   justify-content: center;
   align-items: center;
 }
+
+@mixin textOverflow {
+  overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}

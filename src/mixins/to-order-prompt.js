@@ -17,6 +17,10 @@ export default {
         return vAlert({ content: this.startPricePrompt + ' 起送呢 ^_^' })
       }
 
+      if (QRCodeInfo.needPromptFillOrderRemark() && (this.remark === '')) {
+         return vAlert({ content: '请填写您的备注信息' })
+      }
+
       if (QRCodeInfo.isDealBizType()) {
         this.$store.commit('SET_ORDER_REMARK', this.remark)
 

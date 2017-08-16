@@ -43,8 +43,8 @@ const objFrom = function(search) {
 // 判断 当前时间 是否在开门和打烊时间之间
 // begin: 9:00  end: 18:30
 const dateBetween = function(begin, end) {
-  const [beginHour, beginMinute] = begin.split(':')
-  const [endHour, endMinute] = end.split(':')
+  const [beginHour, beginMinute] = begin.split(':').map(Number)
+  const [endHour, endMinute] = end.split(':').map(Number)
   const now = new Date()
   const nowMilliseconds = now.getTime()
 
@@ -167,6 +167,10 @@ const fillZero = (s) => {
   return String(s).length < 2 ? '0' + String(s) : String(s)
 }
 
+const generateRandom = (min, max) => {
+  return Math.floor((max - min + 1) * Math.random()) + min
+}
+
 export { 
   createSteps, 
   objFrom, 
@@ -175,5 +179,6 @@ export {
   checkBrowserForPay, 
   timeago,
   generateBetweenDate,
-  fillZero 
+  fillZero,
+  generateRandom
 }

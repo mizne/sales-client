@@ -131,15 +131,16 @@ export default {
     display: flex;
     flex-direction: column;
     padding-left: 10px;
+
     .title {
       font-size: .8rem;
       display: flex;
+
       .name {
+        @include textOverflow;
         max-width: 160px;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
       }
+
       .coupon {
         @include flexboxCenter;
         border: 1px solid $warnColor;
@@ -151,6 +152,7 @@ export default {
 
     .description {
       display: flex;
+      
       .food-info {
         flex: 3;
         font-size: .8rem;

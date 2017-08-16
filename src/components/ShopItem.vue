@@ -1,16 +1,18 @@
 <<template>
-  <div class="shop-item">
-    <div class="image" :style="{'background-image': 'url('+ shop.img + ')'}"></div>
+  <div class="shop-item" @click="toShop(shop)">
+    <div class="image" :style="{'background-image': 'url('+ shop.homeImage + ')'}"></div>
 
     <div class="detail">
-      <div class="label">
-        {{shop.name}}
+      <div class="title">
+        <span class="name">{{shop.name}}</span>
+        <span class="distance">{{shop.distance}}</span>
       </div>
       <div class="description">
-        {{shop.description}}
+        <span class="text">{{shop.description}}</span>
+        <span class="close" v-if="shop.close">商家休息</span>
       </div>
       <div class="info">
-        <div class="promotions">{{shop.promotions}}</div>
+        <div class="promotions">{{shop.officialNews}}</div>
         <div class="sell-count">月售{{shop.sellCountPerMonth}}</div>
       </div>
     </div>
@@ -23,11 +25,17 @@ export default {
     shop: {
       type: Object
     }
+  },
+  methods: {
+    toShop(shop) {
+      this.$emit('to-shop', shop)
+    }
   }
 }
 </script>
 <style lang="scss" scoped>
 @import '../assets/css/main.scss';
+
 .shop-item {
   @include flexboxCenter;
   height: 80px;
@@ -44,16 +52,19 @@ export default {
   .detail {
     margin-left: 10px;
     flex: 1;
-    @include flexboxCenter;
-
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: baseline;
     flex-direction: column;
-    .label,
+
+    .title,
     .description,
     .info {
       width: 100%;
     }
 
-    .label,
+    .title,
     .description {
       display: flex;
       justify-content: flex-start;
@@ -64,6 +75,24 @@ export default {
       margin-top: 5px;
       font-size: .8rem;
       color: $greyText;
+
+      .text {
+        @include textOverflow;
+        width: 70%;
+      }
+      .close {
+        width: 30%
+      }
+    }
+
+    .title {
+      .name {
+        @include textOverflow;
+        width: 70%;
+      }
+      .distance {
+        width: 30%;
+      }
     }
 
     .info {
@@ -73,12 +102,15 @@ export default {
       align-items: center;
 
       .promotions {
+        @include textOverflow;
+        flex: 4;
         font-size: .8rem;
         color: $primaryColor
       }
       .sell-count {
+        flex: 1;
         color: $greyText;
-        font-size: .9rem;
+        font-size: .8rem;
       }
     }
   }

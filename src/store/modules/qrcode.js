@@ -1,6 +1,7 @@
 import { QRCodeService } from '@/http/index'
-import { DEAL, ESHOP, GROUP_SHOPPING } from '@/util/constants'
+import { DEAL, ESHOP, GROUP_SHOPPING, MULTI_ESHOP, FETCH_OPENID } from '@/util/constants'
 import QRCodeInfo from '@/models/QRCodeInfo'
+import { generateRandom, dateBetween } from '@/util/index'
 
 const state = {
   industryLabel: '',
@@ -26,6 +27,14 @@ const actions = {
   FETCH_QRCODE_INFO: ({ commit }, qrcodeId) => {
     return QRCodeService.getQRCodeInfo(qrcodeId).then(info => {
       QRCodeInfo.setQrcodeId(qrcodeId)
+
+      //获取商家微信openid
+      if (info.bizType === FETCH_OPENID) {
+        QRCodeInfo.setBizType(info.bizType)
+        QRCodeInfo.setTenantId(info.tenantId)
+        return info
+      }
+
       // 点餐业务、单代售业务、群购业务
       // if (info.length === 1) {
       if (Object.prototype.toString.call(info) === '[object Object]') {
@@ -59,16 +68,22 @@ const actions = {
         }
         // 酒店代售二维码 代售多个商户 未处理优惠券信息
       } else if (info.length >= 2) {
-        QRCodeInfo.setBizType(ESHOP)
-        QRCodeInfo.setConsigneeId(info[0].consigneeId)
+        QRCodeInfo.setBizType(MULTI_ESHOP)
+        // 便于验证电话号码 此时没有tenantId
         QRCodeInfo.setTenantId('tenantId0')
+        QRCodeInfo.setConsigneeId(info[0].consigneeId)
+        QRCodeInfo.setConsigneeName(info[0].consigneeName)
 
         const tenants = info.map(e => ({
           id: e.tenantId,
           name: e.merchantName,
           industry: e.industry,
           tableName: e.tableName,
-          homeImage: e.homeImage
+          homeImage: e.tenantInfo.homeImage,
+          description: `起送价${e.startPrice}元|配送费${e.deliveryFee}元`,
+          officialNews: e.tenantInfo.officialNews,
+          sellCountPerMonth: generateRandom(100, 1000),
+          close: !dateBetween(e.tenantInfo.startTime, e.tenantInfo.endTime)
         }))
 
         QRCodeInfo.setTenants(tenants)

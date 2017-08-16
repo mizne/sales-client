@@ -8,14 +8,9 @@
     </div>
   
     <template v-if="shops.length > 0">
-      <ul class="shops">
-        <li v-for="item in shops" class="shop" :key="item.$index" @click="toTenant(item)">
-          <div class="img-wrapper">
-            <img :src="item.homeImage" alt="">
-          </div>
-          <span class="shop-label">{{item.name}}</span>
-        </li>
-      </ul>
+      <div class="shops">
+        <shop-item v-for="shop in shops" :key="shop.id" :shop="shop" @to-shop="toTenant"></shop-item>
+      </div>
     </template>
     <template v-else>
       <p class="no-shops">商家正在上线中, 敬请期待</p>
@@ -25,11 +20,16 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
+
+import ShopItem from '@/components/ShopItem'
 import { vAlert } from '@/util/vux-wrapper'
 import QRCodeInfo from '@/models/QRCodeInfo'
 
 export default {
   name: 'IndustryHome',
+  components: {
+    ShopItem
+  },
   computed: {
     ...mapGetters(['industryLabel', 'tenantName', 'hasClosed', 'needDeliveryFee'])
   },
@@ -70,6 +70,8 @@ export default {
 }
 </script>
 <style lang="scss">
+@import '../assets/css/main.scss';
+
 .main-page {
   .head-content {
     position: relative;
@@ -88,32 +90,7 @@ export default {
   }
   .shops {
     width: 100%;
-    .shop {
-      display: inline-block;
-      width: 25%;
-      margin-top: 4rem;
-      text-align: center;
-      a {
-        font-size: 2rem;
-        text-decoration: none;
-        color: #fff;
-        cursor: pointer;
-      }
-      .img-wrapper {
-        display: block;
-        width: 60px;
-        height: 60px;
-        text-align: center;
-        border-radius: 60px;
-        background-color: #8DAD6C;
-        margin: 0.5rem auto;
-        img {
-          position: relative;
-          width: 60px;
-          height: 60px;
-        }
-      }
-    }
+    background-color: $greyBackground;
   }
 
   .no-shops {

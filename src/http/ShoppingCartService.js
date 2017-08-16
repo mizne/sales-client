@@ -1,5 +1,5 @@
 import QRCodeInfo from '@/models/QRCodeInfo'
-import { DEAL, ESHOP, GROUP_SHOPPING } from '@/util/constants'
+import { DEAL, ESHOP, GROUP_SHOPPING, MULTI_ESHOP } from '@/util/constants'
 import { BaseService } from './BaseService'
 
 class ShoppingCartService extends BaseService {
@@ -36,7 +36,8 @@ class ShoppingCartService extends BaseService {
     const map = {
       [DEAL]: ['tenantId', 'tableName'],
       [ESHOP]: ['tenantId', 'consigneeId', 'tableName', 'phoneNumber'],
-      [GROUP_SHOPPING]: ['tenantId', 'consigneeId', 'tableName', 'phoneNumber']
+      [GROUP_SHOPPING]: ['tenantId', 'consigneeId', 'tableName', 'phoneNumber'],
+      [MULTI_ESHOP]: ['tenantId', 'consigneeId', 'tableName', 'phoneNumber']
     }
 
     this.addBizTypeParams(params, map)
@@ -61,7 +62,8 @@ class ShoppingCartService extends BaseService {
     const map = {
       [DEAL]: ['tenantId', 'tableName'],
       [ESHOP]: ['tenantId', 'consigneeId', 'tableName', 'phoneNumber'],
-      [GROUP_SHOPPING]: ['tenantId', 'consigneeId', 'tableName', 'phoneNumber']
+      [GROUP_SHOPPING]: ['tenantId', 'consigneeId', 'tableName', 'phoneNumber'],
+      [MULTI_ESHOP]: ['tenantId', 'consigneeId', 'tableName', 'phoneNumber']
     }
 
     this.addBizTypeParams(params.condition, map)
@@ -77,7 +79,8 @@ class ShoppingCartService extends BaseService {
     const map = {
       [DEAL]: ['tenantId', 'tableName'],
       [ESHOP]: ['tenantId', 'consigneeId', 'tableName', 'phoneNumber'],
-      [GROUP_SHOPPING]: ['tenantId', 'consigneeId', 'tableName', 'phoneNumber']
+      [GROUP_SHOPPING]: ['tenantId', 'consigneeId', 'tableName', 'phoneNumber'],
+      [MULTI_ESHOP]: ['tenantId', 'consigneeId', 'tableName', 'phoneNumber']
     }
     return this.getBizTypeQuery(map)
   }

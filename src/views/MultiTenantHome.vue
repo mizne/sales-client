@@ -53,7 +53,6 @@ export default {
   background-color: $greyBackground;
   margin-bottom: 50px;
 
-
   footer {
     position: absolute;
     bottom: 0;

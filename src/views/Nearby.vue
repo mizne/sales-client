@@ -39,80 +39,80 @@ export default {
       shops: [
         {
           name: '老乡鸡',
-          img: require('../assets/logo.png'),
+          homeImage: require('../assets/logo.png'),
           description: '起送价20元|配送费3元',
           sellCountPerMonth: '185',
-          promotions: '满15减8, 满20减12'
+          officialNews: '满15减8, 满20减12'
         },
         {
           name: '谐众千百味',
-          img: require('../assets/logo.png'),
+          homeImage: require('../assets/logo.png'),
           description: '起送价29元|配送费3元',
           sellCountPerMonth: '1850',
-          promotions: '满15减8, 满200减12'
+          officialNews: '满15减8, 满200减12'
         },
         {
           name: '谐众千百味',
-          img: require('../assets/logo.png'),
+          homeImage: require('../assets/logo.png'),
           description: '起送价29元|配送费3元',
           sellCountPerMonth: '1850',
-          promotions: '满15减8, 满200减12'
+          officialNews: '满15减8, 满200减12'
         },
         {
           name: '谐众千百味',
-          img: require('../assets/logo.png'),
+          homeImage: require('../assets/logo.png'),
           description: '起送价29元|配送费3元',
           sellCountPerMonth: '1850',
-          promotions: '满15减8, 满200减12'
+          officialNews: '满15减8, 满200减12'
         },
         {
           name: '谐众千百味',
-          img: require('../assets/logo.png'),
+          homeImage: require('../assets/logo.png'),
           description: '起送价29元|配送费3元',
           sellCountPerMonth: '1850',
-          promotions: '满15减8, 满200减12'
+          officialNews: '满15减8, 满200减12'
         },
         {
           name: '谐众千百味',
-          img: require('../assets/logo.png'),
+          homeImage: require('../assets/logo.png'),
           description: '起送价29元|配送费3元',
           sellCountPerMonth: '1850',
-          promotions: '满15减8, 满200减12'
+          officialNews: '满15减8, 满200减12'
         },
         {
           name: '谐众千百味',
-          img: require('../assets/logo.png'),
+          homeImage: require('../assets/logo.png'),
           description: '起送价29元|配送费3元',
           sellCountPerMonth: '1850',
-          promotions: '满15减8, 满200减12'
+          officialNews: '满15减8, 满200减12'
         },
         {
           name: '谐众千百味',
-          img: require('../assets/logo.png'),
+          homeImage: require('../assets/logo.png'),
           description: '起送价29元|配送费3元',
           sellCountPerMonth: '1850',
-          promotions: '满15减8, 满200减12'
+          officialNews: '满15减8, 满200减12'
         },
         {
           name: '谐众千百味',
-          img: require('../assets/logo.png'),
+          homeImage: require('../assets/logo.png'),
           description: '起送价29元|配送费3元',
           sellCountPerMonth: '1850',
-          promotions: '满15减8, 满200减12'
+          officialNews: '满15减8, 满200减12'
         },
         {
           name: '谐众千百味',
-          img: require('../assets/logo.png'),
+          homeImage: require('../assets/logo.png'),
           description: '起送价29元|配送费3元',
           sellCountPerMonth: '1850',
-          promotions: '满15减8, 满200减12'
+          officialNews: '满15减8, 满200减12'
         },
         {
           name: '谐众千百味',
-          img: require('../assets/logo.png'),
+          homeImage: require('../assets/logo.png'),
           description: '起送价29元|配送费3元',
           sellCountPerMonth: '1850',
-          promotions: '满15减8, 满200减12'
+          officialNews: '满15减8, 满200减12'
         }
       ]
     }
