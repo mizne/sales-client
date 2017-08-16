@@ -10,7 +10,7 @@ import { BaseService } from './BaseService'
 class WechatService extends BaseService {
   redirectForPay() {
     return this.getBizTypeHttp()
-      .get(`/wechatpay/redirctUrl`)
+      .get(`/wechatpay/redirectUrl`)
       .catch(this.exceptionHandler('WechatService', 'redirectForPay'))
   }
 
