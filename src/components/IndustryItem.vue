@@ -3,7 +3,7 @@
     <div class="icon-wrapper" :style="{'backgroundColor': backgroundColor}">
       <i :class="['icon-' + icon]"></i>
     </div>
-    <span>{{label}}</span>
+    <span class="label">{{label}}</span>
     <div class="badge" v-if="badge">{{badge}}</div>
   </div>
 </template>
@@ -31,8 +31,6 @@ export default {
 .industry-item {
   @include flexboxCenter;
   flex-direction: column;
-  
-  
 
   .icon-wrapper {
     @include flexboxCenter;
@@ -47,7 +45,7 @@ export default {
     }
   }
 
-  span {
+  .label {
     font-size: .8rem;
     margin-top: 5px;
   }
