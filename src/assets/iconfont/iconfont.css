@@ -1,10 +1,10 @@
 
 @font-face {font-family: "iconfont";
-  src: url('iconfont.eot?t=1502784340791'); /* IE9*/
-  src: url('iconfont.eot?t=1502784340791#iefix') format('embedded-opentype'), /* IE6-IE8 */
-  url('iconfont.woff?t=1502784340791') format('woff'), /* chrome, firefox */
-  url('iconfont.ttf?t=1502784340791') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
-  url('iconfont.svg?t=1502784340791#iconfont') format('svg'); /* iOS 4.1- */
+  src: url('iconfont.eot?t=1502888747827'); /* IE9*/
+  src: url('iconfont.eot?t=1502888747827#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('iconfont.woff?t=1502888747827') format('woff'), /* chrome, firefox */
+  url('iconfont.ttf?t=1502888747827') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont.svg?t=1502888747827#iconfont') format('svg'); /* iOS 4.1- */
 }
 
 [class^="icon-"] {
@@ -96,6 +96,8 @@
 .icon-laba:before { content: "\e65e"; }
 
 .icon-lobster:before { content: "\e67e"; }
+
+.icon-lvyou:before { content: "\e608"; }
 
 .icon-jiaoyu:before { content: "\e607"; }
 

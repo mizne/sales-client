@@ -26,15 +26,15 @@ export default {
       industryItems1: [
         {
           "name": "lobster",
-          "label": "美食",
+          "label": "美食外卖",
           "icon": "lobster",
           "backgroundColor": "#f04134",
           // "badge": "1折"
         },
         {
           "name": "food",
-          "label": "餐饮",
-          "icon": "canyin",
+          "label": "旅游",
+          "icon": "lvyou",
           "backgroundColor": "#00a854",
           // "badge": "1折"
         },

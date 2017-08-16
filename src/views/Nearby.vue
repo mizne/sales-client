@@ -5,7 +5,7 @@
   
     <deal-content>
       <div class="shops">
-        <shop-item v-for="shop in shops" :key="shop.$index" :shop="shop"></shop-item>
+        <shop-item v-for="shop in shops" :key="shop.$index" :shop="shop" @to-shop="toTenant"></shop-item>
       </div>
     </deal-content>
   
@@ -21,11 +21,14 @@ import DealHeader from '@/components/DealHeader'
 import DealContent from '@/components/DealContent'
 import DealFooter from '@/components/DealFooter'
 import Tabs from '@/components/Tabs'
-import QRCodeInfo from '@/models/QRCodeInfo'
 import ShopItem from '@/components/ShopItem'
+
+import QRCodeInfo from '@/models/QRCodeInfo'
+import toTenant from '@/mixins/to-tenant'
 
 export default {
   name: 'AllOrders',
+  mixins: [toTenant],
   components: {
     DealHeader,
     DealContent,
@@ -36,93 +39,15 @@ export default {
   data() {
     return {
       hasTabs: false,
-      shops: [
-        {
-          name: '老乡鸡',
-          homeImage: require('../assets/logo.png'),
-          description: '起送价20元|配送费3元',
-          sellCountPerMonth: '185',
-          officialNews: '满15减8, 满20减12'
-        },
-        {
-          name: '谐众千百味',
-          homeImage: require('../assets/logo.png'),
-          description: '起送价29元|配送费3元',
-          sellCountPerMonth: '1850',
-          officialNews: '满15减8, 满200减12'
-        },
-        {
-          name: '谐众千百味',
-          homeImage: require('../assets/logo.png'),
-          description: '起送价29元|配送费3元',
-          sellCountPerMonth: '1850',
-          officialNews: '满15减8, 满200减12'
-        },
-        {
-          name: '谐众千百味',
-          homeImage: require('../assets/logo.png'),
-          description: '起送价29元|配送费3元',
-          sellCountPerMonth: '1850',
-          officialNews: '满15减8, 满200减12'
-        },
-        {
-          name: '谐众千百味',
-          homeImage: require('../assets/logo.png'),
-          description: '起送价29元|配送费3元',
-          sellCountPerMonth: '1850',
-          officialNews: '满15减8, 满200减12'
-        },
-        {
-          name: '谐众千百味',
-          homeImage: require('../assets/logo.png'),
-          description: '起送价29元|配送费3元',
-          sellCountPerMonth: '1850',
-          officialNews: '满15减8, 满200减12'
-        },
-        {
-          name: '谐众千百味',
-          homeImage: require('../assets/logo.png'),
-          description: '起送价29元|配送费3元',
-          sellCountPerMonth: '1850',
-          officialNews: '满15减8, 满200减12'
-        },
-        {
-          name: '谐众千百味',
-          homeImage: require('../assets/logo.png'),
-          description: '起送价29元|配送费3元',
-          sellCountPerMonth: '1850',
-          officialNews: '满15减8, 满200减12'
-        },
-        {
-          name: '谐众千百味',
-          homeImage: require('../assets/logo.png'),
-          description: '起送价29元|配送费3元',
-          sellCountPerMonth: '1850',
-          officialNews: '满15减8, 满200减12'
-        },
-        {
-          name: '谐众千百味',
-          homeImage: require('../assets/logo.png'),
-          description: '起送价29元|配送费3元',
-          sellCountPerMonth: '1850',
-          officialNews: '满15减8, 满200减12'
-        },
-        {
-          name: '谐众千百味',
-          homeImage: require('../assets/logo.png'),
-          description: '起送价29元|配送费3元',
-          sellCountPerMonth: '1850',
-          officialNews: '满15减8, 满200减12'
-        }
-      ]
+      shops: []
     }
-  },
-  methods: {
-
   },
   created() {
     this.hasTabs = QRCodeInfo.hasTenants()
     this.$store.commit('SET_TAB_INDEX', 1)
+
+    const allTenants = QRCodeInfo.getTenants()
+    this.shops = allTenants.filter((_, i) => i % 2 === 1)
   }
 }
 </script>
@@ -133,7 +58,7 @@ export default {
   .deal-header-container {}
 
   .deal-content-container {
-    padding: 10px;
+    padding: 10px 0;
     background-color: $greyBackground;
     margin-bottom: 50px;
   }

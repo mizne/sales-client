@@ -7,16 +7,18 @@
     </div>
 
     <div class="shops">
-      <shop-item v-for="shop in shops" :key="shop.$index" :shop="shop"></shop-item>
+      <shop-item v-for="shop in shops" :key="shop.$index" :shop="shop" @to-shop="toTenant"></shop-item>
     </div>
   </div>
 </template>
 <script>
 import ShopItem from '@/components/ShopItem'
 import QRCodeInfo from '@/models/QRCodeInfo'
+import toTenant from '@/mixins/to-tenant'
 
 export default {
   name: 'RecommendArea',
+  mixins: [toTenant],
   components: {
     ShopItem
   },
