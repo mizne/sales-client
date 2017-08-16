@@ -70,7 +70,7 @@ const stateSeed = mutationMaps.reduce((accu, curr) => {
 
 const state = {
   ...stateSeed,
-  officialNews: '广告位招租'
+  officialNews: ''
 }
 
 const mutations = {
@@ -87,10 +87,10 @@ const actions = {
       commit('SET_VIP_AMOUNT', config.vipFee)
       commit('SET_ALMOST_VIP_AMOUNT', config.vipRemindFee)
       commit('SET_HOME_IMAGE', config.homeImage)
-      commit('SET_NEED_ORDER_CONFIRM_PAGE', config.needOrderConfirmPage || false)
+      commit('SET_NEED_ORDER_CONFIRM_PAGE', !!config.needOrderConfirmPage)
       commit('SET_OFFICIAL_NEWS', config.officialNews)
-      commit('SET_VIP_TOAST', config.needVip || false) 
-      commit('SET_NEED_CHOOSE_PEOPLE_NUMBER_PAGE', config.needChoosePeopleNumberPage || false)
+      commit('SET_VIP_TOAST', !!config.needVip) 
+      commit('SET_NEED_CHOOSE_PEOPLE_NUMBER_PAGE', !!config.needChoosePeopleNumberPage)
 
 
       if (config.longitude) {
