@@ -13,6 +13,7 @@
 </template>
 <script>
 import ShopItem from '@/components/ShopItem'
+import QRCodeInfo from '@/models/QRCodeInfo'
 
 export default {
   name: 'RecommendArea',
@@ -21,23 +22,12 @@ export default {
   },
   data() {
     return {
-      shops: [
-        {
-          name: '老乡鸡',
-          homeImage: require('../assets/logo.png'),
-          description: '起送价20元|配送费3元',
-          sellCountPerMonth: '185',
-          officialNews: '满15减8, 满20减12'
-        },
-        {
-          name: '谐众千百味',
-          homeImage: require('../assets/logo.png'),
-          description: '起送价29元|配送费3元',
-          sellCountPerMonth: '1850',
-          officialNews: '满15减8, 满200减12'
-        }
-      ]
+      shops: []
     }
+  },
+  created() {
+    const allTenants = QRCodeInfo.getTenants()
+    this.shops = allTenants.filter((_, i) => i % 2 === 0)
   }
 }
 </script>

@@ -24,21 +24,21 @@ export default {
           "name": "lobster",
           "label": "9.9元起",
           "textColor": "#f04134",
-          "img": require("../assets/logo.png"),
+          "img": require("../assets/images/shucai.jpg"),
           "description": "甩脂大作战"
         },
         {
           "name": "food",
           "label": "机票1折起",
           "textColor": "#00a854",
-          "img": require("../assets/logo.png"),
+          "img": require("../assets/images/dianying.jpg"),
           "description": "跟着电影旅行"
         },
         {
           "name": "educate",
           "label": "0元1元",
           "textColor": "#108ee9",
-          "img": require("../assets/logo.png"),
+          "img": require("../assets/images/mianfei.jpg"),
           "description": "免费抢不停"
         },
       ],
@@ -47,28 +47,28 @@ export default {
           "name": "carBeauty",
           "label": "新客专享",
           "textColor": "#f56a00",
-          "img": require("../assets/logo.png"),
+          "img": require("../assets/images/dianying2.jpg"),
           "description": "领10元约影"
         },
         {
           "name": "lifeServe",
           "label": "打车特惠",
           "textColor": "#7265e6",
-          "img": require("../assets/logo.png"),
+          "img": require("../assets/images/hongbao.jpg"),
           "description": "红包一起抢"
         },
         {
           "name": "buildingMater",
           "label": "1元普吉",
           "textColor": "#ffbf00",
-          "img": require("../assets/logo.png"),
+          "img": require("../assets/images/gentuan.jpg"),
           "description": "周四跟团特价"
         },
         {
           "name": "bakedTea",
           "label": "劲享优惠",
           "textColor": "#00a2ae",
-          "img": require("../assets/logo.png"),
+          "img": require("../assets/images/haodian.jpg"),
           "description": "探人民的好店"
         },]
     }

@@ -1,9 +1,9 @@
 <template>
   <div class="main-page">
-    <div class="head-content">
-      <span>
+    <div class="head-content" :style="{'background-image': 'url('+ industryImage + ')'}">
+      <!-- <span>
         <img style="width:100%;height:40%;" src="../assets/images/dinning.jpg">
-      </span>
+      </span> -->
       <div class="top-pointer">{{industryLabel}}</div>
     </div>
   
@@ -35,7 +35,8 @@ export default {
   },
   data() {
     return {
-      shops: []
+      shops: [],
+      industryImage: null
     }
   },
   methods: {
@@ -64,6 +65,7 @@ export default {
     }
   },
   created() {
+    this.industryImage = require(`../assets/images/${this.industryLabel}.jpg`)
     const allTenants = QRCodeInfo.getTenants()
     this.shops = allTenants.filter(e => e.industry === this.$route.params.name)
   }
@@ -75,6 +77,11 @@ export default {
 .main-page {
   .head-content {
     position: relative;
+    width: 100%;
+    height: 200px;
+    background-size: cover;
+    background-image: url(../assets/images/dinning.jpg);
+
     .top-pointer {
       width: 100%;
       height: 4rem;

@@ -81,7 +81,8 @@ export default {
         width: 70%;
       }
       .close {
-        width: 30%
+        width: 30%;
+        color: $warnColor;
       }
     }
 

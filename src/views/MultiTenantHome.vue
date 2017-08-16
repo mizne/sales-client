@@ -35,10 +35,16 @@ export default {
   },
   data() {
     return {
-      images: Array(3).fill({
+      images: [{
+        url: 'javascript:',
+        img: require('../assets/images/tangbao.jpg')
+      }, {
+        url: 'javascript:',
+        img: require('../assets/images/pizza.jpg')
+      }, {
         url: 'javascript:',
         img: require('../assets/images/dinning.jpg')
-      }),
+      }],
     }
   },
   created() {
