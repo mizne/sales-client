@@ -18,7 +18,7 @@
       </template>
   
       <template v-else>
-        <no-coupon></no-coupon>
+        <prompt text="还没有优惠券呢, 还不快去扫码领取 ^_^"></prompt>
       </template>
     </deal-content>
   </div>
@@ -30,7 +30,7 @@ import { mapGetters } from 'vuex'
 import DealHeader from '@/components/DealHeader'
 import DealContent from '@/components/DealContent'
 import CouponItem from '@/components/CouponItem'
-import NoCoupon from '@/components/NoCoupon'
+import Prompt from '@/components/Prompt'
 
 import { vToast } from '@/util/vux-wrapper'
 
@@ -42,7 +42,7 @@ export default {
     DealHeader,
     DealContent,
     CouponItem,
-    NoCoupon
+    Prompt
   },
   data() {
     return {

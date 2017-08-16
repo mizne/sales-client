@@ -10,7 +10,7 @@
         <order-item v-for="order in allOrders" :key="order.tradeNo" :order="order" @to-detail="toOrderDetail"></order-item>
       </template>
       <template v-else>
-        <div class="no-order">还没有订单呢, 还不快去下单 ^_^</div>
+        <prompt text="还没有订单呢, 还不快去下单 ^_^"></prompt>
       </template>
     </deal-content>
 
@@ -28,6 +28,8 @@ import DealContent from '@/components/DealContent'
 import DealFooter from '@/components/DealFooter'
 import Tabs from '@/components/Tabs'
 import OrderItem from '@/components/OrderItem'
+import Prompt from '@/components/Prompt'
+
 import { timeago, generateBetweenDate } from '@/util/index'
 import QRCodeInfo from '@/models/QRCodeInfo'
 
@@ -44,7 +46,8 @@ export default {
     DealFooter,
     Tabs,
     OrderItem,
-    PopupRadio
+    PopupRadio,
+    Prompt
   },
   computed: {
     ...mapGetters(['allOrders'])
@@ -91,15 +94,6 @@ export default {
     margin-bottom: 50px;
     .popup-radio {
       background-color: white;
-    }
-
-    .no-order {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 50px;
-      position: relative;
-      top: 30%;
     }
   }
 }

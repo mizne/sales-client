@@ -13,7 +13,7 @@
       </div>
     </template>
     <template v-else>
-      <p class="no-shops">商家正在上线中, 敬请期待</p>
+      <prompt text="商家正在上线中, 敬请期待"></prompt>
     </template>
   
   </div>
@@ -22,6 +22,8 @@
 import { mapGetters } from 'vuex'
 
 import ShopItem from '@/components/ShopItem'
+import Prompt from '@/components/Prompt'
+
 import QRCodeInfo from '@/models/QRCodeInfo'
 import toTenant from '@/mixins/to-tenant'
 
@@ -29,7 +31,8 @@ export default {
   name: 'IndustryHome',
   mixins: [toTenant],
   components: {
-    ShopItem
+    ShopItem,
+    Prompt
   },
   computed: {
     ...mapGetters(['industryLabel'])
@@ -79,6 +82,7 @@ export default {
   .no-shops {
     margin-top: 100px;
     text-align: center;
+    color: $greyText;
   }
 }
 </style>
