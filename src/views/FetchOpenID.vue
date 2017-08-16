@@ -15,10 +15,10 @@ export default {
 
     WechatService.getOpenId(obj.code)
       .then(openid => {
-        vToast({ type: 'success', content: '提取成功, 感谢配合 ^_^' })
+        vToast({ type: 'success', content: '感谢配合 ^_^' })
       })
       .catch(err => {
-        vToast({ type: 'cancel', content: '提取失败, 麻烦重试一次 ^_^' })
+        vToast({ type: 'cancel', content: '麻烦重试一次 ^_^' })
       })
   }
 }
