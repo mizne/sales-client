@@ -5,7 +5,7 @@
     <div class="detail">
       <div class="title">
         <span class="name">{{shop.name}}</span>
-        <span class="distance">{{shop.distance}}</span>
+        <span class="distance">{{shop.distance | distanceFilter}}</span>
       </div>
       <div class="description">
         <span class="text">{{shop.description}}</span>
@@ -24,6 +24,15 @@ export default {
   props: {
     shop: {
       type: Object
+    }
+  },
+  filters: {
+    distanceFilter(v) {
+      if (v < 1000) {
+        return `${v} m`
+      }
+
+      return (v / 1000).toFixed(2) + ' km'
     }
   },
   methods: {
