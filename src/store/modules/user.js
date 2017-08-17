@@ -1,6 +1,7 @@
 import { UserService, Logger } from '@/http/index'
 import { vAlert } from '@/util/vux-wrapper'
 import QRCodeInfo from '@/models/QRCodeInfo'
+import { fetchUserPostion, computeDistanceBetween } from '@/util/index'
 
 const state = {
   isVip: false, // 是否vip
@@ -10,7 +11,9 @@ const state = {
   deliveryDistance: 0, // 配送距离
   startPrice: '', // 起送价格
   distanceTooFar: false,
-  tabIndex: 0
+  tabIndex: 0,
+  userLatitude: '', // 用户GPS纬度
+  userLongitude: '' // 用户GPS经度
 }
 
 const mutations = {
@@ -37,6 +40,12 @@ const mutations = {
   },
   SET_DISTANCE_TOO_FAR(state, flag) {
     state.distanceTooFar = flag
+  },
+  SET_USER_LATITUDE(state, lat) {
+    state.userLatitude = lat
+  },
+  SET_USER_LONGITUDE(state, lng) {
+    state.userLongitude = lng
   }
 }
 
@@ -50,26 +59,28 @@ const actions = {
       return [status, coupons]
     })
   },
-  FETCH_DELIVERY_FEE: ({ commit, rootState }) => {
-    const { tenantLatitude, tenantLongitude } = rootState.tenant
-    const merchantAddress = new qq.maps.LatLng(tenantLatitude, tenantLongitude)
+  FETCH_USER_POSITION: ({ commit, dispatch }) => {
+    return fetchUserPostion()
+      .then(({ lat, lng }) => {
+        commit('SET_USER_LATITUDE', lat)
+        commit('SET_USER_LONGITUDE', lng)
+      })
+      .catch(err => {
+        vAlert({ content: err.message })
+      })
+  },
 
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition(function(position) {
-        const lat = position.coords.latitude
-        const lng = position.coords.longitude
-        //调用地图命名空间中的转换接口   type的可选值为 1:GPS经纬度，2:搜狗经纬度，3:百度经纬度，4:mapbar经纬度，5:google经纬度，6:搜狗墨卡托
-        qq.maps.convertor.translate(new qq.maps.LatLng(lat, lng), 1, function(
-          res
-        ) {
-          const { lat: userLatitude, lng: userLongitude } = res[0]
-          const userAddress = new qq.maps.LatLng(userLatitude, userLongitude)
-          const distance = Math.round(
-            qq.maps.geometry.spherical.computeDistanceBetween(
-              userAddress,
-              merchantAddress
-            )
-          )
+  FETCH_DELIVERY_FEE: ({ commit, dispatch, rootState, state }) => {
+    const { tenantLatitude, tenantLongitude } = rootState.tenant
+
+    ;(state.userLatitude && state.userLongitude
+      ? Promise.resolve()
+      : dispatch('FETCH_USER_POSITION')).then(() => {
+      computeDistanceBetween(
+        { lat: state.userLatitude, lng: state.userLongitude },
+        { lat: tenantLatitude, lng: tenantLongitude }
+      )
+        .then(({ userLatitude, userLongitude, distance }) => {
           commit('SET_DELIVERY_DISTANCE', distance)
 
           Logger.info({
@@ -97,7 +108,7 @@ const actions = {
               Logger.info({
                 module: 'user',
                 method: 'FETCH_DELIVERY_FEE',
-                description: `userLatitude: ${userLatitude}, userLongitude: ${userLongitude}, deliveryFeeValue: ${deliveryFeeValue}, deliveryTime: ${deliveryTime}`
+                description: `userLatitude: ${state.userLatitude}, userLongitude: ${state.userLongitude}, deliveryFeeValue: ${deliveryFeeValue}, deliveryTime: ${deliveryTime}`
               })
             })
             .catch(_ => {
@@ -105,10 +116,10 @@ const actions = {
               vAlert({ content: '距离过远, 不支持配送 -_-' })
             })
         })
-      })
-    } else {
-      vAlert({ content: '您的浏览器不支持获取地理位置功能' })
-    }
+        .catch(err => {
+          vAlert({ content: err.message })
+        })
+    })
   }
 }
 
@@ -136,6 +147,12 @@ const getters = {
   },
   tabIndex(state) {
     return state.tabIndex
+  },
+  userLatitude(state) {
+    return state.userLatitude
+  },
+  userLongitude(state) {
+    return state.userLongitude
   }
 }
 

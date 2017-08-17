@@ -101,13 +101,13 @@ const checkBrowserForPay = function() {
 // 返回 date的 多少时间前的描述
 // 譬如 5秒前、40分钟前、3小时14分钟前
 // 如 超过1天 则返回时间描述格式 YYYY-MM-DD HH:mm
-const timeago = function (date) {
+const timeago = function(date) {
   const now = new Date().getTime()
   const d = date.getTime()
   const diff = now - d
   if (diff < 0) {
     throw new Error(`date must before now; date: ${date}`)
-  } 
+  }
   const oneSecond = 1 * 1000
   const oneMinute = 60 * oneSecond
   const oneHour = 60 * oneMinute
@@ -123,7 +123,7 @@ const timeago = function (date) {
 
   if (diff < oneDay) {
     const hours = Math.floor(diff / oneHour)
-    const minutes = Math.floor( (diff % oneHour)/oneMinute )
+    const minutes = Math.floor(diff % oneHour / oneMinute)
 
     return `${hours}小时${minutes}分钟前`
   }
@@ -136,7 +136,7 @@ const timeago = function (date) {
 // [startTime, endTime]
 // startTime: 一周前, 一月前, 一年前
 // endTime: 现在
-const generateBetweenDate = function (duration) {
+const generateBetweenDate = function(duration) {
   const now = new Date().getTime()
   let startTime
   const endTime = fecha.format(new Date(now), 'YYYY/MM/DD HH:mm:ss')
@@ -156,29 +156,97 @@ const generateBetweenDate = function (duration) {
       startTime = fecha.format(new Date(now - oneYear), 'YYYY/MM/DD HH:mm:ss')
       return [startTime, endTime]
     default:
-      throw new Error(`Unknown duration to generate between date; duration: ${duration}`)
+      throw new Error(
+        `Unknown duration to generate between date; duration: ${duration}`
+      )
   }
 }
 generateBetweenDate.WEEK = 'week'
 generateBetweenDate.MONTH = 'month'
 generateBetweenDate.YEAR = 'year'
 
-const fillZero = (s) => {
+/**
+ * 填充前导0
+ * 
+ * @param {any} s 
+ * @returns 
+ */
+const fillZero = s => {
   return String(s).length < 2 ? '0' + String(s) : String(s)
 }
 
+/**
+ * 生成 一定范围内的 随机整数
+ * 
+ * @param {any} min 
+ * @param {any} max 
+ * @returns 
+ */
 const generateRandom = (min, max) => {
   return Math.floor((max - min + 1) * Math.random()) + min
 }
 
-export { 
-  createSteps, 
-  objFrom, 
-  dateBetween, 
-  not, 
-  checkBrowserForPay, 
+/**
+ * 通过 HTML5 GeoLocation功能获取 用户GPS经纬度
+ * 
+ * @returns 
+ */
+const fetchUserPostion = function() {
+  return new Promise((resolve, reject) => {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        const lat = position.coords.latitude
+        const lng = position.coords.longitude
+
+        resolve({ lat, lng })
+      })
+    } else {
+      reject(new Error('您的浏览器不支持获取地理位置功能'))
+    }
+  })
+}
+
+/**
+ * 转换用户GPS经纬度为腾讯地图经纬度 并 计算 用户和商户的距离
+ * 
+ * @param {any} userLatLng 用户的GPS经纬度
+ * @param {any} tenantLatLng 商户的腾讯地图经纬度
+ * @returns 用户腾讯地图经纬度 和 用户和商户之间距离
+ */
+const computeDistanceBetween = function(userLatLng, tenantLatLng) {
+  const merchantAddress = new qq.maps.LatLng(tenantLatLng.lat, tenantLatLng.lng)
+
+  return new Promise((resolve, reject) => {
+    //调用地图命名空间中的转换接口   type的可选值为 1:GPS经纬度，2:搜狗经纬度，3:百度经纬度，4:mapbar经纬度，5:google经纬度，6:搜狗墨卡托
+    qq.maps.convertor.translate(
+      new qq.maps.LatLng(userLatLng.lat, userLatLng.lng),
+      1,
+      function(res) {
+        const { lat: userLatitude, lng: userLongitude } = res[0]
+        const userAddress = new qq.maps.LatLng(userLatitude, userLongitude)
+        const distance = Math.round(
+          qq.maps.geometry.spherical.computeDistanceBetween(
+            userAddress,
+            merchantAddress
+          )
+        )
+
+        resolve({ userLatitude, userLongitude, distance })
+      }
+    )
+  })
+}
+
+export {
+  createSteps,
+  objFrom,
+  dateBetween,
+  not,
+  checkBrowserForPay,
   timeago,
   generateBetweenDate,
   fillZero,
-  generateRandom
+  generateRandom,
+  fetchUserPostion,
+  computeDistanceBetween
 }
