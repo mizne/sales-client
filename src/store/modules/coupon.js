@@ -109,10 +109,9 @@ const actions = {
       })
       .catch(err => {
         vToast({ content: `获取可用优惠券失败 -_-` })
-        return Promise.reject(err)
+        return Promise.resolve([])
       })
   },
-
   // 获取此用户的所有可用优惠券
   FETCH_ALL_COUPONS: ({ commit }) => {
     return CouponService.getAllCoupons().then(coupons => {
