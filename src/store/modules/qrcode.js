@@ -113,10 +113,10 @@ const actions = {
             }
 
             vAlert({ content: JSON.stringify(distances, null, 2) })
-            QRCodeInfo.setTenants(tenants)
+            
           })
         })
-
+        QRCodeInfo.setTenants(tenants)
         
       } else {
         console.error(`qrcode template id error; id: ${qrcodeId}`)
