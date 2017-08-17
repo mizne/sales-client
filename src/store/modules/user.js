@@ -64,6 +64,7 @@ const actions = {
       .then(({ lat, lng }) => {
         commit('SET_USER_LATITUDE', lat)
         commit('SET_USER_LONGITUDE', lng)
+        return {lat, lng}
       })
       .catch(err => {
         vAlert({ content: err.message })

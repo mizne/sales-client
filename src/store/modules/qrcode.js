@@ -1,7 +1,19 @@
 import { QRCodeService } from '@/http/index'
-import { DEAL, ESHOP, GROUP_SHOPPING, MULTI_ESHOP, FETCH_OPENID } from '@/util/constants'
+import {
+  DEAL,
+  ESHOP,
+  GROUP_SHOPPING,
+  MULTI_ESHOP,
+  FETCH_OPENID
+} from '@/util/constants'
 import QRCodeInfo from '@/models/QRCodeInfo'
-import { generateRandom, dateBetween } from '@/util/index'
+import {
+  generateRandom,
+  dateBetween,
+  computeDistanceBetween
+} from '@/util/index'
+
+import { vAlert } from '@/util/vux-wrapper'
 
 const state = {
   industryLabel: '',
@@ -24,7 +36,7 @@ const mutations = {
 }
 
 const actions = {
-  FETCH_QRCODE_INFO: ({ commit }, qrcodeId) => {
+  FETCH_QRCODE_INFO: ({ commit, dispatch }, qrcodeId) => {
     return QRCodeService.getQRCodeInfo(qrcodeId).then(info => {
       QRCodeInfo.setQrcodeId(qrcodeId)
 
@@ -86,7 +98,26 @@ const actions = {
           close: !dateBetween(e.tenantInfo.startTime, e.tenantInfo.endTime)
         }))
 
-        QRCodeInfo.setTenants(tenants)
+        dispatch('FETCH_USER_POSITION').then(({ lat, lng }) => {
+          Promise.all(
+            info.map(e =>
+              computeDistanceBetween(
+                { lat, lng },
+                { lat: e.tenantInfo.latitude, lng: e.tenantInfo.longitude }
+              )
+            )
+          )
+          .then((distances) => {
+            for (let i = 0; i < tenants.length; i += 1) {
+              tenants[i].distance = distances[i].distance
+            }
+
+            vAlert({ content: JSON.stringify(distances, null, 2) })
+            QRCodeInfo.setTenants(tenants)
+          })
+        })
+
+        
       } else {
         console.error(`qrcode template id error; id: ${qrcodeId}`)
       }
