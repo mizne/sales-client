@@ -1,7 +1,10 @@
+import Vue from 'vue'
+
 import { ShoppingCartService } from '@/http/index'
 import router from '@/router/index'
 import QRCodeInfo from '@/models/QRCodeInfo'
-import Vue from 'vue'
+import { vAlert } from '@/util/vux-wrapper'
+
 
 const state = {
   // {
@@ -101,9 +104,16 @@ const actions = {
   EDIT_SHOPPING_CART: ({ commit, dispatch }, foodParams) => {
     commit('SHOW_LOADING', true)
 
-    return ShoppingCartService.editShoppingCart(foodParams).then(_ =>
+    return ShoppingCartService.editShoppingCart(foodParams)
+    .then(_ => {
+      commit('SHOW_LOADING', false)
       dispatch('FETCH_SHOPPING_CART')
-    )
+    })
+    .catch(err => {
+      commit('SHOW_LOADING', false)
+      dispatch('FETCH_SHOPPING_CART')
+      vAlert({ content: err.message || '修改购物车失败 -_-' })
+    })
   }
 }
 

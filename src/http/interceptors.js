@@ -38,7 +38,7 @@ const eshopHttp = axios.create({
           return Promise.reject(new Error(resp.data.resMsg))
         }
       } else {
-        return Promise.reject(new Error('服务器繁忙'))
+        return Promise.reject(new Error(`server resp format incorrect; has no resCode field; resp: ${JSON.stringify(resp.data)}`))
       }
     },
     function(error) {
