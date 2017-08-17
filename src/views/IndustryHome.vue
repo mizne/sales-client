@@ -24,7 +24,6 @@ import { mapGetters } from 'vuex'
 import ShopItem from '@/components/ShopItem'
 import Prompt from '@/components/Prompt'
 
-import QRCodeInfo from '@/models/QRCodeInfo'
 import toTenant from '@/mixins/to-tenant'
 
 export default {
@@ -35,7 +34,7 @@ export default {
     Prompt
   },
   computed: {
-    ...mapGetters(['industryLabel'])
+    ...mapGetters(['industryLabel', 'tenants'])
   },
   data() {
     return {
@@ -45,8 +44,7 @@ export default {
   },
   created() {
     this.industryImage = require(`../assets/images/${this.industryLabel}.jpg`)
-    const allTenants = QRCodeInfo.getTenants()
-    this.shops = allTenants.filter(e => e.industry === this.$route.params.name)
+    this.shops = this.tenants.filter(e => e.industry === this.$route.params.name)
   }
 }
 </script>

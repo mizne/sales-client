@@ -95,7 +95,8 @@ const actions = {
           description: `起送价${e.startPrice}元|配送费${e.deliveryFee}元`,
           officialNews: e.tenantInfo.officialNews,
           sellCountPerMonth: generateRandom(100, 1000),
-          close: !dateBetween(e.tenantInfo.startTime, e.tenantInfo.endTime)
+          close: !dateBetween(e.tenantInfo.startTime, e.tenantInfo.endTime),
+          distance: '计算中...'
         }))
 
         dispatch('FETCH_USER_POSITION').then(({ lat, lng }) => {
@@ -108,17 +109,11 @@ const actions = {
             )
           )
           .then((distances) => {
-            // 由于QRCodeInfo.setTenants 存的是字符串 故异步存distance需这么做
-            const oldTenatns = QRCodeInfo.getTenants()
-            for (let i = 0; i < oldTenatns.length; i += 1) {
-              oldTenatns[i].distance = distances[i].distance
-            }
-
-            QRCodeInfo.setTenants(oldTenatns)
+            commit('SET_TENANTS_DISTANCE', distances.map(e => e.distance))
           })
         })
-        QRCodeInfo.setTenants(tenants)
-        
+
+        commit('SET_TENANTS', tenants)
       } else {
         console.error(`qrcode template id error; id: ${qrcodeId}`)
       }

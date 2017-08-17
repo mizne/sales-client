@@ -36,6 +36,9 @@ export default {
     Tabs,
     ShopItem
   },
+  computed: {
+    ...mapGetters(['tenants'])
+  },
   data() {
     return {
       hasTabs: false,
@@ -43,11 +46,10 @@ export default {
     }
   },
   created() {
-    this.hasTabs = QRCodeInfo.hasTenants()
+    this.hasTabs = QRCodeInfo.isMultiEShopBizType()
     this.$store.commit('SET_TAB_INDEX', 1)
 
-    const allTenants = QRCodeInfo.getTenants()
-    this.shops = allTenants.filter((_, i) => i % 2 === 1)
+    this.shops = this.tenants.filter((_, i) => i % 2 === 1)
   }
 }
 </script>

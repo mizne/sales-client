@@ -12,6 +12,8 @@
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
+
 import ShopItem from '@/components/ShopItem'
 import QRCodeInfo from '@/models/QRCodeInfo'
 import toTenant from '@/mixins/to-tenant'
@@ -22,14 +24,16 @@ export default {
   components: {
     ShopItem
   },
+  computed: {
+    ...mapGetters(['tenants'])
+  },
   data() {
     return {
       shops: []
     }
   },
   created() {
-    const allTenants = QRCodeInfo.getTenants()
-    this.shops = allTenants.filter((_, i) => i % 2 === 0)
+    this.shops = this.tenants.filter((_, i) => i % 2 === 0)
   }
 }
 </script>

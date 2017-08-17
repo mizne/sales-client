@@ -93,7 +93,7 @@ export default {
   created() {
     this.$store.commit('SET_TAB_INDEX', 3)
     this.phoneNumber = QRCodeInfo.getPhoneNumber()
-    this.hasTabs = QRCodeInfo.hasTenants()
+    this.hasTabs = QRCodeInfo.isMultiEShopBizType()
   },
   beforeRouteEnter(to, from, next) {
     if (!QRCodeInfo.hasPhoneNumber()) {

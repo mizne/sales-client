@@ -70,13 +70,22 @@ const stateSeed = mutationMaps.reduce((accu, curr) => {
 
 const state = {
   ...stateSeed,
-  officialNews: ''
+  officialNews: '',
+  tenants: []
 }
 
 const mutations = {
   ...generateMutations(mutationMaps, state),
   SET_OFFICIAL_NEWS(state, news) {
     state.officialNews = news
+  },
+  SET_TENANTS(state, tenants) {
+    state.tenants = tenants
+  },
+  SET_TENANTS_DISTANCE(state, distances) {
+    for (let i = 0; i < state.tenants.length; i += 1) {
+      state.tenants[i].distance = distances[i]
+    }
   }
 }
 
@@ -127,6 +136,9 @@ const getters = {
       return state.officialNews
     }
     return state.officialNews.split('&')
+  },
+  tenants(state) {
+    return state.tenants
   }
 }
 

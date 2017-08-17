@@ -28,6 +28,10 @@ export default {
   },
   filters: {
     distanceFilter(v) {
+      if (typeof v === 'string') {
+        return v
+      }
+
       if (v < 1000) {
         return `${v} m`
       }

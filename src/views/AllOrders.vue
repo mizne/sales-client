@@ -78,7 +78,7 @@ export default {
     },
   },
   created() {
-    this.hasTabs = QRCodeInfo.hasTenants()
+    this.hasTabs = QRCodeInfo.isMultiEShopBizType()
     this.$store.commit('SET_TAB_INDEX', 2)
     this.$store.dispatch('FETCH_ALL_ORDERS', generateBetweenDate.WEEK)
   }

@@ -44,7 +44,7 @@ export default {
           return
         }
 
-        if (QRCodeInfo.hasTenants()) {
+        if (QRCodeInfo.isMultiEShopBizType()) {
           this.$router.push({ name: 'MultiTenantHome' })
         } else {
           this.$router.push({ name: 'SingleTenantHome' })
