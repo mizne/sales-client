@@ -17,3 +17,8 @@ export const ORDER_SUCCESS_STATUS = 2
 
 // 一键关注 小v宝公众号链接
 export const ATTENTION_HREF = 'https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzUzNTAzNjUzNg==&scene=124#wechat_redirect'
+
+// 不同订单状态
+export const UN_PAY_ORDER = 0
+export const WAIT_PAY_ORDER = 1
+export const PAYED_ORDER = 2

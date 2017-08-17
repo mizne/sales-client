@@ -13,7 +13,7 @@
         <prompt text="还没有订单呢, 还不快去下单 ^_^"></prompt>
       </template>
     </deal-content>
-
+  
     <deal-footer v-if="hasTabs">
       <tabs></tabs>
     </deal-footer>
@@ -32,6 +32,7 @@ import Prompt from '@/components/Prompt'
 
 import { timeago, generateBetweenDate } from '@/util/index'
 import QRCodeInfo from '@/models/QRCodeInfo'
+import { UN_PAY_ORDER, WAIT_PAY_ORDER, PAYED_ORDER } from '@/util/constants'
 
 const dateMap = {
   [generateBetweenDate.WEEK]: '周',
@@ -67,11 +68,15 @@ export default {
   },
   methods: {
     toOrderDetail(order) {
-      if (order.status !== 2) {
-        this.$store.commit('SET_TENANT_ID', order.tenantId)
-        this.$store.commit('SET_TABLE_NAME', order.tableName)
-
+      this.$store.commit('SET_TENANT_ID', order.tenantId)
+      this.$store.commit('SET_TABLE_NAME', order.tableName)
+      
+      if (order.status === UN_PAY_ORDER || order.status === WAIT_PAY_ORDER) {
         this.$router.push({ name: 'OrderSuccess' })
+      }
+
+      if (order.status === PAYED_ORDER) {
+        this.$router.push({ name: 'OrderDetail', params: { tradeNo: order.tradeNo } })
       }
     },
   },

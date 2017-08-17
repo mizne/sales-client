@@ -25,6 +25,7 @@ import ShopCommentView from '@/views/ShopCommentView'
 import Wechatpay from '@/views/Wechatpay'
 import SelectCoupon from '@/views/SelectCoupon'
 import FetchOpenID from '@/views/FetchOpenID'
+import OrderDetail from '@/views/OrderDetail'
 
 Vue.use(Router)
 
@@ -156,6 +157,11 @@ const routes = [
     path: '/fetch-openid',
     name: 'FetchOpenID',
     component: FetchOpenID
+  },
+  {
+    path: '/order-detail/:tradeNo',
+    name: 'OrderDetail',
+    component: OrderDetail
   }
 ]
 
