@@ -108,12 +108,13 @@ const actions = {
             )
           )
           .then((distances) => {
-            for (let i = 0; i < tenants.length; i += 1) {
-              tenants[i].distance = distances[i].distance
+            // 由于QRCodeInfo.setTenants 存的是字符串 故异步存distance需这么做
+            const oldTenatns = QRCodeInfo.getTenants()
+            for (let i = 0; i < oldTenatns.length; i += 1) {
+              oldTenatns[i].distance = distances[i].distance
             }
 
-            vAlert({ content: JSON.stringify(distances, null, 2) })
-            
+            QRCodeInfo.setTenants(oldTenatns)
           })
         })
         QRCodeInfo.setTenants(tenants)
