@@ -109,11 +109,11 @@ const actions = {
       }
 
       // 店铺已打烊
-      if (!dateBetween(config.startTime, config.endTime)) {
-        commit('SET_HAS_CLOSED', true)
-      } else {
+      // if (!dateBetween(config.startTime, config.endTime)) {
+      //   commit('SET_HAS_CLOSED', true)
+      // } else {
         commit('SET_HAS_CLOSED', false)
-      }
+      // }
 
       return config
     })
