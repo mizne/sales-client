@@ -13,7 +13,7 @@
       </div>
     </template>
     <template v-else>
-      <prompt text="商家正在上线中, 敬请期待"></prompt>
+      <prompt text="商家正在上线中, 敬请期待" style="bottom: 30%;"></prompt>
     </template>
   
   </div>
@@ -69,7 +69,7 @@ export default {
       font-size: 2rem;
       background-color: rgba(121, 121, 121, 0.8);
       font-weight: 500;
-      color: $greyText;
+      color: #fff;
       padding-left: 20px;
     }
   }
