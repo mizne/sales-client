@@ -1,15 +1,24 @@
 <template>
   <div class="shopcart-bar-container">
-    <div class="left-area">
+    <!-- <div class="left-area">
       <span>欢迎提供建议</span>
     </div>
     <div class="right-area">
-      <x-button class="btn" type="primary" @click.native="toShopComment">评价</x-button>
+      <x-button class="btn" type="primary" @click.native="toShopComment">评价一下</x-button>
+    </div> -->
+
+    <div class="left-area">
+      <span>关注公众号优惠多多</span>
+    </div>
+    <div class="right-area">
+      <x-button class="btn" type="primary" @click.native="toAttention">一键关注</x-button>
     </div>
   </div>
 </template>
 <script>
 import { XButton } from 'vux'
+import { ATTENTION_HREF } from '@/util/constants'
+
 export default {
   name: 'BillBar',
   components: {
@@ -18,6 +27,9 @@ export default {
   methods: {
     toShopComment() {
       this.$emit('to-shopcomment')
+    },
+    toAttention() {
+      window.location.href = ATTENTION_HREF
     }
   }
 }

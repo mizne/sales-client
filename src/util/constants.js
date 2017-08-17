@@ -14,3 +14,6 @@ export const FETCH_OPENID = 'openId'
 export const EMPTY_STATUS = 0
 export const SHOPPING_CART_STATUS = 1
 export const ORDER_SUCCESS_STATUS = 2
+
+// 一键关注 小v宝公众号链接
+export const ATTENTION_HREF = 'https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzUzNTAzNjUzNg==&scene=124#wechat_redirect'
