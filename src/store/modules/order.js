@@ -132,7 +132,6 @@ const actions = {
         return dispatch('FETCH_AVALIABLE_COUPONS')
       })
       .then(allCoupons => {
-        debugger
         // 根据订单价格 过滤出可用优惠券
         const predicate = e => {
           if (e.couponType === Coupon.REDUCE) {
