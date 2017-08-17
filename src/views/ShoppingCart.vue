@@ -154,12 +154,12 @@ export default {
     },
     startPricePrompt() {
       if (this.orderDetail) {
-        return '下单'
+        return '去结算'
       } else {
         if (this.shoppingCart.totalPrice < this.startPrice) {
           return `还差 ${this.startPrice - this.shoppingCart.totalPrice} 元`
         } else {
-          return '下单'
+          return '去结算'
         }
       }
 
