@@ -267,7 +267,7 @@ export default {
     next((vm) => {
       // 从 所有订单列表页面 进入 通过订单号 获取订单详情
       if (from.name === 'AllOrders') {
-        return vm.$store.dispatch('FETCH_ORDER', vm.$route.params.tradeNo)
+        return vm.$store.dispatch('FETCH_ORDER', vm.$route.query.tradeNo)
           .catch(err => {
             vAlert({ content: '获取订单失败' })
           })

@@ -69,11 +69,11 @@ export default {
   methods: {
     toOrderDetail(order) {
       if (order.status === UN_PAY_ORDER || order.status === WAIT_PAY_ORDER) {
-        this.$router.push({ name: 'OrderSuccess', params: { tradeNo: order.tradeNo } })
+        this.$router.push({ name: 'OrderSuccess', query: { tradeNo: order.tradeNo } })
       }
 
       if (order.status === PAYED_ORDER) {
-        this.$router.push({ name: 'OrderDetail', params: { tradeNo: order.tradeNo } })
+        this.$router.push({ name: 'OrderDetail', query: { tradeNo: order.tradeNo } })
       }
     },
   },

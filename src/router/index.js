@@ -94,7 +94,7 @@ const routes = [
     component: PeopleNumber
   },
   {
-    path: '/order-success/:tradeNo',
+    path: '/order-success',
     name: 'OrderSuccess',
     component: OrderSuccess
   },
