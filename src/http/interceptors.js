@@ -35,7 +35,7 @@ const eshopHttp = axios.create({
         if (resp.data.resCode === 0) {
           return resp.data.result
         } else {
-          return Promise.reject(new Error(resp.data.resMsg))
+          return Promise.reject(new Error(resp.data.result))
         }
       } else {
         return Promise.reject(new Error(`server resp format incorrect; has no resCode field; resp: ${JSON.stringify(resp.data)}`))

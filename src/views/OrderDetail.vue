@@ -19,6 +19,7 @@ import DealHeader from '@/components/DealHeader'
 import DealContent from '@/components/DealContent'
 import DealFooter from '@/components/DealFooter'
 import BillDetail from '@/components/BillDetail'
+import BillBar from '@/components/BillBar'
 
 import { vAlert } from '@/util/vux-wrapper'
 
@@ -28,7 +29,8 @@ export default {
     DealHeader,
     DealContent,
     DealFooter,
-    BillDetail
+    BillDetail,
+    BillBar
   },
   computed: {
     ...mapGetters(['orderDetail'])
