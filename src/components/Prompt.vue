@@ -23,7 +23,10 @@ export default {
 .prompt-container {
   @include flexboxCenter;
   flex-direction: column;
-  margin-top: 20px;
+  position: absolute;
+  bottom: 50%;
+  left: 0;
+  right: 0;
 
   .description {
     margin-top: 10px;
