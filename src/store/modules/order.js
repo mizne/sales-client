@@ -45,6 +45,9 @@ const actions = {
       commit('SHOW_LOADING', false)
       commit('SET_ALL_ORDERS', orders)
     })
+    .catch(err => {
+      commit('SHOW_LOADING', false)
+    })
   },
   CHOOSE_PEOPLE_NUMBER: ({ commit, dispatch }, number) => {
     commit('SET_DINERS_NUM', number)
