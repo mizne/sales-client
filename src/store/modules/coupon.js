@@ -94,18 +94,23 @@ const actions = {
   },
   // 获取可用优惠券
   FETCH_AVALIABLE_COUPONS: ({ commit }) => {
-    return CouponService.getAvaliableCoupons().then(coupons => {
-      // 将优惠券 按照失效时间 倒序
-      coupons.sort((a, b) => {
-        const aMilliseconds = new Date(a.InvalidDate).getTime()
-        const bMilliseconds = new Date(b.InvalidDate).getTime()
+    return CouponService.getAvaliableCoupons()
+      .then(coupons => {
+        // 将优惠券 按照失效时间 倒序
+        coupons.sort((a, b) => {
+          const aMilliseconds = new Date(a.InvalidDate).getTime()
+          const bMilliseconds = new Date(b.InvalidDate).getTime()
 
-        return aMilliseconds - bMilliseconds
+          return aMilliseconds - bMilliseconds
+        })
+
+        commit('SET_ALL_COUPONS', coupons)
+        return coupons
       })
-
-      commit('SET_ALL_COUPONS', coupons)
-      return coupons
-    })
+      .catch(err => {
+        vToast({ content: `获取可用优惠券失败 -_-` })
+        return Promise.reject(err)
+      })
   },
 
   // 获取此用户的所有可用优惠券

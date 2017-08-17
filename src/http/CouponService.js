@@ -19,7 +19,7 @@ class CouponService extends BaseService {
         [DEAL]: ['tenantId', 'phoneNumber'],
         [ESHOP]: ['tenantId', 'phoneNumber'],
         [GROUP_SHOPPING]: ['tenantId', 'phoneNumber'],
-        [MULTI_ESHOP]: ['phoneNumber']
+        [MULTI_ESHOP]: ['tenantId', 'phoneNumber']
       }
       const query = this.getBizTypeQuery(map)
 
