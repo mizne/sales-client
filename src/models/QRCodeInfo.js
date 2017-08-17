@@ -42,11 +42,11 @@ QRCodeInfo.prototype.getShoppingCartRemarkPlaceholder = function() {
   }
 
   if (this.isEShopBizType()) {
-    if (this.hasTenants()) {
-      return `该订单为${this.getConsigneeName()}代售商品, 请备注您的房间号`
-    } else {
-      return '该订单为代售商品, 如收货地址变更, 请填写具体地址, 默认为本二维码所在地址'
-    }
+    return '该订单为代售商品, 如收货地址变更, 请填写具体地址, 默认为本二维码所在地址'
+  }
+
+  if (this.isMultiEShopBizType()) {
+    return `该订单为${this.getConsigneeName()}代售商品, 请备注您的房间号`
   }
 
   if (this.isGroupShoppingBizType()) {

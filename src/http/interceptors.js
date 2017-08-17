@@ -55,9 +55,9 @@ const loggerHttp = axios.create({
 loggerHttp.interceptors.request.use(
   // 开发环境 不上传 error-logger
   function(config) {
-    // if (process.env.NODE_ENV === 'development') {
-    //   return Promise.reject(new Error('development not need report to server'))
-    // }
+    if (process.env.NODE_ENV === 'development') {
+      return Promise.reject(new Error('development not need report to server'))
+    }
     return config
   },
   function(error) {
