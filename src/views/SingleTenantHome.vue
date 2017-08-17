@@ -67,7 +67,6 @@ export default {
               })
             }
             document.title = vm.tenantName
-
             // 代售业务且商户有经纬度才获取 配送费
             if (vm.needDeliveryFee) {
               vm.$store.dispatch('FETCH_DELIVERY_FEE')
