@@ -7,7 +7,7 @@
       <div class="food-info">
         <swiper :list="images" :auto="true" height="400px" dots-class="custom-bottom" dots-position="center"></swiper>
         <!-- <div :style="{'width': '100%', 'height': '250px', 'background': `url(${foodDetail.food.image})`, 'background-size': 'contain'}"> -->
-          <!--<img style="width:100%;height:300px;" :src="foodDetail.food.image" alt="">-->
+        <!--<img style="width:100%;height:300px;" :src="foodDetail.food.image" alt="">-->
         <!-- </div> -->
         <div class="title">{{foodDetail.food.name}}</div>
         <div class="favorite">
@@ -197,16 +197,25 @@ export default {
       'isAddMoreFood',
     ]),
     images() {
-      return Array(3).fill({
-        url: 'javascript:',
-        img: this.foodDetail.food.image || require('../assets/images/default.jpg')
-      })
+      if (this.foodDetail.food.image.length === 1) {
+        return Array(3).fill({
+          url: 'javascript:',
+          img: this.foodDetail.food.image[0] || require('../assets/images/default.jpg')
+        })
+      }
+
+      if (this.foodDetail.food.image.length === 3) {
+        return this.foodDetail.food.image.map(e => ({
+          url: 'javascript:',
+          img: e
+        }))
+      }
     }
   },
   created() {
     this.isDealBizType = QRCodeInfo.isDealBizType()
     this.hasPhoneNumber = QRCodeInfo.hasPhoneNumber()
-    
+
     if (this.foodDetail.food.unit === '斤') {
       window.setTimeout(() => {
         this.showSelection = true

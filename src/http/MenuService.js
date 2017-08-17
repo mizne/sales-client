@@ -18,6 +18,13 @@ class MenuService extends BaseService {
               const milliSecondsB = new Date(b.rateTime).getTime()
               return milliSecondsB - milliSecondsA
             })
+
+            // 处理 image 为数组字符串格式 表示多个图片
+            try {
+               food.image = JSON.parse(food.image) 
+            } catch(e) {
+              food.image = [food.image]
+            }
           })
         })
 
