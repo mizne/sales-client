@@ -7,19 +7,19 @@
     <deal-content v-if="orderDetail">
       <!-- <scroll-notification :texts="promptText"></scroll-notification> -->
       <!-- <div class="tip">
-        <div class="line">
-          <i class="icon-point"></i>
-          <span>若退出, 再扫二维码, 即可加单或买单</span>
-        </div>
-        <div class="line" v-if="!isDealBizType">
-          <div class="btn-group">
-            <div class="cancel-btn">
-              <x-button type="primary" @click.native="cancelOrder">取消</x-button>
-            </div>
+          <div class="line">
+            <i class="icon-point"></i>
+            <span>若退出, 再扫二维码, 即可加单或买单</span>
           </div>
-          <div class="placeholder"></div>
-        </div>
-      </div> -->
+          <div class="line" v-if="!isDealBizType">
+            <div class="btn-group">
+              <div class="cancel-btn">
+                <x-button type="primary" @click.native="cancelOrder">取消</x-button>
+              </div>
+            </div>
+            <div class="placeholder"></div>
+          </div>
+        </div> -->
       <div class="order-info">
         <div class="table-number">
           <span style="margin-left: 20px;">台
@@ -265,6 +265,13 @@ export default {
   },
   beforeRouteEnter(to, from, next) {
     next((vm) => {
+      // 从 所有订单列表页面 进入 通过订单号 获取订单详情
+      if (from.name === 'AllOrders') {
+        return vm.$store.dispatch('FETCH_ORDER', vm.$route.params.tradeNo)
+          .catch(err => {
+            vAlert({ content: '获取订单失败' })
+          })
+      }
 
       // 分别从
       // 购物车页面 代售业务从购物车进来 下单
@@ -278,6 +285,7 @@ export default {
           })
       }
 
+      // 从支付宝支付页面 回来 去除遮罩层
       if (from.name === 'Alipay') {
         vm.$store.commit('SET_SHOW_IFRAME', false)
       }

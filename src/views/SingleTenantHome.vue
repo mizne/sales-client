@@ -57,7 +57,7 @@ export default {
     next(vm => {
       // 从 首页进来 初始化状态及配置信息
       // 从 其他页面后退进来 不作初始化请求 让其直接进入home页
-      if (from.path === '/') {
+      if (from.name === 'Home') {
         // 获取商户配置信息
         vm.$store.dispatch('FETCH_TENANT_CONFIG')
           .then(_ => {
