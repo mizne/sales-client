@@ -102,6 +102,7 @@ export default {
       }
       .distance {
         width: 30%;
+        font-size: .8rem;
       }
     }
 
