@@ -38,7 +38,7 @@ class OrderService extends BaseService {
 
   getAllOrder(dateFormat) {
     const [startTime, endTime] = generateBetweenDate(dateFormat)
-    const query = `?consigneeId=${QRCodeInfo.getConsigneeId()}&phoneNumber=${QRCodeInfo.getPhoneNumber()}&startTime=${startTime}&endTime=${endTime}`
+    const query = `?phoneNumber=${QRCodeInfo.getPhoneNumber()}&startTime=${startTime}&endTime=${endTime}`
     return this.getBizTypeHttp()
     .get(`/consignee/order${query}`)
     .then(orders => {
