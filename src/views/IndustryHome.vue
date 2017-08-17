@@ -59,19 +59,18 @@ export default {
     width: 100%;
     height: 200px;
     background-size: cover;
-    background-image: url(../assets/images/dinning.jpg);
 
     .top-pointer {
+      position: absolute;
+      bottom: 0;
       width: 100%;
       height: 4rem;
       line-height: 4rem;
       font-size: 2rem;
       background-color: rgba(121, 121, 121, 0.8);
       font-weight: 500;
-      color: #fff;
+      color: $greyText;
       padding-left: 20px;
-      position: absolute;
-      bottom: 0;
     }
   }
   .shops {

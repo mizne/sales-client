@@ -131,7 +131,7 @@ export default {
   .description {
     flex: 5;
     height: 100%;
-    color: $text;
+    color: $primaryTextColor;
     display: flex;
     justify-content: space-around;
     flex-direction: column;

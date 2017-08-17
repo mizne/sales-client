@@ -14,8 +14,8 @@
       </template>
     </deal-content>
 
-    <deal-footer>
-      <tabs v-if="hasTabs"></tabs>
+    <deal-footer v-if="hasTabs">
+      <tabs></tabs>
     </deal-footer>
   </div>
 </template>
@@ -93,7 +93,7 @@ export default {
     background-color: $greyBackground;
     margin-bottom: 50px;
     .popup-radio {
-      background-color: white;
+      background-color: $whiteBackground;
     }
   }
 }

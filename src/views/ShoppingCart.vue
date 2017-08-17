@@ -323,7 +323,6 @@ export default {
     .left-area,
     .center-area {
       color: #fff;
-      background-color: #000;
     }
 
     .right-area {

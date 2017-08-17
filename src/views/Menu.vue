@@ -228,8 +228,8 @@ export default {
       left: 0;
       width: 200px;
       transform: none;
-      color: #313131;
-      background-color: #fff;
+      color: $primaryTextColor;
+      background-color: $whiteBackground;
       transition: all .3s ease;
       z-index: 5000;
 
@@ -264,7 +264,7 @@ export default {
       left: 0;
       bottom: 40px;
       width: 80px;
-      border-right: 1px solid #EEE;
+      border-right: 1px solid $greyBorder;
       overflow: overlay;
 
       .dish-type-container {
@@ -275,9 +275,9 @@ export default {
           font-size: .9rem;
           position: relative;
           overflow: hidden;
-          border-bottom: 1px solid #EEE;
+          border-bottom: 1px solid $greyBorder;
           text-align: center;
-          color: gray;
+          color: $greyText;
           cursor: pointer;
 
           .food-count {
@@ -317,7 +317,7 @@ export default {
           display: flex;
           align-items: center;
           // background-color: lighten($primaryColor, 50%);
-          background-color: #EEE;
+          background-color: $greyBorder;
           height: 30px;
           padding-left: 5px;
         }
@@ -327,10 +327,6 @@ export default {
         }
       }
     }
-  }
-
-  .deal-footer-container {
-    background-color: black;
   }
 }
 </style>

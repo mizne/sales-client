@@ -21,6 +21,7 @@ export default {
   height: 50px;
   color: #fff;
   text-align: center;
+  background-color: $blackBackground;
 }
 </style>
 

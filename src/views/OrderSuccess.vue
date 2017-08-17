@@ -414,10 +414,6 @@ export default {
     }
   }
 
-  .deal-footer-container {
-    background-color: black;
-  }
-
   iframe {
     border: none;
     width: 100%;

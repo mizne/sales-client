@@ -1,11 +1,4 @@
-$text: #222;
-$greyText: #999;
-$primaryColor: #1AAD19;
-$warnColor: #E64340;
-$greyBackground: #EEE;
-$whiteBackground: #FBF9FE;
-
-$themeColor: #04BE02;
+@import './colors';
 
 @mixin flexboxCenter {
   display: flex;

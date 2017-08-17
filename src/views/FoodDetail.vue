@@ -333,7 +333,7 @@ export default {
       .price {
         .vip-text,
         .vip-price {
-          color: #f00;
+          color: $warnColor;
         }
         .vip-text {
           margin-left: 10px;
@@ -361,9 +361,9 @@ export default {
       h3 {
         text-align: left;
         margin-top: 10px;
+        margin-bottom: 10px;
         font-weight: 500;
         font-size: 18px;
-        margin-bottom: 10px;
       }
 
       .rating-item {
@@ -431,10 +431,6 @@ export default {
     }
   }
 
-  .deal-footer-container {
-    background-color: black;
-  }
-
   .select-area {
     position: fixed;
     bottom: 0;
@@ -444,7 +440,7 @@ export default {
     height: 330px;
     z-index: 100;
     background-color: $greyBackground;
-    border-top: 1px solid #aaa;
+    border-top: 1px solid $greyBorder;
     overflow: overlay;
     padding-bottom: 40px;
 
@@ -454,7 +450,7 @@ export default {
       .food-title {
         @include flexboxCenter;
         height: 50px;
-        border-bottom: 1px solid #aaa;
+        border-bottom: 1px solid $greyBorder;
         .food-name {
           flex: 3;
         }
@@ -464,12 +460,11 @@ export default {
           margin-left: 5px;
         }
 
-
         .food-name {
           font-weight: 600;
         }
         .food-old-price {
-          color: #aaa;
+          color: $greyBorder;
           text-decoration: line-through;
         }
         .food-price {
@@ -478,7 +473,7 @@ export default {
         .cancel {
           flex: 1;
           margin-left: 80px;
-          color: #aaa;
+          color: $greyBorder;
           transform: scale(1.3);
         }
       }
@@ -492,7 +487,7 @@ export default {
               font-weight: 600;
             }
             .remark {
-              color: #aaa;
+              color: $greyBorder;
               font-size: .9rem;
             }
           }
@@ -502,7 +497,7 @@ export default {
             display: flex;
             .number {
               flex: 1;
-              border: 1px solid #aaa;
+              border: 1px solid $greyBorder;
               border-radius: 4px;
               text-align: center;
               font-weight: 600;
@@ -536,7 +531,7 @@ export default {
               .col {
                 flex: 1;
                 text-align: center;
-                border: 1px solid #aaa;
+                border: 1px solid $greyBorder;
                 border-radius: 4px;
 
                 &:last-child {
@@ -560,7 +555,7 @@ export default {
           .text-area {
             width: 100%;
             padding: 5px;
-            border: 1px solid #aaa;
+            border: 1px solid $greyBorder;
             box-sizing: border-box;
           }
         }
@@ -572,7 +567,7 @@ export default {
       width: 100%;
       height: 40px;
       background-color: $primaryColor;
-      color: white;
+      color: $whiteBackground;
       text-align: center;
       line-height: 40px;
     }

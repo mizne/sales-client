@@ -150,10 +150,6 @@ export default {
     padding: 10px;
     background-color: $greyBackground;
   }
-
-  .deal-footer-container {
-    background-color: black;
-  }
 }
 </style>
 

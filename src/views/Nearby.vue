@@ -9,8 +9,8 @@
       </div>
     </deal-content>
   
-    <deal-footer>
-      <tabs v-if="hasTabs"></tabs>
+    <deal-footer v-if="hasTabs">
+      <tabs></tabs>
     </deal-footer>
   </div>
 </template>

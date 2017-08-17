@@ -45,8 +45,8 @@
       </div>
     </deal-content>
   
-    <deal-footer>
-      <tabs v-if="hasTabs">
+    <deal-footer v-if="hasTabs">
+      <tabs>
       </tabs>
     </deal-footer>
   </div>
@@ -126,7 +126,7 @@ export default {
     .phone-info {
       height: 50px;
       color: #aaa;
-      background-color: #fff;
+      background-color: $whiteBackground;
       display: flex;
       justify-content: space-around;
       align-items: center;
@@ -136,11 +136,10 @@ export default {
       margin-top: 10px;
       height: 230px;
 
-
       .abstract {
         display: flex;
         height: 80px;
-        background-color: #fff;
+        background-color: $whiteBackground;
         justify-content: space-around;
         align-items: center;
 
@@ -179,7 +178,7 @@ export default {
 
       .card-item {
         height: 50px;
-        background-color: #fff;
+        background-color: $whiteBackground;
         display: flex;
         justify-content: space-around;
         align-items: center;
