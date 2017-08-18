@@ -21,7 +21,7 @@
           </div>
         </div> -->
       <div class="order-info">
-        <div class="table-number">
+        <div class="table-number" v-if="isDealBizType">
           <span style="margin-left: 20px;">台
             <span style="width: 30px; display:inline-block"></span> 号：
           </span>

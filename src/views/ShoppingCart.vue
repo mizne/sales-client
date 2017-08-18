@@ -9,7 +9,7 @@
   
       <div class="content">
         <div class="table-info" :class="{'hasScroll': avaliableCoupons.length > 0}">
-          <span class="table-number">桌号: {{shoppingCart.tableName}}</span>
+          <span class="table-number" v-if="isDealBizType">桌号: {{shoppingCart.tableName}}</span>
           <span class="food-count">合计: {{shoppingCart.totalNum}}份</span>
           <span class="food-cost">
             <i class="icon-money"></i>

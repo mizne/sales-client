@@ -9,7 +9,7 @@
     <div class="bill-detail">
       <div class="tenant-name">{{tenantName}}</div>
       <div class="bill-abstract">
-        <div class="table-info">
+        <div class="table-info" v-if="isDealBizType">
           <div class="table-number">
             <span>桌号：</span>
             <span>{{orderDetail.tableName}}</span>
@@ -78,6 +78,7 @@
 </template>
 <script>
 import Coupon from '@/models/Coupon'
+import QRCodeInfo from '@/models/QRCodeInfo'
 
 export default {
   name: 'BillDetail',
@@ -95,6 +96,11 @@ export default {
       type: String
     }
   },
+  data() {
+    return {
+      isDealBizType: false
+    }
+  },
   filters: {
     // 格式化后台返回下单时间 只显示时间部分
     time(v) {
@@ -104,6 +110,9 @@ export default {
       return new Coupon(type, v).getText()
     }
   },
+  created() {
+    this.isDealBizType = QRCodeInfo.isDealBizType()
+  }
 }
 </script>
 <style lang="scss" scoped>
