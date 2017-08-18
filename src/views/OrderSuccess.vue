@@ -344,6 +344,7 @@ export default {
 
       .table-number,
       .order-time {
+        @include flexboxCenter;
         flex: 1;
       }
 

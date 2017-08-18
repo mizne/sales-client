@@ -68,12 +68,14 @@ export default {
   },
   methods: {
     toOrderDetail(order) {
+      this.$store.commit('SET_TENANT_ID', order.tenantId)
+      
       if (order.status === UN_PAY_ORDER || order.status === WAIT_PAY_ORDER) {
         this.$router.push({ name: 'OrderSuccess', query: { tradeNo: order.tradeNo } })
       }
 
       if (order.status === PAYED_ORDER) {
-        this.$router.push({ name: 'OrderDetail', query: { tradeNo: order.tradeNo } })
+        this.$router.push({ name: 'OrderStatus', query: { tradeNo: order.tradeNo } })
       }
     },
   },

@@ -49,6 +49,7 @@ export default {
   },
   created() {
     this.$store.commit('SET_TAB_INDEX', 0)
+    document.title = '小v宝e代售'
   }
 }
 </script>

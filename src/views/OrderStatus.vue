@@ -19,25 +19,25 @@
           <timeline-item>
             <div class="timeline-item">
               <div class="name">订单已提交</div>
-              <div class="time">20:45</div>
+              <div class="time">{{commitOrderTime}}</div>
             </div>
           </timeline-item>
           <timeline-item>
             <div class="timeline-item">
               <div class="name">支付成功</div>
-              <div class="time">20:45</div>
+              <div class="time">{{payOrderTime}}</div>
             </div>
           </timeline-item>
           <timeline-item>
             <div class="timeline-item">
               <div class="name">等待商家接单</div>
-              <div class="time">20:45</div>
+              <div class="time">{{acceptOrderTime}}</div>
             </div>
           </timeline-item>
           <timeline-item>
             <div class="timeline-item">
               <div class="name">等待接货</div>
-              <div class="time">20:45</div>
+              <div class="time">{{receiveGoodsTime}}</div>
             </div>
           </timeline-item>
         </timeline>
@@ -59,6 +59,7 @@
 <script>
 import { Tab, TabItem, XButton } from 'vux'
 import { mapGetters } from 'vuex'
+import fecha from 'fecha'
 
 import DealHeader from '@/components/DealHeader'
 import DealContent from '@/components/DealContent'
@@ -85,14 +86,51 @@ export default {
     XButton
   },
   computed: {
-    // ...mapGetters(['orderDetail'])
+    ...mapGetters(['orderDetail']),
+    orderTime() {
+      if (this.orderDetail) {
+        return this.orderDetail.time
+      }
+      return fecha.format(new Date(), 'YYYY-MM-DD HH:mm:ss')
+    },
+    current() {
+      if (this.orderDetail) {
+        return this.orderDetail.status
+      }
+      return 1
+    },
+    commitOrderTime() {
+      if (this.orderDetail) {
+        return this.orderDetail.time
+      }
+      return ''
+    },
+    payOrderTime() {
+      if (this.orderDetail && this.orderDetail.status >= 2) {
+        return this.orderDetail.payTime
+      }
+      return ''
+    },
+    acceptOrderTime() {
+      if (this.orderDetail && this.orderDetail.status >= 3) {
+        return this.orderDetail.acceptTime
+      }
+      return ''
+    },
+    receiveGoodsTime() {
+      if (this.orderDetail && this.orderDetail.status >= 4) {
+        return this.orderDetail.receiveTime
+      }
+      return ''
+    }
   },
   data() {
     return {
       view: 'status',
-      current: 1,
-      orderTime: '2017-08-15 18:21:00',
-      duration: 5
+      // current: 1,
+      // orderTime: '2017-08-15 18:21:00',
+      duration: 5,
+      timer: null
     }
   },
   methods: {
@@ -101,12 +139,21 @@ export default {
     },
     orderTimeout() {
       // console.log('order timeout!')
+    },
+    initTimer() {
+      const tradeNo = this.$route.query.tradeNo
+
+      this.$store.dispatch('FETCH_ORDER', tradeNo)
+      this.timer = window.setInterval(() => {
+        this.$store.dispatch('FETCH_ORDER', tradeNo)
+      }, 2e4)
     }
   },
   created() {
-    window.setInterval(() => {
-      this.current = (++this.current) % 4
-    }, 2e3)
+    this.initTimer()
+  },
+  beforeDestroy() {
+    window.clearInterval(this.timer)
   }
 }
 </script>
