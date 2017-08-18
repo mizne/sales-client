@@ -57,7 +57,7 @@ QRCodeInfo.prototype.getShoppingCartRemarkPlaceholder = function() {
 }
 
 QRCodeInfo.prototype.needPromptFillOrderRemark = function () {
-  return this.isGroupShoppingBizType()
+  return this.isMultiEShopBizType()
 }
 
 QRCodeInfo.prototype.getBizTypeText = function() {
