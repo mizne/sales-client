@@ -69,6 +69,7 @@ export default {
       font-weight: 500;
       color: #fff;
       padding-left: 20px;
+      box-sizing: border-box;
     }
   }
   .shops {

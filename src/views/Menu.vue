@@ -161,11 +161,6 @@ export default {
     },
     _initAllFoods() {
       return this.$store.dispatch('FETCH_ALL_FOODS')
-        .catch(err => {
-          vToast({
-            content: '啊哦, 网络似乎出问题了, 稍后请重试下 ^_^',
-          })
-        })
         .then(_ => {
           Vue.nextTick(() => {
             this._initScroll()// 初始化scrollListener
@@ -173,7 +168,11 @@ export default {
             this._initRectTop()// 初始化 菜品滚动区的视口top
           })
         })
-
+        .catch(err => {
+          vToast({
+            content: '啊哦, 网络似乎出问题了, 稍后请重试下 ^_^',
+          })
+        })
     },
     _initScroll() {
       document.addEventListener('scroll', this._scrollListener)

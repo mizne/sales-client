@@ -73,15 +73,15 @@ export default {
           type: 'cancel',
           content: '已取消优惠券'
         })
-        this.$router.push({ name: 'OrderSuccess' })
       } else {
         this.$store.dispatch('SELECT_COUPON', coupon)
         vToast({
           type: 'success',
           content: '已选中优惠券'
         })
-        this.$router.push({ name: 'OrderSuccess' })
       }
+
+      this.$router.push({ name: 'OrderSuccess' })
     }
   },
   created() {
