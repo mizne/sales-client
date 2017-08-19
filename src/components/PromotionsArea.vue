@@ -1,19 +1,21 @@
 <template>
   <div class="promotions-area">
     <div class="promotions-items1">
-      <promotions-item v-for="item in promotionsItems1" :key="item.$index" @click="toIndustry(item)" :label="item.label" :text-color="item.textColor" :img="item.img" :description="item.description"></promotions-item> 
+      <promotions-item v-for="item in promotionsItems1" :key="item.$index" @to-tenant="toTenant(item)" :tenant="item"></promotions-item> 
     </div>
   
-    <div class="promotions-items2">
-      <promotions-item v-for="item in promotionsItems2" :key="item.$index" @click="toIndustry(item)" :label="item.label" :text-color="item.textColor" :img="item.img" :description="item.description"></promotions-item> 
-    </div>
+    <!-- <div class="promotions-items2">
+      <promotions-item v-for="item in promotionsItems2" :key="item.$index" @click="toTenant(item)" :tenant="item"></promotions-item> 
+    </div> -->
   </div>
 </template>
 <script>
 import PromotionsItem from '@/components/PromotionsItem'
+import toTenant from '@/mixins/to-tenant'
 
 export default {
   name: 'IndustryArea',
+  mixins: [toTenant],
   components: {
     PromotionsItem
   },
@@ -25,21 +27,24 @@ export default {
           "label": "9.9元起",
           "textColor": "#f04134",
           "img": require("../assets/images/shucai.jpg"),
-          "description": "甩脂大作战"
+          "description": "满减促销",
+          "id": "18d473e77f459833bb06c60f9a8f0002"
         },
         {
           "name": "food",
-          "label": "机票1折起",
+          "label": "美味披萨",
           "textColor": "#00a854",
           "img": require("../assets/images/dianying.jpg"),
-          "description": "跟着电影旅行"
+          "description": "大折扣",
+          "id": "d5495b96870e70797dbef12fc32b5d40"
         },
         {
           "name": "educate",
           "label": "0元1元",
           "textColor": "#108ee9",
           "img": require("../assets/images/mianfei.jpg"),
-          "description": "免费抢不停"
+          "description": "免费抢不停",
+          "id": "8b093db931ba90587b358d304aaf6049"
         },
       ],
       promotionsItems2: [
@@ -74,10 +79,6 @@ export default {
     }
   },
   methods: {
-    toIndustry(item) {
-      this.$store.commit('SET_INDUSTRY_LABEL', item.label)
-      this.$router.push({ name: 'IndustryHome', params: { name: item.label } })
-    },
   }
 }
 </script>

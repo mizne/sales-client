@@ -1,11 +1,11 @@
 <template>
-  <div class="promotions-item">
+  <div class="promotions-item" @click="toTenant(tenant)">
     <div class="label">
-      {{label}}
+      {{tenant.label}}
     </div>
-    <div class="description" :style="{'color': textColor}">{{description}}</div>
+    <div class="description" :style="{'color': tenant.textColor}">{{tenant.description}}</div>
     <div class="image-wrapper">
-      <div class="image" :style="{'background-image': 'url('+img+')'}"></div>
+      <div class="image" :style="{'background-image': 'url('+tenant.img+')'}"></div>
     </div>
   </div>
 </template>
@@ -13,17 +13,13 @@
 export default {
   name: 'PromotionsItem',
   props: {
-    label: {
-      type: String
-    },
-    textColor: {
-      type: String
-    },
-    img: {
-      type: String
-    },
-    description: {
-      type: String
+    tenant: {
+      type: Object
+    }
+  },
+  methods: {
+    toTenant(tenant) {
+      this.$emit('to-tenant', tenant)
     }
   }
 }

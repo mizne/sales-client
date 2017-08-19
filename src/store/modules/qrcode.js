@@ -99,6 +99,7 @@ const actions = {
           distance: '计算中...'
         }))
 
+        // 获取用户地理位置 并 计算商户和用户的距离
         dispatch('FETCH_USER_POSITION').then(({ lat, lng }) => {
           Promise.all(
             info.map(e =>
