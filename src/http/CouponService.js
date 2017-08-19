@@ -33,8 +33,16 @@ class CouponService extends BaseService {
 
   getAllCoupons() {
     if (QRCodeInfo.hasPhoneNumber()) {
+      const map = {
+        [DEAL]: ['tenantId', 'phoneNumber'],
+        [ESHOP]: ['tenantId', 'phoneNumber'],
+        [GROUP_SHOPPING]: ['tenantId', 'phoneNumber'],
+        [MULTI_ESHOP]: ['phoneNumber']
+      }
+      const query = this.getBizTypeQuery(map)
+
       return this.getBizTypeHttp()
-      .get(`/availableCoupon?phoneNumber=${QRCodeInfo.getPhoneNumber()}`)
+      .get(`/availableCoupon${query}`)
       .catch(this.exceptionHandler('CouponService', 'getAllCoupons'))
     } else {
       return Promise.resolve([])
@@ -90,6 +98,21 @@ class CouponService extends BaseService {
     return this.getBizTypeHttp()
       .post('/couponBindTradeNo', params)
       .catch(this.exceptionHandler('CouponService', 'consumCoupon'))
+  }
+
+  //  删除某个优惠券
+  delCoupon(couponKey) {
+    const map = {
+      [DEAL]: ['tenantId', 'phoneNumber'],
+      [ESHOP]: ['tenantId', 'phoneNumber', 'consigneeId'],
+      [GROUP_SHOPPING]: ['tenantId', 'phoneNumber', 'consigneeId'],
+      [MULTI_ESHOP]: ['phoneNumber', 'consigneeId']
+    }
+    const query = this.getBizTypeQuery(map)
+
+    return this.getBizTypeHttp()
+    .delete(`/coupon${query}&couponKey=${couponKey}`)
+    .catch(this.exceptionHandler('CouponService', 'consumCoupon'))
   }
 }
 

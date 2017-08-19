@@ -91,7 +91,9 @@ const mutations = {
 
 const actions = {
   FETCH_TENANT_CONFIG: ({ commit }) => {
+    commit('SHOW_LOADING', true)
     return TenantService.getConfig().then(config => {
+      commit('SHOW_LOADING', false)
       commit('SET_TENANT_NAME', config.name)
       commit('SET_VIP_AMOUNT', config.vipFee)
       commit('SET_ALMOST_VIP_AMOUNT', config.vipRemindFee)
@@ -125,6 +127,9 @@ const actions = {
       }
 
       return config
+    })
+    .catch(_ => {
+      commit('SHOW_LOADING', false)
     })
   }
 }

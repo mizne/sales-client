@@ -104,7 +104,7 @@ const actions = {
           return aMilliseconds - bMilliseconds
         })
 
-        commit('SET_ALL_COUPONS', coupons)
+        commit('SET_AVALIABLE_COUPONS', coupons)
         return coupons
       })
       .catch(err => {
@@ -142,6 +142,17 @@ const actions = {
         : '',
       rootState.order.orderDetail[tenantId].tradeNo
     )
+  },
+  // 删除某个优惠券
+  DELETE_COUPON: ({ commit, dispatch }, coupon) => {
+    return CouponService.delCoupon(coupon.couponKey)
+    .then(_ => {
+      vToast({ type: 'success', content: '删除成功 ^_^' })
+    })
+    .catch(_ => {
+      vToast({ type: 'cancel', content: '删除失败 -_-' })
+    })
+    
   }
 }
 

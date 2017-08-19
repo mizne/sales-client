@@ -2,7 +2,7 @@
   <div class="coupon-view-container">
     <deal-header title="选择优惠券">
     </deal-header>
-  
+
     <deal-content>
       <div class="tabs">
         <tab>
@@ -10,13 +10,23 @@
           <tab-item @on-item-click="onItemClick('disabled')">不可用</tab-item>
         </tab>
       </div>
-  
       <template v-if="couponsToShow.length > 0">
         <div class="coupon-items">
-          <coupon-item v-for="coupon in couponsToShow" :key="coupon.couponKey" :coupon="coupon" :merchant="tenantName" :selected-coupon="selectedCoupon" :filter="filter" @select-coupon="selectItem"></coupon-item>
+          <swipeout>
+            <div v-for="coupon in couponsToShow" :key="coupon.$index">
+              <swipeout-item transition-mode="follow" :disabled="true">
+                <div slot="right-menu">
+                  <swipeout-button @click.native="deleteCoupon(coupon)" type="warn">删除</swipeout-button>
+                </div>
+                <div slot="content">
+                  <coupon-item :key="coupon.couponKey" :coupon="coupon" :merchant="tenantName" :selected-coupon="selectedCoupon" :filter="filter" @select-coupon="selectItem"></coupon-item>
+                </div>
+              </swipeout-item>
+            </div>
+          </swipeout>
         </div>
       </template>
-  
+
       <template v-else>
         <prompt text="还没有优惠券呢, 还不快去扫码领取 ^_^"></prompt>
       </template>
@@ -24,7 +34,7 @@
   </div>
 </template>
 <script>
-import { Tab, TabItem } from 'vux'
+import { Tab, TabItem, Swipeout, SwipeoutItem, SwipeoutButton } from 'vux'
 import { mapGetters } from 'vuex'
 
 import DealHeader from '@/components/DealHeader'
@@ -39,6 +49,9 @@ export default {
   components: {
     Tab,
     TabItem,
+    Swipeout,
+    SwipeoutItem,
+    SwipeoutButton,
     DealHeader,
     DealContent,
     CouponItem,
@@ -52,6 +65,18 @@ export default {
   },
   computed: {
     ...mapGetters(['avaliableCoupons', 'disableCoupons', 'selectedCoupon', 'tenantName'])
+  },
+  watch: {
+    avaliableCoupons(v) {
+      if (this.filter === 'avaliable') {
+        this.couponsToShow = this.avaliableCoupons
+      }
+    },
+    disableCoupons(v) {
+      if (this.filter === 'disabled') {
+        this.couponsToShow = this.disableCoupons
+      }
+    }
   },
   methods: {
     onItemClick(filter) {
@@ -82,6 +107,12 @@ export default {
       }
 
       this.$router.push({ name: 'OrderSuccess' })
+    },
+    deleteCoupon(coupon) {
+      this.$store.dispatch('DELETE_COUPON', coupon)
+        .then(_ => {
+          this.$store.dispatch('FETCH_AVALIABLE_COUPONS')
+        })
     }
   },
   created() {
@@ -106,10 +137,10 @@ export default {
     }
 
     .coupon-items {
-      padding: 0 10px;
+      padding: 50px 10px 0 10px;
 
       .coupon-item:first-child {
-        padding-top: 50px;
+        // padding-top: 50px;
       }
     }
   }
