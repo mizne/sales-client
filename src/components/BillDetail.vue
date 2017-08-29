@@ -5,7 +5,7 @@
         <div class="block"></div>
       </div>
     </div>
-  
+
     <div class="bill-detail">
       <div class="tenant-name">{{tenantName}}</div>
       <div class="bill-abstract">
@@ -19,7 +19,7 @@
             <span>{{orderDetail.diners_num}}人</span>
           </div>
         </div>
-  
+
         <div class="ordering-time">
           <span>下单时间：</span>
           <span>{{orderDetail.time | time}}</span>
@@ -29,7 +29,7 @@
           <span>{{payTime | time}}</span>
         </div>
       </div>
-  
+
       <div class="money-info">
         <div class="bill-money">
           <span>账单金额{{isVip ? '(会员价)' : ''}}：</span>
@@ -40,7 +40,7 @@
           <span class="text">{{orderDetail.actualAmount}}</span>
         </div>
       </div>
-  
+
       <div class="order-detail">
         <div class="order-title">
           <span>账单详情</span>
@@ -48,9 +48,9 @@
         <div class="order-item" v-for="item in orderDetail.foods" :key="item.$index">
           <span>{{item.name}}</span>
           <span>x {{item.num}}</span>
-          <span>{{orderDetail.isVip ? item.vipPrice : item.price}}元/{{item.unit}}</span>
+          <span>{{orderDetail.isVip ? item.vipPrice : ( item.activityPrice ? item.activityPrice : item.price )}}元/{{item.unit}}</span>
         </div>
-  
+
         <div class="coupon-info" v-if="orderDetail.couponValue">
           <span>已使用优惠券: {{orderDetail.couponValue | couponValue(orderDetail.couponType)}} </span>
         </div>
@@ -58,18 +58,24 @@
         <div class="coupon-info" v-if="orderDetail.firstOrderDiscount">
           <span>已享用首杯半价优惠: {{orderDetail.firstOrderDiscount}} 元</span>
         </div>
-  
+
         <div class="delivery-info" v-if="orderDetail.deliveryFee">
           <span>配送费:</span>
           <span>{{orderDetail.deliveryFee}} 元</span>
         </div>
-  
+
+        <div class="delivery-info" v-if="orderDetail.totalGoodsDiscount">
+          <span>活动优惠：</i>
+            <span>{{orderDetail.totalGoodsDiscount}} 元</span>
+          </span>
+        </div>
+
         <div class="order-total">
           <span>总计</span>
           <span>{{orderDetail.actualAmount}}元</span>
         </div>
       </div>
-  
+
       <div class="welcome">
         <span>谢谢光临</span>
       </div>
