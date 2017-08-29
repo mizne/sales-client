@@ -3,23 +3,23 @@
     <deal-header title="下单成功">
       <!-- <x-button slot="left" @click.native="addMoreFood" :mini="true" type="primary">继续添加</x-button> -->
     </deal-header>
-  
+
     <deal-content v-if="orderDetail">
       <!-- <scroll-notification :texts="promptText"></scroll-notification> -->
       <!-- <div class="tip">
-          <div class="line">
-            <i class="icon-point"></i>
-            <span>若退出, 再扫二维码, 即可加单或买单</span>
-          </div>
-          <div class="line" v-if="!isDealBizType">
-            <div class="btn-group">
-              <div class="cancel-btn">
-                <x-button type="primary" @click.native="cancelOrder">取消</x-button>
-              </div>
+            <div class="line">
+              <i class="icon-point"></i>
+              <span>若退出, 再扫二维码, 即可加单或买单</span>
             </div>
-            <div class="placeholder"></div>
-          </div>
-        </div> -->
+            <div class="line" v-if="!isDealBizType">
+              <div class="btn-group">
+                <div class="cancel-btn">
+                  <x-button type="primary" @click.native="cancelOrder">取消</x-button>
+                </div>
+              </div>
+              <div class="placeholder"></div>
+            </div>
+          </div> -->
       <div class="order-info">
         <div class="table-number" v-if="isDealBizType">
           <span style="margin-left: 20px;">台
@@ -32,7 +32,7 @@
           <span>{{orderDetail.time | time}}</span>
         </div>
       </div>
-  
+
       <div class="order-detail">
         <group class="coupon-area">
           <cell title="优惠券" :value="couponText" @click.native="toCoupon" :is-link="true"></cell>
@@ -49,7 +49,7 @@
             <span>{{orderDetail.totalVipPrice}}</span>
           </span>
         </div>
-  
+
         <swipeout>
           <div v-for="item in orderDetail.foods" :key="item.id">
             <swipeout-item transition-mode="follow" :disabled="true">
@@ -81,16 +81,23 @@
             </swipeout-item>
           </div>
         </swipeout>
-  
+
+        <div class="food-remark" v-if="orderDetail.totalGoodsDiscount" style="padding: 10px;">
+          <p>活动优惠：
+            <span><i class="icon-money"></i>
+            <span>{{orderDetail.totalGoodsDiscount}}</span></span>
+          </p>
+        </div>
+
         <delivery v-if="needDeliveryFee" :delivery-distance="deliveryDistance" :delivery-fee-value="deliveryFeeValue" :delivery-time="deliveryTime"></delivery>
-  
+
       </div>
     </deal-content>
-  
+
     <deal-footer>
       <order-bar :order-cost="totalPrice" @to-pay="toPay"></order-bar>
     </deal-footer>
-  
+
     <div class="deal-mask" v-show="showIframe"></div>
   </div>
 </template>
@@ -162,6 +169,12 @@ export default {
         if (this.deliveryFeeValue) {
           resultPrice += (+this.deliveryFeeValue)
         }
+
+        if (this.orderDetail.totalGoodsDiscount) {
+          resultPrice -= this.orderDetail.totalGoodsDiscount
+        }
+
+
 
         if (this.isVip) {
           freePrice = this.orderDetail.totalVipPrice - resultPrice
