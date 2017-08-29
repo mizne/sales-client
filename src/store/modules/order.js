@@ -144,6 +144,11 @@ const actions = {
             if (rootState.user.deliveryFeeValue) {
               orderPrice += +rootState.user.deliveryFeeValue
             }
+            // 如果有优惠 则减去
+            if (orderDetail.totalGoodsDiscount) {
+              orderPrice -= orderDetail.totalGoodsDiscount
+            }
+
             const couponValue = Number(e.value.split('-')[0])
             return orderPrice >= couponValue
           } else {
