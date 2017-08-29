@@ -30,7 +30,6 @@
               <span class="vip-text">活动价:</span>
               <span class="vip-price">{{food.goodsPromotion.activityPrice}}/{{food.unit}}</span>
             </div>
-
             <!--<div v-if="needVip">
                 <span class="vip-text">会员价:</span>
                 <span class="vip-price">{{food.vipPrice}}/{{food.unit}}</span>
