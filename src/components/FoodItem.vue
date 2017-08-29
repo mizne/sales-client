@@ -7,7 +7,7 @@
     <div class="food-detail">
       <div class="title">
         <div class="name">{{food.name}}</div>
-        <div class="coupon" v-if="food.goodsPromotion">{{food.goodsPromotion.purchaseLimit === -1 ? '不限购份数' : '限购'+food.goodsPromotion.purchaseLimit+'份'}}</div>
+        <div class="coupon" v-if="food.goodsPromotion">{{food.goodsPromotion.purchaseLimit === -1 ? '优惠不限份数' : '每单限'+food.goodsPromotion.purchaseLimit+'份优惠'}}</div>
       </div>
 
       <div class="description">
