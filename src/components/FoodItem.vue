@@ -1,35 +1,40 @@
 <template>
   <li class="food-item" @click="showDetails">
     <div v-if="mode === 'picMode'" class="food-img">
-       <img class="img" style="width: 100%; height: 100%;" :src="food.image[0]" alt=""> 
+      <img class="img" style="width: 100%; height: 100%;" :src="food.image[0]" alt="">
     </div>
-  
+
     <div class="food-detail">
       <div class="title">
         <div class="name">{{food.name}}</div>
-        <div class="coupon" v-if="food.coupon">{{food.coupon}}</div>
+        <div class="coupon" v-if="food.goodsPromotion">{{food.goodsPromotion.purchaseLimit === -1 ? '不限购份数' : '限购'+food.goodsPromotion.purchaseLimit+'份'}}</div>
       </div>
-  
+
       <div class="description">
         <div class="food-info">
           <div class="favorite">
             <!-- <i class="icon-like"></i> -->
             <span class="title-text">已售</span>
             <span class="text">{{food.sellCount}}</span>
-             <!-- <span class="rest" v-if="food.rest > 0">还剩 {{food.rest + food.unit}}</span>   -->
+            <!-- <span class="rest" v-if="food.rest > 0">还剩 {{food.rest + food.unit}}</span>   -->
             <span class="empty" v-if="food.rest === 0">已售完</span>
             <i class="icon-Zambia" v-if="food.Ratings.length > 0"></i>
             <span class="zambia-count" v-if="food.Ratings.length > 0">{{food.Ratings.length}}</span>
-  
+
           </div>
           <div class="price">
             <i class="icon-money"></i>
             <span class="normal-price">{{food.price}}/{{food.unit}}</span>
-  
-            <!-- <div v-if="needVip">
-              <span class="vip-text">会员价:</span>
-              <span class="vip-price">{{food.vipPrice}}/{{food.unit}}</span>
-            </div> -->
+
+            <div v-if="food.goodsPromotion">
+              <span class="vip-text">活动价:</span>
+              <span class="vip-price">{{food.goodsPromotion.activityPrice}}/{{food.unit}}</span>
+            </div>
+
+            <!--<div v-if="needVip">
+                <span class="vip-text">会员价:</span>
+                <span class="vip-price">{{food.vipPrice}}/{{food.unit}}</span>
+              </div> -->
           </div>
         </div>
         <div class="food-action" v-if="(food.unit === '份' || food.unit === '条' || food.unit === '瓶' || food.unit === '个' || food.unit === '盒' || food.unit === '块' || food.unit === '桶' || food.unit === '束' || food.unit === '篮') && food.rest > 0">
@@ -49,7 +54,7 @@
         </div>
       </div>
     </div>
-  
+
   </li>
 </template>
 <script>
@@ -122,8 +127,7 @@ export default {
     width: 65px;
     height: 65px;
     background: center center no-repeat;
-    background-size: cover; 
-    // background-image: url(../assets/images/default.jpg);
+    background-size: cover; // background-image: url(../assets/images/default.jpg);
   }
 
   .food-detail {
@@ -152,7 +156,7 @@ export default {
 
     .description {
       display: flex;
-      
+
       .food-info {
         flex: 3;
         font-size: .8rem;

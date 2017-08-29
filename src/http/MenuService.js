@@ -36,9 +36,9 @@ class MenuService extends BaseService {
   _getQuery() {
     const map = {
       [DEAL]: ['tenantId'],
-      [ESHOP]: ['tenantId', 'consigneeId'],
-      [GROUP_SHOPPING]: ['tenantId', 'consigneeId'],
-      [MULTI_ESHOP]: ['tenantId', 'consigneeId']
+      [ESHOP]: ['tenantId', 'consigneeId', 'qrcodeId'],
+      [GROUP_SHOPPING]: ['tenantId', 'consigneeId', 'qrcodeId'],
+      [MULTI_ESHOP]: ['tenantId', 'consigneeId', 'qrcodeId']
     }
     
     return this.getBizTypeQuery(map)
