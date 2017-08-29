@@ -134,8 +134,11 @@ const actions = {
       .then(allCoupons => {
         // 根据订单价格 过滤出可用优惠券
         const predicate = e => {
+          const orderDetail = state.orderDetail[tenantId]
+          if (!orderDetail.canUseCoupon) {
+            return false
+          }
           if (e.couponType === Coupon.REDUCE) {
-            const orderDetail = state.orderDetail[tenantId]
             let orderPrice = orderDetail.isVip ? orderDetail.totalVipPrice : orderDetail.totalPrice
             // 如果有配送费 则加上
             if (rootState.user.deliveryFeeValue) {

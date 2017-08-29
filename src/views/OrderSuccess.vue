@@ -61,7 +61,7 @@
                   <div class="item-detail">
                     <div class="food-name">{{item.name}}</div>
                     <div class="food-money">
-                      <div class="food-price">{{item.price}} 元/{{item.unit}}</div>
+                      <div class="food-price">{{orderDetail.isVip ? item.vipPrice : ( item.activityPrice ? item.activityPrice : item.price )}} 元/{{item.unit}}</div>
                       <template v-if="item.unit === '份'">
                         <i v-if="isEditable" class="icon-sub" @click="editFood(item)"></i>
                         <div class="food-count">{{item.num}}</div>
