@@ -16,12 +16,12 @@
 
         <div class="amount">
           <span class="sign">￥</span>
-          <span class="number">16.00</span>
+          <span class="number">{{totalAmount}}</span>
         </div>
 
         <div class="order">
           <span class="sign">订单后四位</span>
-          <span class="number">3898</span>
+          <span class="number">{{tradeNoLastFour}}</span>
         </div>
 
         <div class="btn-div">
@@ -50,6 +50,8 @@ export default {
   name: 'PayToMerchant',
   data() {
     return {
+      totalAmount: '',
+      tradeNoLastFour: ''
     }
   },
   components: {
@@ -68,7 +70,8 @@ export default {
   created() {
     const obj = objFrom(decodeURIComponent(location.search))
 
-    window.alert(JSON.stringify(obj, null, 2))
+    this.totalAmount = obj.total_amount
+    this.tradeNoLastFour = String(obj.trade_no).slice(-4)
   }
 }
 </script>

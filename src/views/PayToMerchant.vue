@@ -124,5 +124,11 @@ export default {
   }
 }
 </style>
+<style>
+.keyboard {
+  height: 33vh;
+}
+</style>
+
 
 
