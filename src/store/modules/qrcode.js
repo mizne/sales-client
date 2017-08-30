@@ -45,6 +45,7 @@ const actions = {
       if (info.bizType === EPAY) {
         QRCodeInfo.setBizType(info.bizType)
         QRCodeInfo.setTenantId(info.tenantId)
+        QRCodeInfo.setTenantName(info.merchantName)
         return info
       }
 

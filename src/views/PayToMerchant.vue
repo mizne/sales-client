@@ -11,7 +11,7 @@
           </div>
         </div>
         <div class="shop-desc">
-          向潘多拉--南京--南京基地-03付款
+          向 {{merchantName}} 付款
         </div>
       </div>
 
@@ -33,13 +33,15 @@ import { mapGetters } from 'vuex'
 import DealHeader from '@/components/DealHeader'
 import DealContent from '@/components/DealContent'
 
+import QRCodeInfo from '@/models/QRCodeInfo'
 import { vToast } from '@/util/vux-wrapper'
 
 export default {
   name: 'PayToMerchant',
   data() {
     return {
-      num: ''
+      num: '',
+      merchantName: ''
     }
   },
   components: {
@@ -61,7 +63,7 @@ export default {
     }
   },
   created() {
-
+    this.merchantName = QRCodeInfo.getTenantName()
   },
   mounted() {
     console.log(this.$refs.board.showKeyboard = true)
