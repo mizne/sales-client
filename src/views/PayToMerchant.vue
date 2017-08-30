@@ -28,8 +28,6 @@
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
-
 import DealHeader from '@/components/DealHeader'
 import DealContent from '@/components/DealContent'
 
