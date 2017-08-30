@@ -4,9 +4,26 @@
     </deal-header>
 
     <deal-content>
-      <numkeyboard v-model="num" ok-text="OK" text-align="left"></numkeyboard>
+      <div class="title">
+        <div class="shop-icon">
+          <div class="icon-wrapper">
+            <i class="icon-shop"></i>
+          </div>
+        </div>
+        <div class="shop-desc">
+          向潘多拉--南京--南京基地-03付款
+        </div>
+      </div>
 
-      <!-- <input type="number"> -->
+      <div class="amount">
+        <div class="abstract">消费金额</div>
+        <div class="input-area">
+          <div class="prefix">￥</div>
+          <div class="content">
+            <numkeyboard v-model="num" ok-text="付款" @onOk="pay" text-align="left"></numkeyboard>
+          </div>
+        </div>
+      </div>
     </deal-content>
   </div>
 </template>
@@ -15,6 +32,8 @@ import { mapGetters } from 'vuex'
 
 import DealHeader from '@/components/DealHeader'
 import DealContent from '@/components/DealContent'
+
+import { vToast } from '@/util/vux-wrapper'
 
 export default {
   name: 'PayToMerchant',
@@ -31,7 +50,13 @@ export default {
     ...mapGetters(['allCoupons', 'tenantName'])
   },
   methods: {
-
+    pay(value) {
+      if (String(value).split(/\./).length > 2) {
+        this.num = ''
+        return vToast({ content: '请输入正确金额' })
+      }
+      console.log(parseFloat(value).toFixed(2))
+    }
   },
   created() {
   }
@@ -45,8 +70,49 @@ export default {
 
   .deal-content-container {
     padding: 10px;
-    background-color: $greyBackground;
+    background-color: #eaeaea;
     height: 100vh;
+
+    .title {
+      margin-top: 20px;
+      .shop-icon {
+        @include flexboxCenter;
+
+        .icon-wrapper {
+          @include flexboxCenter;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          background-color: #2b91e2;
+          i {
+            color: #fff;
+            font-size: 1.3rem;
+          }
+        }
+      }
+
+      .shop-desc {
+        margin-top: 20px;
+        text-align: center;
+      }
+    }
+
+    .amount {
+      background-color: #fff;
+      margin-top: 20px;
+      padding: 10px;
+      border-radius: 4px;
+
+      .input-area {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        .content {
+          flex: 1;
+        }
+      }
+    }
   }
 }
 </style>
