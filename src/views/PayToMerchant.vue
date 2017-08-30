@@ -59,14 +59,14 @@ export default {
       }
 
       this.$store.dispatch('FETCH_ALIPAY_EPAY', parseFloat(value).toFixed(2))
-      console.log(parseFloat(value).toFixed(2))
     }
   },
   created() {
     this.merchantName = QRCodeInfo.getTenantName()
   },
   mounted() {
-    console.log(this.$refs.board.showKeyboard = true)
+    // 手动显示 keyboard
+    this.$refs.board.showKeyboard = true
   }
 }
 </script>
