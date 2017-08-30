@@ -15,6 +15,10 @@ import '@/util/error-handler.js'
 
 import LogRocket from 'logrocket'
 import VueAnalytics from 'vue-analytics'
+import numkeyboard from 'vue-numkeyboard'
+import 'vue-numkeyboard/style.css'
+
+Vue.use(numkeyboard)
 
 LogRocket.init('49bwep/sales-zm4qk')
 FastClick.attach(document.body)

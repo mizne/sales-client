@@ -1,5 +1,5 @@
 {
-  "name": "eshop-mobile",
+  "name": "sales-client",
   "version": "1.0.0",
   "description": "A Vue.js project",
   "author": "mizne <w20054319@126.com>",
@@ -22,6 +22,7 @@
     "store": "^2.0.12",
     "vue": "^2.2.2",
     "vue-analytics": "^4.2.2",
+    "vue-numkeyboard": "^1.1.1",
     "vue-router": "^2.2.0",
     "vue-visitor": "0.0.4",
     "vuex": "^2.1.1",
@@ -79,6 +80,7 @@
     "semver": "^5.3.0",
     "sinon": "^1.17.7",
     "sinon-chai": "^2.8.0",
+    "unpipe": "^1.0.0",
     "url-loader": "^0.5.7",
     "vue-loader": "^11.1.4",
     "vue-style-loader": "^2.0.0",

@@ -27,6 +27,8 @@ import SelectCoupon from '@/views/SelectCoupon'
 import FetchOpenID from '@/views/FetchOpenID'
 import OrderDetail from '@/views/OrderDetail'
 
+import PayToMerchant from '@/views/PayToMerchant'
+
 Vue.use(Router)
 
 // 点餐流程
@@ -162,6 +164,11 @@ const routes = [
     path: '/order-detail/:tradeNo',
     name: 'OrderDetail',
     component: OrderDetail
+  }, 
+  {
+    path: '/pay-to-merchant',
+    name: 'PayToMerchant',
+    component: PayToMerchant
   }
 ]
 
