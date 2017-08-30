@@ -10,6 +10,13 @@ class AlipayService extends BaseService {
       .catch(this.exceptionHandler('AlipayService', 'getWapParams'))
   }
 
+  getEPayParams(qrcodeId, amount) {
+
+    return this.getBizTypeHttp()
+    .get(`/alipay?qrcodeId=${qrcodeId}&amount=${amount}`)
+    .catch(this.exceptionHandler('AlipayService', 'getEPayParams'))
+  }
+
   _getQuery() {
     const map = {
       [DEAL]: ['tenantId', 'tableName', 'phoneNumber'],

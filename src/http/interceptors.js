@@ -16,8 +16,13 @@ const eshopHttp = axios.create({
   timeout: 10000
 })
 
+const epayHttp = axios.create({
+  baseURL: host.epay,
+  timeout: 10000
+})
+
 //https://github.com/mzabriskie/axios#interceptor
-;[qrcodeHttp, dealHttp, eshopHttp].forEach(http => {
+;[qrcodeHttp, dealHttp, eshopHttp, epayHttp].forEach(http => {
   http.interceptors.request.use(
     function(config) {
       return config
@@ -86,4 +91,4 @@ loggerHttp.interceptors.response.use(
   }
 )
 
-export { dealHttp, eshopHttp, qrcodeHttp, loggerHttp }
+export { dealHttp, eshopHttp, epayHttp, qrcodeHttp, loggerHttp }

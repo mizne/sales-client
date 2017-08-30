@@ -28,6 +28,7 @@ import FetchOpenID from '@/views/FetchOpenID'
 import OrderDetail from '@/views/OrderDetail'
 
 import PayToMerchant from '@/views/PayToMerchant'
+import PaySuccess from '@/views/PaySuccess'
 
 Vue.use(Router)
 
@@ -169,6 +170,11 @@ const routes = [
     path: '/pay-to-merchant',
     name: 'PayToMerchant',
     component: PayToMerchant
+  },
+  {
+    path: '/pay-success',
+    name: 'PaySuccess',
+    component: PaySuccess
   }
 ]
 

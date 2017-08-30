@@ -1,6 +1,6 @@
 import QRCodeInfo, { capital } from '@/models/QRCodeInfo'
-import { dealHttp, eshopHttp } from './interceptors'
-import { DEAL, ESHOP, GROUP_SHOPPING, MULTI_ESHOP, FETCH_OPENID } from '@/util/constants'
+import { dealHttp, eshopHttp, epayHttp } from './interceptors'
+import { DEAL, ESHOP, GROUP_SHOPPING, MULTI_ESHOP, FETCH_OPENID, EPAY } from '@/util/constants'
 import Logger from './Logger'
 
 export class BaseService {
@@ -38,7 +38,8 @@ export class BaseService {
       [ESHOP]: eshopHttp,
       [GROUP_SHOPPING]: eshopHttp,
       [MULTI_ESHOP]: eshopHttp,
-      [FETCH_OPENID]: eshopHttp
+      [FETCH_OPENID]: eshopHttp,
+      [EPAY]: epayHttp
     }
 
     if (!map[QRCodeInfo.getBizType()]) {

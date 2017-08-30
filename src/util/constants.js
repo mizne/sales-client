@@ -9,6 +9,7 @@ export const ESHOP = 'eshop'
 export const GROUP_SHOPPING = 'groupshopping'
 export const MULTI_ESHOP = 'multieshop'
 export const FETCH_OPENID = 'openId'
+export const EPAY = 'epay'
 
 // 当前二维码 用户使用状态
 export const EMPTY_STATUS = 0

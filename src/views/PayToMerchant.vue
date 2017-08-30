@@ -20,7 +20,7 @@
         <div class="input-area">
           <div class="prefix">￥</div>
           <div class="content">
-            <numkeyboard v-model="num" ok-text="付款" @onOk="pay" text-align="left"></numkeyboard>
+            <numkeyboard ref="board" v-model="num" ok-text="付款" @onOk="pay" text-align="left"></numkeyboard>
           </div>
         </div>
       </div>
@@ -39,7 +39,7 @@ export default {
   name: 'PayToMerchant',
   data() {
     return {
-      num: 1
+      num: ''
     }
   },
   components: {
@@ -55,10 +55,16 @@ export default {
         this.num = ''
         return vToast({ content: '请输入正确金额' })
       }
+
+      this.$store.dispatch('FETCH_ALIPAY_EPAY', parseFloat(value).toFixed(2))
       console.log(parseFloat(value).toFixed(2))
     }
   },
   created() {
+
+  },
+  mounted() {
+    console.log(this.$refs.board.showKeyboard = true)
   }
 }
 </script>

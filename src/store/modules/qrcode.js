@@ -4,7 +4,8 @@ import {
   ESHOP,
   GROUP_SHOPPING,
   MULTI_ESHOP,
-  FETCH_OPENID
+  FETCH_OPENID,
+  EPAY
 } from '@/util/constants'
 import QRCodeInfo from '@/models/QRCodeInfo'
 import {
@@ -39,6 +40,13 @@ const actions = {
   FETCH_QRCODE_INFO: ({ commit, dispatch }, qrcodeId) => {
     return QRCodeService.getQRCodeInfo(qrcodeId).then(info => {
       QRCodeInfo.setQrcodeId(qrcodeId)
+
+      // e码付
+      if (info.bizType === EPAY) {
+        QRCodeInfo.setBizType(info.bizType)
+        QRCodeInfo.setTenantId(info.tenantId)
+        return info
+      }
 
       //获取商家微信openid
       if (info.bizType === FETCH_OPENID) {

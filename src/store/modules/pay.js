@@ -40,6 +40,18 @@ const actions = {
 
   FETCH_WECHATPAY_PARAMS: ({ commit }, code) => {
     return WechatService.getWechatPayParams(code)
+  },
+
+  FETCH_ALIPAY_EPAY: ({ commit }, amount) => {
+    router.push({ name: 'Alipay' })
+    const qrcodeId = QRCodeInfo.getQrcodeId()
+
+    return AlipayService.getEPayParams(qrcodeId, amount)
+    .then(urlParams => {
+      commit('SET_SHOW_IFRAME', true)
+      const url = `${ALIPAY_PREFIX_URL}${urlParams}`
+      commit('SET_ALIPAY_URL', url)
+    })
   }
 }
 

@@ -1,7 +1,7 @@
 <template>
   <div class="home-container">
     <div class="background" :style="homeStyle"></div>
-  
+
     <group class="phone" label-width="4.5em" label-margin-right="2em" label-align="right">
       <cell title="电话号码" value="025-86662644"></cell>
     </group>
@@ -150,8 +150,7 @@ export default {
         a {
           color: white;
         }
-        background-color: $warnColor;
-        // border-right: 1px solid black;
+        background-color: $warnColor; // border-right: 1px solid black;
       }
       &:last-child {
         // border-left: 1px solid black;
