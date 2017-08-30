@@ -5,6 +5,8 @@
 
     <deal-content>
       <numkeyboard v-model="num" ok-text="OK" text-align="left"></numkeyboard>
+
+      <!-- <input type="number"> -->
     </deal-content>
   </div>
 </template>
@@ -29,7 +31,7 @@ export default {
     ...mapGetters(['allCoupons', 'tenantName'])
   },
   methods: {
-    
+
   },
   created() {
   }

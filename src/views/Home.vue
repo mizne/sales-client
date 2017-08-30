@@ -34,7 +34,7 @@ export default {
     // 获取二维码信息判断是否酒店总二维码 是否跳转入口
     const qrcodeId = this.getQrcodeId()
 
-    if (qrcodeId === '1') {
+    if (qrcodeId == '123') {
       return this.$router.push({ name: 'PayToMerchant' })
     }
 
