@@ -48,9 +48,6 @@ export default {
     DealHeader,
     DealContent,
   },
-  computed: {
-    ...mapGetters(['allCoupons', 'tenantName'])
-  },
   methods: {
     pay(value) {
       if (String(value).split(/\./).length > 2) {
