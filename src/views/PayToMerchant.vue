@@ -124,9 +124,13 @@ export default {
   }
 }
 </style>
-<style>
+<style lang="scss">
 .keyboard {
-  height: 33vh;
+  height: 33vh !important;
+
+  td {
+    font-size: 1rem;
+  }
 }
 </style>
 
