@@ -32,7 +32,9 @@ import DealHeader from '@/components/DealHeader'
 import DealContent from '@/components/DealContent'
 
 import QRCodeInfo from '@/models/QRCodeInfo'
-import { vToast } from '@/util/vux-wrapper'
+import { vToast, vAlert } from '@/util/vux-wrapper'
+import { checkBrowserForPay } from '@/util/index'
+import { WEIXIN_BROWSER } from '@/util/constants'
 
 export default {
   name: 'PayToMerchant',
@@ -53,7 +55,24 @@ export default {
         return vToast({ content: '请输入正确金额' })
       }
 
-      this.$store.dispatch('FETCH_ALIPAY_EPAY', parseFloat(value).toFixed(2))
+      this._pay(parseFloat(value).toFixed(2))
+    },
+    _pay(amount) {
+      const { browser, support } = checkBrowserForPay()
+
+      if (browser === WEIXIN_BROWSER) {
+        if (support) {
+          return this.$store.dispatch('FETCH_WECHATPAY_URL_EPAY').catch(_ => {
+            vAlert({ content: '不好意思, 微信重定向地址获取失败 -_-' })
+          })
+        } else {
+          vAlert({ content: '您的微信版本过低, 不支持支付功能, 请升级微信版本 ^_^' })
+        }
+      } else {
+        return this.$store.dispatch('FETCH_ALIPAY_EPAY', amount).catch(_ => {
+          vAlert({ content: '不好意思, 阿里支付请求参数获取失败 -_-' })
+        })
+      }
     }
   },
   created() {

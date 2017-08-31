@@ -38,6 +38,12 @@ const actions = {
     })
   },
 
+  FETCH_WECHATPAY_URL_EPAY: ({ commit }) => {
+    return WechatService.redirectForEPay().then(url => {
+      window.location.href = url
+    })
+  },
+
   FETCH_WECHATPAY_PARAMS: ({ commit }, code) => {
     return WechatService.getWechatPayParams(code)
   },

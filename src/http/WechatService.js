@@ -14,6 +14,13 @@ class WechatService extends BaseService {
       .catch(this.exceptionHandler('WechatService', 'redirectForPay'))
   }
 
+  // e码付业务 获取重定向地址
+  redirectForEPay() {
+    return this.getBizTypeHttp()
+    .get(`/wechatpay/redirectUrl`)
+    .catch(this.exceptionHandler('WechatService', 'redirectForEPay'))
+  }
+
   redirectForOpenId() {
     return this.getBizTypeHttp()
       .get(`/fetch-openid/redirectUrl`)

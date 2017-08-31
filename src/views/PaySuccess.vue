@@ -1,9 +1,9 @@
 <template>
   <div class="pay-success-container">
-    <deal-header title="支付成功">
+    <deal-header title="支付结果">
     </deal-header>
 
-    <deal-content>
+    <deal-content v-if="payEnd">
       <div class="title">
         <div class="shop-icon">
           <div class="icon-wrapper">
@@ -38,6 +38,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { XButton } from 'vux'
+import fecha from 'fecha'
 
 import DealHeader from '@/components/DealHeader'
 import DealContent from '@/components/DealContent'
@@ -51,7 +52,9 @@ export default {
   data() {
     return {
       totalAmount: '',
-      tradeNoLastFour: ''
+      tradeNoLastFour: '',
+      payParams: null, // 微信支付请求参数
+      payEnd: false // 是否支付完成
     }
   },
   components: {
@@ -65,13 +68,85 @@ export default {
   methods: {
     toAttention() {
       window.location.href = ATTENTION_HREF
-    }
+    },
+    initAlipayResult(obj) {
+      this.totalAmount = obj.total_amount
+      this.tradeNoLastFour = String(obj.trade_no).slice(-4)
+    },
+    payForWechat(obj) {
+      this.$store.dispatch('FETCH_WECHATPAY_PARAMS', obj.code)
+        .then(data => {
+          this.tradeNoLastFour = data.trade_no.slice(-4)
+
+          // TODO 获取 totalAmount
+
+          data.timeStamp = data.timestamp
+          delete data.timestamp
+          delete data.trade_no
+          this.payParams = data
+
+          if (typeof WeixinJSBridge !== 'undefined') {
+            this.invokePay()
+          }
+        })
+        .catch(err => {
+          vAlert({
+            content: '获取微信支付请求失败 -_-',
+          })
+        })
+
+      function onBridgeReady() {
+        if (this.payParams) {
+          this.invokePay()
+        }
+      }
+
+      if (typeof WeixinJSBridge == "undefined") {
+        if (document.addEventListener) {
+          document.addEventListener('WeixinJSBridgeReady', onBridgeReady.bind(this), false)
+        } else if (document.attachEvent) {
+          document.attachEvent('WeixinJSBridgeReady', onBridgeReady.bind(this))
+          document.attachEvent('onWeixinJSBridgeReady', onBridgeReady.bind(this))
+        }
+      } else {
+        onBridgeReady.bind(this)()
+      }
+    },
+    // 等待 微信浏览器注入对象WeixinJSBridge成功 且 获取支付请求参数成功 则调用支付接口
+    invokePay() {
+      WeixinJSBridge.invoke(
+        'getBrandWCPayRequest', this.payParams,
+        (res) => {
+          // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
+          if (res.err_msg == "get_brand_wcpay_request:ok") {
+            this.payEnd = true
+          }
+          if (res.err_msg === 'get_brand_wcpay_request:cancel') {
+            vAlert({
+              content: '支付取消',
+            })
+          }
+          if (res.err_msg === 'get_brand_wcpay_request:fail') {
+            vAlert({
+              content: '支付失败 -_-',
+            })
+          }
+        }
+      )
+    },
   },
   created() {
+    const { isAlipay, isWechat } = this.$browser
     const obj = objFrom(decodeURIComponent(location.search))
 
-    this.totalAmount = obj.total_amount
-    this.tradeNoLastFour = String(obj.trade_no).slice(-4)
+    if (isAlipay) {
+      this.payEnd = true
+      this.initAlipayResult(obj)
+    }
+
+    if (isWechat) {
+      this.payForWechat(obj)
+    }
   }
 }
 </script>
