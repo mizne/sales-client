@@ -134,6 +134,7 @@ export default {
 
         .content {
           flex: 1;
+          margin-left: 10px;
         }
       }
     }
