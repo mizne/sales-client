@@ -6,6 +6,7 @@ import {
   FETCH_OPENID
 } from '@/util/constants'
 import { BaseService } from './BaseService'
+import QRCodeInfo from '@/models/QRCodeInfo'
 
 class WechatService extends BaseService {
   redirectForPay() {
@@ -34,6 +35,14 @@ class WechatService extends BaseService {
     return this.getBizTypeHttp()
       .get(`/wechatpay/wap${query}`)
       .catch(this.exceptionHandler('WechatService', 'getWechatPayParams'))
+  }
+
+  getWechatPayParamsForEPay(code) {
+    const query = `?qrcodeId=${QRCodeInfo.getQrcodeId()}&code=${code}`
+
+    return this.getBizTypeHttp()
+    .get(`/wechatpay${query}`)
+    .catch(this.exceptionHandler('WechatService', 'getWechatPayParamsForEPay'))
   }
 
   getOpenId(code) {

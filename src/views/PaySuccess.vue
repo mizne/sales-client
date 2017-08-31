@@ -74,10 +74,10 @@ export default {
       this.tradeNoLastFour = String(obj.trade_no).slice(-4)
     },
     payForWechat(obj) {
-      this.$store.dispatch('FETCH_WECHATPAY_PARAMS', obj.code)
+      this.$store.dispatch('FETCH_WECHATPAY_PARAMS_EPAY', obj.code)
         .then(data => {
           this.tradeNoLastFour = data.trade_no.slice(-4)
-
+          this.totalAmount = 'fake amount'
           // TODO 获取 totalAmount
 
           data.timeStamp = data.timestamp
