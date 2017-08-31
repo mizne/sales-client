@@ -74,23 +74,21 @@ export default {
       this.tradeNoLastFour = String(obj.trade_no).slice(-4)
     },
     payForWechat(obj) {
-      window.alert(`code: ${obj.code}`)
+      const amount = localStorage.getItem('XIAO_V_BAO_AMOUNT_EPAY')
 
       this.$store.dispatch('FETCH_WECHATPAY_PARAMS_EPAY', {
         code: obj.code,
-        amount: localStorage.getItem('XIAO_V_BAO_AMOUNT_EPAY')
+        amount
       })
         .then(data => {
           this.tradeNoLastFour = data.trade_no.slice(-4)
-          this.totalAmount = 'fake amount'
+          this.totalAmount = amount
           // TODO 获取 totalAmount
 
           data.timeStamp = data.timestamp
           delete data.timestamp
           delete data.trade_no
           this.payParams = data
-
-          window.alert(JSON.stringify(this.payParams, null, 2))
 
           if (typeof WeixinJSBridge !== 'undefined') {
             this.invokePay()
