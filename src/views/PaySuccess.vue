@@ -76,7 +76,10 @@ export default {
     payForWechat(obj) {
       window.alert(`code: ${obj.code}`)
 
-      this.$store.dispatch('FETCH_WECHATPAY_PARAMS_EPAY', obj.code)
+      this.$store.dispatch('FETCH_WECHATPAY_PARAMS_EPAY', {
+        code: obj.code,
+        amount: localStorage.setItem('XIAO_V_BAO_AMOUNT_EPAY')
+      })
         .then(data => {
           this.tradeNoLastFour = data.trade_no.slice(-4)
           this.totalAmount = 'fake amount'

@@ -60,13 +60,7 @@ export default {
     _pay(amount) {
       const { browser, support } = checkBrowserForPay()
 
-      if (this.$browser.isAlipay) {
-        window.alert('支付宝浏览器')
-      }
-
-      if (this.$browser.isWechat) {
-        window.alert('微信浏览器')
-      }
+      localStorage.setItem('XIAO_V_BAO_AMOUNT_EPAY', amount)
 
       if (browser === WEIXIN_BROWSER) {
         if (support) {

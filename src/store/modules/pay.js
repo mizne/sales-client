@@ -48,8 +48,8 @@ const actions = {
     return WechatService.getWechatPayParams(code)
   },
 
-  FETCH_WECHATPAY_PARAMS_EPAY: ({ commit }, code) => {
-    return WechatService.getWechatPayParamsForEPay(code)
+  FETCH_WECHATPAY_PARAMS_EPAY: ({ commit }, {code, amount}) => {
+    return WechatService.getWechatPayParamsForEPay(code, amount)
   },
 
   FETCH_ALIPAY_EPAY: ({ commit }, amount) => {
