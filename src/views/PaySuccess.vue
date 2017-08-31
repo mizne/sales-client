@@ -78,7 +78,7 @@ export default {
 
       this.$store.dispatch('FETCH_WECHATPAY_PARAMS_EPAY', {
         code: obj.code,
-        amount: localStorage.setItem('XIAO_V_BAO_AMOUNT_EPAY')
+        amount: localStorage.getItem('XIAO_V_BAO_AMOUNT_EPAY')
       })
         .then(data => {
           this.tradeNoLastFour = data.trade_no.slice(-4)
