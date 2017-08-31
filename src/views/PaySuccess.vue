@@ -74,6 +74,8 @@ export default {
       this.tradeNoLastFour = String(obj.trade_no).slice(-4)
     },
     payForWechat(obj) {
+      window.alert(`code: ${obj.code}`)
+
       this.$store.dispatch('FETCH_WECHATPAY_PARAMS_EPAY', obj.code)
         .then(data => {
           this.tradeNoLastFour = data.trade_no.slice(-4)
@@ -84,6 +86,8 @@ export default {
           delete data.timestamp
           delete data.trade_no
           this.payParams = data
+
+          window.alert(JSON.stringify(this.payParams, null, 2))
 
           if (typeof WeixinJSBridge !== 'undefined') {
             this.invokePay()
