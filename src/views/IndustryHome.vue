@@ -34,7 +34,7 @@ export default {
     Prompt
   },
   computed: {
-    ...mapGetters(['industryLabel', 'tenants'])
+    ...mapGetters(['industryLabel', 'industryImg', 'tenants'])
   },
   data() {
     return {
@@ -43,7 +43,7 @@ export default {
     }
   },
   created() {
-    this.industryImage = require(`../assets/images/${this.industryLabel}.jpg`)
+    this.industryImage = require(`../assets/images/${this.industryImg}.jpg`)
     this.shops = this.tenants.filter(e => e.industry === this.$route.params.name)
   }
 }

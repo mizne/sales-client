@@ -18,6 +18,7 @@ import { vAlert } from '@/util/vux-wrapper'
 
 const state = {
   industryLabel: '',
+  industryImg: '',
   tenantId: '',
   tableName: ''
 }
@@ -25,6 +26,9 @@ const state = {
 const mutations = {
   SET_INDUSTRY_LABEL(state, industryLabel) {
     state.industryLabel = industryLabel
+  },
+  SET_INDUSTRY_IMG(state, industryImg) {
+    state.industryImg = industryImg
   },
   SET_TENANT_ID(state, tenantId) {
     QRCodeInfo.setTenantId(tenantId)
@@ -101,7 +105,7 @@ const actions = {
           industry: e.industry,
           tableName: e.tableName,
           homeImage: e.tenantInfo.homeImage,
-          description: `起送价${e.startPrice}元|配送费${e.deliveryFee}元`,
+          description: `起送价${e.startPrice || 30}元|配送费${e.deliveryFee || 5}元`,
           officialNews: e.tenantInfo.officialNews,
           sellCountPerMonth: generateRandom(100, 1000),
           close: !dateBetween(e.tenantInfo.startTime, e.tenantInfo.endTime),
@@ -134,6 +138,9 @@ const actions = {
 const getters = {
   industryLabel(state) {
     return state.industryLabel
+  },
+  industryImg(state) {
+    return state.industryImg
   },
   tenantId(state) {
     return state.tenantId

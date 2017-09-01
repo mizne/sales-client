@@ -26,14 +26,16 @@ export default {
       industryItems1: [
         {
           "name": "lobster",
-          "label": "美食外卖",
+          "label": "美食",
+          "imgName": "美食外卖",
           "icon": "lobster",
           "backgroundColor": "#f04134",
           // "badge": "1折"
         },
         {
           "name": "food",
-          "label": "旅游",
+          "label": "儿童休闲",
+          "imgName": "旅游",
           "icon": "lvyou",
           "backgroundColor": "#00a854",
           // "badge": "1折"
@@ -41,13 +43,15 @@ export default {
         {
           "name": "educate",
           "label": "教育",
+          "imgName": "教育",
           "icon": "jiaoyu",
           "backgroundColor": "#108ee9",
           // "badge": "1折"
         },
         {
           "name": "fitness",
-          "label": "健身",
+          "label": "服饰",
+          "imgName": "健身",
           "icon": "jianshen",
           "backgroundColor": "#f5317f",
           // "badge": "1折"
@@ -57,21 +61,24 @@ export default {
       industryItems2: [
         {
           "name": "carBeauty",
-          "label": "汽车美容",
+          "label": "美容美发",
+          "imgName": "汽车美容",
           "icon": "qichebaoyang",
           "backgroundColor": "#f56a00",
           // "badge": "1折"
         },
         {
           "name": "lifeServe",
-          "label": "服务",
+          "label": "影城",
+          "imgName": "服务",
           "icon": "fuwu",
           "backgroundColor": "#7265e6",
           // "badge": "1折"
         },
         {
           "name": "buildingMater",
-          "label": "家装建材",
+          "label": "综合",
+          "imgName": "家装建材",
           "icon": "jiazhuang",
           "backgroundColor": "#ffbf00",
           // "badge": "1折"
@@ -79,6 +86,7 @@ export default {
         {
           "name": "bakedTea",
           "label": "烘焙茶饮",
+          "imgName": "烘焙茶饮",
           "icon": "yinpin",
           "backgroundColor": "#00a2ae",
           // "badge": "1折"
@@ -88,6 +96,7 @@ export default {
   methods: {
     toIndustry(item) {
       this.$store.commit('SET_INDUSTRY_LABEL', item.label)
+      this.$store.commit('SET_INDUSTRY_IMG', item.imgName)
       this.$router.push({ name: 'IndustryHome', params: { name: item.label } })
     },
   }
