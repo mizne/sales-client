@@ -116,17 +116,11 @@ const actions = {
 
         // 获取用户地理位置 并 计算商户和用户的距离
         dispatch('FETCH_USER_POSITION').then(({ lat, lng }) => {
-          Promise.all(
-            info.map(e =>
-              computeDistanceBetween(
-                { lat, lng },
-                { lat: e.tenantInfo.latitude, lng: e.tenantInfo.longitude }
-              )
-            )
-          )
-          .then((distances) => {
-            commit('SET_TENANTS_DISTANCE', distances.map(e => e.distance))
-          })
+          const distances = info.map(e => computeDistanceBetween({lat, lng}, {
+            lat: e.tenantInfo.latitude,
+            lng: e.tenantInfo.longitude
+          }))
+          commit('SET_TENANTS_DISTANCE', distances)
         })
 
         commit('SET_TENANTS', tenants)

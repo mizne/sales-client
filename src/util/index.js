@@ -123,7 +123,7 @@ const timeago = function(date) {
 
   if (diff < oneDay) {
     const hours = Math.floor(diff / oneHour)
-    const minutes = Math.floor(diff % oneHour / oneMinute)
+    const minutes = Math.floor((diff % oneHour) / oneMinute)
 
     return `${hours}小时${minutes}分钟前`
   }
@@ -187,7 +187,7 @@ const generateRandom = (min, max) => {
 }
 
 /**
- * 通过 HTML5 GeoLocation功能获取 用户GPS经纬度
+ * 通过 HTML5 GeoLocation功能获取 用户GPS经纬度 并转为腾讯地图经纬度
  * 
  * @returns 
  */
@@ -198,7 +198,14 @@ const fetchUserPostion = function() {
         const lat = position.coords.latitude
         const lng = position.coords.longitude
 
-        resolve({ lat, lng })
+        //调用地图命名空间中的转换接口   type的可选值为 1:GPS经纬度，2:搜狗经纬度，3:百度经纬度，4:mapbar经纬度，5:google经纬度，6:搜狗墨卡托
+        qq.maps.convertor.translate(
+          new qq.maps.LatLng(lat, lng),
+          1,
+          function(res) {
+            resolve(res[0])
+          }
+        )
       })
     } else {
       reject(new Error('您的浏览器不支持获取地理位置功能'))
@@ -207,34 +214,52 @@ const fetchUserPostion = function() {
 }
 
 /**
- * 转换用户GPS经纬度为腾讯地图经纬度 并 计算 用户和商户的距离
+ * 计算 用户和商户的距离
  * 
- * @param {any} userLatLng 用户的GPS经纬度
+ * @param {any} userLatLng 用户的腾讯地图经纬度
  * @param {any} tenantLatLng 商户的腾讯地图经纬度
- * @returns 用户腾讯地图经纬度 和 用户和商户之间距离
+ * @returns 用户和商户之间距离
  */
-const computeDistanceBetween = function(userLatLng, tenantLatLng) {
+const computeDistanceBetween = memorize(function(userLatLng, tenantLatLng) {
+  const userAddress = new qq.maps.LatLng(userLatLng.lat, userLatLng.lng)
   const merchantAddress = new qq.maps.LatLng(tenantLatLng.lat, tenantLatLng.lng)
 
-  return new Promise((resolve, reject) => {
-    //调用地图命名空间中的转换接口   type的可选值为 1:GPS经纬度，2:搜狗经纬度，3:百度经纬度，4:mapbar经纬度，5:google经纬度，6:搜狗墨卡托
-    qq.maps.convertor.translate(
-      new qq.maps.LatLng(userLatLng.lat, userLatLng.lng),
-      1,
-      function(res) {
-        const { lat: userLatitude, lng: userLongitude } = res[0]
-        const userAddress = new qq.maps.LatLng(userLatitude, userLongitude)
-        const distance = Math.round(
-          qq.maps.geometry.spherical.computeDistanceBetween(
-            userAddress,
-            merchantAddress
-          )
-        )
-
-        resolve({ userLatitude, userLongitude, distance })
-      }
+  const distance = Math.round(
+    qq.maps.geometry.spherical.computeDistanceBetween(
+      userAddress,
+      merchantAddress
     )
-  })
+  )
+
+  return distance
+})
+
+const nestedArray = function(array, subLength) {
+  return array.reduce((accu, curr) => {
+    if (accu.length === 0) {
+      accu.push([curr])
+    } else if (accu[accu.length - 1].length < subLength) {
+      accu[accu.length - 1].push(curr)
+    } else {
+      accu.push([curr])
+    }
+    return accu
+  }, [])
+}
+
+function memorize(fn) {
+  const cache = Object.create(null)
+
+  return function () {
+    const key = JSON.stringify(arguments)
+    if (cache[key]) {
+      return cache[key]
+    } else {
+      const result = fn.apply(this, arguments)
+      cache[key] = result
+      return result
+    }
+  }
 }
 
 export {
@@ -248,5 +273,6 @@ export {
   fillZero,
   generateRandom,
   fetchUserPostion,
-  computeDistanceBetween
+  computeDistanceBetween,
+  nestedArray
 }

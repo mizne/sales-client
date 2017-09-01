@@ -58,7 +58,7 @@ const mutationMaps = [
     mutationKey: 'SET_NEED_ORDER_CONFIRM_PAGE',
     stateKey: 'needOrderConfirmPage',
     initValue: false
-  },
+  }
 ]
 
 const gettersSeed = [...mutationMaps.map(e => e.stateKey)]
@@ -92,45 +92,48 @@ const mutations = {
 const actions = {
   FETCH_TENANT_CONFIG: ({ commit }) => {
     commit('SHOW_LOADING', true)
-    return TenantService.getConfig().then(config => {
-      commit('SHOW_LOADING', false)
-      commit('SET_TENANT_NAME', config.name)
-      commit('SET_VIP_AMOUNT', config.vipFee)
-      commit('SET_ALMOST_VIP_AMOUNT', config.vipRemindFee)
-      commit('SET_HOME_IMAGE', config.homeImage)
-      commit('SET_NEED_ORDER_CONFIRM_PAGE', !!config.needOrderConfirmPage)
-      commit('SET_OFFICIAL_NEWS', config.officialNews)
-      commit('SET_VIP_TOAST', !!config.needVip) 
-      commit('SET_NEED_CHOOSE_PEOPLE_NUMBER_PAGE', !!config.needChoosePeopleNumberPage)
+    return TenantService.getConfig()
+      .then(config => {
+        commit('SHOW_LOADING', false)
+        commit('SET_TENANT_NAME', config.name)
+        commit('SET_VIP_AMOUNT', config.vipFee)
+        commit('SET_ALMOST_VIP_AMOUNT', config.vipRemindFee)
+        commit('SET_HOME_IMAGE', config.homeImage)
+        commit('SET_NEED_ORDER_CONFIRM_PAGE', !!config.needOrderConfirmPage)
+        commit('SET_OFFICIAL_NEWS', config.officialNews)
+        commit('SET_VIP_TOAST', !!config.needVip)
+        commit(
+          'SET_NEED_CHOOSE_PEOPLE_NUMBER_PAGE',
+          !!config.needChoosePeopleNumberPage
+        )
 
-
-      if (config.longitude) {
-        commit('SET_TENANT_LONGITUDE', config.longitude)
-        commit('SET_TENANT_LATITUDE', config.latitude)
-        // 代售、多代售才需配送费
-        if (QRCodeInfo.isEShopBizType() || QRCodeInfo.isMultiEShopBizType()) {
-          commit('SET_NEED_DELIVERY_FEE', true)
+        if (config.longitude) {
+          commit('SET_TENANT_LONGITUDE', config.longitude)
+          commit('SET_TENANT_LATITUDE', config.latitude)
+          // 代售、多代售才需配送费
+          if (QRCodeInfo.isEShopBizType() || QRCodeInfo.isMultiEShopBizType()) {
+            commit('SET_NEED_DELIVERY_FEE', true)
+          } else {
+            commit('SET_NEED_DELIVERY_FEE', false)
+          }
         } else {
+          commit('SET_TENANT_LONGITUDE', '')
+          commit('SET_TENANT_LATITUDE', '')
           commit('SET_NEED_DELIVERY_FEE', false)
         }
-      } else {
-        commit('SET_TENANT_LONGITUDE', '')
-        commit('SET_TENANT_LATITUDE', '')
-        commit('SET_NEED_DELIVERY_FEE', false)
-      }
 
-      // 店铺已打烊
-      if (!dateBetween(config.startTime, config.endTime)) {
-        commit('SET_HAS_CLOSED', true)
-      } else {
-        commit('SET_HAS_CLOSED', false)
-      }
+        // 店铺已打烊
+        if (!dateBetween(config.startTime, config.endTime)) {
+          commit('SET_HAS_CLOSED', true)
+        } else {
+          commit('SET_HAS_CLOSED', false)
+        }
 
-      return config
-    })
-    .catch(_ => {
-      commit('SHOW_LOADING', false)
-    })
+        return config
+      })
+      .catch(_ => {
+        commit('SHOW_LOADING', false)
+      })
   }
 }
 
