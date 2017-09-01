@@ -1,6 +1,6 @@
 <template>
   <div class="home-page">
-    <swiper :list="images" :auto="true" height="180px" dots-class="custom-bottom" dots-position="center"></swiper>
+    <swiper :list="images" :auto="true" height="230px" dots-class="custom-bottom" dots-position="center"></swiper>
     <industry-area></industry-area>
     <promotions-area></promotions-area>
     <recommend-area></recommend-area>
