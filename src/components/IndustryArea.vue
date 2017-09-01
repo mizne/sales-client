@@ -2,13 +2,13 @@
   <div class="industry-area">
     <ul>
       <li v-for="item in industryItems1" :key="item.$index" @click="toIndustry(item)">
-         <industry-item :label="item.label" :icon="item.icon" :badge="item.badge" :background-color="item.backgroundColor"></industry-item> 
+        <industry-item :label="item.label" :icon="item.icon" :badge="item.badge" :background-color="item.backgroundColor"></industry-item>
       </li>
     </ul>
-  
+
     <ul>
       <li v-for="item in industryItems2" :key="item.$index" @click="toIndustry(item)">
-        <industry-item :label="item.label" :icon="item.icon" :badge="item.badge" :background-color="item.backgroundColor"></industry-item> 
+        <industry-item :label="item.label" :icon="item.icon" :badge="item.badge" :background-color="item.backgroundColor"></industry-item>
       </li>
     </ul>
   </div>
@@ -60,6 +60,14 @@ export default {
       ],
       industryItems2: [
         {
+          "name": "bakedTea",
+          "label": "烘焙饮品",
+          "imgName": "烘焙茶饮",
+          "icon": "yinpin",
+          "backgroundColor": "#00a2ae",
+          // "badge": "1折"
+        },
+        {
           "name": "carBeauty",
           "label": "美容美发",
           "imgName": "汽车美容",
@@ -82,15 +90,8 @@ export default {
           "icon": "jiazhuang",
           "backgroundColor": "#ffbf00",
           // "badge": "1折"
-        },
-        {
-          "name": "bakedTea",
-          "label": "烘焙饮品",
-          "imgName": "烘焙茶饮",
-          "icon": "yinpin",
-          "backgroundColor": "#00a2ae",
-          // "badge": "1折"
-        },]
+        }
+      ]
     }
   },
   methods: {
