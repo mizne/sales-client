@@ -37,13 +37,13 @@ export default {
     return {
       images: [{
         url: 'javascript:',
-        img: require('../assets/images/tangbao.jpg')
+        img: require('../assets/images/xuehuabing.jpg')
       }, {
         url: 'javascript:',
-        img: require('../assets/images/pizza.jpg')
+        img: require('../assets/images/lashangyin.png')
       }, {
         url: 'javascript:',
-        img: require('../assets/images/dinning.jpg')
+        img: require('../assets/images/qingdoujia.jpg')
       }],
     }
   },
