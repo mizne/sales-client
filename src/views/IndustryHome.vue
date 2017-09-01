@@ -25,6 +25,7 @@ import ShopItem from '@/components/ShopItem'
 import Prompt from '@/components/Prompt'
 
 import toTenant from '@/mixins/to-tenant'
+import { not } from '@/util/index'
 
 export default {
   name: 'IndustryHome',
@@ -44,7 +45,10 @@ export default {
   },
   created() {
     this.industryImage = require(`../assets/images/${this.industryImg}.jpg`)
-    this.shops = this.tenants.filter(e => e.industry === this.$route.params.name)
+    const industryShops = this.tenants.filter(e => e.industry === this.$route.params.name)
+    const isOpen = e => e.openFlag
+
+    this.shops = [...industryShops.filter(isOpen), ...industryShops.filter(not(isOpen))]
   }
 }
 </script>

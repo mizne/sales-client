@@ -7,6 +7,10 @@ export default {
   },
   methods: {
     toTenant(item) {
+      if (!item.openFlag) {
+        return vAlert({ content: '商家暂未开通' })
+      }
+
       this.$store.commit('SET_TENANT_ID', item.id)
       this.$store.commit('SET_TABLE_NAME', item.tableName)
 

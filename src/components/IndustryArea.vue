@@ -50,7 +50,7 @@ export default {
         },
         {
           "name": "fitness",
-          "label": "服饰",
+          "label": "服装",
           "imgName": "健身",
           "icon": "jianshen",
           "backgroundColor": "#f5317f",
@@ -85,7 +85,7 @@ export default {
         },
         {
           "name": "bakedTea",
-          "label": "烘焙茶饮",
+          "label": "烘焙饮品",
           "imgName": "烘焙茶饮",
           "icon": "yinpin",
           "backgroundColor": "#00a2ae",

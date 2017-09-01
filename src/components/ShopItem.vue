@@ -8,7 +8,7 @@
         <span class="distance">{{shop.distance | distanceFilter}}</span>
       </div>
       <div class="description">
-        <span class="text">{{shop.description}}</span>
+        <span class="text">{{shop.address}}</span>
         <span class="close" v-if="shop.close">商家休息</span>
       </div>
       <div class="info">

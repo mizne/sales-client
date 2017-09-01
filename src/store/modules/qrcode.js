@@ -104,6 +104,8 @@ const actions = {
           name: e.merchantName,
           industry: e.industry,
           tableName: e.tableName,
+          address: e.address,
+          openFlag: e.tenantInfo.openFlag,
           homeImage: e.tenantInfo.homeImage,
           description: `起送价${e.startPrice || 30}元|配送费${e.deliveryFee || 5}元`,
           officialNews: e.tenantInfo.officialNews,
