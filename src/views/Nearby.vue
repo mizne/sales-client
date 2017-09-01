@@ -25,6 +25,7 @@ import ShopItem from '@/components/ShopItem'
 
 import QRCodeInfo from '@/models/QRCodeInfo'
 import toTenant from '@/mixins/to-tenant'
+import { not } from '@/util/index'
 
 export default {
   name: 'AllOrders',
@@ -49,7 +50,9 @@ export default {
     this.hasTabs = QRCodeInfo.isMultiEShopBizType()
     this.$store.commit('SET_TAB_INDEX', 1)
 
-    this.shops = this.tenants.filter((_, i) => i % 2 === 1)
+    const isOpen = e => e.openFlag
+    const randomShops = this.tenants.filter((_, i) => i % 2 === 1)
+    this.shops = [...randomShops.filter(isOpen), ...randomShops.filter(not(isOpen))]
   }
 }
 </script>

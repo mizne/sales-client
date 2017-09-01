@@ -17,6 +17,7 @@ import { mapGetters } from 'vuex'
 import ShopItem from '@/components/ShopItem'
 import QRCodeInfo from '@/models/QRCodeInfo'
 import toTenant from '@/mixins/to-tenant'
+import { not } from '@/util/index'
 
 export default {
   name: 'RecommendArea',
@@ -33,7 +34,9 @@ export default {
     }
   },
   created() {
-    this.shops = this.tenants.filter((_, i) => i % 2 === 0)
+    const isOpen = e => e.openFlag
+    const randomShops = this.tenants.filter((_, i) => i % 2 === 0)
+    this.shops = [...randomShops.filter(isOpen), ...randomShops.filter(not(isOpen))]
   }
 }
 </script>
