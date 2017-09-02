@@ -54,7 +54,7 @@ class OrderService extends BaseService {
 
   _addParams(params) {
     const map = {
-      [DEAL]: ['tenantId', 'tableName', 'phoneNumber'],
+      [DEAL]: ['tenantId', 'tableName', 'phoneNumber', 'qrcodeId'],
       [ESHOP]: ['tenantId', 'consigneeId', 'tableName', 'phoneNumber', 'qrcodeId'],
       [GROUP_SHOPPING]: ['tenantId', 'consigneeId', 'tableName', 'phoneNumber', 'qrcodeId'],
       [MULTI_ESHOP]: ['tenantId', 'consigneeId', 'tableName', 'phoneNumber', 'qrcodeId']

@@ -35,7 +35,7 @@ class MenuService extends BaseService {
 
   _getQuery() {
     const map = {
-      [DEAL]: ['tenantId'],
+      [DEAL]: ['tenantId', 'qrcodeId'],
       [ESHOP]: ['tenantId', 'consigneeId', 'qrcodeId'],
       [GROUP_SHOPPING]: ['tenantId', 'consigneeId', 'qrcodeId'],
       [MULTI_ESHOP]: ['tenantId', 'consigneeId', 'qrcodeId']
