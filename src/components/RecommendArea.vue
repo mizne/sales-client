@@ -1,4 +1,4 @@
-<<template>
+<template>
   <div class="recommend-area">
     <div class="title">
       <span class="before">-</span>
@@ -34,8 +34,8 @@ export default {
     }
   },
   created() {
-    const isOpen = e => e.openFlag
-    const randomShops = this.tenants.filter((_, i) => i % 2 === 0)
+    const isOpen = e => e.openFlag;
+    const randomShops = this.tenants.filter((_, i) => i % 2 === 0);
     this.shops = [...randomShops.filter(isOpen), ...randomShops.filter(not(isOpen))]
   }
 }
@@ -54,7 +54,7 @@ export default {
   }
 
   .shops {
-    
+
   }
 }
 </style>

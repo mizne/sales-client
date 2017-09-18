@@ -1,12 +1,14 @@
 <template>
   <div class="main-page">
-    <div class="head-content" :style="{'background-image': 'url('+ industryImage + ')'}">
+    <!--<div class="head-content" :style="{'background-image': 'url('+ industryImage + ')'}">-->
       <!-- <span>
         <img style="width:100%;height:40%;" src="../assets/images/dinning.jpg">
       </span> -->
-      <div class="top-pointer">{{industryLabel}}</div>
-    </div>
-  
+      <!--<div class="top-pointer">{{industryLabel}}</div>-->
+    <!--</div>-->
+
+    <swiper :list="industryImg" :auto="true" height="230px" dots-class="custom-bottom" dots-position="center"></swiper>
+
     <template v-if="shops.length > 0">
       <div class="shops">
         <shop-item v-for="shop in shops" :key="shop.id" :shop="shop" @to-shop="toTenant"></shop-item>
@@ -15,12 +17,12 @@
     <template v-else>
       <prompt text="商家正在上线中, 敬请期待" style="bottom: 30%;"></prompt>
     </template>
-  
+
   </div>
 </template>
 <script>
 import { mapGetters } from 'vuex'
-
+import { XButton, Swiper } from 'vux'
 import ShopItem from '@/components/ShopItem'
 import Prompt from '@/components/Prompt'
 
@@ -32,7 +34,8 @@ export default {
   mixins: [toTenant],
   components: {
     ShopItem,
-    Prompt
+    Prompt,
+    Swiper
   },
   computed: {
     ...mapGetters(['industryLabel', 'industryImg', 'tenants'])
@@ -40,11 +43,22 @@ export default {
   data() {
     return {
       shops: [],
-      industryImage: null
+      industryImage: null,
+      images: [{
+        url: 'javascript:',
+        img: require('../assets/images/biyige.jpg')
+      }, {
+        url: 'javascript:',
+        img: require('../assets/images/weishuwu.jpg')
+      }, {
+        url: 'javascript:',
+        img: require('../assets/images/huangmenlaozao.jpg')
+      }
+      ],
     }
   },
   created() {
-    this.industryImage = require(`../assets/images/${this.industryImg}.jpg`)
+//  this.industryImage = require(`../assets/images/${this.industryImg}.jpg`)
     const industryShops = this.tenants.filter(e => e.industry === this.$route.params.name)
     const isOpen = e => e.openFlag
 

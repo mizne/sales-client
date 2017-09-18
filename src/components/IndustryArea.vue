@@ -27,7 +27,17 @@ export default {
         {
           "name": "lobster",
           "label": "美食",
-          "imgName": "美食外卖",
+          "imgName":[{
+                    url: 'javascript:',
+                    img: require('../assets/images/biyige.jpg')
+                  }, {
+                    url: 'javascript:',
+                    img: require('../assets/images/weishuwu.jpg')
+                  }, {
+                    url: 'javascript:',
+                    img: require('../assets/images/huangmenlaozao.jpg')
+                  }
+                  ],
           "icon": "lobster",
           "backgroundColor": "#f04134",
           // "badge": "1折"
@@ -35,7 +45,11 @@ export default {
         {
           "name": "food",
           "label": "儿童休闲",
-          "imgName": "旅游",
+//        "imgName": "旅游",
+          "imgName":[{
+              url: 'javascript:',
+              img: require('../assets/images/旅游.jpg')
+              }],
           "icon": "lvyou",
           "backgroundColor": "#00a854",
           // "badge": "1折"
@@ -43,7 +57,11 @@ export default {
         {
           "name": "educate",
           "label": "教育",
-          "imgName": "教育",
+//        "imgName": "教育",
+          "imgName":[{
+            url: 'javascript:',
+            img: require('../assets/images/教育.jpg')
+          }],
           "icon": "jiaoyu",
           "backgroundColor": "#108ee9",
           // "badge": "1折"
@@ -51,7 +69,11 @@ export default {
         {
           "name": "fitness",
           "label": "服装",
-          "imgName": "健身",
+//        "imgName": "健身",
+          "imgName":[{
+            url: 'javascript:',
+            img: require('../assets/images/健身.jpg')
+          }],
           "icon": "jianshen",
           "backgroundColor": "#f5317f",
           // "badge": "1折"
@@ -62,7 +84,11 @@ export default {
         {
           "name": "bakedTea",
           "label": "烘焙饮品",
-          "imgName": "烘焙茶饮",
+//        "imgName": "烘焙茶饮",
+          "imgName":[{
+            url: 'javascript:',
+            img: require('../assets/images/烘焙茶饮.jpg')
+          }],
           "icon": "yinpin",
           "backgroundColor": "#00a2ae",
           // "badge": "1折"
@@ -70,7 +96,11 @@ export default {
         {
           "name": "carBeauty",
           "label": "美容美发",
-          "imgName": "汽车美容",
+//        "imgName": "汽车美容",
+          "imgName":[{
+            url: 'javascript:',
+            img: require('../assets/images/汽车美容.jpg')
+          }],
           "icon": "qichebaoyang",
           "backgroundColor": "#f56a00",
           // "badge": "1折"
@@ -78,7 +108,11 @@ export default {
         {
           "name": "lifeServe",
           "label": "影城",
-          "imgName": "服务",
+//        "imgName": "服务",
+          "imgName":[{
+            url: 'javascript:',
+            img: require('../assets/images/服务.jpg')
+          }],
           "icon": "fuwu",
           "backgroundColor": "#7265e6",
           // "badge": "1折"
@@ -86,7 +120,11 @@ export default {
         {
           "name": "buildingMater",
           "label": "综合",
-          "imgName": "家装建材",
+//        "imgName": "家装建材",
+          "imgName":[{
+            url: 'javascript:',
+            img: require('../assets/images/家装建材.jpg')
+          }],
           "icon": "jiazhuang",
           "backgroundColor": "#ffbf00",
           // "badge": "1折"

@@ -20,6 +20,7 @@ import 'vue-numkeyboard/style.css'
 
 Vue.use(numkeyboard)
 
+
 LogRocket.init('49bwep/sales-zm4qk')
 FastClick.attach(document.body)
 

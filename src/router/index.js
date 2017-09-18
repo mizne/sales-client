@@ -26,6 +26,7 @@ import Wechatpay from '@/views/Wechatpay'
 import SelectCoupon from '@/views/SelectCoupon'
 import FetchOpenID from '@/views/FetchOpenID'
 import OrderDetail from '@/views/OrderDetail'
+import searchPage from '@/views/searchPage'
 
 import PayToMerchant from '@/views/PayToMerchant'
 import PaySuccess from '@/views/PaySuccess'
@@ -165,7 +166,7 @@ const routes = [
     path: '/order-detail/:tradeNo',
     name: 'OrderDetail',
     component: OrderDetail
-  }, 
+  },
   {
     path: '/pay-to-merchant',
     name: 'PayToMerchant',
@@ -175,6 +176,11 @@ const routes = [
     path: '/pay-success',
     name: 'PaySuccess',
     component: PaySuccess
+  },
+  {
+    path: '/searchPage',
+    name: 'searchPage',
+    component: searchPage
   }
 ]
 

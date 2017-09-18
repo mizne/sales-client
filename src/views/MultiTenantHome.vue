@@ -1,5 +1,9 @@
 <template>
   <div class="home-page">
+    <!--<search-->
+      <!--@on-focus="onFocus"-->
+      <!--&gt;-->
+    <!--</search>-->
     <swiper :list="images" :auto="true" height="230px" dots-class="custom-bottom" dots-position="center"></swiper>
     <industry-area></industry-area>
     <promotions-area></promotions-area>
@@ -13,7 +17,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import { XButton, Swiper } from 'vux'
-
+import { Search } from 'vux'
 import { objFrom } from '@/util/index'
 import QRCodeInfo from '@/models/QRCodeInfo'
 import Tabs from '@/components/Tabs'
@@ -27,6 +31,7 @@ export default {
   components: {
     XButton,
     Swiper,
+    Search,
     Tabs,
     DealFooter,
     IndustryArea,
@@ -44,12 +49,18 @@ export default {
       }, {
         url: 'javascript:',
         img: require('../assets/images/qingdoujia.jpg')
-      }],
+      }
+      ],
     }
   },
   created() {
     this.$store.commit('SET_TAB_INDEX', 0)
     document.title = '缤润汇商场'
+  },
+  methods: {
+    onFocus() {
+        this.$router.push('/searchPage')
+    }
   }
 }
 </script>
