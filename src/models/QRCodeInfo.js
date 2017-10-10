@@ -1,5 +1,5 @@
 import storage from '@/util/storage'
-import { DEAL, ESHOP, GROUP_SHOPPING, MULTI_ESHOP, FETCH_OPENID, EPAY } from '@/util/constants'
+import { DEAL, ESHOP, GROUP_SHOPPING, MULTI_ESHOP, FETCH_OPENID, EPAY, IPAY} from '@/util/constants'
 
 const methods = [
   'qrcodeId',
@@ -13,7 +13,8 @@ const methods = [
   'coupons',
   'couponRate',
   'tableUser',
-  'phoneNumber'
+  'phoneNumber',
+  'PaymentMerchant'
 ]
 const QRCodeInfo = function() {}
 
@@ -39,6 +40,10 @@ QRCodeInfo.prototype.isFetchOpenidBizType = function () {
 
 QRCodeInfo.prototype.isEPayBizType = function () {
   return this.getBizType() === EPAY
+}
+
+QRCodeInfo.prototype.isIPayBizType = function () {
+  return this.getBizType() === IPAY
 }
 
 QRCodeInfo.prototype.getShoppingCartRemarkPlaceholder = function() {

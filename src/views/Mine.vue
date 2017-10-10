@@ -2,31 +2,72 @@
   <div class="vip-card-container">
     <deal-header title="我的">
     </deal-header>
-  
+
     <deal-content>
       <div class="phone-info">
         <span class="label">手机号</span>
         <span class="number">{{phoneNumber}}</span>
       </div>
-  
+
       <div class="card-detail">
-        <div class="abstract">
+        <div class="abstract-top">
+          <div class="check-in">
+            <span class="day">0天</span>
+            <div class="18 calendar" style="display:inline-block">
+              <i style="color:#08BDD8" class="icon-18calendar"></i>
+            </div>
+            <span class="text">签到</span>
+          </div>
+
+          <div class="dividing-line"></div>
+
           <div class="points" @click="toPoints()">
-            <span class="number">10</span>
+            <span class="number">10积分</span>
+            <div class="integral" >
+              <i  class="icon-integral"></i>
+            </div>
             <span class="text">我的积分</span>
           </div>
-  
-          <div class="bag" @click="toCoupon()">
-            <i class="icon-bag"></i>
+        </div>
+
+        <div class="abstract">
+
+          <div class="gift" @click="toCoupon()">
+            <i class="icon-gift"></i>
             <span class="text">我的券包</span>
           </div>
-  
-          <div class="gift" @click="toOrder()">
-            <i class="icon-gift"></i>
+
+          <div class="order" @click="toOrder()">
+            <i class="icon-order1"></i>
             <span class="text">我的订单</span>
           </div>
+
+
+          <div class="cart">
+            <i class="icon-iconfontcart" @click="toMall()"></i>
+            <span class="text">在线商城</span>
+          </div>
         </div>
-  
+
+        <div class="abstract-line">
+
+          <div class="cart">
+            <i class="icon-iconfontcart"></i>
+            <span class="text">积分兑换</span>
+          </div>
+
+          <div class="my">
+            <i class="icon-my"></i>
+            <span class="text">我的资料</span>
+          </div>
+
+
+          <div class="comment">
+            <i class="icon-comment"></i>
+            <span class="text">通知消息</span>
+          </div>
+        </div>
+
         <!-- <div class="card-item points">
               <i class="icon-points"></i>
               <span class="text">积分换券</span>
@@ -44,11 +85,12 @@
             </div> -->
       </div>
     </deal-content>
-  
+
     <deal-footer v-if="hasTabs">
       <tabs>
       </tabs>
     </deal-footer>
+
   </div>
 </template>
 <script>
@@ -76,7 +118,8 @@ export default {
   data() {
     return {
       hasTabs: false,
-      phoneNumber: ''
+      phoneNumber: '',
+
     }
   },
   methods: {
@@ -88,6 +131,9 @@ export default {
     },
     toOrder() {
       this.$router.push({ name: 'AllOrders' })
+    },
+    toMall() {
+      this.$router.push({ name: 'onlineMall' })
     }
   },
   created() {
@@ -135,33 +181,104 @@ export default {
     .card-detail {
       margin-top: 10px;
       height: 230px;
+      font-size:14px;
 
+        .abstract-top {
+          display: flex;
+          height: 70px;
+          padding-top:10px;
+          padding-bottom:10px;
+
+          background-color: $whiteBackground;
+          justify-content: space-around;
+          align-items: center;
+          margin-bottom:10px;
+
+        .dividing-line{
+          border-right:1px solid #CCD5D2;
+          width:30px;
+          height:60px;
+        }
+
+        .points {
+            margin-left:-10px;
+          .number {
+            display:block;
+            text-align:center;
+          }
+          .integral{
+              display:inline-block;
+            i{
+              color: $cartColor;
+            }
+          }
+        }
+
+        .check-in {
+            margin-right:-20px;
+          .day{
+            display:block;
+            text-align:center;
+          }
+          .18 calendar{
+            i {
+              color: $calendar;
+            }
+          }
+        }
+      }
       .abstract {
         display: flex;
-        height: 80px;
+        height: 90px;
+        padding-top:10px;
+
         background-color: $whiteBackground;
         justify-content: space-around;
         align-items: center;
+        border-bottom:1px solid #CCD5D2;
 
         .points,
-        .bag,
+        .order,
+        .cart,
         .gift {
           display: flex;
           flex-direction: column;
           align-items: center;
+          font-size:14px;
         }
 
         .points {
           .number {
             color: $primaryColor;
             transform: scale(1.5);
+            margin-bottom: 15px;
+          }
+        }
+
+        .order {
+
+          i {
+            background-color: $orderColor;
+            color:#fff;
+            width:30px;
+            height:30px;
+            text-align:center;
+            line-height:30px;
+            border-radius:15px;
+            transform: scale(1.5);
             margin-bottom: 10px;
           }
         }
 
-        .bag {
+        .cart {
           i {
-            color: $primaryColor;
+            background-color: $mallColor;
+            color:#fff;
+            width:30px;
+            height:30px;
+            text-align:center;
+            line-height:30px;
+            border-radius:15px;
             transform: scale(1.5);
             margin-bottom: 10px;
           }
@@ -169,10 +286,89 @@ export default {
 
         .gift {
           i {
-            color: $primaryColor;
+            background-color: $couponColor;
+            color:#fff;
+            width:30px;
+            height:30px;
+            text-align:center;
+            line-height:30px;
+            border-radius:15px;
             transform: scale(1.5);
             margin-bottom: 10px;
           }
+        }
+      }
+
+      .abstract-line{
+        display: flex;
+        height: 90px;
+        padding-top:10px;
+
+        background-color: $whiteBackground;
+        justify-content: space-around;
+        align-items: center;
+        border-bottom:1px solid #CCD5D2;
+
+        .comment,
+        .my,
+        .cart,
+        .points
+         {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          font-size:14px;
+        }
+
+        .points {
+        .number {
+          color: $primaryColor;
+          transform: scale(1.5);
+          margin-bottom: 15px;
+        }
+        }
+
+        .my {
+
+          i {
+            background-color: $myInfo;
+            color:#fff;
+            width:30px;
+            height:30px;
+            text-align:center;
+            line-height:30px;
+            border-radius:15px;
+            transform: scale(1.5);
+            margin-bottom: 10px;
+          }
+        }
+
+        .cart {
+        i {
+          background-color: #FFBC03;
+          color:#fff;
+          width:30px;
+          height:30px;
+          text-align:center;
+          line-height:30px;
+          border-radius:15px;
+          transform: scale(1.5);
+          margin-bottom: 10px;
+        }
+        }
+
+        .comment {
+        i {
+          background-color: $notification;
+          color:#fff;
+          width:30px;
+          height:30px;
+          text-align:center;
+          line-height:30px;
+          border-radius:15px;
+          transform: scale(1.5);
+          margin-bottom: 10px;
+        }
         }
       }
 

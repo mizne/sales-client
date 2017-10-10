@@ -16,7 +16,8 @@ const mutationMaps = [
   },
   {
     mutationKey: 'SET_ALMOST_VIP_AMOUNT',
-    stateKey: 'almostVipAmount', // 消费快满多少 提示还差多少即可成会员
+    stateKey: 'almostVipAmount', // 消费快满多少 提示还差多少
+    // 即可成会员
     initValue: 0
   },
   {

@@ -12,10 +12,18 @@ const state = {
   //   ...
   // }
   shoppingCart: {},
-  isAddMoreFood: false
+  isAddMoreFood: false,
+  goodsInfo: {},
+  goodsDetail: {}
 }
 
 const mutations = {
+  buyCoupon(state,item) {
+    state.goodsInfo = item;
+  },
+  queryDetail(state,item) {
+    state.goodsDetail = item;
+  },
   ADD_MORE_FOOD(state) {
     state.isAddMoreFood = true
   },
@@ -131,7 +139,14 @@ const getters = {
   },
   isAddMoreFood(state) {
     return state.isAddMoreFood
+  },
+  goodsInfo(state) {
+    return state.goodsInfo
+  },
+  goodsDetail(state) {
+    return state.goodsDetail
   }
+
 }
 
 export { state, mutations, actions, getters }

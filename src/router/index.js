@@ -27,9 +27,14 @@ import SelectCoupon from '@/views/SelectCoupon'
 import FetchOpenID from '@/views/FetchOpenID'
 import OrderDetail from '@/views/OrderDetail'
 import searchPage from '@/views/searchPage'
+import onlineMall from '@/views/onlineMall'
+import onlineMallPay from '@/views/onlineMallPay'
+import queryGoodsDetail from '@/views/queryGoodsDetail'
 
 import PayToMerchant from '@/views/PayToMerchant'
+import PayToAlliance from '@/views/PayToAlliance'
 import PaySuccess from '@/views/PaySuccess'
+
 
 Vue.use(Router)
 
@@ -173,14 +178,35 @@ const routes = [
     component: PayToMerchant
   },
   {
+    path: '/pay-to-alliance',
+    name: 'PayToAlliance',
+    component: PayToAlliance
+  },
+  {
     path: '/pay-success',
     name: 'PaySuccess',
     component: PaySuccess
   },
+
   {
     path: '/searchPage',
     name: 'searchPage',
     component: searchPage
+  },
+  {
+    path: '/onlineMall',
+    name: 'onlineMall',
+    component: onlineMall
+  },
+  {
+    path: '/onlineMallPay',
+    name: 'onlineMallPay',
+    component: onlineMallPay
+  },
+  {
+    path: '/queryGoodsDetail',
+    name: 'queryGoodsDetail',
+    component: queryGoodsDetail
   }
 ]
 

@@ -22,6 +22,12 @@ class WechatService extends BaseService {
     .catch(this.exceptionHandler('WechatService', 'redirectForEPay'))
   }
 
+  redirectForIPay() {
+    return this.getBizTypeHttp()
+      .get(`/wechatpay/redirectUrl`)
+      .catch(this.exceptionHandler('WechatService', 'redirectForIPay'))
+  }
+
   redirectForOpenId() {
     return this.getBizTypeHttp()
       .get(`/fetch-openid/redirectUrl`)
@@ -43,6 +49,14 @@ class WechatService extends BaseService {
     return this.getBizTypeHttp()
     .get(`/wechatpay${query}`)
     .catch(this.exceptionHandler('WechatService', 'getWechatPayParamsForEPay'))
+  }
+
+  getWechatPayParamsForIPay(code, amount) {
+    const query = `?qrcodeId=${QRCodeInfo.getQrcodeId()}&code=${code}&amount=${amount}`
+
+    return this.getBizTypeHttp()
+      .get(`/wechatpay${query}`)
+      .catch(this.exceptionHandler('WechatService', 'getWechatPayParamsForIPay'))
   }
 
   getOpenId(code) {

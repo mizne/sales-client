@@ -11,10 +11,21 @@ class AlipayService extends BaseService {
   }
 
   getEPayParams(qrcodeId, amount) {
+    return this.getBizTypeHttp()
+      .get(`/alipay?qrcodeId=${qrcodeId}&amount=${amount}`)
+      .catch(this.exceptionHandler('AlipayService', 'getEPayParams'))
+  }
+
+  getIPayParams(qrcodeId, amount) {
 
     return this.getBizTypeHttp()
-    .get(`/alipay?qrcodeId=${qrcodeId}&amount=${amount}`)
-    .catch(this.exceptionHandler('AlipayService', 'getEPayParams'))
+      .get(`/alipay?qrcodeId=${qrcodeId}&amount=${amount}`)
+      .catch(this.exceptionHandler('AlipayService', 'getEPayParams'))
+
+    // return this.getBizTypeHttp()
+    //   .get(`/alipay?qrcodeId=201709291029024212253&amount=${amount}`)
+    //   .catch(this.exceptionHandler('AlipayService', 'getEPayParams'))
+
   }
 
   _getQuery() {

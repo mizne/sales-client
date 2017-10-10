@@ -5,12 +5,12 @@
         <i class="icon-back" @click="$router.push({ name: 'Home' })"></i>
       </span>
     </deal-header>
-  
+
     <deal-content>
-      <bill-detail v-if="orderDetail" :order-detail="orderDetail" 
+      <bill-detail v-if="orderDetail" :order-detail="orderDetail"
       :tenant-name="tenantName" :pay-time="payTime" pay-mode="微信"></bill-detail>
     </deal-content>
-  
+
     <deal-footer v-if="orderDetail">
       <bill-bar @to-shopcomment="toShopComment"></bill-bar>
     </deal-footer>
@@ -56,7 +56,7 @@ export default {
       WeixinJSBridge.invoke(
         'getBrandWCPayRequest', this.payParams,
         (res) => {
-          // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
+          // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回  ok，但并不保证它绝对可靠。
           if (res.err_msg == "get_brand_wcpay_request:ok") {
             this.$store.dispatch('FETCH_ORDER', this.tradeNo)
               .catch(err => {

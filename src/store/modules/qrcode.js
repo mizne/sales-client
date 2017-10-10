@@ -5,7 +5,8 @@ import {
   GROUP_SHOPPING,
   MULTI_ESHOP,
   FETCH_OPENID,
-  EPAY
+  EPAY,
+  IPAY
 } from '@/util/constants'
 import QRCodeInfo from '@/models/QRCodeInfo'
 import {
@@ -42,7 +43,7 @@ const mutations = {
 
 const actions = {
   FETCH_QRCODE_INFO: ({ commit, dispatch }, qrcodeId) => {
-    return QRCodeService.getQRCodeInfo(qrcodeId).then(info => {
+    return QRCodeService.getQRCodeInfo(qrcodeId,).then(info => {
       QRCodeInfo.setQrcodeId(qrcodeId)
 
       // e码付
@@ -50,6 +51,14 @@ const actions = {
         QRCodeInfo.setBizType(info.bizType)
         QRCodeInfo.setTenantId(info.tenantId)
         QRCodeInfo.setTenantName(info.merchantName)
+        return info
+      }
+
+      if (info.bizType === IPAY) {
+        QRCodeInfo.setBizType(info.bizType)
+        QRCodeInfo.setTenantId(info.tenantId)
+        QRCodeInfo.setTenantName(info.merchantName)
+        QRCodeInfo.setPaymentMerchant(info.paymentMerchant)
         return info
       }
 

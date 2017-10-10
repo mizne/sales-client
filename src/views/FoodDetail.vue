@@ -2,13 +2,13 @@
   <div class="food-detail-container">
     <deal-header title="详情">
     </deal-header>
-  
+
     <deal-content>
       <div class="food-info">
         <swiper :list="images" :auto="true" height="400px" dots-class="custom-bottom" dots-position="center"></swiper>
-        <!-- <div :style="{'width': '100%', 'height': '250px', 'background': `url(${foodDetail.food.image})`, 'background-size': 'contain'}"> -->
+         <!--<div :style="{'width': '100%', 'height': '250px', 'background': `url(${foodDetail.food.image})`, 'background-size': 'contain'}">-->
         <!--<img style="width:100%;height:300px;" :src="foodDetail.food.image" alt="">-->
-        <!-- </div> -->
+         <!--</div>-->
         <div class="title">{{foodDetail.food.name}}</div>
         <div class="favorite">
           <i class="icon-like"></i>
@@ -18,7 +18,7 @@
         <div class="price">
           <i class="icon-money"></i>
           <span class="normal-price">{{foodDetail.food.price + '/' + foodDetail.food.unit}}</span>
-  
+
           <span class="vip-text" v-if="needVipToast">会员:</span>
           <span class="vip-price" v-if="needVipToast">{{foodDetail.food.price + '/' + foodDetail.food.unit}}</span>
         </div>
@@ -33,28 +33,28 @@
       </div>
       <div class="food-comment">
         <h3>商品评价</h3>
-  
+
         <template v-if="foodDetail.food.Ratings.length">
           <div v-for="(comment, index) in foodDetail.food.Ratings" :key="comment.$index">
             <comment-item :comment="comment" @change="changeThumbs($event, comment)"></comment-item>
           </div>
         </template>
-  
+
         <template v-else>
           <p>这个商品还没有评论呢</p>
         </template>
-  
+
         <div class="leave-message" v-if="hasPhoneNumber">
           <x-textarea :max="50" v-model="commentText" placeholder="说两句话吧, 您的评价和建议, 将会为我们的改进, 提供很好的参考。"></x-textarea>
           <x-button type="default" @click.native="commitComment">提交</x-button>
         </div>
       </div>
     </deal-content>
-  
+
     <deal-footer>
       <deal-cart-bar :add-more="isAddMoreFood" :shop-cart="shoppingCart" :food-cost="tempShoppingCartFoodCost" :food-count="tempShoppingCartFoodCount" @go-shopcart="toShopCart"></deal-cart-bar>
     </deal-footer>
-  
+
     <transition enter-active-class="animated fadeInUp" leave-active-class="animated fadeOutDown">
       <div class="select-area" v-if="showSelection">
         <div class="food-content">
@@ -66,7 +66,7 @@
               <i class="icon-money"></i>{{foodDetail.food.price}}</span>
             <span class="cancel" @click="showSelection=false">X</span>
           </div>
-  
+
           <div class="food-detail">
             <div class="food-quantity">
               <div class="title">
@@ -78,7 +78,7 @@
                 <!--<x-number v-model="food.quantity" :step="0.1"></x-number>-->
               </div>
             </div>
-  
+
             <div class="food-taste">
               <div class="title">
                 默认
@@ -89,7 +89,7 @@
                 </div>
               </div>
             </div>
-  
+
             <div class="food-remark">
               <div class="title">
                 备注
@@ -98,11 +98,11 @@
             </div>
           </div>
         </div>
-  
+
         <div class="food-btn" @click="addShopCart">加购物车</div>
       </div>
     </transition>
-  
+
   </div>
 </template>
 <script>
@@ -210,6 +210,12 @@ export default {
           img: e
         }))
       }
+      else{
+        return Array(3).fill({
+          url: 'javascript:',
+          img: this.foodDetail.food.image
+        })
+      }
     }
   },
   created() {
@@ -261,6 +267,7 @@ export default {
           type: 'text',
         })
       }
+
       const tasteText = this.tastes.reduce((accu, curr) => {
         return accu.concat(curr)
       }, [])

@@ -29,7 +29,7 @@ Vue.use(VueAnalytics, {
   id: 'UA-104521154-1',
   router
 })
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 // Vue.config.devtools = true
 
 /* eslint-disable no-new */

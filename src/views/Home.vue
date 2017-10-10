@@ -48,6 +48,10 @@ export default {
           return this.$router.push({ name: 'PayToMerchant' })
         }
 
+        if (QRCodeInfo.isIPayBizType()) {
+          return this.$router.push({ name: 'PayToAlliance' })
+        }
+
         if (QRCodeInfo.isMultiEShopBizType()) {
           this.$router.push({ name: 'MultiTenantHome' })
         } else {

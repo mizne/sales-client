@@ -9,6 +9,7 @@ export default {
   },
   methods: {
     ensureOrder() {
+
       if (!this.orderDetail && this.shoppingCart.foods.length === 0) {
         return vAlert({ content: '购物车为空呢 ^_^' })
       }
