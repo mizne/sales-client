@@ -14,7 +14,7 @@
         </div>
         <div class="tab-item" :class="{'selected': tabIndex === 3}" @click="toMine()">
           <i class="icon-my"></i>
-          <span>我的</span>
+          <span>会员中心</span>
         </div>
   </div>
 </template>

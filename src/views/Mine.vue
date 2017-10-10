@@ -1,6 +1,6 @@
 <template>
   <div class="vip-card-container">
-    <deal-header title="我的">
+    <deal-header title="会员中心">
     </deal-header>
 
     <deal-content>
@@ -22,7 +22,7 @@
           <div class="dividing-line"></div>
 
           <div class="points" @click="toPoints()">
-            <span class="number">10积分</span>
+            <span class="number">{{integral}} 积分</span>
             <div class="integral" >
               <i  class="icon-integral"></i>
             </div>
@@ -99,6 +99,7 @@ import DealContent from '@/components/DealContent'
 import DealFooter from '@/components/DealFooter'
 import DealDialog from '@/components/DealDialog'
 import Tabs from '@/components/Tabs'
+import axios from 'axios'
 
 import QRCodeInfo from '@/models/QRCodeInfo'
 import { vAlert, vConfirm } from '@/util/vux-wrapper'
@@ -119,8 +120,11 @@ export default {
     return {
       hasTabs: false,
       phoneNumber: '',
-
+      integral: ''
     }
+  },
+  created() {
+
   },
   methods: {
     toPoints() {
@@ -140,6 +144,9 @@ export default {
     this.$store.commit('SET_TAB_INDEX', 3)
     this.phoneNumber = QRCodeInfo.getPhoneNumber()
     this.hasTabs = QRCodeInfo.isMultiEShopBizType()
+    axios.get(`https://deal.xiaovbao.cn/api/test/admin/vipPhone?alliancesId=222267370d07487ee160a1b7c07136e4&number=${this.phoneNumber}`).then(resp => {
+       this.integral = resp.data.result.aggregateScore
+    })
   },
   beforeRouteEnter(to, from, next) {
     if (!QRCodeInfo.hasPhoneNumber()) {
