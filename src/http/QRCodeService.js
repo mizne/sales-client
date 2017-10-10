@@ -4,7 +4,7 @@ import QRCodeInfo from '@/models/QRCodeInfo'
 
 class QRCodeService extends BaseService {
     getQRCodeInfo(qrcodeId) {
-      return  qrcodeHttp.get('/QRCodeTemplate?QRCodeTemplateId=201708312100381153263')
+      return  qrcodeHttp.get(`/QRCodeTemplate?QRCodeTemplateId=${qrcodeId}`)
         .catch(this.exceptionHandler('QRCodeService', 'getQRCodeInfo'))
   }
 }

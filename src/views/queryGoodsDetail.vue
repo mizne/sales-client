@@ -73,7 +73,7 @@
 
           if (browser === WEIXIN_BROWSER) {
             if (support) {
-              return this.$store.dispatch('FETCH_WECHATPAY_URL_EPAY').catch(_ => {
+              return this.$store.dispatch('Online_WECHATPAY_URL_EPAY').catch(_ => {
                 vAlert({ content: '不好意思, 微信重定向地址获取失败 -_-' })
               })
             } else {
