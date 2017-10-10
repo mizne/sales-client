@@ -6,6 +6,7 @@ import {
   FETCH_OPENID
 } from '@/util/constants'
 import { BaseService } from './BaseService'
+import { epayHttp } from './interceptors'
 import QRCodeInfo from '@/models/QRCodeInfo'
 
 class WechatService extends BaseService {
@@ -20,6 +21,11 @@ class WechatService extends BaseService {
     return this.getBizTypeHttp()
     .get(`/wechatpay/redirectUrl`)
     .catch(this.exceptionHandler('WechatService', 'redirectForEPay'))
+  }
+
+  OnlineRedirectForEPay() {
+    return epayHttp.get(`/wechatpay/redirectUrl`)
+      .catch(this.exceptionHandler('WechatService', 'OnlineRedirectForEPay'))
   }
 
   redirectForIPay() {
@@ -49,6 +55,13 @@ class WechatService extends BaseService {
     return this.getBizTypeHttp()
     .get(`/wechatpay${query}`)
     .catch(this.exceptionHandler('WechatService', 'getWechatPayParamsForEPay'))
+  }
+
+  OnlineWechatPayParamsForEPay(code, amount) {
+    const query = `?qrcodeId=${QRCodeInfo.getQrcodeId()}&code=${code}&amount=${amount}`
+
+    return epayHttp.get(`/wechatpay${query}`)
+      .catch(this.exceptionHandler('WechatService', 'OnlineWechatPayParamsForEPay'))
   }
 
   getWechatPayParamsForIPay(code, amount) {

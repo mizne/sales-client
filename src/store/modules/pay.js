@@ -44,6 +44,12 @@ const actions = {
     })
   },
 
+  Online_WECHATPAY_URL_EPAY: ({ commit }) => {
+    return WechatService.OnlineRedirectForEPay().then(url => {
+      window.location.href = url
+    })
+  },
+
   FETCH_WECHATPAY_URL_IPAY: ({ commit }) => {
     return WechatService.redirectForIPay().then(url => {
       window.location.href = url
@@ -56,6 +62,10 @@ const actions = {
 
   FETCH_WECHATPAY_PARAMS_EPAY: ({ commit }, {code, amount}) => {
     return WechatService.getWechatPayParamsForEPay(code, amount)
+  },
+
+  Online_WECHATPAY_PARAMS_EPAY: ({ commit }, {code, amount}) => {
+    return WechatService.OnlineWechatPayParamsForEPay(code, amount)
   },
 
   FETCH_WECHATPAY_PARAMS_IPAY: ({ commit }, {code, amount}) => {
@@ -72,6 +82,18 @@ const actions = {
       const url = `${ALIPAY_PREFIX_URL}${urlParams}`
       commit('SET_ALIPAY_URL', url)
     })
+  },
+
+  Online_ALIPAY_EPAY: ({ commit }, amount) => {
+    router.push({ name: 'Alipay' })
+    const qrcodeId = QRCodeInfo.getQrcodeId()
+
+    return AlipayService.getOnlineParams(qrcodeId, amount)
+      .then(urlParams => {
+        commit('SET_SHOW_IFRAME', true)
+        const url = `${ALIPAY_PREFIX_URL}${urlParams}`
+        commit('SET_ALIPAY_URL', url)
+      })
   },
 
   FETCH_ALIPAY_IPAY: ({ commit }, amount) => {

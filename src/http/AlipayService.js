@@ -1,4 +1,5 @@
 import { DEAL, ESHOP, GROUP_SHOPPING, MULTI_ESHOP } from '@/util/constants'
+import { epayHttp } from './interceptors'
 import { BaseService } from './BaseService'
 
 class AlipayService extends BaseService {
@@ -16,16 +17,16 @@ class AlipayService extends BaseService {
       .catch(this.exceptionHandler('AlipayService', 'getEPayParams'))
   }
 
+  getOnlineParams(qrcodeId, amount) {
+    return  epayHttp.get(`/alipay?qrcodeId=${qrcodeId}&amount=${amount}`)
+      .catch(this.exceptionHandler('AlipayService', 'getOnlineParams'))
+  }
+
   getIPayParams(qrcodeId, amount) {
 
     return this.getBizTypeHttp()
       .get(`/alipay?qrcodeId=${qrcodeId}&amount=${amount}`)
       .catch(this.exceptionHandler('AlipayService', 'getEPayParams'))
-
-    // return this.getBizTypeHttp()
-    //   .get(`/alipay?qrcodeId=201709291029024212253&amount=${amount}`)
-    //   .catch(this.exceptionHandler('AlipayService', 'getEPayParams'))
-
   }
 
   _getQuery() {
