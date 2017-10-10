@@ -72,8 +72,8 @@
           localStorage.setItem('XIAO_V_BAO_AMOUNT_EPAY', amount);
           if (browser === WEIXIN_BROWSER) {
             if (support) {
-              return this.$store.dispatch('FETCH_WECHATPAY_URL').catch(_ => {
-                vAlert({content: '不好意思, 地址获取失败 -_-'})
+              return this.$store.dispatch('FETCH_WECHATPAY_URL_EPAY').catch(_ => {
+                vAlert({ content: '不好意思, 微信重定向地址获取失败 -_-' })
               })
             } else {
               vAlert({ content: '您的微信版本过低, 不支持支付功能, 请升级微信版本 ^_^' })
@@ -137,9 +137,9 @@
     width:100%;
     height:50px;
     line-height:50px;
-    position:absolute;
-    bottom:0;
-    /*margin-left:-10px;*/
+    /*position:absolute;*/
+    /*bottom:0;*/
+    margin-top:60px;
     padding-left:10px;
     box-sizing:border-box;
   .order-btn{
