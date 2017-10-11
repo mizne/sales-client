@@ -41,14 +41,12 @@ const actions = {
 
   FETCH_WECHATPAY_URL_EPAY: ({ commit }) => {
     return WechatService.redirectForEPay().then(url => {
-      // window.alert(url);
       window.location.href = url
     })
   },
 
   Online_WECHATPAY_URL_EPAY: ({ commit }) => {
     return WechatService.OnlineRedirectForEPay().then(url => {
-      // window.alert(url);
       window.location.href = url
     })
   },
@@ -89,7 +87,7 @@ const actions = {
 
   Online_ALIPAY_EPAY: ({ commit }, amount) => {
     router.push({ name: 'Alipay' })
-    const qrcodeId = QRCodeInfo.getQrcodeId()
+    let qrcodeId = '201710111357459483951';
 
     return AlipayService.getOnlineParams(qrcodeId, amount)
       .then(urlParams => {

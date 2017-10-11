@@ -13,4 +13,5 @@ class QRCodeService extends BaseService {
 //201709282004086717356 服务
 //qrcodeId
 //201708312100381153263
+//e码付 201710111357459483951
 export default new QRCodeService()

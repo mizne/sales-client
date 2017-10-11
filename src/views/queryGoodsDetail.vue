@@ -154,8 +154,8 @@
     height:100%;
     float:right;
     font-size:14px;
-    padding-left:10px;
-    padding-right:10px;
+    width:80px;
+    text-align:center;
     cursor:pointer;
   }
   }

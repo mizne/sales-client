@@ -12,7 +12,7 @@
       </div>
 
       <div class="food-img">
-        <img :src="food.image" style="width:160px;height:160px;" alt="">
+        <img :src="food.image" style="width:140px;height:140px;" alt="">
       </div>
     </div>
   </div>
@@ -38,7 +38,7 @@
    },
      mixins: [toOrderPrompt],
      created() {
-        axios.get('https://deal.xiaovbao.cn/api/test/customer/eshop/menu?tenantId=22003000da501d8a976da9e3e680230e&consigneeId=4ee5cad6a0fa434370afd738331fbfff&qrcodeId=201708312100381153263')
+        axios.get('https://deal.xiaovbao.cn/api/test/customer/eshop/menu?tenantId=22003000da501d8a976da9e3e680230e&consigneeId=4ee5cad6a0fa434370afd738331fbfff&qrcodeId=201710111357459483951')
           .then(resp => {
               this.foods = resp.data.result;
               this.foods.forEach(e => {
@@ -67,10 +67,6 @@
 <style lang="scss" scoped>
   @import '../assets/css/main.scss';
   .online-mall{
-     /*display:flex;*/
-     /*justify-content:center;*/
-     /*align-items:center;*/
-
     .food{
       display:block;
       width:90%;
@@ -116,12 +112,9 @@
         }
       }
       .food-img{
-        float:left;
-        position:absolute;
-        right:10%;
-        top:10%;
+        float:right;
         img{
-          border-radius:80px;
+          border-radius:70px;
         }
 
       }

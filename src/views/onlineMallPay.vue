@@ -58,10 +58,6 @@ import { WEIXIN_BROWSER } from '@/util/constants'
             vAlert({ content: '您的微信版本过低, 不支持支付功能, 请升级微信版本 ^_^' })
           }
         } else {
-//          return this.$store.dispatch('FETCH_ALIPAY_EPAY', amount).catch(_ => {
-//            vAlert({ content: '不好意思, 阿里支付请求参数获取失败 -_-' })
-//          })
-
           return this.$store.dispatch('Online_ALIPAY_EPAY', amount).catch(_ => {
             vAlert({ content: '不好意思, 阿里支付请求参数获取失败 -_-' })
           })
@@ -139,12 +135,13 @@ import { WEIXIN_BROWSER } from '@/util/constants'
           background-color:#FF6D00;
           color:#fff;
           display:inline-block;
+          width:80px;
           height:100%;
           float:right;
           font-size:14px;
-          padding-left:10px;
-          padding-right:10px;
+          text-align:center;
           cursor:pointer;
+          box-sizing:border-box;
         }
       }
     }
