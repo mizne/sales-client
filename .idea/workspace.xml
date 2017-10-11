@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ec9c169-048d-4db3-b56c-68580c3641e4" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/http/WechatService.js" afterPath="$PROJECT_DIR$/src/http/WechatService.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/store/modules/pay.js" afterPath="$PROJECT_DIR$/src/store/modules/pay.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/PaySuccess.vue" afterPath="$PROJECT_DIR$/src/views/PaySuccess.vue" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -45,21 +44,11 @@
           <file leaf-file-name="WechatService.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/http/WechatService.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="225">
-                  <caret line="21" column="24" lean-forward="false" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
+                <state relative-caret-position="325">
+                  <caret line="55" column="30" lean-forward="true" selection-start-line="55" selection-start-column="30" selection-end-line="55" selection-end-column="30" />
                   <folding>
                     <element signature="e#0#99#0" expanded="true" />
                   </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="OrderSuccess.vue" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/views/OrderSuccess.vue">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="500">
-                  <caret line="116" column="12" lean-forward="false" selection-start-line="116" selection-start-column="12" selection-end-line="116" selection-end-column="12" />
-                  <folding />
                 </state>
               </provider>
             </entry>
@@ -77,7 +66,7 @@
           <file leaf-file-name="PaySuccess.vue" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/views/PaySuccess.vue">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="75">
+                <state relative-caret-position="175">
                   <caret line="78" column="55" lean-forward="false" selection-start-line="78" selection-start-column="28" selection-end-line="78" selection-end-column="55" />
                   <folding>
                     <element signature="e#936#969#0" expanded="true" />
@@ -252,6 +241,7 @@
         <option value="$PROJECT_DIR$/src/http/QRCodeService.js" />
         <option value="$PROJECT_DIR$/src/store/modules/pay.js" />
         <option value="$PROJECT_DIR$/src/http/WechatService.js" />
+        <option value="$PROJECT_DIR$/src/views/PaySuccess.vue" />
       </list>
     </option>
   </component>
@@ -518,12 +508,12 @@
       <workItem from="1506734893430" duration="15322000" />
       <workItem from="1507598756732" duration="26528000" />
       <workItem from="1507637321028" duration="8833000" />
-      <workItem from="1507684488688" duration="7151000" />
+      <workItem from="1507684488688" duration="7754000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="266231000" />
+    <option name="totallyTimeSpent" value="266834000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-82" width="1936" height="1096" extended-state="0" />
@@ -911,14 +901,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/OrderSuccess.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="500">
-          <caret line="116" column="12" lean-forward="false" selection-start-line="116" selection-start-column="12" selection-end-line="116" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/mixins/to-pay.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="406">
@@ -937,10 +919,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/OrderSuccess.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1450">
+          <caret line="116" column="12" lean-forward="false" selection-start-line="116" selection-start-column="12" selection-end-line="116" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/http/WechatService.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="21" column="24" lean-forward="false" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
+        <state relative-caret-position="325">
+          <caret line="55" column="30" lean-forward="true" selection-start-line="55" selection-start-column="30" selection-end-line="55" selection-end-column="30" />
           <folding>
             <element signature="e#0#99#0" expanded="true" />
           </folding>
@@ -949,7 +939,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/views/PaySuccess.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
+        <state relative-caret-position="175">
           <caret line="78" column="55" lean-forward="false" selection-start-line="78" selection-start-column="28" selection-end-line="78" selection-end-column="55" />
           <folding>
             <element signature="e#936#969#0" expanded="true" />

@@ -75,7 +75,7 @@ export default {
     },
     payForWechat(obj) {
       const amount = localStorage.getItem('XIAO_V_BAO_AMOUNT_EPAY')
-
+      window.alert('支付金额' + amount)
       this.$store.dispatch('FETCH_WECHATPAY_PARAMS_EPAY', {
         code: obj.code,
         amount
@@ -142,6 +142,7 @@ export default {
   },
   created() {
     const { isAlipay, isWechat } = this.$browser
+    window.alert('微信支付' + isWechat)
     const obj = objFrom(decodeURIComponent(location.search))
 
     if (isAlipay) {
@@ -150,6 +151,7 @@ export default {
     }
 
     if (isWechat) {
+
       this.payForWechat(obj)
     }
   }
