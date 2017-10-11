@@ -150,7 +150,6 @@ export default {
     }
 
     if (isWechat) {
-
       this.payForWechat(obj)
     }
   }

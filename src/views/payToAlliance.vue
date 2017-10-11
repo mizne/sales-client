@@ -60,7 +60,7 @@
       _pay(amount) {
         const { browser, support } = checkBrowserForPay()
 
-        localStorage.setItem('XIAO_V_BAO_AMOUNT_IPAY', amount)
+        localStorage.setItem('XIAO_V_BAO_AMOUNT_EPAY', amount)
 
         if (browser === WEIXIN_BROWSER) {
           if (support) {
