@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ec9c169-048d-4db3-b56c-68580c3641e4" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/PaySuccess.vue" afterPath="$PROJECT_DIR$/src/views/PaySuccess.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/http/WechatService.js" afterPath="$PROJECT_DIR$/src/http/WechatService.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -32,8 +32,8 @@
           <file leaf-file-name="pay.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/store/modules/pay.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="150">
-                  <caret line="66" column="33" lean-forward="true" selection-start-line="66" selection-start-column="25" selection-end-line="66" selection-end-column="50" />
+                <state relative-caret-position="233">
+                  <caret line="66" column="50" lean-forward="false" selection-start-line="66" selection-start-column="25" selection-end-line="66" selection-end-column="50" />
                   <folding>
                     <element signature="e#0#59#0" expanded="true" />
                   </folding>
@@ -41,11 +41,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="WechatService.js" pinned="false" current-in-tab="false">
+          <file leaf-file-name="WechatService.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/http/WechatService.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="325">
-                  <caret line="55" column="30" lean-forward="true" selection-start-line="55" selection-start-column="30" selection-end-line="55" selection-end-column="30" />
+                <state relative-caret-position="400">
+                  <caret line="52" column="87" lean-forward="false" selection-start-line="52" selection-start-column="87" selection-end-line="52" selection-end-column="87" />
                   <folding>
                     <element signature="e#0#99#0" expanded="true" />
                   </folding>
@@ -63,10 +63,10 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="PaySuccess.vue" pinned="false" current-in-tab="true">
+          <file leaf-file-name="PaySuccess.vue" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/views/PaySuccess.vue">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="175">
+                <state relative-caret-position="325">
                   <caret line="78" column="55" lean-forward="false" selection-start-line="78" selection-start-column="28" selection-end-line="78" selection-end-column="55" />
                   <folding>
                     <element signature="e#936#969#0" expanded="true" />
@@ -130,8 +130,8 @@
           <file leaf-file-name="QRCodeService.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/http/QRCodeService.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="175">
-                  <caret line="4" column="41" lean-forward="true" selection-start-line="4" selection-start-column="41" selection-end-line="4" selection-end-column="41" />
+                <state relative-caret-position="325">
+                  <caret line="7" column="36" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
                   <folding>
                     <element signature="e#0#43#0" expanded="true" />
                     <marker date="1507643105090" expanded="true" signature="205:354" ph="{...}" />
@@ -177,7 +177,6 @@
       <find>redirectForEPay</find>
       <find>getWechatPayParams</find>
       <find>FETCH_WECHATPAY_URL_EPAY</find>
-      <find>FETCH_WECHATPAY_PARAMS_EPAY</find>
       <find>payForWechat</find>
       <find>ji</find>
       <find>jie</find>
@@ -188,6 +187,7 @@
       <find>结账单</find>
       <find>FETCH_ALIPAY_EPAY</find>
       <find>getWechatPayParamsForEPay</find>
+      <find>FETCH_WECHATPAY_PARAMS_EPAY</find>
     </findStrings>
     <dirStrings>
       <dir>E:\projects\sales-client\test</dir>
@@ -240,8 +240,8 @@
         <option value="$PROJECT_DIR$/src/views/queryGoodsDetail.vue" />
         <option value="$PROJECT_DIR$/src/http/QRCodeService.js" />
         <option value="$PROJECT_DIR$/src/store/modules/pay.js" />
-        <option value="$PROJECT_DIR$/src/http/WechatService.js" />
         <option value="$PROJECT_DIR$/src/views/PaySuccess.vue" />
+        <option value="$PROJECT_DIR$/src/http/WechatService.js" />
       </list>
     </option>
   </component>
@@ -508,12 +508,12 @@
       <workItem from="1506734893430" duration="15322000" />
       <workItem from="1507598756732" duration="26528000" />
       <workItem from="1507637321028" duration="8833000" />
-      <workItem from="1507684488688" duration="7754000" />
+      <workItem from="1507684488688" duration="8272000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="266834000" />
+    <option name="totallyTimeSpent" value="267352000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-82" width="1936" height="1096" extended-state="0" />
@@ -869,17 +869,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/http/QRCodeService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="4" column="41" lean-forward="true" selection-start-line="4" selection-start-column="41" selection-end-line="4" selection-end-column="41" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-            <marker date="1507643105090" expanded="true" signature="205:354" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/views/onlineMallPay.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="275">
@@ -909,16 +898,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/store/modules/pay.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="66" column="33" lean-forward="true" selection-start-line="66" selection-start-column="25" selection-end-line="66" selection-end-column="50" />
-          <folding>
-            <element signature="e#0#59#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/views/OrderSuccess.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1450">
@@ -927,23 +906,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/http/WechatService.js">
+    <entry file="file://$PROJECT_DIR$/src/http/QRCodeService.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="325">
-          <caret line="55" column="30" lean-forward="true" selection-start-line="55" selection-start-column="30" selection-end-line="55" selection-end-column="30" />
+          <caret line="7" column="36" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
           <folding>
-            <element signature="e#0#99#0" expanded="true" />
+            <element signature="e#0#43#0" expanded="true" />
+            <marker date="1507643105090" expanded="true" signature="205:354" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/views/PaySuccess.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
+        <state relative-caret-position="325">
           <caret line="78" column="55" lean-forward="false" selection-start-line="78" selection-start-column="28" selection-end-line="78" selection-end-column="55" />
           <folding>
             <element signature="e#936#969#0" expanded="true" />
             <element signature="n#style#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/store/modules/pay.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="233">
+          <caret line="66" column="50" lean-forward="false" selection-start-line="66" selection-start-column="25" selection-end-line="66" selection-end-column="50" />
+          <folding>
+            <element signature="e#0#59#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/http/WechatService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="52" column="87" lean-forward="false" selection-start-line="52" selection-start-column="87" selection-end-line="52" selection-end-column="87" />
+          <folding>
+            <element signature="e#0#99#0" expanded="true" />
           </folding>
         </state>
       </provider>
