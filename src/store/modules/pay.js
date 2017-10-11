@@ -34,6 +34,7 @@ const actions = {
 
   FETCH_WECHATPAY_URL: ({ commit }) => {
     return WechatService.redirectForPay().then(url => {
+      window.alert(url)
       window.location.href = url
     })
   },
