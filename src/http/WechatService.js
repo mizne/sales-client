@@ -52,7 +52,7 @@ class WechatService extends BaseService {
   getWechatPayParamsForEPay(code, amount) {
     const query = `?qrcodeId=${QRCodeInfo.getQrcodeId()}&code=${code}&amount=${amount}`
 
-    return this.epayHttp
+    return this.getBizTypeHttp()
     .get(`/wechatpay${query}`)
     .catch(this.exceptionHandler('WechatService', 'getWechatPayParamsForEPay'))
   }

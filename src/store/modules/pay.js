@@ -40,12 +40,14 @@ const actions = {
 
   FETCH_WECHATPAY_URL_EPAY: ({ commit }) => {
     return WechatService.redirectForEPay().then(url => {
+      // window.alert(url);
       window.location.href = url
     })
   },
 
   Online_WECHATPAY_URL_EPAY: ({ commit }) => {
     return WechatService.OnlineRedirectForEPay().then(url => {
+      // window.alert(url);
       window.location.href = url
     })
   },
