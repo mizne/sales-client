@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6ec9c169-048d-4db3-b56c-68580c3641e4" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/http/WechatService.js" afterPath="$PROJECT_DIR$/src/http/WechatService.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/PaySuccess.vue" afterPath="$PROJECT_DIR$/src/views/PaySuccess.vue" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -44,8 +45,8 @@
           <file leaf-file-name="WechatService.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/http/WechatService.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="400">
-                  <caret line="52" column="87" lean-forward="false" selection-start-line="52" selection-start-column="87" selection-end-line="52" selection-end-column="87" />
+                <state relative-caret-position="825">
+                  <caret line="54" column="19" lean-forward="false" selection-start-line="54" selection-start-column="11" selection-end-line="54" selection-end-column="19" />
                   <folding>
                     <element signature="e#0#99#0" expanded="true" />
                   </folding>
@@ -66,8 +67,8 @@
           <file leaf-file-name="PaySuccess.vue" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/views/PaySuccess.vue">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="325">
-                  <caret line="78" column="55" lean-forward="false" selection-start-line="78" selection-start-column="28" selection-end-line="78" selection-end-column="55" />
+                <state relative-caret-position="200">
+                  <caret line="77" column="55" lean-forward="false" selection-start-line="77" selection-start-column="28" selection-end-line="77" selection-end-column="55" />
                   <folding>
                     <element signature="e#936#969#0" expanded="true" />
                     <element signature="n#style#0;n#!!top" expanded="false" />
@@ -508,12 +509,12 @@
       <workItem from="1506734893430" duration="15322000" />
       <workItem from="1507598756732" duration="26528000" />
       <workItem from="1507637321028" duration="8833000" />
-      <workItem from="1507684488688" duration="8272000" />
+      <workItem from="1507684488688" duration="8683000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="267352000" />
+    <option name="totallyTimeSpent" value="267763000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-82" width="1936" height="1096" extended-state="0" />
@@ -861,14 +862,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/http/AlipayService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-44">
-          <caret line="11" column="3" lean-forward="true" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/views/onlineMallPay.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="275">
@@ -887,14 +880,6 @@
           <folding>
             <element signature="e#757#805#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mixins/to-pay.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="28" column="58" lean-forward="false" selection-start-line="28" selection-start-column="39" selection-end-line="28" selection-end-column="58" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -917,10 +902,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/http/AlipayService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-44">
+          <caret line="11" column="3" lean-forward="true" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mixins/to-pay.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="406">
+          <caret line="28" column="58" lean-forward="false" selection-start-line="28" selection-start-column="39" selection-end-line="28" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/views/PaySuccess.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="78" column="55" lean-forward="false" selection-start-line="78" selection-start-column="28" selection-end-line="78" selection-end-column="55" />
+        <state relative-caret-position="200">
+          <caret line="77" column="55" lean-forward="false" selection-start-line="77" selection-start-column="28" selection-end-line="77" selection-end-column="55" />
           <folding>
             <element signature="e#936#969#0" expanded="true" />
             <element signature="n#style#0;n#!!top" expanded="false" />
@@ -940,8 +941,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/http/WechatService.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="52" column="87" lean-forward="false" selection-start-line="52" selection-start-column="87" selection-end-line="52" selection-end-column="87" />
+        <state relative-caret-position="825">
+          <caret line="54" column="19" lean-forward="false" selection-start-line="54" selection-start-column="11" selection-end-line="54" selection-end-column="19" />
           <folding>
             <element signature="e#0#99#0" expanded="true" />
           </folding>
