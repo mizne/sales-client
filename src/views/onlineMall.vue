@@ -74,7 +74,10 @@
                 if(resp.data.resCode === 0) {
                   localStorage.setItem('online-tradeNo', resp.data.result.tradeNo);
                 } else {
-                   console.log('已购买过');
+                  this.$vux.alert.show({
+                    title: '',
+                    content: '今日已购买过'
+                  })
                 }
              })
            } else {
@@ -89,6 +92,28 @@
          if(this.foodsDetail[0].todaySales <= 2) {
            this.$router.push({ name: 'queryGoodsDetail' });
            this.$store.commit('queryDetail',food)
+           const foodOrder = {
+             "tableName":"0号桌",
+             "tenantId":"22003000da501d8a976da9e3e680230e",
+             "qrcodeId":"201710111357459483951",
+             "foodNum":1,
+             "foodUnit":food.unit,
+             "foodId":food.id,
+             "foodName":food.name,
+             "foodPrice":food.price,
+             "openId":"oeGC00rSlKScZMw7g9Bz3xj5hrsc",
+             "cardId":food.cardId
+           };
+           queryOrder(foodOrder).then(resp => {
+             if(resp.data.resCode === 0) {
+               localStorage.setItem('online-tradeNo', resp.data.result.tradeNo);
+             } else {
+               this.$vux.alert.show({
+                 title: '',
+                 content: '今日已购买过'
+               })
+             }
+           })
          } else {
            this.$vux.alert.show({
              title: '',
