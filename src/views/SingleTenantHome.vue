@@ -1,6 +1,6 @@
 <template>
   <div class="home-container">
-    <div class="background">
+    <div class="background" :style="homeStyle">
       <div class="attention">
         <p class="animated  swing">关注领红包</p>
         <span @click="toAttention"><img :src="attentionPng" alt=""></span>
@@ -139,8 +139,8 @@ export default {
   .background {
     position:relative;
     height: calc(100% - 103px);
-    background:url('../assets/images/qingdoujia.jpg') no-repeat;
-    /*background-size: 100% 100% !important;*/
+    /*background:url('static/image/backgroundImag.jpg');*/
+    background-size: 100% 100% !important;
     .attention{
       position:absolute;
       bottom:0;

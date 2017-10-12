@@ -107,7 +107,7 @@ const actions = {
           'SET_NEED_CHOOSE_PEOPLE_NUMBER_PAGE',
           !!config.needChoosePeopleNumberPage
         )
-
+        alert('homeImage: ' + config.homeImage)
         if (config.longitude) {
           commit('SET_TENANT_LONGITUDE', config.longitude)
           commit('SET_TENANT_LATITUDE', config.latitude)
