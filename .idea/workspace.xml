@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ec9c169-048d-4db3-b56c-68580c3641e4" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/PaySuccess.vue" afterPath="$PROJECT_DIR$/src/views/PaySuccess.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/SingleTenantHome.vue" afterPath="$PROJECT_DIR$/src/views/SingleTenantHome.vue" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -51,11 +52,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PaySuccess.vue" pinned="false" current-in-tab="false">
+      <file leaf-file-name="PaySuccess.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/views/PaySuccess.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
-              <caret line="73" column="54" lean-forward="true" selection-start-line="73" selection-start-column="54" selection-end-line="73" selection-end-column="54" />
+            <state relative-caret-position="300">
+              <caret line="78" column="0" lean-forward="false" selection-start-line="78" selection-start-column="0" selection-end-line="79" selection-end-column="33" />
               <folding>
                 <element signature="n#style#0;n#!!top" expanded="false" />
               </folding>
@@ -63,11 +64,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SingleTenantHome.vue" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SingleTenantHome.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/views/SingleTenantHome.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="307">
-              <caret line="65" column="68" lean-forward="true" selection-start-line="65" selection-start-column="68" selection-end-line="65" selection-end-column="68" />
+            <state relative-caret-position="107">
+              <caret line="57" column="28" lean-forward="true" selection-start-line="57" selection-start-column="28" selection-end-line="57" selection-end-column="28" />
               <folding>
                 <element signature="n#group#0;n#div#0;n#template#0;n#!!top" expanded="false" />
                 <element signature="n#footer#0;n#div#0;n#template#0;n#!!top" expanded="false" />
@@ -189,8 +190,8 @@
         <option value="$PROJECT_DIR$/src/http/WechatService.js" />
         <option value="$PROJECT_DIR$/src/store/modules/pay.js" />
         <option value="$PROJECT_DIR$/src/views/onlineMall.vue" />
-        <option value="$PROJECT_DIR$/src/views/PaySuccess.vue" />
         <option value="$PROJECT_DIR$/src/views/SingleTenantHome.vue" />
+        <option value="$PROJECT_DIR$/src/views/PaySuccess.vue" />
       </list>
     </option>
   </component>
@@ -455,12 +456,12 @@
       <workItem from="1507598756732" duration="26528000" />
       <workItem from="1507637321028" duration="8833000" />
       <workItem from="1507684488688" duration="27114000" />
-      <workItem from="1507772896097" duration="34984000" />
+      <workItem from="1507772896097" duration="35567000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="321178000" />
+    <option name="totallyTimeSpent" value="321761000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-82" width="1936" height="1096" extended-state="6" />
@@ -897,16 +898,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/PaySuccess.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="73" column="54" lean-forward="true" selection-start-line="73" selection-start-column="54" selection-end-line="73" selection-end-column="54" />
-          <folding>
-            <element signature="n#style#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/views/onlineMall.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="325">
@@ -921,14 +912,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/views/SingleTenantHome.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="65" column="68" lean-forward="true" selection-start-line="65" selection-start-column="68" selection-end-line="65" selection-end-column="68" />
+        <state relative-caret-position="107">
+          <caret line="57" column="28" lean-forward="true" selection-start-line="57" selection-start-column="28" selection-end-line="57" selection-end-column="28" />
           <folding>
             <element signature="n#group#0;n#div#0;n#template#0;n#!!top" expanded="false" />
             <element signature="n#footer#0;n#div#0;n#template#0;n#!!top" expanded="false" />
             <element signature="e#880#921#0" expanded="true" />
             <element signature="n#style#0;n#!!top" expanded="false" />
             <element signature="n#style#1;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/PaySuccess.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="78" column="0" lean-forward="false" selection-start-line="78" selection-start-column="0" selection-end-line="79" selection-end-column="33" />
+          <folding>
+            <element signature="n#style#0;n#!!top" expanded="false" />
           </folding>
         </state>
       </provider>
