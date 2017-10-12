@@ -63,7 +63,7 @@ export default {
     ...mapGetters(['hasClosed', 'homeImage', 'tenantName', 'needDeliveryFee']),
     homeStyle() {
       return {
-        'background-image': `url(${this.homeImage}) no-repeat`,
+        'background': `url(${this.homeImage}) no-repeat`,
       }
     },
   },
