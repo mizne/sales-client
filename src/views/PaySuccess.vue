@@ -84,7 +84,7 @@ export default {
         amount
       })
         .then(data => {
-          this.tradeNoLastFour = data.trade_no.slice(-4)
+          this.tradeNoLastFour = data.data.result.trade_no
           this.totalAmount = amount
           // TODO 获取 totalAmount
 
