@@ -90,7 +90,7 @@
        },
 
        showDetail(food, index) {
-         if(this.foodsDetail[0].todaySales <= 2) {
+         if(this.foodsDetail[0].todaySales <= 20) {
            this.$router.push({ name: 'queryGoodsDetail' });
            this.$store.commit('queryDetail',food)
            const foodOrder = {
