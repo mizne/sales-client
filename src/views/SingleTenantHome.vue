@@ -63,7 +63,7 @@ export default {
     ...mapGetters(['hasClosed', 'homeImage', 'tenantName', 'needDeliveryFee']),
     homeStyle() {
       return {
-        'background': `url(${this.homeImage}) cover no-repeat `,
+        'background': `url(${this.homeImage})  no-repeat `,
       }
     },
   },
@@ -139,7 +139,7 @@ export default {
   .background {
     position:relative;
     height: calc(100% - 103px);
-    background-size: 100% 100% !important;
+    /*background-size: 100% 100% !important;*/
     .attention{
       position:absolute;
       bottom:0;
