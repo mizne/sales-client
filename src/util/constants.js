@@ -18,7 +18,7 @@ export const SHOPPING_CART_STATUS = 1
 export const ORDER_SUCCESS_STATUS = 2
 
 // 一键关注 小v宝公众号链接
-export const ATTENTION_HREF = 'https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzUzNTAzNjUzNg==&scene=124#wechat_redirect'
+export const ATTENTION_HREF = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx09b412b006792e2c&redirect_uri=http%3A%2F%2Fdeal.xiaovbao.cn%2Fwechatpay&response_type=code&scope=snsapi_userinfo&state=hongbaojie#wechat_redirect"
 
 // 不同订单状态
 export const UN_PAY_ORDER = 0

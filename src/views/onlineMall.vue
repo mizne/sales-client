@@ -22,6 +22,7 @@
   import { Alert } from 'vux'
   import { mapGetters } from 'vuex'
   import toOrderPrompt from '@/mixins/to-order-prompt'
+  import {queryOrder} from '@/http/onlineMall'
 
  export default{
      data() {
@@ -57,6 +58,21 @@
            if(this.foodsDetail[0].todaySales <= 20) {
              this.$router.push({ name: 'onlineMallPay' });
              this.$store.commit('buyCoupon',food);
+//             const foodOrder = {
+//               "tableName":"0号桌",
+//               "tenantId":"22003000da501d8a976da9e3e680230e",
+//               "qrcodeId":"201710111357459483951",
+//               "foodNum":1,
+//               "foodUnit":food.unit,
+//               "foodId":food.id,
+//               "foodName":food.name,
+//               "foodPrice":food.price,
+//               "openId":"oeGC00rSlKScZMw7g9Bz3xj5hrsc",
+//               "cardId":food.cardId
+//             };
+//             queryOrder(foodOrder).then(resp => {
+//
+//             })
            } else {
              this.$vux.alert.show({
                title: '',
