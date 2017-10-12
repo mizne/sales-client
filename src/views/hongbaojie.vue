@@ -14,7 +14,7 @@ export default {
         //将openid用户头像post给会展人后台,完成后跳转到红包节界面
         //return code
         queryOpenid(code).then(resp => {
-          window.location.href = `http://dm.huizhanren.com/home/actlist/0d05035c-599f-437c-820e-a6eb009b4e3d?openid=${resp.data.result.openid}`
+          window.location.href = `http://dm.huizhanren.com/home/actlist/0630046f-54e0-4724-b30a-303482024be0?openid=${resp.data.result.openid}`
      })
     }
    }

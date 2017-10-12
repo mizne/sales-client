@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ec9c169-048d-4db3-b56c-68580c3641e4" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/SingleTenantHome.vue" afterPath="$PROJECT_DIR$/src/views/SingleTenantHome.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/hongbaojie.vue" afterPath="$PROJECT_DIR$/src/views/hongbaojie.vue" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -34,8 +35,8 @@
       <file leaf-file-name="hongbaojie.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/views/hongbaojie.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="8" column="15" lean-forward="true" selection-start-line="8" selection-start-column="15" selection-end-line="8" selection-end-column="15" />
+            <state relative-caret-position="250">
+              <caret line="10" column="51" lean-forward="true" selection-start-line="10" selection-start-column="51" selection-end-line="10" selection-end-column="51" />
               <folding>
                 <element signature="e#46#84#0" expanded="true" />
               </folding>
@@ -46,14 +47,13 @@
       <file leaf-file-name="SingleTenantHome.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/views/SingleTenantHome.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="325">
-              <caret line="161" column="18" lean-forward="true" selection-start-line="161" selection-start-column="18" selection-end-line="161" selection-end-column="18" />
+            <state relative-caret-position="100">
+              <caret line="4" column="32" lean-forward="false" selection-start-line="4" selection-start-column="32" selection-end-line="4" selection-end-column="32" />
               <folding>
-                <element signature="n#template#0;n#!!top" expanded="false" />
                 <element signature="n#group#0;n#div#0;n#template#0;n#!!top" expanded="false" />
                 <element signature="n#footer#0;n#div#0;n#template#0;n#!!top" expanded="false" />
                 <element signature="n#script#0;n#!!top" expanded="false" />
-                <element signature="e#867#908#0" expanded="true" />
+                <element signature="e#881#922#0" expanded="true" />
                 <element signature="n#style#1;n#!!top" expanded="false" />
               </folding>
             </state>
@@ -177,9 +177,9 @@
         <option value="$PROJECT_DIR$/src/views/payToAlliance.vue" />
         <option value="$PROJECT_DIR$/src/http/WechatService.js" />
         <option value="$PROJECT_DIR$/src/router/index.js" />
-        <option value="$PROJECT_DIR$/src/views/SingleTenantHome.vue" />
         <option value="$PROJECT_DIR$/src/views/onlineMall.vue" />
         <option value="$PROJECT_DIR$/src/http/HongBaoJieService.js" />
+        <option value="$PROJECT_DIR$/src/views/SingleTenantHome.vue" />
         <option value="$PROJECT_DIR$/src/views/hongbaojie.vue" />
       </list>
     </option>
@@ -445,12 +445,12 @@
       <workItem from="1507598756732" duration="26528000" />
       <workItem from="1507637321028" duration="8833000" />
       <workItem from="1507684488688" duration="27114000" />
-      <workItem from="1507772896097" duration="17001000" />
+      <workItem from="1507772896097" duration="17463000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="303195000" />
+    <option name="totallyTimeSpent" value="303657000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-82" width="1936" height="1096" extended-state="6" />
@@ -892,14 +892,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/views/SingleTenantHome.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="161" column="18" lean-forward="true" selection-start-line="161" selection-start-column="18" selection-end-line="161" selection-end-column="18" />
+        <state relative-caret-position="100">
+          <caret line="4" column="32" lean-forward="false" selection-start-line="4" selection-start-column="32" selection-end-line="4" selection-end-column="32" />
           <folding>
-            <element signature="n#template#0;n#!!top" expanded="false" />
             <element signature="n#group#0;n#div#0;n#template#0;n#!!top" expanded="false" />
             <element signature="n#footer#0;n#div#0;n#template#0;n#!!top" expanded="false" />
             <element signature="n#script#0;n#!!top" expanded="false" />
-            <element signature="e#867#908#0" expanded="true" />
+            <element signature="e#881#922#0" expanded="true" />
             <element signature="n#style#1;n#!!top" expanded="false" />
           </folding>
         </state>
@@ -907,8 +906,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/views/hongbaojie.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="8" column="15" lean-forward="true" selection-start-line="8" selection-start-column="15" selection-end-line="8" selection-end-column="15" />
+        <state relative-caret-position="250">
+          <caret line="10" column="51" lean-forward="true" selection-start-line="10" selection-start-column="51" selection-end-line="10" selection-end-column="51" />
           <folding>
             <element signature="e#46#84#0" expanded="true" />
           </folding>
