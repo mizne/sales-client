@@ -2,7 +2,7 @@
   <div class="home-container">
     <div class="background" :style="homeStyle">
       <div class="attention">
-        <p class="animated swing">关注领红包</p>
+        <p class="animated  swing">关注领红包</p>
         <span @click="toAttention"><img :src="attentionPng" alt=""></span>
       </div>
     </div>
@@ -10,8 +10,6 @@
     <group class="phone" label-width="4.5em" label-margin-right="2em" label-align="right">
       <cell title="电话号码" value="025-86662644"></cell>
     </group>
-
-
 
     <footer class="footer">
       <div class="item">
@@ -148,9 +146,9 @@ export default {
       right:5%;
       z-index:1000;
     P{
+      animation-iteration-count: 3;
       color:#fff;
       font-size:14px;
-      /*border:1px solid #ccc;*/
       padding:5px;
       border-radius:5px;
       background:red;

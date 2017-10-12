@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6ec9c169-048d-4db3-b56c-68580c3641e4" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/SingleTenantHome.vue" afterPath="$PROJECT_DIR$/src/views/SingleTenantHome.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/hongbaojie.vue" afterPath="$PROJECT_DIR$/src/views/hongbaojie.vue" />
     </list>
@@ -32,11 +33,21 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="125">
+              <caret line="6" column="23" lean-forward="true" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="hongbaojie.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/views/hongbaojie.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="10" column="51" lean-forward="true" selection-start-line="10" selection-start-column="51" selection-end-line="10" selection-end-column="51" />
+            <state relative-caret-position="400">
+              <caret line="16" column="10" lean-forward="false" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
               <folding>
                 <element signature="e#46#84#0" expanded="true" />
               </folding>
@@ -44,37 +55,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SingleTenantHome.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/views/SingleTenantHome.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="100">
-              <caret line="4" column="32" lean-forward="false" selection-start-line="4" selection-start-column="32" selection-end-line="4" selection-end-column="32" />
-              <folding>
-                <element signature="n#group#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-                <element signature="n#footer#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-                <element signature="n#script#0;n#!!top" expanded="false" />
-                <element signature="e#881#922#0" expanded="true" />
-                <element signature="n#style#1;n#!!top" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="100">
-              <caret line="5" column="15" lean-forward="false" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="15" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="HongBaoJieService.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/http/HongBaoJieService.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="8" column="60" lean-forward="true" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="60" />
+            <state relative-caret-position="150">
+              <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -94,7 +79,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>getBizTypeHttp</find>
       <find>redirectForEPay</find>
       <find>FETCH_WECHATPAY_URL_EPAY</find>
       <find>payForWechat</find>
@@ -124,6 +108,7 @@
       <find>swiper</find>
       <find>home-container</find>
       <find>attention</find>
+      <find>animate.css</find>
     </findStrings>
     <dirStrings>
       <dir>E:\projects\sales-client\test</dir>
@@ -445,12 +430,12 @@
       <workItem from="1507598756732" duration="26528000" />
       <workItem from="1507637321028" duration="8833000" />
       <workItem from="1507684488688" duration="27114000" />
-      <workItem from="1507772896097" duration="17463000" />
+      <workItem from="1507772896097" duration="21067000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="303657000" />
+    <option name="totallyTimeSpent" value="307261000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-82" width="1936" height="1096" extended-state="6" />
@@ -864,9 +849,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/http/HongBaoJieService.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="8" column="60" lean-forward="true" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="60" />
+        <state relative-caret-position="150">
+          <caret line="6" column="0" lean-forward="true" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/SingleTenantHome.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="50">
+          <caret line="129" column="25" lean-forward="false" selection-start-line="129" selection-start-column="25" selection-end-line="129" selection-end-column="25" />
+          <folding>
+            <element signature="n#template#0;n#!!top" expanded="false" />
+            <element signature="n#group#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="n#footer#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="n#script#0;n#!!top" expanded="false" />
+            <element signature="e#880#921#0" expanded="true" />
+            <element signature="n#style#0;n#!!top" expanded="false" />
+            <element signature="n#style#1;n#!!top" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -884,30 +885,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="5" column="15" lean-forward="false" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="15" />
+        <state relative-caret-position="125">
+          <caret line="6" column="23" lean-forward="true" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/SingleTenantHome.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="4" column="32" lean-forward="false" selection-start-line="4" selection-start-column="32" selection-end-line="4" selection-end-column="32" />
-          <folding>
-            <element signature="n#group#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#footer#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-            <element signature="n#script#0;n#!!top" expanded="false" />
-            <element signature="e#881#922#0" expanded="true" />
-            <element signature="n#style#1;n#!!top" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/views/hongbaojie.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="10" column="51" lean-forward="true" selection-start-line="10" selection-start-column="51" selection-end-line="10" selection-end-column="51" />
+        <state relative-caret-position="400">
+          <caret line="16" column="10" lean-forward="false" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
           <folding>
             <element signature="e#46#84#0" expanded="true" />
           </folding>
