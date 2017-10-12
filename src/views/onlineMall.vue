@@ -56,7 +56,7 @@
      methods: {
        toBuyNow(food,index) {
            if(this.foodsDetail[0].todaySales <= 20) {
-             this.$router.push({ name: 'onlineMallPay' });
+
              this.$store.commit('buyCoupon',food);
              const foodOrder = {
                "tableName":"0号桌",
@@ -73,6 +73,7 @@
              queryOrder(foodOrder).then(resp => {
                 if(resp.data.resCode === 0) {
                   localStorage.setItem('online-tradeNo', resp.data.result.tradeNo);
+                  this.$router.push({ name: 'onlineMallPay' });
                 } else {
                   this.$vux.alert.show({
                     title: '',
