@@ -46,7 +46,6 @@ const actions = {
 
   Online_WECHATPAY_URL_EPAY: ({ commit }) => {
     return WechatService.OnlineRedirectForEPay().then(url => {
-      console.log(url);
       window.location.href = url
     })
   },
@@ -61,8 +60,8 @@ const actions = {
     return WechatService.getWechatPayParams(code)
   },
 
-  FETCH_WECHATPAY_PARAMS_EPAY: ({ commit }, {code, amount}) => {
-    return WechatService.getWechatPayParamsForEPay(code, amount)
+  FETCH_WECHATPAY_PARAMS_EPAY: ({ commit }, {code, amount, onlineTradeNo}) => {
+    return WechatService.getWechatPayParamsForEPay(code, amount, onlineTradeNo)
   },
 
   Online_WECHATPAY_PARAMS_EPAY: ({ commit }, {code, amount}) => {

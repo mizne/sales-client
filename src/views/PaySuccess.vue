@@ -75,12 +75,14 @@ export default {
     },
     payForWechat(obj) {
       const amount = localStorage.getItem('XIAO_V_BAO_AMOUNT_EPAY')
+      const onlineTradeNo = localStorage.getItem('online-tradeNo')
       this.$store.dispatch('FETCH_WECHATPAY_PARAMS_EPAY', {
         code: obj.code,
+        onlineTradeNo,
         amount
       })
         .then(data => {
-          this.tradeNoLastFour = data.trade_no.slice(-4)
+          this.tradeNoLastFour = data.data.result.trade_no
           this.totalAmount = amount
           // TODO 获取 totalAmount
 
