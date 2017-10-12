@@ -21,7 +21,7 @@ export default {
           //我的充值：http://dm.huizhanren.com/My/Pay/0630046f-54e0-4724-b30a-303482024be0
           //红包去哪了：http://dm.huizhanren.com/Home/TotalMoney/0630046f-54e0-4724-b30a-303482024be0
         queryOpenid(code).then(resp => {
-          window.location.href = `http://dm.huizhanren.com/Sponsor/Index/c909ea15-bedc-4b4c-ac79-db9cd6c10862?openid=${resp.data.result.openid}`
+          window.location.href = `http://dm.huizhanren.com/home/actlist/0630046f-54e0-4724-b30a-303482024be0?openid=${resp.data.result.openid}`
      })
     }
    }
