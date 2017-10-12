@@ -1,10 +1,19 @@
 <template>
   <div class="home-container">
-    <div class="background" :style="homeStyle"></div>
+    <div class="background" :style="homeStyle">
+      <div class="attention">
+        <p>关注领红包
+        </p>
+        <span @click="toAttention"><img :src="attentionPng" alt=""></span>
+      </div>
+    </div>
 
     <group class="phone" label-width="4.5em" label-margin-right="2em" label-align="right">
       <cell title="电话号码" value="025-86662644"></cell>
     </group>
+
+
+
     <footer class="footer">
       <div class="item">
         <router-link to="/menu">
@@ -23,9 +32,10 @@
   </div>
 </template>
 <script>
-import { Group, Cell } from 'vux'
+import { Group, Cell, Popover} from 'vux'
 import { mapGetters } from 'vuex'
 
+import { ATTENTION_HREF } from '@/util/constants'
 import { objFrom } from '@/util/index'
 import { vAlert, vToast } from '@/util/vux-wrapper'
 import QRCodeInfo from '@/models/QRCodeInfo'
@@ -35,10 +45,22 @@ export default {
   name: 'Home',
   components: {
     Group,
-    Cell
+    Cell,
+    Popover
   },
   data() {
-    return { bizTypeText: '' }
+    return {
+        bizTypeText: '' ,
+        attentionPng: 'static/image/icon-attention.png'
+    }
+
+
+  },
+  methods: {
+    toAttention() {
+        console.log('dianji ')
+      window.location.href = ATTENTION_HREF
+    }
   },
   computed: {
     ...mapGetters(['hasClosed', 'homeImage', 'tenantName', 'needDeliveryFee']),
@@ -118,8 +140,36 @@ export default {
   right: 0;
 
   .background {
+    position:relative;
     height: calc(100% - 103px);
     background-size: 100% 100% !important;
+    .attention{
+      position:absolute;
+      bottom:0;
+      right:5%;
+      z-index:1000;
+    P{
+      color:#fff;
+      font-size:14px;
+      /*border:1px solid #ccc;*/
+      padding:5px;
+      border-radius:5px;
+      background:red;
+      margin-left:5px;
+    }
+    span{
+        position:relative;
+        left:30px;
+      img{
+        width:45px;
+        height:45px;
+        color:#fff;
+        background-color:#FFBC03;
+        border-radius:50%;
+      }
+    }
+    }
+
   }
 
   .phone {
@@ -128,6 +178,8 @@ export default {
     right: 0;
     bottom: 63px;
   }
+
+
 
   /*background: url(../assets/images/lashangyin-home1.png) no-repeat;
   background-size: 100% 93%;*/

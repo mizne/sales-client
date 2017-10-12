@@ -34,6 +34,7 @@ import queryGoodsDetail from '@/views/queryGoodsDetail'
 import PayToMerchant from '@/views/PayToMerchant'
 import PayToAlliance from '@/views/PayToAlliance'
 import PaySuccess from '@/views/PaySuccess'
+import HongBaoJie from '@/views/hongbaojie'
 
 
 Vue.use(Router)
@@ -207,6 +208,11 @@ const routes = [
     path: '/queryGoodsDetail',
     name: 'queryGoodsDetail',
     component: queryGoodsDetail
+  },
+  {
+    path: '/hongbaojie',
+    name: 'hongbaojie',
+    component: HongBaoJie
   }
 ]
 

@@ -19,6 +19,7 @@
 </template>
 <script>
   import axios from 'axios'
+  import { Alert } from 'vux'
   import { mapGetters } from 'vuex'
   import toOrderPrompt from '@/mixins/to-order-prompt'
 
@@ -53,13 +54,27 @@
      },
      methods: {
        toBuyNow(food,index) {
-           this.$router.push({ name: 'onlineMallPay' });
-           this.$store.commit('buyCoupon',food);
+           if(this.foodsDetail[0].todaySales <= 20) {
+             this.$router.push({ name: 'onlineMallPay' });
+             this.$store.commit('buyCoupon',food);
+           } else {
+             this.$vux.alert.show({
+               title: '',
+               content: '今日已售完,敬请期待下一次'
+             })
+           }
        },
 
        showDetail(food, index) {
-         this.$router.push({ name: 'queryGoodsDetail' });
-         this.$store.commit('queryDetail',food)
+         if(this.foodsDetail[0].todaySales <= 2) {
+           this.$router.push({ name: 'queryGoodsDetail' });
+           this.$store.commit('queryDetail',food)
+         } else {
+           this.$vux.alert.show({
+             title: '',
+             content: '今日已售完,敬请期待下一次'
+           })
+         }
        }
      }
  }
