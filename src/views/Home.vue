@@ -60,7 +60,7 @@ export default {
       })
       .catch(err => {
         vAlert({
-          content: '抱歉, 二维码已失效'
+          content: '系统繁忙，请稍后再试'
         })
       })
   }

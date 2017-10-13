@@ -57,7 +57,7 @@ export default class Coupon {
       case Coupon.DISCOUNT: return `${this.value * 10} 折`
       case Coupon.REDUCE: 
         const [, free] = this.value.split('-')
-        return `${free} 元`
+        return `送${free} 元`
       default: 
         console.error(`Unknown coupon type: ${this.type}`)
     }
