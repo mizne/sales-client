@@ -2,7 +2,7 @@
   <div class="home-container">
     <div class="background" :style="homeStyle">
       <div class="attention">
-        <p class="animated  swing">关注领红包</p>
+        <p class="animated swing">关注领红包</p>
         <span @click="toAttention"><img :src="attentionPng" alt=""></span>
       </div>
     </div>
