@@ -3,7 +3,7 @@
     <div class="background" :style="homeStyle">
       <div class="attention">
         <p class="animated swing">关注领红包</p>
-        <span @click="toAttention"><img :src="attentionPng" alt=""></span>
+        <a :href="ATTENTION_HREF"><img :src="attentionPng" alt=""></a>
       </div>
     </div>
 
@@ -48,7 +48,8 @@ export default {
   data() {
     return {
         bizTypeText: '' ,
-        attentionPng: 'static/image/icon-attention.png'
+        attentionPng: 'static/image/icon-attention.png',
+        ATTENTION_HREF
     }
 
 
@@ -155,7 +156,7 @@ export default {
       background:red;
       margin-left:5px;
     }
-    span{
+    a{
         position:relative;
         left:30px;
       img{
