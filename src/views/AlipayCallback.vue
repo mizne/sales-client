@@ -5,12 +5,13 @@
         <i class="icon-back" @click="$router.push({ name: 'Home' })"></i>
       </span>
     </deal-header>
-  
+
     <deal-content>
+
       <bill-detail v-if="orderDetail" :order-detail="orderDetail" :tenant-name="tenantName"
        :pay-time="payTime" pay-mode="支付宝"></bill-detail>
     </deal-content>
-  
+
     <deal-footer v-if="orderDetail">
       <bill-bar @to-shopcomment="toShopComment"></bill-bar>
     </deal-footer>
@@ -55,7 +56,7 @@ export default {
   created() {
     const tenantId = QRCodeInfo.getTenantId()
     this.$store.commit('SET_TENANT_ID', tenantId)
-    
+
     // 由于 Alipay 回调重新拉起应用, 故需 重新初始化状态
     const obj = objFrom(decodeURIComponent(location.search))
     this.payTime = obj.timestamp
@@ -64,7 +65,6 @@ export default {
       .then(_ => {
         document.title = this.tenantName
       })
-
     this.$store.dispatch('FETCH_ORDER', obj.out_trade_no)
       .catch(err => {
         vAlert({

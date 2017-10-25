@@ -13,7 +13,7 @@
         <div class="abstract-top">
           <div class="check-in">
             <span class="day">0天</span>
-            <div class="18 calendar" style="display:inline-block">
+            <div class="calendar" style="display:inline-block">
               <i style="color:#08BDD8" class="icon-18calendar"></i>
             </div>
             <span class="text">签到</span>
@@ -227,7 +227,7 @@ export default {
             display:block;
             text-align:center;
           }
-          .18 calendar{
+          .calendar {
             i {
               color: $calendar;
             }

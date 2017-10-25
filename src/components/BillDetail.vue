@@ -8,6 +8,9 @@
 
     <div class="bill-detail">
       <div class="tenant-name">{{tenantName}}</div>
+
+      <div class="prompt-text" v-if="orderDetail.promptText">{{orderDetail.promptText}}</div>
+
       <div class="bill-abstract">
         <div class="table-info" v-if="isDealBizType">
           <div class="table-number">
@@ -160,6 +163,10 @@ export default {
       @include flexboxCenter;
       height: 60px;
       font-size: 1.3rem;
+    }
+
+    .prompt-text {
+      padding: 0 10px;
     }
 
     .bill-abstract {
