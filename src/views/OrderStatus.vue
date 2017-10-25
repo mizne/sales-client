@@ -1,11 +1,11 @@
 <template>
   <div class="order-status-container">
     <deal-header title="订单状态">
-      <a class="header-right" slot="right" style="width: 40px;" href="tel:18761342997">
+      <a class="header-right" slot="right" style="width: 40px;" :href="'tel:' + orderDetail.merchantPhone">
         <i class="icon-phone" style="color: black;"></i>
       </a>
     </deal-header>
-  
+
     <deal-content>
       <div class="tabs">
         <tab>
@@ -13,7 +13,7 @@
           <tab-item @on-item-click="onItemClick('detail')">订单详情</tab-item>
         </tab>
       </div>
-  
+
       <template v-if="view === 'status'">
         <timeline :current="current">
           <timeline-item>
@@ -41,16 +41,16 @@
             </div>
           </timeline-item>
         </timeline>
-  
+
         <wait-order v-if="current === 1" :order-time="orderTime" :duration="duration" @timeout="orderTimeout()"></wait-order>
       </template>
-  
+
       <template v-if="view === 'detail'">
-        <p style="text-align: center;">订单详情</p>
-        <!-- <bill-detail :order-detail="orderDetail"></bill-detail> -->
+        <!-- <p style="text-align: center;">订单详情</p> -->
+        <bill-detail :order-detail="orderDetail"></bill-detail>
       </template>
     </deal-content>
-  
+
     <deal-footer>
       <x-button style="height: 100%">取消订单</x-button>
     </deal-footer>
