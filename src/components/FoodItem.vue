@@ -17,7 +17,7 @@
             <!-- <i class="icon-like"></i> -->
             <span class="title-text">已售</span>
             <span class="text">{{food.sellCount}}</span>
-            <!-- <span class="rest" v-if="food.rest > 0">还剩 {{food.rest + food.unit}}</span>   -->
+            <span class="rest" v-if="food.rest > 0">还剩 {{food.rest + food.unit}}</span>
             <span class="empty" v-if="food.rest === 0">已售完</span>
             <i class="icon-Zambia" v-if="food.Ratings.length > 0"></i>
             <span class="zambia-count" v-if="food.Ratings.length > 0">{{food.Ratings.length}}</span>
