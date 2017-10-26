@@ -85,11 +85,11 @@ const mutations = {
         || food.unit === '束'
         || food.unit === '篮'
         || food.unit === '根'
-        || item.unit === '套'
-        || item.unit === '罐'
-        || item.unit === '件'
-        || item.unit === '对'
-        || item.unit === '袋'
+        || food.unit === '套'
+        || food.unit === '罐'
+        || food.unit === '件'
+        || food.unit === '对'
+        || food.unit === '袋'
       ) {
         state.tempShoppingCart[tenantId][food.id].num += 1
         state.tempShoppingCart[tenantId][food.id].remark = remark
