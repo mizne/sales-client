@@ -10,13 +10,13 @@
         <span class="text">无图模式</span>
       </li>
     </deal-dialog>
-  
+
     <deal-header :title="tenantName">
       <!-- <span class="menu" slot="left">
         <i class="icon-menu" @click="show"></i>
       </span> -->
     </deal-header>
-  
+
     <deal-content>
       <scroll-notification :texts="officialNews"></scroll-notification>
       <div class="left-tab">
@@ -27,7 +27,7 @@
           </li>
         </ul>
       </div>
-  
+
       <div class="right-content" ref="foodsWrapper">
         <li class="food-type-container" v-for="(subFoods, index) in allFoods" :key="subFoods.id">
           <div class="food-type-title" :class="{selected: index === menuCurrentIndex}">{{subFoods.name}}</div>
@@ -36,11 +36,11 @@
         </li>
       </div>
     </deal-content>
-  
+
     <deal-footer>
       <deal-cart-bar :add-more="isAddMoreFood" :shop-cart="shoppingCart" :food-cost="tempShoppingCartFoodCost" :food-count="tempShoppingCartFoodCount" @go-shopcart="toShopCart"></deal-cart-bar>
     </deal-footer>
-  
+
     <back-top></back-top>
   </div>
 </template>
@@ -75,15 +75,15 @@ export default {
     BackTop,
     FoodItem,
     'deal-cart-bar': DealShopCartBar,
-    ScrollNotification,
+    ScrollNotification
   },
   mixins: [vipToast, toShoppingCartPrompt],
   data() {
     return {
-      showMenu: false,// 是否显示左上角的menu
-      listHeight: [],// 菜单右边菜品子列表的高度
-      foodsScrollY: 0,// 菜单右边滚动区的 滚动y轴偏差
-      menuCurrentIndex: 0,// 菜单左边 当前选中索引,
+      showMenu: false, // 是否显示左上角的menu
+      listHeight: [], // 菜单右边菜品子列表的高度
+      foodsScrollY: 0, // 菜单右边滚动区的 滚动y轴偏差
+      menuCurrentIndex: 0 // 菜单左边 当前选中索引,
     }
   },
   computed: {
@@ -102,13 +102,16 @@ export default {
       for (let i = 0, l = this.listHeight.length; i < l; i++) {
         let topHeight = this.listHeight[i]
         let bottomHeight = this.listHeight[i + 1]
-        if (!bottomHeight || (this.foodsScrollY >= topHeight && this.foodsScrollY < bottomHeight)) {
+        if (
+          !bottomHeight ||
+          (this.foodsScrollY >= topHeight && this.foodsScrollY < bottomHeight)
+        ) {
           this.menuCurrentIndex = i
           return
         }
       }
       this.menuCurrentIndex = 0
-    },
+    }
   },
   methods: {
     addFood(food, typeIndex) {
@@ -131,7 +134,7 @@ export default {
       this.$router.push({ name: 'FoodDetail' })
       this.$store.commit('SET_FOOD_DETAIL', {
         food,
-        typeIndex,
+        typeIndex
       })
     },
     choose(mode) {
@@ -160,17 +163,18 @@ export default {
       window.scrollTo(0, this.listHeight[index])
     },
     _initAllFoods() {
-      return this.$store.dispatch('FETCH_ALL_FOODS')
-        .then(_ => {
-          Vue.nextTick(() => {
-            this._initScroll()// 初始化scrollListener
-            this._calcHeight()// 初始化不同品种菜列表 的高度
-            this._initRectTop()// 初始化 菜品滚动区的视口top
-          })
-        })
+      return this.$store
+        .dispatch('FETCH_ALL_FOODS')
         .catch(err => {
           vToast({
-            content: '啊哦, 网络似乎出问题了, 稍后请重试下 ^_^',
+            content: '啊哦, 网络似乎出问题了, 稍后请重试下 ^_^'
+          })
+        })
+        .then(_ => {
+          Vue.nextTick(() => {
+            this._initScroll() // 初始化scrollListener
+            this._calcHeight() // 初始化不同品种菜列表 的高度
+            this._initRectTop() // 初始化 菜品滚动区的视口top
           })
         })
     },
@@ -186,11 +190,12 @@ export default {
         const scrollY = -(rect.top - this._rectTop)
         this.foodsScrollY = scrollY
       }
-
     },
     _calcHeight() {
       if (this.$refs.foodsWrapper) {
-        const foodsList = this.$refs.foodsWrapper.querySelectorAll('.food-type-container')
+        const foodsList = this.$refs.foodsWrapper.querySelectorAll(
+          '.food-type-container'
+        )
         let height = 0
         this.listHeight.push(height)
         for (let list of foodsList) {
@@ -198,7 +203,6 @@ export default {
           this.listHeight.push(height)
         }
       }
-
     },
     _initRectTop() {
       if (this.$refs.foodsWrapper) {
@@ -211,7 +215,7 @@ export default {
   },
   beforeDestroy() {
     this._destroyScroll()
-  },
+  }
 }
 </script>
 <style lang="scss">
@@ -220,7 +224,6 @@ export default {
 
 .menu-container {
   .deal-dialog-container.menu-dialog {
-
     .deal-dialog {
       position: fixed;
       top: 40px;
@@ -229,7 +232,7 @@ export default {
       transform: none;
       color: $primaryTextColor;
       background-color: $whiteBackground;
-      transition: all .3s ease;
+      transition: all 0.3s ease;
       z-index: 5000;
 
       .menu-item {
@@ -271,7 +274,7 @@ export default {
         .dish-type {
           @include flexboxCenter;
           height: 40px;
-          font-size: .9rem;
+          font-size: 0.9rem;
           position: relative;
           overflow: hidden;
           border-bottom: 1px solid $greyBorder;
