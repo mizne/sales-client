@@ -51,6 +51,7 @@
         || item.unit === '罐'
         || item.unit === '件'
         || item.unit === '对'
+        || item.unit === '袋'
         ) && food.rest > 0">
           <span class="sub" v-if="foodCount > 0" @click="removeFood">
             <i class="icon-sub"></i>

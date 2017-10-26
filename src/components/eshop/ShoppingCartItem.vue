@@ -19,6 +19,7 @@
         || item.unit === '罐'
         || item.unit === '件'
         || item.unit === '对'
+        || item.unit === '袋'
         ">
           <i v-if="isEditable" class="icon-sub" @click="editFood(item, -1)"></i>
           <div class="food-count">{{item.num}}</div>
