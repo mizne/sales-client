@@ -19,7 +19,7 @@ export default {
       }
 
       if (QRCodeInfo.needPromptFillOrderRemark() && (this.remark === '')) {
-         return vAlert({ content: '请填写您的备注信息' })
+         return vAlert({ content: '请填写您的房间号' })
       }
 
       if (QRCodeInfo.isDealBizType()) {
