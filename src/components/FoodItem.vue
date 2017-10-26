@@ -1,7 +1,7 @@
 <template>
   <li class="food-item" @click="showDetails">
     <div v-if="mode === 'picMode'" class="food-img">
-      <img class="img" style="width: 100%; height: 100%;" :src="food.image[0]" alt="">
+      <img class="img" style="width: 100%; height: 100%;" v-lazy="food.image[0]" alt="">
     </div>
 
     <div class="food-detail">

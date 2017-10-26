@@ -22,6 +22,7 @@
     "store": "^2.0.12",
     "vue": "^2.2.2",
     "vue-analytics": "^4.2.2",
+    "vue-lazyload": "^1.1.4",
     "vue-numkeyboard": "^1.1.1",
     "vue-router": "^2.2.0",
     "vue-visitor": "0.0.4",

@@ -17,8 +17,16 @@ import LogRocket from 'logrocket'
 import VueAnalytics from 'vue-analytics'
 import numkeyboard from 'vue-numkeyboard'
 import 'vue-numkeyboard/style.css'
+import VueLazyload from 'vue-lazyload'
 
-Vue.use(numkeyboard)
+Vue.use(VueLazyload)
+
+Vue.use(numkeyboard, {
+  preLoad: 1.3,
+  error: 'assets/error.png',
+  loading: 'assets/loading.gif',
+  attempt: 1
+})
 
 
 LogRocket.init('49bwep/sales-zm4qk')
