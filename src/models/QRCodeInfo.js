@@ -72,7 +72,7 @@ QRCodeInfo.prototype.needPromptFillOrderRemark = function () {
 
 QRCodeInfo.prototype.getBizTypeText = function() {
   const map = {
-    [DEAL]: '点餐',
+    [DEAL]: '选购',
     [ESHOP]: '选购',
     [GROUP_SHOPPING]: '群购'
   }
