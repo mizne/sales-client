@@ -165,11 +165,11 @@ export default {
     _initAllFoods() {
       return this.$store
         .dispatch('FETCH_ALL_FOODS')
-        .catch(err => {
-          vToast({
-            content: '啊哦, 网络似乎出问题了, 稍后请重试下 ^_^'
-          })
-        })
+        // .catch(err => {
+        //   vToast({
+        //     content: '啊哦, 网络似乎出问题了, 稍后请重试下 ^_^'
+        //   })
+        // })
         .then(_ => {
           Vue.nextTick(() => {
             this._initScroll() // 初始化scrollListener

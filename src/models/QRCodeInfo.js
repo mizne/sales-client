@@ -52,7 +52,7 @@ QRCodeInfo.prototype.getShoppingCartRemarkPlaceholder = function() {
   }
 
   if (this.isEShopBizType()) {
-    return '该订单为代售商品, 如收货地址变更, 请填写具体地址, 默认为本二维码所在地址'
+    return '特别提醒: 此处填写房号, 以便前台及时送达'
   }
 
   if (this.isMultiEShopBizType()) {
@@ -67,7 +67,7 @@ QRCodeInfo.prototype.getShoppingCartRemarkPlaceholder = function() {
 }
 
 QRCodeInfo.prototype.needPromptFillOrderRemark = function () {
-  return this.isMultiEShopBizType()
+  return this.isMultiEShopBizType() || this.isEShopBizType()
 }
 
 QRCodeInfo.prototype.getBizTypeText = function() {
