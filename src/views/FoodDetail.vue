@@ -131,7 +131,7 @@ export default {
     DealFooter,
     CommentItem,
     Swiper,
-    'deal-cart-bar': DealShopCartBar,
+    'deal-cart-bar': DealShopCartBar
   },
   mixins: [vipToast, toShoppingCartPrompt],
   data() {
@@ -145,72 +145,87 @@ export default {
         remark: ''
       },
       tastes: [
-        [{
-          text: '麻辣',
-          selected: false
-        }, {
-          text: '香辣',
-          selected: false
-        }],
-        [{
-          text: '剁椒',
-          selected: false
-        }, {
-          text: '葱香',
-          selected: false
-        }],
-        [{
-          text: '双椒',
-          selected: false
-        }, {
-          text: '蒜香',
-          selected: false
-        }],
-        [{
-          text: '酸菜',
-          selected: false
-        }, {
-          text: '香辣豆豉',
-          selected: false
-        }],
-        [{
-          text: '五香豆豉',
-          selected: false
-        }, {
-          text: '鱼香',
-          selected: false
-        }],
-        [{
-          text: '怪味',
-          selected: false
-        }, {
-          text: '毛血旺',
-          selected: false
-        }]
+        [
+          {
+            text: '麻辣',
+            selected: false
+          },
+          {
+            text: '香辣',
+            selected: false
+          }
+        ],
+        [
+          {
+            text: '剁椒',
+            selected: false
+          },
+          {
+            text: '葱香',
+            selected: false
+          }
+        ],
+        [
+          {
+            text: '双椒',
+            selected: false
+          },
+          {
+            text: '蒜香',
+            selected: false
+          }
+        ],
+        [
+          {
+            text: '酸菜',
+            selected: false
+          },
+          {
+            text: '香辣豆豉',
+            selected: false
+          }
+        ],
+        [
+          {
+            text: '五香豆豉',
+            selected: false
+          },
+          {
+            text: '鱼香',
+            selected: false
+          }
+        ],
+        [
+          {
+            text: '怪味',
+            selected: false
+          },
+          {
+            text: '毛血旺',
+            selected: false
+          }
+        ]
       ]
     }
   },
   computed: {
-    ...mapGetters([
-      'foodDetail',
-      'tempShoppingCart',
-      'isAddMoreFood',
-    ]),
+    ...mapGetters(['foodDetail', 'tempShoppingCart', 'isAddMoreFood']),
     images() {
-      if (this.foodDetail.food.image.length === 1) {
+      if (this.foodDetail.food.minuteImage.length === 1) {
         return Array(3).fill({
           url: 'javascript:',
-          img: this.foodDetail.food.image[0] || require('../assets/images/default.jpg')
+          img:
+            this.foodDetail.food.minuteImage[0] ||
+            require('../assets/images/default.jpg')
         })
       }
 
-      if (this.foodDetail.food.image.length === 3) {
-        return this.foodDetail.food.image.map(e => ({
+      if (this.foodDetail.food.minuteImage.length === 3) {
+        return this.foodDetail.food.minuteImage.map(e => ({
           url: 'javascript:',
           img: e
         }))
-      }
-      else{
+      } else {
         return Array(3).fill({
           url: 'javascript:',
           img: this.foodDetail.food.image
@@ -264,13 +279,14 @@ export default {
       if (this.food.quantity <= 0) {
         return this.$vux.toast.show({
           text: '必须为正数呢 ^_^',
-          type: 'text',
+          type: 'text'
         })
       }
 
-      const tasteText = this.tastes.reduce((accu, curr) => {
-        return accu.concat(curr)
-      }, [])
+      const tasteText = this.tastes
+        .reduce((accu, curr) => {
+          return accu.concat(curr)
+        }, [])
         .filter(e => e.selected)
         .map(e => e.text)
         .join(', ')
@@ -284,7 +300,7 @@ export default {
       })
 
       vToast({
-        content: '已添加购物车 ^_^',
+        content: '已添加购物车 ^_^'
       })
 
       this.showSelection = false
@@ -299,24 +315,24 @@ export default {
       const params = {
         phoneNumber: QRCodeInfo.getPhoneNumber(),
         comment: this.commentText,
-        foodId: this.foodDetail.food.id,
+        foodId: this.foodDetail.food.id
       }
-      this.$store.dispatch('ADD_FOOD_COMMENT', params)
-        .then(_ => {
-          this.commentText = ''
-          vToast({
-            content: '感谢评论 ^_^',
-          })
+      this.$store.dispatch('ADD_FOOD_COMMENT', params).then(_ => {
+        this.commentText = ''
+        vToast({
+          content: '感谢评论 ^_^'
         })
+      })
     }
-  },
+  }
 }
 </script>
 <style lang="scss" scoped>
 @import '../assets/css/main.scss';
 
 .food-detail-container {
-  .deal-header-container {}
+  .deal-header-container {
+  }
 
   .deal-content-container {
     overflow: auto;
@@ -362,7 +378,6 @@ export default {
         bottom: -5px;
       }
     }
-
 
     .separate-lines {
       margin-top: 15px;
@@ -504,7 +519,7 @@ export default {
             }
             .remark {
               color: $greyBorder;
-              font-size: .9rem;
+              font-size: 0.9rem;
             }
           }
 
