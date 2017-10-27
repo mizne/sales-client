@@ -211,20 +211,22 @@ export default {
   computed: {
     ...mapGetters(['foodDetail', 'tempShoppingCart', 'isAddMoreFood']),
     images() {
-      if (this.foodDetail.food.minuteImage.length === 1) {
-        return Array(3).fill({
-          url: 'javascript:',
-          img:
-            this.foodDetail.food.minuteImage[0] ||
-            require('../assets/images/default.jpg')
-        })
-      }
+      if (Array.isArray(this.foodDetail.food.minuteImage)) {
+        if (this.foodDetail.food.minuteImage.length === 1) {
+          return Array(3).fill({
+            url: 'javascript:',
+            img:
+              this.foodDetail.food.minuteImage[0] ||
+              require('../assets/images/default.jpg')
+          })
+        }
 
-      if (this.foodDetail.food.minuteImage.length === 3) {
-        return this.foodDetail.food.minuteImage.map(e => ({
-          url: 'javascript:',
-          img: e
-        }))
+        if (this.foodDetail.food.minuteImage.length === 3) {
+          return this.foodDetail.food.minuteImage.map(e => ({
+            url: 'javascript:',
+            img: e
+          }))
+        }
       } else {
         return Array(3).fill({
           url: 'javascript:',
