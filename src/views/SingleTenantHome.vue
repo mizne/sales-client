@@ -1,10 +1,10 @@
 <template>
   <div class="home-container">
-    <div class="background" :style="homeStyle">
-      <div class="attention">
+    <div class="background" @click="toMenu()" :style="homeStyle">
+      <!-- <div class="attention">
         <p class="animated swing">关注领红包</p>
         <a :href="ATTENTION_HREF"><img :src="attentionPng" alt=""></a>
-      </div>
+      </div> -->
     </div>
 
     <group class="phone" label-width="4.5em" label-margin-right="2em" label-align="right">
@@ -51,13 +51,14 @@ export default {
         attentionPng: 'static/image/icon-attention.png',
         ATTENTION_HREF
     }
-
-
   },
   methods: {
     toAttention() {
       console.log('dianji ')
       window.location.href = ATTENTION_HREF
+    },
+    toMenu() {
+      this.$router.push({ name: 'Menu' })
     }
   },
   computed: {
