@@ -63,7 +63,7 @@
         <delivery v-if="needDeliveryFee" :delivery-distance="deliveryDistance" :delivery-fee-value="deliveryFeeValue" :delivery-time="deliveryTime"></delivery>
 
         <div class="remark-label">
-          <span>收货地址: </span>
+          <span>房间号: </span>
         </div>
         <div class="remark">
           <x-textarea :max="50" :rows="2" v-model="remark" :placeholder="remarkPlaceholder"></x-textarea>
