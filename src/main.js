@@ -34,7 +34,7 @@ FastClick.attach(document.body)
 
 Vue.use(VueVisitor)
 Vue.use(VueAnalytics, {
-  id: 'UA-104521154-1',
+  id: 'UA-109362282-1',
   router
 })
 Vue.config.productionTip = false;
