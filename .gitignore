@@ -6,8 +6,7 @@ yarn-debug.log*
 yarn-error.log*
 
 dist/
-
-src/http/host.js
+config/
 
 .vscode
 

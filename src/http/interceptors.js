@@ -1,5 +1,5 @@
 import axios from 'axios'
-import host from './host.js'
+import host from '../../config/host.js'
 import Logger from './Logger'
 import QRCodeInfo from '@/models/QRCodeInfo'
 
