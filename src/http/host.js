@@ -1,5 +1,5 @@
 export default {
-  qrcode: 'https://deal.xiaovbao.cn/api/test/customer',
+  qrcode: 'https://deal.xiaovbao.cn/api/test/customer', 
   deal: 'https://deal.xiaovbao.cn/api/test/customer/deal',
   eshop: 'https://deal.xiaovbao.cn/api/test/customer/eshop',
   epay: 'https://deal.xiaovbao.cn/api/test/customer/epay',
