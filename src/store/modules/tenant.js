@@ -10,6 +10,11 @@ const mutationMaps = [
     initValue: ''
   },
   {
+    mutationKey: 'SET_TENANT_PHONE',
+    stateKey: 'tenantPhone', // 租户名称
+    initValue: ''
+  },
+  {
     mutationKey: 'SET_VIP_AMOUNT',
     stateKey: 'vipAmount', // 消费满多少成会员 额度
     initValue: 0
@@ -97,6 +102,7 @@ const actions = {
       .then(config => {
         commit('SHOW_LOADING', false)
         commit('SET_TENANT_NAME', config.name)
+        commit('SET_TENANT_PHONE', config.phone)
         commit('SET_VIP_AMOUNT', config.vipFee)
         commit('SET_ALMOST_VIP_AMOUNT', config.vipRemindFee)
         commit('SET_HOME_IMAGE', config.homeImage)

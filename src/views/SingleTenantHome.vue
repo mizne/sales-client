@@ -8,7 +8,7 @@
     </div>
 
     <group class="phone" label-width="4.5em" label-margin-right="2em" label-align="right">
-      <cell title="电话号码" value="025-86662644"></cell>
+      <cell title="电话号码" :value="tenantPhone"></cell>
     </group>
 
     <footer class="footer">
@@ -62,7 +62,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['hasClosed', 'homeImage', 'tenantName', 'needDeliveryFee']),
+    ...mapGetters(['hasClosed', 'homeImage', 'tenantName', 'needDeliveryFee', 'tenantPhone']),
     homeStyle() {
       return {
         'background': `url(${this.homeImage})  no-repeat `,
