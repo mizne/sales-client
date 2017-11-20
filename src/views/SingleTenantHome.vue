@@ -54,7 +54,6 @@ export default {
   },
   methods: {
     toAttention() {
-      console.log('dianji ')
       window.location.href = ATTENTION_HREF
     },
     toMenu() {

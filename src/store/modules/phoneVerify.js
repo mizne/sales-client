@@ -37,22 +37,22 @@ const actions = {
         commit('SHOW_LOADING', false)
         dispatch('BIND_COUPON')
         .then(_ => {
-          router.push({ name: 'Menu' })
+          router.replace({ name: 'Menu' })
         })
         .catch(_ => {
-          router.push({ name: 'Menu' })
+          router.replace({ name: 'Menu' })
         })
           // 点餐业务 下订单时 需要的验证手机号码
       } else if (state.purposeOfPhoneVerify === ADD_ORDER) {
         commit('SHOW_LOADING', false)
         if (rootState.tenant.needChoosePeopleNumberPage) {
-          router.push({ name: 'PeopleNumber' })
+          router.replace({ name: 'PeopleNumber' })
         } else {
           dispatch('ADD_ORDER')
         }
       } else if (state.purposeOfPhoneVerify === VERIFY_USER) {
         commit('SHOW_LOADING', false)
-        router.push({ name: 'Mine' })
+        router.replace({ name: 'Mine' })
       }
     })
     .catch(err => {

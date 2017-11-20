@@ -77,7 +77,12 @@ const actions = {
         return ShoppingCartService.addShoppingCart(params)
           .then(_ => {
             commit('SHOW_LOADING', false)
-            router.push({ name: 'ShoppingCart' })
+            if (router.currentRoute.name === 'PhoneVerify') {
+              router.replace({ name: 'ShoppingCart' })
+            } else {
+              router.push({ name: 'ShoppingCart' })
+            }
+            
           })
           .catch(err => {
             commit('SHOW_LOADING', false)
