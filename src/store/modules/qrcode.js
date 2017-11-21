@@ -44,6 +44,7 @@ const mutations = {
 const actions = {
   FETCH_QRCODE_INFO: ({ commit, dispatch }, qrcodeId) => {
     return QRCodeService.getQRCodeInfo(qrcodeId,).then(info => {
+      info = info[0]
       QRCodeInfo.setQrcodeId(qrcodeId)
 
       // e码付

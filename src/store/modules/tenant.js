@@ -100,6 +100,7 @@ const actions = {
     commit('SHOW_LOADING', true)
     return TenantService.getConfig()
       .then(config => {
+        config = config[0]
         commit('SHOW_LOADING', false)
         commit('SET_TENANT_NAME', config.name)
         commit('SET_TENANT_PHONE', config.phone)
