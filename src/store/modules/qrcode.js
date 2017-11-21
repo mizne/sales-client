@@ -73,30 +73,29 @@ const actions = {
       // 点餐业务、单代售业务、群购业务
       // if (info.length === 1) {
       if (Object.prototype.toString.call(info) === '[object Object]') {
-        info = [info]
-        QRCodeInfo.setBizType(info[0].bizType)
-        QRCodeInfo.setTableName(info[0].tableName)
+        QRCodeInfo.setBizType(info.bizType)
+        QRCodeInfo.setTableName(info.tableName)
 
-        if (info[0].bizType === ESHOP || info[0].bizType === GROUP_SHOPPING) {
+        if (info.bizType === ESHOP || info.bizType === GROUP_SHOPPING) {
           // 代售单个商户、群购
-          QRCodeInfo.setTenantId(info[0].tenantId)
-          commit('SET_TENANT_ID', info[0].tenantId)
-          QRCodeInfo.setConsigneeId(info[0].consigneeId)
+          QRCodeInfo.setTenantId(info.tenantId)
+          commit('SET_TENANT_ID', info.tenantId)
+          QRCodeInfo.setConsigneeId(info.consigneeId)
 
           QRCodeInfo.removeTenants()
-        } else if (info[0].bizType === DEAL) {
+        } else if (info.bizType === DEAL) {
           // 点餐业务
-          QRCodeInfo.setTenantId(info[0].tenantId)
-          commit('SET_TENANT_ID', info[0].tenantId)
+          QRCodeInfo.setTenantId(info.tenantId)
+          commit('SET_TENANT_ID', info.tenantId)
 
           QRCodeInfo.removeConsigneeId()
           QRCodeInfo.removeTenants()
         }
 
         // 存储多条优惠券信息
-        if (info[0].coupons) {
-          QRCodeInfo.setCoupons(info[0].coupons)
-          QRCodeInfo.setCouponRate(info[0].couponRate)
+        if (info.coupons) {
+          QRCodeInfo.setCoupons(info.coupons)
+          QRCodeInfo.setCouponRate(info.couponRate)
         } else {
           QRCodeInfo.removeCoupons()
           QRCodeInfo.removeCouponRate()
