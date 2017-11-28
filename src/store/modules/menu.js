@@ -75,22 +75,7 @@ const mutations = {
       }
 
       if (
-        food.unit === '份'
-        || food.unit === '条'
-        || food.unit === '瓶'
-        || food.unit === '个'
-        || food.unit === '盒'
-        || food.unit === '块'
-        || food.unit === '桶'
-        || food.unit === '束'
-        || food.unit === '篮'
-        || food.unit === '根'
-        || food.unit === '套'
-        || food.unit === '罐'
-        || food.unit === '件'
-        || food.unit === '对'
-        || food.unit === '袋'
-      ) {
+        food.unit !== '斤') {
         state.tempShoppingCart[tenantId][food.id].num += 1
         state.tempShoppingCart[tenantId][food.id].remark = remark
       } else if (food.unit === '斤') {

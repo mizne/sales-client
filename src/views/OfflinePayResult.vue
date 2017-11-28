@@ -16,7 +16,6 @@ import { mapGetters } from 'vuex'
 import DealHeader from '@/components/DealHeader'
 import DealContent from '@/components/DealContent'
 
-
 export default {
   name: 'PayToMerchant',
   data() {
@@ -50,6 +49,7 @@ export default {
 
     .prompt {
       text-align: center;
+      font-size: 1.8rem;
       margin-top: 50px;
     }
   }

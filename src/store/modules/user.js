@@ -107,7 +107,7 @@ const actions = {
         })
         .catch(_ => {
           commit('SET_DISTANCE_TOO_FAR', true)
-          vAlert({ content: '距离过远, 不支持配送 -_-' })
+          // vAlert({ content: '距离过远, 不支持配送 -_-' })
         })
     })
   }

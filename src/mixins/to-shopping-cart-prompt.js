@@ -6,10 +6,10 @@ import QRCodeInfo from '@/models/QRCodeInfo'
 export default {
   computed: {
     ...mapGetters([
-      'tempShoppingCartFoodCost', 
-      'tempShoppingCartFoodCount', 
-      'shoppingCart', 
-      'hasClosed', 
+      'tempShoppingCartFoodCost',
+      'tempShoppingCartFoodCount',
+      'shoppingCart',
+      'hasClosed',
       'orderDetail',
       'needDeliveryFee',
       'distanceTooFar'
@@ -23,12 +23,12 @@ export default {
       }
 
       if (this.needDeliveryFee && this.distanceTooFar) {
-        return vAlert({ content: '距离过远, 不支持配送 -_-' })
+        // return vAlert({ content: '距离过远, 不支持配送 -_-' })
       }
 
       // 如果 临时购物车和购物车 都没有商品 则提示 还没有点菜
       if (
-        this.tempShoppingCartFoodCost === 0 
+        this.tempShoppingCartFoodCost === 0
         && this.shoppingCart.totalPrice === 0
         && !this.orderDetail
       ) {
