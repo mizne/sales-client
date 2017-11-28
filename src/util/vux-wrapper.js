@@ -5,7 +5,7 @@ Vue.use(AlertPlugin)
 Vue.use(ConfirmPlugin)
 Vue.use(ToastPlugin)
 
-const vConfirm = function({ title = '提示', content = '小v宝 友情提醒', confirmText, cancelText }) {
+const vConfirm = function({ title = '提示', content = '躺着买 友情提醒', confirmText, cancelText }) {
   return new Promise((resolve, reject) => {
     Vue.$vux.confirm.show({
       title,
@@ -24,7 +24,7 @@ const vConfirm = function({ title = '提示', content = '小v宝 友情提醒', 
 
 const vAlert = function({
   title = '提示',
-  content = '小v宝 友情提醒, 出错啦 -_-',
+  content = '躺着买 友情提醒, 出错啦 -_-',
   buttonText = '朕知道了'
 }) {
   return new Promise((resolve, reject) => {
@@ -40,7 +40,7 @@ const vAlert = function({
 }
 
 const vToast = function({
-  content = '小v宝 友情提醒',
+  content = '躺着买 友情提醒',
   type = 'text',
   time = 3e3,
   position = 'default'

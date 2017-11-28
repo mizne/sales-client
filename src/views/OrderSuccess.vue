@@ -281,7 +281,7 @@ export default {
 
       this.promptText = this.isDealBizType
         ? ['欢迎光顾小店']
-        : ['小v宝e代售提醒您先买单, 订单10分钟后失效']
+        : ['躺着买提醒您先买单, 订单10分钟后失效']
 
     }
   },

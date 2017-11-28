@@ -81,9 +81,9 @@ QRCodeInfo.prototype.getBizTypeText = function() {
 
 QRCodeInfo.prototype.getDocumentTitle = function() {
   const map = {
-    [DEAL]: '小v24小时便利',
-    [ESHOP]: '小v宝e代售',
-    [GROUP_SHOPPING]: '小v宝e群购'
+    [DEAL]: '躺着买',
+    [ESHOP]: '躺着买',
+    [GROUP_SHOPPING]: '躺着买'
   }
   return map[this.getBizType()]
 }
