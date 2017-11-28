@@ -26,6 +26,7 @@ import Wechatpay from '@/views/Wechatpay'
 import SelectCoupon from '@/views/SelectCoupon'
 import FetchOpenID from '@/views/FetchOpenID'
 import OrderDetail from '@/views/OrderDetail'
+import OfflinePayResult from '@/views/OfflinePayResult'
 import searchPage from '@/views/searchPage'
 import onlineMall from '@/views/onlineMall'
 import onlineMallPay from '@/views/onlineMallPay'
@@ -188,7 +189,11 @@ const routes = [
     name: 'PaySuccess',
     component: PaySuccess
   },
-
+  {
+    path: '/offline-pay-result',
+    name: 'OfflinePayResult',
+    component: OfflinePayResult
+  },
   {
     path: '/searchPage',
     name: 'searchPage',

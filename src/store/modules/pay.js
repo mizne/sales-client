@@ -1,4 +1,4 @@
-import { AlipayService, WechatService } from '@/http/index'
+import { AlipayService, WechatService, OfflinePayService } from '@/http/index'
 import router from '@/router/index'
 import QRCodeInfo from '@/models/QRCodeInfo'
 
@@ -7,7 +7,8 @@ export const ALIPAY_PREFIX_URL = 'https://openapi.alipay.com/gateway.do?'
 
 const state = {
   alipayUrl: '',
-  showIframe: false
+  showIframe: false,
+  offlinePayResult: false
 }
 
 const mutations = {
@@ -16,10 +17,25 @@ const mutations = {
   },
   SET_SHOW_IFRAME(state, showIframe) {
     state.showIframe = showIframe
+  },
+  SET_OFFLINE_PAY_RESULT(state, result) {
+    state.offlinePayResult = result
   }
 }
 
 const actions = {
+  OFFLINE_PAY: ({ commit }, { tradeNo }) => {
+    return OfflinePayService.payOffline(tradeNo)
+    .then(() => {
+      commit('SET_OFFLINE_PAY_RESULT', true)
+      router.push({ name: 'OfflinePayResult' })
+    })
+    .catch(() => {
+      commit('SET_OFFLINE_PAY_RESULT', false)
+      router.push({ name: 'OfflinePayResult' })
+    })
+  },
+
   FETCH_ALIPAY_URL: ({ commit, rootState }) => {
     router.push({ name: 'Alipay' })
     const tenantId = QRCodeInfo.getTenantId()
@@ -120,6 +136,9 @@ const getters = {
   },
   showIframe(state) {
     return state.showIframe
+  },
+  offlinePayResult(state) {
+    return state.offlinePayResult
   }
 }
 

@@ -10,6 +10,7 @@ import TenantService from './TenantService'
 import Logger from './Logger'
 import CouponService from './CouponService'
 import QRCodeService from './QRCodeService'
+import OfflinePayService from './OfflinePayService'
 
 export {
   MenuService,
@@ -23,5 +24,6 @@ export {
   TenantService,
   Logger,
   CouponService,
-  QRCodeService
+  QRCodeService,
+  OfflinePayService
 }

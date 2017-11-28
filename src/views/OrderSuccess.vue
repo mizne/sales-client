@@ -259,15 +259,24 @@ export default {
     },
 
     toPay() {
-      // 如果不需要 订单确认页面 则直接买单
+      vConfirm({ content: '选择支付方式', confirmText: '立即线上支付', cancelText: '退房时支付' })
+      .then((_) =>　{
+        // 如果不需要 订单确认页面 则直接买单
       // 否则 跳到订单确认页面
       if (this.needOrderConfirmPage) {
         this.$router.push({ name: 'OrderEnsure' })
       } else {
         this.payImmediately()
       }
+      })
+      .catch((_) => {
+        this.$store.dispatch('OFFLINE_PAY', {
+          tradeNo: this.orderDetail.tradeNo
+        })
+      })
+
     },
-    _init() {
+    init() {
       this.isDealBizType = QRCodeInfo.isDealBizType()
 
       this.promptText = this.isDealBizType
@@ -277,7 +286,7 @@ export default {
     }
   },
   created() {
-    this._init()
+    this.init()
   },
   beforeRouteEnter(to, from, next) {
     next((vm) => {
@@ -314,7 +323,8 @@ export default {
 @import '../assets/css/main.scss';
 
 .order-success-container {
-  .deal-header-container {}
+  .deal-header-container {
+  }
 
   .deal-content-container {
     background-color: $greyBackground;

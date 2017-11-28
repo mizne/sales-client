@@ -3,10 +3,10 @@
     <deal-header title="购物车">
       <!-- <x-button slot="left" @click.native="addMoreFood" :mini="true" type="primary">继续添加</x-button> -->
     </deal-header>
-  
+
     <deal-content>
       <scroll-notification v-if="avaliableCoupons.length" :texts="couponNews"></scroll-notification>
-  
+
       <div class="content">
         <div class="table-info" :class="{'hasScroll': avaliableCoupons.length > 0}">
           <span class="table-number" v-if="isDealBizType">桌号: {{shoppingCart.tableName}}</span>
@@ -16,7 +16,7 @@
             <span>{{shoppingCart.totalPrice}}</span>
           </span>
         </div>
-  
+
         <div class="delivery" v-if="needDeliveryFee">
           <span class="delivery-label">起送价:</span>
           <span class="delivery-placeholder"></span>
@@ -25,7 +25,7 @@
             <span>{{startPrice}}</span>
           </span>
         </div>
-  
+
         <div class="order-list">
           <template v-if="shoppingCart.foods.length > 0">
             <swipeout>
@@ -35,14 +35,14 @@
                     <swipeout-button @click.native="deleteFood(item)" type="warn">删除</swipeout-button>
                   </div>
                   <div slot="content">
-  
+
                     <template v-if="isDealBizType">
                       <deal-item :is-editable="isEditable" :is-vip="isVip" :item="item" @edit-food="editFood"></deal-item>
                     </template>
                     <template v-else>
                       <eshop-item :is-editable="isEditable" :is-vip="isVip" :item="item" @edit-food="editFood"></eshop-item>
                     </template>
-  
+
                     <div class="food-remark" v-if="item.unit === '斤'" style="padding: 10px;">
                       <p>备注： {{item.remark}}</p>
                     </div>
@@ -57,9 +57,9 @@
               <span class="text">您还未点菜哟 ^_^</span>
             </div>
           </template>
-  
+
         </div>
-  
+
         <delivery v-if="needDeliveryFee" :delivery-distance="deliveryDistance" :delivery-fee-value="deliveryFeeValue" :delivery-time="deliveryTime"></delivery>
 
         <div class="remark-label">
@@ -69,9 +69,9 @@
           <x-textarea :max="50" :rows="2" v-model="remark" :placeholder="remarkPlaceholder"></x-textarea>
         </div>
       </div>
-  
+
     </deal-content>
-  
+
     <deal-footer>
       <div class="left-area" @click="refreshOrder">
         <i class="icon-refresh"></i>
@@ -87,7 +87,7 @@
         <span class="text" v-else>去结算</span>
       </div>
     </deal-footer>
-  
+
   </div>
 </template>
 <script>
@@ -201,7 +201,7 @@ export default {
       }
       this.$store.dispatch('EDIT_SHOPPING_CART', params)
     },
-    _init() {
+    init() {
       this.isDealBizType = QRCodeInfo.isDealBizType()
 
       this.remarkPlaceholder = QRCodeInfo.getShoppingCartRemarkPlaceholder()
@@ -213,7 +213,7 @@ export default {
     }
   },
   created() {
-    this._init()
+    this.init()
   }
 }
 </script>

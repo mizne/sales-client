@@ -67,7 +67,7 @@ QRCodeInfo.prototype.getShoppingCartRemarkPlaceholder = function() {
 }
 
 QRCodeInfo.prototype.needPromptFillOrderRemark = function () {
-  return this.isMultiEShopBizType() || this.isEShopBizType()
+  return this.isEShopBizType() && (this.getTableName() === '0号桌')
 }
 
 QRCodeInfo.prototype.getBizTypeText = function() {
