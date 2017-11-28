@@ -7,6 +7,7 @@
       <p class="prompt">
         {{offlinePayResult ? '该订单已备注退房时支付，要记得哦亲' : '服务器打瞌睡了，请稍后重试下'}}
       </p>
+      <img src="../assets/images/fruits-pineapple.gif" alt="">
     </deal-content>
   </div>
 </template>
@@ -49,8 +50,13 @@ export default {
 
     .prompt {
       text-align: center;
-      font-size: 1.8rem;
-      margin-top: 50px;
+      font-size: 1.5rem;
+      margin: 30px 0;
+      color: $greyText;
+    }
+    img {
+      display: block;
+      margin: 0 auto;
     }
   }
 }
