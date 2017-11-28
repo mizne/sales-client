@@ -13,9 +13,9 @@
 
     <footer class="footer">
       <div class="item">
-        <router-link to="/menu">
+        <div @click="toMenu()" class="to-menu">
           <div class="text">去{{bizTypeText}}</div>
-        </router-link>
+        </div>
       </div>
       <div class="item">
         <router-link to="/shop-comment-view">
@@ -29,14 +29,18 @@
   </div>
 </template>
 <script>
-import { Group, Cell, Popover} from 'vux'
+import { Group, Cell, Popover } from 'vux'
 import { mapGetters } from 'vuex'
 
 import { ATTENTION_HREF } from '@/util/constants'
 import { objFrom } from '@/util/index'
 import { vAlert, vToast } from '@/util/vux-wrapper'
 import QRCodeInfo from '@/models/QRCodeInfo'
-import { EMPTY_STATUS, SHOPPING_CART_STATUS, ORDER_SUCCESS_STATUS } from '@/util/constants'
+import {
+  EMPTY_STATUS,
+  SHOPPING_CART_STATUS,
+  ORDER_SUCCESS_STATUS
+} from '@/util/constants'
 
 export default {
   name: 'Home',
@@ -47,9 +51,9 @@ export default {
   },
   data() {
     return {
-        bizTypeText: '' ,
-        attentionPng: 'static/image/icon-attention.png',
-        ATTENTION_HREF
+      bizTypeText: '',
+      attentionPng: 'static/image/icon-attention.png',
+      ATTENTION_HREF
     }
   },
   methods: {
@@ -67,66 +71,72 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['hasClosed', 'homeImage', 'tenantName', 'needDeliveryFee', 'tenantPhone']),
+    ...mapGetters([
+      'hasClosed',
+      'homeImage',
+      'tenantName',
+      'needDeliveryFee',
+      'tenantPhone'
+    ]),
     homeStyle() {
       return {
-        'background': `url(${this.homeImage})  no-repeat `,
+        background: `url(${this.homeImage})  no-repeat `
       }
-    },
+    }
   },
   created() {
     this.bizTypeText = QRCodeInfo.getBizTypeText()
     document.title = QRCodeInfo.getDocumentTitle()
   },
   beforeRouteEnter(to, from, next) {
-
     next(vm => {
       // 从 首页进来 初始化状态及配置信息
       // 从 其他页面后退进来 不作初始化请求 让其直接进入home页
       if (from.name === 'Home') {
         // 获取商户配置信息
-        vm.$store.dispatch('FETCH_TENANT_CONFIG')
-          .then(_ => {
-            if (vm.hasClosed) {
-              vAlert({
-                content: '啊哦, 店铺已打烊, 只能看不能买了, 明天再来吧 ^_^'
-              })
-            }
-            document.title = vm.tenantName
-            // 代售业务且商户有经纬度才获取 配送费
-            if (vm.needDeliveryFee) {
-              vm.$store.dispatch('FETCH_DELIVERY_FEE')
-            }
-          })
+        vm.$store.dispatch('FETCH_TENANT_CONFIG').then(_ => {
+          if (vm.hasClosed) {
+            vAlert({
+              content: '啊哦, 店铺已打烊, 只能看不能买了, 明天再来吧 ^_^'
+            })
+          }
+          document.title = vm.tenantName
+          // 代售业务且商户有经纬度才获取 配送费
+          if (vm.needDeliveryFee) {
+            vm.$store.dispatch('FETCH_DELIVERY_FEE')
+          }
+        })
 
         // 获取当前用户状态
-        vm.$store.dispatch('FETCH_USER_STATUS')
-          .then(([status, coupons]) => {
-            // 通过桌状态 路由页面W
-            // 空桌 可领取优惠券
-            if (status.tableStatus === EMPTY_STATUS) {// 空桌
-              vm.$router.push({ name: 'SingleTenantHome' })
+        vm.$store.dispatch('FETCH_USER_STATUS').then(([status, coupons]) => {
+          // 通过桌状态 路由页面W
+          // 空桌 可领取优惠券
+          if (status.tableStatus === EMPTY_STATUS) {
+            // 空桌
+            vm.$router.push({ name: 'SingleTenantHome' })
 
-              // 可以领取优惠券
-              if (QRCodeInfo.hasCoupons()) {
-                vm.$store.dispatch('RECEIVE_COUPON')
-              }
-            } else if (status.tableStatus === SHOPPING_CART_STATUS) {// 已下购物车
-              vm.$router.push({ name: 'ShoppingCart' })
-            } else if (status.tableStatus === ORDER_SUCCESS_STATUS) {// 已下单
-              vm.$router.push({ name: 'OrderSuccess' })
-            } else {
-              console.error(`Unknown table status; status: `, status.tableStatus)
-              vm.$router.push({ name: 'SingleTenantHome' })
+            // 可以领取优惠券
+            if (QRCodeInfo.hasCoupons()) {
+              vm.$store.dispatch('RECEIVE_COUPON')
             }
+          } else if (status.tableStatus === SHOPPING_CART_STATUS) {
+            // 已下购物车
+            vm.$router.push({ name: 'ShoppingCart' })
+          } else if (status.tableStatus === ORDER_SUCCESS_STATUS) {
+            // 已下单
+            vm.$router.push({ name: 'OrderSuccess' })
+          } else {
+            console.error(`Unknown table status; status: `, status.tableStatus)
+            vm.$router.push({ name: 'SingleTenantHome' })
+          }
 
-            if (coupons.length > 0) {
-              vToast({
-                content: `恭喜您, 您有 ${coupons.length} 张优惠券 ^_^`,
-                position: 'top'
-              })
-            }
-          })
+          if (coupons.length > 0) {
+            vToast({
+              content: `恭喜您, 您有 ${coupons.length} 张优惠券 ^_^`,
+              position: 'top'
+            })
+          }
+        })
       } else {
         vm.bizTypeText = QRCodeInfo.getBizTypeText()
       }
@@ -144,37 +154,36 @@ export default {
   right: 0;
 
   .background {
-    position:relative;
+    position: relative;
     height: calc(100% - 103px);
     /*background:url('static/image/backgroundImag.jpg');*/
     background-size: 100% 100% !important;
-    .attention{
-      position:absolute;
-      bottom:0;
-      right:5%;
-      z-index:1000;
-    P{
-      animation-iteration-count: 3;
-      color:#fff;
-      font-size:14px;
-      padding:5px;
-      border-radius:5px;
-      background:red;
-      margin-left:5px;
-    }
-    a{
-        position:relative;
-        left:30px;
-      img{
-        width:45px;
-        height:45px;
-        color:#fff;
-        background-color:#FFBC03;
-        border-radius:50%;
+    .attention {
+      position: absolute;
+      bottom: 0;
+      right: 5%;
+      z-index: 1000;
+      p {
+        animation-iteration-count: 3;
+        color: #fff;
+        font-size: 14px;
+        padding: 5px;
+        border-radius: 5px;
+        background: red;
+        margin-left: 5px;
+      }
+      a {
+        position: relative;
+        left: 30px;
+        img {
+          width: 45px;
+          height: 45px;
+          color: #fff;
+          background-color: #ffbc03;
+          border-radius: 50%;
+        }
       }
     }
-    }
-
   }
 
   .phone {
@@ -183,8 +192,6 @@ export default {
     right: 0;
     bottom: 63px;
   }
-
-
 
   /*background: url(../assets/images/lashangyin-home1.png) no-repeat;
   background-size: 100% 93%;*/
@@ -202,6 +209,10 @@ export default {
     .item {
       @include flexboxCenter;
       flex: 1;
+
+      .to-menu {
+        color: white;
+      }
 
       &:first-child {
         a {
