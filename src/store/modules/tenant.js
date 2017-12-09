@@ -136,16 +136,21 @@ const actions = {
         }
 
         // 店铺已打烊
-        if (!dateBetween(config.startTime, config.endTime)) {
-          commit('SET_HAS_CLOSED', true)
-        } else {
-          commit('SET_HAS_CLOSED', false)
+        if (config.startTime) {
+          if (!dateBetween(config.startTime, config.endTime)) {
+            commit('SET_HAS_CLOSED', true)
+          } else {
+            commit('SET_HAS_CLOSED', false)
+          }
         }
 
-        if (!dateBetween(config.deliveryStartTime, config.deliveryEndTime)) {
-          commit('SET_CAN_DELIVERY', false)
-        } else {
-          commit('SET_CAN_DELIVERY', true)
+        // 店铺是否支持配送
+        if (config.deliveryStartTime) {
+          if (!dateBetween(config.deliveryStartTime, config.deliveryEndTime)) {
+            commit('SET_CAN_DELIVERY', false)
+          } else {
+            commit('SET_CAN_DELIVERY', true)
+          }
         }
 
         return config
