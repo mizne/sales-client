@@ -73,6 +73,7 @@ export default {
   computed: {
     ...mapGetters([
       'hasClosed',
+      'canDelivery',
       'homeImage',
       'tenantName',
       'needDeliveryFee',
@@ -100,6 +101,15 @@ export default {
               content: '啊哦, 店铺已打烊, 只能看不能买了, 明天再来吧 ^_^'
             })
           }
+
+          if (!vm.canDelivery) {
+            vToast({
+              content: `现在店家不支持配送，商品需自取`,
+              position: 'middle',
+              type: 'warn'
+            })
+          }
+
           document.title = vm.tenantName
           // 代售业务且商户有经纬度才获取 配送费
           if (vm.needDeliveryFee) {

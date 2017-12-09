@@ -41,6 +41,11 @@ const mutationMaps = [
     initValue: false
   },
   {
+    mutationKey: 'SET_CAN_DELIVERY',
+    stateKey: 'canDelivery', // 是否支持配送
+    initValue: true
+  },
+  {
     mutationKey: 'SET_NEED_CHOOSE_PEOPLE_NUMBER_PAGE',
     stateKey: 'needChoosePeopleNumberPage',
     initValue: false
@@ -135,6 +140,12 @@ const actions = {
           commit('SET_HAS_CLOSED', true)
         } else {
           commit('SET_HAS_CLOSED', false)
+        }
+
+        if (!dateBetween(config.deliveryStartTime, config.deliveryEndTime)) {
+          commit('SET_CAN_DELIVERY', false)
+        } else {
+          commit('SET_CAN_DELIVERY', true)
         }
 
         return config
