@@ -112,9 +112,10 @@ export default {
 
           document.title = vm.tenantName
           // 代售业务且商户有经纬度才获取 配送费
-          if (vm.needDeliveryFee) {
-            vm.$store.dispatch('FETCH_DELIVERY_FEE')
-          }
+          // 当前只有酒店业务 无需获取用户地理位置
+          // if (vm.needDeliveryFee) {
+          //   vm.$store.dispatch('FETCH_DELIVERY_FEE')
+          // }
         })
 
         // 获取当前用户状态
