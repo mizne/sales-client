@@ -8,7 +8,7 @@
     </div>
 
     <group class="phone" label-width="4.5em" label-margin-right="2em" label-align="right">
-      <cell title="电话号码" :value="tenantPhone"></cell>
+      <cell :title="phoneLabel" :value="tenantPhone"></cell>
     </group>
 
     <footer class="footer">
@@ -83,6 +83,9 @@ export default {
       return {
         background: `url(${this.homeImage})  no-repeat `
       }
+    },
+    phoneLabel() {
+      return `${this.tenantName}电话号码`
     }
   },
   created() {

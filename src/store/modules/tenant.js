@@ -66,6 +66,11 @@ const mutationMaps = [
     initValue: false
   },
   {
+    mutationKey: 'SET_NEED_CHOOSE_PAY_MODE',
+    stateKey: 'needChoosePayMode',
+    initValue: false
+  },
+  {
     mutationKey: 'SET_NEED_ORDER_CONFIRM_PAGE',
     stateKey: 'needOrderConfirmPage',
     initValue: false
@@ -119,6 +124,7 @@ const actions = {
           'SET_NEED_CHOOSE_PEOPLE_NUMBER_PAGE',
           !!config.needChoosePeopleNumberPage
         )
+        commit('SET_NEED_CHOOSE_PAY_MODE', !!config.needChoosePayMode)
 
         if (config.longitude) {
           commit('SET_TENANT_LONGITUDE', config.longitude)

@@ -103,7 +103,15 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
-import { Swipeout, SwipeoutItem, SwipeoutButton, XButton, XNumber, Group, Cell } from 'vux'
+import {
+  Swipeout,
+  SwipeoutItem,
+  SwipeoutButton,
+  XButton,
+  XNumber,
+  Group,
+  Cell
+} from 'vux'
 import DealHeader from '@/components/DealHeader'
 import DealContent from '@/components/DealContent'
 import DealFooter from '@/components/DealFooter'
@@ -145,7 +153,8 @@ export default {
       'deliveryFeeValue',
       'deliveryDistance',
       'deliveryTime',
-      'needOrderConfirmPage'
+      'needOrderConfirmPage',
+      'needChoosePayMode'
     ]),
     totalPrice() {
       if (this.orderDetail) {
@@ -163,18 +172,19 @@ export default {
         }
 
         if (this.selectedCoupon) {
-          resultPrice = new Coupon(this.selectedCoupon.couponType, this.selectedCoupon.value).computePrice(resultPrice)
+          resultPrice = new Coupon(
+            this.selectedCoupon.couponType,
+            this.selectedCoupon.value
+          ).computePrice(resultPrice)
         }
 
         if (this.deliveryFeeValue) {
-          resultPrice += (+this.deliveryFeeValue)
+          resultPrice += +this.deliveryFeeValue
         }
 
         if (this.orderDetail.totalGoodsDiscount) {
           resultPrice -= this.orderDetail.totalGoodsDiscount
         }
-
-
 
         if (this.isVip) {
           freePrice = this.orderDetail.totalVipPrice - resultPrice
@@ -183,7 +193,7 @@ export default {
         }
 
         if (this.deliveryFeeValue) {
-          freePrice += (+this.deliveryFeeValue)
+          freePrice += +this.deliveryFeeValue
         }
 
         if (resultPrice < 0) {
@@ -198,9 +208,14 @@ export default {
     },
     couponText() {
       if (this.selectedCoupon) {
-        return new Coupon(this.selectedCoupon.couponType, this.selectedCoupon.value).getText()
+        return new Coupon(
+          this.selectedCoupon.couponType,
+          this.selectedCoupon.value
+        ).getText()
       } else {
-        return this.avaliableCoupons.length > 0 ? `${this.avaliableCoupons.length} 张可用` : '无可用'
+        return this.avaliableCoupons.length > 0
+          ? `${this.avaliableCoupons.length} 张可用`
+          : '无可用'
       }
     }
   },
@@ -259,22 +274,28 @@ export default {
     },
 
     toPay() {
-      vConfirm({ content: '选择支付方式', confirmText: '立即线上支付', cancelText: '退房时支付' })
-      .then((_) =>　{
-        // 如果不需要 订单确认页面 则直接买单
-      // 否则 跳到订单确认页面
-      if (this.needOrderConfirmPage) {
-        this.$router.push({ name: 'OrderEnsure' })
-      } else {
-        this.payImmediately()
-      }
-      })
-      .catch((_) => {
-        this.$store.dispatch('OFFLINE_PAY', {
-          tradeNo: this.orderDetail.tradeNo
+      ;(this.needChoosePayMode
+        ? vConfirm({
+            content: '选择支付方式',
+            confirmText: '在线支付',
+            cancelText: '退房统一结算'
+          })
+        : Promise.resolve()
+      )
+        .then(_ => {
+          // 如果不需要 订单确认页面 则直接买单
+          // 否则 跳到订单确认页面
+          if (this.needOrderConfirmPage) {
+            this.$router.push({ name: 'OrderEnsure' })
+          } else {
+            this.payImmediately()
+          }
         })
-      })
-
+        .catch(_ => {
+          this.$store.dispatch('OFFLINE_PAY', {
+            tradeNo: this.orderDetail.tradeNo
+          })
+        })
     },
     init() {
       this.isDealBizType = QRCodeInfo.isDealBizType()
@@ -282,17 +303,17 @@ export default {
       this.promptText = this.isDealBizType
         ? ['欢迎光顾小店']
         : ['躺着买提醒您先买单, 订单10分钟后失效']
-
     }
   },
   created() {
     this.init()
   },
   beforeRouteEnter(to, from, next) {
-    next((vm) => {
+    next(vm => {
       // 从 所有订单列表页面 进入 通过订单号 获取订单详情
       if (from.name === 'AllOrders') {
-        return vm.$store.dispatch('FETCH_ORDER', vm.$route.query.tradeNo)
+        return vm.$store
+          .dispatch('FETCH_ORDER', vm.$route.query.tradeNo)
           .catch(err => {
             vAlert({ content: '获取订单失败' })
           })
@@ -304,10 +325,9 @@ export default {
       // 主页 有订单情况下 则直接进入
       // 订单失败页面 下订单失败则继续下单
       if (from.name !== 'SelectCoupon') {
-        vm.$store.dispatch('FETCH_ORDER')
-          .catch(err => {
-            vAlert({ content: '获取订单失败' })
-          })
+        vm.$store.dispatch('FETCH_ORDER').catch(err => {
+          vAlert({ content: '获取订单失败' })
+        })
       }
 
       // 从支付宝支付页面 回来 去除遮罩层
@@ -317,7 +337,6 @@ export default {
     })
   }
 }
-
 </script>
 <style lang="scss" scoped>
 @import '../assets/css/main.scss';
