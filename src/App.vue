@@ -19,7 +19,7 @@ export default {
     ...mapGetters([
       'loading'
     ])
-  },
+  }
 }
 </script>
 <style lang="less">
