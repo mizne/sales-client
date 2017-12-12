@@ -85,7 +85,7 @@ export default {
       }
     },
     phoneLabel() {
-      return `${this.tenantName}电话号码`
+      return `${this.tenantName}`
     }
   },
   created() {
@@ -257,6 +257,10 @@ export default {
 .phone {
   .weui-cells {
     background-color: $greyBackground !important;
+  }
+
+  .vux-label {
+    width: 5.5em !important;
   }
 }
 </style>

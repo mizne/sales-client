@@ -13,12 +13,12 @@ export default {
       // 用了优惠券 则请求绑定优惠券和订单 再支付
       // 没用优惠券 则置空
 
-      this.$store
-        .dispatch('COUSUM_COUPON')
-        .catch(_ => vToast({ content: '使用优惠券失败' }))
-        .then(_ => {
+      // this.$store
+      //   .dispatch('COUSUM_COUPON')
+      //   .catch(_ => vToast({ content: '使用优惠券失败' }))
+      //   .then(_ => {
           this._toPay()
-        })
+        // })
     },
 
     _toPay() {
