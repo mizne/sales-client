@@ -63,11 +63,11 @@ export default {
     toMenu() {
       const tenantId = QRCodeInfo.getTenantId()
       // 首豪酒店 暂且不开放
-      if (tenantId !== '33334f14444089f1334e0fb32d6f17b6') {
+      // if (tenantId !== '33334f14444089f1334e0fb32d6f17b6') {
         this.$router.push({ name: 'Menu' })
-      } else {
-        vToast({ content: '酒店商品正在上线中，敬请期待...' })
-      }
+      // } else {
+        // vToast({ content: '酒店商品正在上线中，敬请期待...' })
+      // }
     }
   },
   computed: {
