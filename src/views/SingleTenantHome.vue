@@ -106,10 +106,8 @@ export default {
           }
 
           if (!vm.canDelivery) {
-            vToast({
-              content: `现在店家不支持配送，商品需自取`,
-              position: 'middle',
-              type: 'warn'
+            vAlert({
+              content: `现在店家不支持配送，商品需自取 `
             })
           }
 
