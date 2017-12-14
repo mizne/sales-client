@@ -71,6 +71,11 @@ const mutationMaps = [
     initValue: false
   },
   {
+    mutationKey: 'SET_OUT_OF_SERVICE_TIME_PROMPT',
+    stateKey: 'outOfServiceTimePrompt',
+    initValue: false
+  },
+  {
     mutationKey: 'SET_NEED_ORDER_CONFIRM_PAGE',
     stateKey: 'needOrderConfirmPage',
     initValue: false
@@ -125,6 +130,7 @@ const actions = {
           !!config.needChoosePeopleNumberPage
         )
         commit('SET_NEED_CHOOSE_PAY_MODE', !!config.needChoosePayMode)
+        commit('SET_OUT_OF_SERVICE_TIME_PROMPT', config.outOfServiceTimePrompt)
 
         if (config.longitude) {
           commit('SET_TENANT_LONGITUDE', config.longitude)

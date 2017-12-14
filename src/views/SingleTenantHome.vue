@@ -12,8 +12,8 @@
     </group>
 
     <footer class="footer">
-      <div class="item">
-        <div @click="toMenu()" class="to-menu">
+      <div class="item" @click="toMenu()">
+        <div class="to-menu">
           <div class="text">去{{bizTypeText}}</div>
         </div>
       </div>
@@ -77,7 +77,8 @@ export default {
       'homeImage',
       'tenantName',
       'needDeliveryFee',
-      'tenantPhone'
+      'tenantPhone',
+      'outOfServiceTimePrompt'
     ]),
     homeStyle() {
       return {
@@ -107,7 +108,7 @@ export default {
 
           if (!vm.canDelivery) {
             vAlert({
-              content: `现在店家不支持配送，商品需自取 `
+              content: vm.outOfServiceTimePrompt || `现在店家不支持配送，商品需自取 `
             })
           }
 
