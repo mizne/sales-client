@@ -1,7 +1,7 @@
 import QRCodeInfo, { capital } from '@/models/QRCodeInfo'
 import { dealHttp, eshopHttp, epayHttp, ipayHttp } from './interceptors'
 import { DEAL, ESHOP, GROUP_SHOPPING, MULTI_ESHOP, FETCH_OPENID, EPAY, IPAY } from '@/util/constants'
-import Logger from './Logger'
+import Logger from '../util/error-logger'
 
 export class BaseService {
   getBizTypeQuery(map) {

@@ -1,7 +1,6 @@
-import { Logger } from '@/http/index'
+import Logger from '../util/error-logger'
 import createPlugin from 'logrocket-vuex'
 import LogRocket from 'logrocket'
-
 
 const userActions = ['ADD_FOOD', 'REMOVE_FOOD']
 

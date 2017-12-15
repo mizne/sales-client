@@ -19,13 +19,7 @@ import numkeyboard from 'vue-numkeyboard'
 import 'vue-numkeyboard/style.css'
 import VueLazyload from 'vue-lazyload'
 
-import Raven from 'raven-js'
-import RavenVue from 'raven-js/plugins/vue'
-
-Raven
-.config('https://f0fd16a5120f404e8758b66d9f4c1488@sentry.io/258071')
-.addPlugin(RavenVue, Vue)
-.install()
+import Logger from './util/error-logger.js'
 
 Vue.use(VueLazyload)
 

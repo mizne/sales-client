@@ -1,6 +1,5 @@
 import axios from 'axios'
 import host from '../../config/host.js'
-import Logger from './Logger'
 import QRCodeInfo from '@/models/QRCodeInfo'
 
 const qrcodeHttp = axios.create({

@@ -31,9 +31,6 @@ export default {
     ...mapGetters(['offlinePayResult'])
   },
   methods: {
-  },
-  created() {
-    console.log(this.offlinePayResult)
   }
 }
 </script>

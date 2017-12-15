@@ -1,20 +1,29 @@
 <template>
   <div class="home-container">
-    <div class="background" @click="toMenu()" :style="homeStyle">
+    <div
+    class="background"
+    @click="toMenu()"
+    :style="homeStyle">
       <!-- <div class="attention">
         <p class="animated swing">关注领红包</p>
         <a :href="ATTENTION_HREF"><img :src="attentionPng" alt=""></a>
       </div> -->
     </div>
 
-    <group class="phone" label-width="4.5em" label-margin-right="2em" label-align="right">
-      <cell :title="phoneLabel" :value="tenantPhone"></cell>
+    <group
+          class="phone"
+           label-width="4.5em"
+           label-margin-right="2em"
+           label-align="right">
+      <cell
+        :title="phoneLabel"
+        :value="tenantPhone" />
     </group>
 
     <footer class="footer">
       <div class="item" @click="toMenu()">
         <div class="to-menu">
-          <div class="text">去{{bizTypeText}}</div>
+          <div class="text">去{{ bizTypeText }}</div>
         </div>
       </div>
       <div class="item">
@@ -63,11 +72,11 @@ export default {
     toMenu() {
       const tenantId = QRCodeInfo.getTenantId()
       // 首豪酒店 暂且不开放
-      // if (tenantId !== '33334f14444089f1334e0fb32d6f17b6') {
+      if (tenantId !== '33334f14444089f1334e0fb32d6f17b6') {
         this.$router.push({ name: 'Menu' })
-      // } else {
-        // vToast({ content: '酒店商品正在上线中，敬请期待...' })
-      // }
+      } else {
+        vToast({ content: '酒店商品正在上线中，敬请期待...' })
+      }
     }
   },
   computed: {
@@ -108,7 +117,8 @@ export default {
 
           if (!vm.canDelivery) {
             vAlert({
-              content: vm.outOfServiceTimePrompt || `现在店家不支持配送，商品需自取 `
+              content:
+                vm.outOfServiceTimePrompt || `现在店家不支持配送，商品需自取 `
             })
           }
 

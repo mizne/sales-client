@@ -1,4 +1,5 @@
-import { UserService, Logger } from '@/http/index'
+import { UserService } from '@/http/index'
+import Logger from '../../util/error-logger'
 import { vAlert } from '@/util/vux-wrapper'
 import QRCodeInfo from '@/models/QRCodeInfo'
 import { fetchUserPostion, computeDistanceBetween } from '@/util/index'

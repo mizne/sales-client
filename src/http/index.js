@@ -7,7 +7,6 @@ import UserService from './UserService'
 import CommentService from './CommentService'
 import WechatService from './WechatService'
 import TenantService from './TenantService'
-import Logger from './Logger'
 import CouponService from './CouponService'
 import QRCodeService from './QRCodeService'
 import OfflinePayService from './OfflinePayService'
@@ -22,7 +21,6 @@ export {
   CommentService,
   WechatService,
   TenantService,
-  Logger,
   CouponService,
   QRCodeService,
   OfflinePayService

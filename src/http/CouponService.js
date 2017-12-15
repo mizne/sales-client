@@ -1,4 +1,4 @@
-import Logger from './Logger'
+import Logger from '../util/error-logger'
 import QRCodeInfo from '@/models/QRCodeInfo'
 import { DEAL, ESHOP, GROUP_SHOPPING, MULTI_ESHOP } from '@/util/constants'
 import { BaseService } from './BaseService'

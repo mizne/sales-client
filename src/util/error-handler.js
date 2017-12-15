@@ -1,4 +1,4 @@
-import { Logger } from '@/http/index'
+import Logger from './error-logger'
 
 if (process.env.NODE_ENV === 'production') {
   window.onerror = function(msg, url, col, line, error) {
