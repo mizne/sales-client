@@ -269,7 +269,9 @@ export default {
   }
 
   .vux-label {
-    width: 5.5em !important;
+    width: 100% !important;
+    text-align: left !important;
+    margin: 0 !important;
   }
 }
 </style>

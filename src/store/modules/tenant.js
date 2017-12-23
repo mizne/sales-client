@@ -176,6 +176,9 @@ const actions = {
 const getters = {
   ...generateGetters(gettersSeed, state),
   officialNews(state) {
+    if (!state.officialNews) {
+      return []
+    }
     if (Array.isArray(state.officialNews)) {
       return state.officialNews
     }

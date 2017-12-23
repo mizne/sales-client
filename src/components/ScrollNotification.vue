@@ -6,7 +6,7 @@
         <div ref="content" v-show="show">{{texts[currentIndex]}}</div>
       </transition>
     </div>
-  
+
   </div>
 </template>
 <script>
@@ -30,18 +30,25 @@ export default {
       show: true
     }
   },
-  methods: {
-
-  },
+  methods: {},
   created() {
-    setInterval(() => {
-      this.show = false
+    if (this.texts.length > 0) {
+      this.timeId = setInterval(() => {
+        this.show = false
 
-      const index = this.currentIndex
-      this.currentIndex = (index + 1) % (this.texts.length)
+        const index = this.currentIndex
+        this.currentIndex = (index + 1) % this.texts.length
 
-      setTimeout(() => { this.show = true }, 0)
-    }, 3e3)
+        setTimeout(() => {
+          this.show = true
+        }, 0)
+      }, 3e3)
+    }
+  },
+  beforeDestroy() {
+    if (this.timeId) {
+      clearInterval(this.timeId)
+    }
   }
 }
 </script>
@@ -56,11 +63,11 @@ export default {
   justify-content: space-between;
   align-items: center;
   padding: 3px 10px;
-  background-color: #EEE;
+  background-color: #eee;
   // background-color: lighten($primaryColor, 60%);
   color: $warnColor;
   height: 30px;
-	box-sizing: border-box;
+  box-sizing: border-box;
 
   .content-wrapper {
     flex: 1;
@@ -77,4 +84,4 @@ export default {
   transition: all linear 4s;
 }
 </style>
- 
+
